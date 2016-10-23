@@ -1,0 +1,50 @@
+/ = btn_toolbar_adds([name: '新增产品', path: '/backend/products/new', type: 'add'])
+- if flash[:info]
+  - flash[:info]
+
+= render "search"
+
+.well
+  .search-well
+    = form_tag draw_lottery_backend_products_path do
+      = label_tag "期数序号"
+      = text_field_tag :item_id
+      = label_tag "重庆时时彩号码"
+      = text_field_tag :cqssc
+      = label_tag ""
+      = submit_tag '开奖'
+    %a{:href => "http://data.shishicai.cn/cqssc/haoma/", :target => "_blank"}
+      %h4 时时彩开奖结果查询(选择进入旧版)
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 序号
+        %th 产品
+        %th 总价
+        %th 卖出
+        %th 剩余
+        %th 开奖时间
+        %th 中奖号码
+        %th 中奖人电话
+    %tbody
+      - @items.each do |item|
+        %tr
+          %td= link_to item.id, product_orders_backend_products_path(id: item.id)
+          %td= link_to item.product.title, product_orders_backend_products_path(id: item.id)
+          %td= item.product.total_price
+          %td= item.already
+          %td= item.remain
+          - if item.hit_time.present?
+            %td= item.hit_time.strftime("%Y-%m-%d %H:%M:%S")
+          - else
+            %td= ""
+          %td= item.hit_number
+          - hit_order = item.product_orders.hit_order.first
+          - if item.product_orders.hit_order.first.present? 
+            %td= link_to item.product_orders.hit_order.first.user.mobile, backend_advance_lender_path(item.product_orders.hit_order.first.user), :target => "_blank"
+          - else
+            %td= ""
+
+= will_paginate @items

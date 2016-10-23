@@ -1,0 +1,40 @@
+- if !(current_user.has_role? '网络营销')
+  = btn_toolbar_adds([name: '添加奖励', path: '/backend/promotions/bonu', type: 'add'])
+
+.well
+  .search-well
+    - url = activies_backend_promotions_path
+    = search_form_for @q, :url => url, :html => { :class=>"form-inline", :role=>"form"} do |f|
+      = f.search_field :user_mobile_or_user_info_name_cont, class: "input-xlarge", placeholder: "姓名/手机号"
+      = f.submit '搜索', class: "btn"
+      = link_to '重置', activies_backend_promotions_path
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 中奖者
+        %th 手机号
+        %th 时间
+        %th 类型
+        %th 奖品
+        %th 价值
+        %th 是否使用
+        %th 过期时间
+        %th 快递单号
+        %th 操作
+    %tbody
+      - @records.each do |re|
+        %tr
+          %td= link_to re.user.name, backend_lender_path(re.user)
+          %td= link_to re.user.mobile, backend_lender_path(re.user)
+          %td= format_time re.actived_at
+          %td= format_bonu re.category
+          %td= re.detail
+          %td= re.price
+          %td= re.is_finished == true ? "已使用" : "未使用"
+          %td= format_time re.due_at, false
+          %td= re.delivery_num
+          %td= link_to "添加单号", add_delivery_num_backend_promotions_path(bonu_id: re.id)
+
+= will_paginate @records

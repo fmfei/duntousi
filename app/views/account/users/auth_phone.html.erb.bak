@@ -1,0 +1,80 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12 box'>
+    <div class="box-header"></div>
+    <div class='box-content box-double-padding'>
+      <fieldset>
+        <%= form_note_account flash %>
+        <% if current_user.auth_mobile == true %>
+          <div class="alert alert-success alert-dismissable">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            您已通过手机认证。
+          </div>
+        <% end %>
+        <div class='col-sm-4'>
+          <div class='lead'>
+            <i class='icon-phone-sign text-contrast'></i>
+            手机认证<small></small>
+          </div>
+          <small class='text-muted'>
+            <% if current_user.auth_mobile != true %> 为了您的资金安全，请填写正确的手机号码，方便我们进行验证
+            <% else %>
+            您的手机号: <%= current_user.info.mobile %>
+            <% end %>
+          </small>
+        </div>
+
+        <% if current_user.auth_mobile != true %>
+          <%= form_for current_user.info, :url => verify_phone_account_users_path, :method => 'POST', :class=>'form', :style=>'margin-bottom: 0;', :enctype => "multipart/form-data" do |f| %>
+            <div class='col-sm-5 col-sm-offset-1'>
+              <div class='form-group' id='mobile_group'>
+                <label>手机号</label>
+                <%= f.text_field :mobile , :class=>'form-control', :placeholder=>'手机号', disabled: current_user.auth_mobile %>
+                <span for="user_info_mobile" class="help-block has-error" id='error_for_user_info_mobile'></span>
+              </div>
+              <div class='form-group'>
+                <label>验证码</label>
+                <%= f.text_field :sms_verify_code, :value => '', :class=>'form-control', disabled: current_user.auth_mobile %>
+                <span class='btn btn-primary' id='get_verify'>获取验证码</span>
+              </div>
+            </div>
+            <div class='text-center col-sm-6 col-sm-offset-3'>
+              <%= f.submit "提交", :class => "btn btn-primary" %>
+            </div>
+          <% end %>
+        <% end %>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var wait = 60;
+function countdown(){
+  if(wait == 0){
+    $('#get_verify').removeClass('disabled');
+    $('#get_verify').html('重新获取验证码');
+    wait = 60;
+  }else{
+    $('#get_verify').addClass('disabled');
+    $('#get_verify').html(wait + '秒后重新获取验证码');
+    wait--;
+    setTimeout(function(){
+      countdown();
+    }, 1000);
+  }
+}
+$(function(){
+  $('#get_verify').click(function(){
+    if($('#user_info_mobile').val().length == 11 && !isNaN($('#user_info_mobile').val())){
+      $('#mobile_group').removeClass('has-error');
+      $('#error_for_user_info_mobile').html('')
+      countdown();
+      $.ajax({
+        url: '<%= send_verify_code_account_users_path %>/?mobile=' + $('#user_info_mobile').val(),
+      });
+    }else{
+      $('#mobile_group').addClass('has-error');
+      $('#error_for_user_info_mobile').html('请输入正确的手机号。')
+    }
+  })
+})
+</script>

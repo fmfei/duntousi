@@ -1,0 +1,4 @@
+<%= form_for @admin, :url => backend_admins_path do |f| %>
+	<%= f.hidden_field :confirmed_at, :value => format_time(Time.now) %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end %>

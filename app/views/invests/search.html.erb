@@ -1,0 +1,16 @@
+    <div class="box-header">投资列表</div>
+      <% @loans.each do |l|%>
+      <%= render :partial => "/home/bid", :locals => {:loan => l}%>
+      <%end%>
+
+
+<%= will_paginate @loans, :class => 'pagination loan_pg' %>
+<script type="text/javascript">
+$(function (){
+  $(".loan_pg a").click(function (){
+    url = $(this).attr("href");
+    $('#loans_content').load(url);
+    return false;
+  });
+})
+</script>

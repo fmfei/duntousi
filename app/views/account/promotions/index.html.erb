@@ -1,0 +1,82 @@
+<div class='right'>
+    <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">邀请好友</div>
+    </div>
+      <div class='row'>
+        <div class='col-sm-12' style="margin:40px 0 20px 0;">
+          <div id="code1"><%= invests_url(:yaoqingid => current_user.id) %></div>
+        </div>
+          <div style="margin-bottom:20px;color:gray;">
+          <div class="row_copy">
+          	<a  id="d_clip_button" href="javascript:void(0);">复制连接可进行邀请好友(点击复制)</a>
+          </div>
+            <div>
+              <img src="<%= asset_url('frontend/pic_f.png') %>" />
+            </div>
+            <div style='text-align:left;padding-left:20px;line-height:25px;'>
+            温馨提示：<br>
+              1. 复制链接发给好友,每成功邀请一位好友投资,您可获得被邀请人每笔投资金额的<%= SystemConfig.promotion_ratio.value.to_f * 10 %>‰的奖励，上不封顶！<br>
+              2. 邀请奖励无上限，邀请越多，奖励越多；<br>
+              3. 邀请奖励到活动相应期限后系统自动发放；<br>
+              4. 使用过程中如遇到问题，请联系客服。</div>
+          </div>
+      </div>
+    <div class="tongtit">
+      <div class="xshi">邀请列表</div><span style='float: left;line-height: 45px;'>（同台电脑，同个ID操作无效）</span>
+    </div>
+    <div class="contents">
+       <div class="czjl">
+          <div class="czjltitle">邀请用户昵称</div>
+          <div class="czjltitle">用户注册时间</div>
+          <div class="czjltitle">奖励金额</div>
+       </div>
+       <% @invite_users.each do |user| %>
+       <div class="czjl">
+        <div class="czjltitle"><%= user.username %></div>
+        <div class="czjltitle"><%= format_time user.created_at %></div>
+        <div class="czjltitle"><%= CashFlow.where({to_user_id: current_user.id, offline_user_id: user.id, cash_flow_description_id: Dict::CashFlowDescription.promote_prize.id}).sum(:amount) %>元</div>
+        </div>
+        <% end %>
+       <%= will_paginate @invite_users %>
+    </div>
+    </div>
+
+
+
+<SCRIPT LANGUAGE="JavaScript">
+$(function(){
+  $("#d_clip_button").click(function(){
+    var Url=$("#code1").text();
+    copyToClipboard(Url);
+ });
+});
+
+function copyToClipboard(maintext){
+  if (window.clipboardData){
+    window.clipboardData.setData("Text", maintext);
+    }else if (window.netscape){
+      try{
+        netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+    }catch(e){
+        alert("该浏览器不支持一键复制！请手工复制文本框链接地址～");
+    }
+
+    var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+    if (!clip) return;
+    var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+    if (!trans) return;
+    trans.addDataFlavor('text/unicode');
+    var str = new Object();
+    var len = new Object();
+    var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+    var copytext=maintext;
+    str.data=copytext;
+    trans.setTransferData("text/unicode",str,copytext.length*2);
+    var clipid=Components.interfaces.nsIClipboard;
+    if (!clip) return false;
+    clip.setData(trans,null,clipid.kGlobalClipboard);
+  }
+  alert("以下内容已经复制到剪贴板nn" + maintext);
+}
+</SCRIPT>

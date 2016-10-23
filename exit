@@ -1,0 +1,26 @@
+[1mdiff --git a/app/views/account/messages/index.haml.bak b/app/views/account/messages/index.haml.bak[m
+[1mindex 3342f5e..bfb2cf5 100644[m
+[1m--- a/app/views/account/messages/index.haml.bak[m
+[1m+++ b/app/views/account/messages/index.haml.bak[m
+[36m@@ -13,7 +13,7 @@[m
+             %ul.nav.nav-responsive.nav-tabs[m
+               %li{:class => ("active" unless params[:tab].present? )}[m
+                 %a{:href => account_messages_path}[m
+[31m-                  全部消息[m
+[32m+[m[32m                  全部消息a[m
+               %li{:class => ("active" if params[:tab]=="unread")}[m
+                 %a{:href => account_messages_path(tab: "unread")}[m
+                   未读消息[m
+[1mdiff --git a/app/views/account/messages/index.html.erb b/app/views/account/messages/index.html.erb[m
+[1mindex 341694a..66a82f5 100644[m
+[1m--- a/app/views/account/messages/index.html.erb[m
+[1m+++ b/app/views/account/messages/index.html.erb[m
+[36m@@ -8,7 +8,7 @@[m
+    <div class="contents">[m
+     [m
+       <ul class="xiaoxi">[m
+[31m-        <%= @messages? "暂无消息"  : ''%>[m
+[32m+[m[32m        <%= @messages? ''  : '暂无消息'%>[m
+         <% @messages.each do |m|%>[m
+          <li><span><%= m.title %></span> <span><%= m.created_at %></span>[m
+              <div><%= m.content%><span class="right">收起∧</span></div>[m

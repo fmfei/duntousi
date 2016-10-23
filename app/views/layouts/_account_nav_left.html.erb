@@ -1,0 +1,59 @@
+<div class="left">
+   <a href="#" class="title">我的账户</a>
+   <div>
+      <%= link_to '个人主页', account_users_path, :class => ((controller_name == 'users' && action_name == 'show') ? 'visiteds' : '') %>
+      <%= link_to '个人资料', profile_account_users_path, :class => (controller_name == 'users' and action_name == 'profile' ? 'visiteds' : '') %>
+      <%= link_to '修改密码',  show_set_password_account_users_path, :class => ((controller_name == 'users' && (action_name == 'show_set_password' || action_name == 'set_password') ) ? 'visiteds' : '') %>
+      <%= link_to '认证体系',  real_name_account_users_path, :class => ((controller_name == 'users' && action_name == 'real_name') ? 'visiteds' : '') %>
+   </div>
+   <a href="#" class="title">资金管理</a>
+   <div>
+      <%= link_to '充值', account_recharge_path, :class => ((controller_name == 'pay_orders') ? 'visiteds' : '') %>
+      <%= link_to '提现', new_account_withdraw_path, :class => ((controller_name == 'withdraws' && action_name == 'new') ? 'visiteds' : '') %>
+      <%= link_to '交易记录', account_transactions_path, :class => ((controller_name == 'cash_flows' && action_name == 'index') ? 'visiteds' : '') %>
+         <%= link_to '银行卡管理', account_banks_path, :class => ((controller_name == 'user_banks' && (action_name == 'index' || action_name == 'new' || action_name == 'edit')) ? 'visiteds' : '') %>
+         <%= link_to '自动投标',  account_auto_invests_path, :class => ((controller_name == 'auto_invests') ? 'visiteds' : '') %>
+   </div>
+   <a href="#" class="title">理财管理</a>
+   <div>
+<%= link_to '投标中的项目',  account_invests_path, :class => ((controller_name == 'bids' && action_name == 'index') ? 'visiteds' : '') %>
+<%= link_to '收款中项目',  repaying_account_invests_path, :class => ((controller_name == 'bids' && action_name == 'repaying') ? 'visiteds' : '') %>
+<%= link_to '已还清的项目',  finished_account_invests_path, :class => ((controller_name == 'bids' && action_name == 'finished') ? 'visiteds' : '') %>
+<%= link_to '新手标',  rookie_account_invests_path, :class => ((controller_name == 'bids' && action_name == 'rookie') ? 'visiteds' : '') %>
+<%= link_to '收款明细',  account_collections_path, :class => ((controller_name == 'collections' && action_name == 'index') ? 'visiteds' : '') %>
+<%= link_to '理财统计',  stat_account_invests_path, :class => ((controller_name == 'bids' && action_name == 'stat') ? 'visiteds' : '') %>
+<%= link_to '债权转让',  account_debts_path, :class => ((controller_name == 'debts' && (action_name == 'index' || action_name == 'selling_list' || action_name == 'sold')) ? 'visiteds' : '') %>
+
+<%= link_to '邀请好友',  account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'index') ? 'visiteds' : '') %>
+<%= link_to '我的现金券',  spring_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'spring') ? 'visiteds' : '') %>
+<%= link_to '转盘活动',  two_yr_anniversary_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'two_yr_anniversary') ? 'visiteds' : '') %>
+<%#= link_to '任务记录',  box_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'box') ? 'visiteds' : '') %>
+<%#= link_to '幸运码记录',  lucky_code_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'lucky_code') ? 'visiteds' : '') %>
+<%#= link_to '幸运猜猜猜记录',  lucky_guess_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'lucky_guess') ? 'visiteds' : '') %>
+<%#= link_to '新年砸蛋',  newyear_egg_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'newyear_egg') ? 'visiteds' : '') %>
+ </div>
+ <% if current_user.product_orders.present? %>
+   <a href="#" class="title">一元购夺宝记录</a>
+   <div>
+      <%= link_to '正在进行的商品',  progressing_account_yiyuangous_path, :class => ((controller_name == 'yiyuangou' && action_name == 'progressing' ) ? 'visiteds' : '') %>
+      <%= link_to '已揭晓的商品',  finished_account_yiyuangous_path, :class => ((controller_name == 'yiyuangou' && action_name == 'finished' ) ? 'visiteds' : '') %>
+      <%= link_to '待揭晓的商品',  waiting_account_yiyuangous_path, :class => ((controller_name == 'yiyuangou' && action_name == 'waiting' ) ? 'visiteds' : '') %>
+   </div>
+   <% end %>
+   <!-- <a href="#" class="title">安全中心</a> -->
+   <!-- <div> -->
+      <%#= link_to '修改登录密码',  show_set_password_account_users_path, :class => ((controller_name == 'users' && (action_name == 'show_set_password' || action_name == 'set_password') ) ? 'visiteds' : '') %>
+      <%#= link_to '设置提现密码',  show_set_trade_password_account_users_path, :class => ((controller_name == 'users' && (action_name == 'show_set_trade_password' || action_name == 'set_trade_password')) ? 'visiteds' : '') %>
+      <!-- <a href="#">已还清的项目</a> -->
+      <%#= link_to '实名认证',  real_name_account_users_path, :class => ((controller_name == 'users' && action_name == 'real_name') ? 'visiteds' : '') %>
+      <%#= link_to '手机认证',  auth_phone_account_users_path, :class => ((controller_name == 'users' && action_name == 'auth_phone') ? 'visiteds' : '') %>
+      <%#= link_to '邮箱认证',  auth_email_account_users_path, :class => ((controller_name == 'users' && action_name == 'auth_email') ? 'visiteds' : '') %>
+   <!-- </div> -->
+   <a href="#" class="title">活动管理</a>
+   <div>
+      <%= link_to '红包奖励',  cash_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'cash' ) ? 'visiteds' : '') %>
+      <%= link_to '实物奖励',  actual_object_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'actual_object' ) ? 'visiteds' : '') %>
+      <%= link_to '现金奖励',  bribery_money_account_promotions_path, :class => ((controller_name == 'promotions' && action_name == 'bribery_money' ) ? 'visiteds' : '') %>
+   </div>
+   <%= link_to '站内信息', account_messages_path, :class => "title" %>
+</div>

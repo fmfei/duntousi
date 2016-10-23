@@ -1,0 +1,3 @@
+class WithdrawMessage < Message
+
+end

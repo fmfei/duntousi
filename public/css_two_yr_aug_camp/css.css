@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+.zhuanp-bg{ width:100%; height:648px; background:url(/campaigns/two_yr_aug_camp/a8_09.jpg) no-repeat center;}
+.zhuanp-main{ width:1200px; height:648px; margin:0 auto;}
+.zp-con		{ width:570px; height:600px; background:url(/campaigns/two_yr_aug_camp/zp.jpg) center center no-repeat; position:relative; float:left; margin-top:-6px;}
+.zp-con	.an	{ width:209px; height:161px;  position:absolute; left:184px; top:216px; cursor:pointer;}
+.zp-right	{ width:356px; height:200px; float:right;  position:relative; font-family:微软雅黑; margin-top:335px; margin-right:122px;}
+.zpR-con	{  width:356px; height:200px; padding:25px 0px;position:relative; text-align:center;}
+.zpR-con	p.xm{ font-size:16px; line-height:30px;} 
+.zpR-con p.xm span{ padding:0px 8px; font-weight:bold;}
+.zpR-con	p.tit{ font-size:20px; line-height:30px; margin-top:15px;} 
+.zpR-con	p.tit span{ font-size:24px; color:#f00; font-weight:bold;} 
+.zpR-con	p.jj{ font-size:16px; line-height:30px; margin-top:20px; color:#4c4c4c} 
+/*中奖名单*/	
+.roster{ height:634px; width:100%; background:#fffddf;}
+.roster_bgs{height:634px; background:url(/campaigns/two_yr_aug_camp/august_18.png) no-repeat center center; position:relative;}
+.roster_bg{ width:900px; height:202px; overflow:hidden; padding-top:260px; margin:0 auto; }	
+.hjmp-con			{ width:90%; height:207px; overflow:hidden; z-index:0; position:absolute; left:43px; top:40px; color:#d4a411; font-family:微软雅黑; font-weight:600; }
+.hjmp-con	li		{ width:100%; height:31px; line-height:31px;overflow:hidden;}
+.hjmp-con	li	span.xm		{ width:33%; padding-left:20px; display:block; height:31px; float:left; vertical-align:middle;}
+.hjmp-con	li	span.time		{ width:33%; padding-left:20px; display:block; height:31px; float:left; vertical-align:middle;}
+.hjmp-con	li	span.jj		{ width:26%; padding-left:20px; display:block; height:31px; float:left; vertical-align:middle;}
+.hjmp-con li span.jj span{ color:#f00; padding:0px 5px;}	
+.bg-fafafa		{ background:#fafafa !important;}
+
+

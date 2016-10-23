@@ -1,0 +1,30 @@
+<div class="well">
+    <%= render 'search' %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <% @bid_count.each do |k, v| %>
+            <th><%= k %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>标数(个)</td>
+          <% @bid_count.each do |k, v| %>
+            <td><%= v.sum %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>金额(元)</td>
+          <% @bid_amount.each do |k, v| %>
+            <td><%= v.sum %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <%= high_chart("bid_count", @h) %>
+    <%= high_chart("bid_amount", @a) %>
+    
+</div>

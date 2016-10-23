@@ -1,0 +1,132 @@
+<div class="rights">
+  <div class="right">
+<div class="czjl_top"></div>
+    <div class="tongtit">
+      <div><%= link_to "实名认证", real_name_account_users_path %><small><%= '(已认证)' if current_user.auth_realname == 1 %></small></div>
+      <div class="xshi">手机认证</div>
+      <div><%= link_to "邮箱认证", auth_email_account_users_path %></div>
+    </div>
+    
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12 box'>
+    <div class='box-content box-double-padding'>
+         <div class="user_trade_password_left">
+        <%= form_note_account flash %>
+      </div>
+        <div>
+          <div class='lead'>
+             <br />
+          </div>
+          <small class='text-muted'>
+            <% if current_user.auth_mobile != true %> 
+                <div class="dtitle"> <span class="xjieshi">
+                  为了您的账户安全，请填写正确的手机号码，方便我们进行验证
+                </span></div>
+            <% else %>
+              <div class="dtitle"> <span class="xjieshi">
+                您已通过手机认证，手机号码为: <%= current_user.mobile.gsub(/[\d]{4}$/, "****") %>
+              </span></div>
+            <% end %>
+          </small>
+        </div>
+
+        <% if current_user.auth_mobile != true %>
+          <%= form_for current_user, :url => verify_phone_account_users_path, :method => 'POST', :class=>'form', :style=>'margin-bottom: 0;', :enctype => "multipart/form-data" do |f| %>
+
+        <div class="dtitles">
+            <div class="righter">
+                <div><span class="xjieshi">手机号&nbsp;&nbsp;&nbsp;</span><span class="xjieshi"><%= f.text_field :mobile , :class=>'form-control', :placeholder=>'手机号', disabled: current_user.auth_mobile, :error => "is" %></span></div>
+                <div><span class="xjieshi">验证码&nbsp;&nbsp;&nbsp;</span><span class="xjieshi"><%= f.text_field :sms_verify_code, :value => '', :class=>'form-control', disabled: current_user.auth_mobile , :error => "is"%></span><span style='background:#ff6766;color:#fff;padding:5px;border-radius:5px;cursor:pointer;' id='get_verify'>获取验证码</span></div>
+                    
+              </div>
+          </div>
+
+            <div class='dtitle'>
+              <%= f.submit "提交", :class => "hqyzm", :id => "send" %>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+var wait = 60;
+function countdown(){
+  if(wait == 0){
+    $('#get_verify').removeClass('disabled');
+    $('#get_verify').html('重新获取验证码');
+    wait = 60;
+  }else{
+    $('#get_verify').addClass('disabled');
+    $('#get_verify').html(wait + '秒后重新获取验证码');
+    wait--;
+    setTimeout(function(){
+      countdown();
+    }, 1000);
+  }
+}
+$(function(){
+  $('#get_verify').click(function(){
+    if($('#user_mobile').val().length == 11 && !isNaN($('#user_mobile').val())){
+      $('#mobile_group').removeClass('has-error');
+      $('#error_for_user_mobile').html('')
+      countdown();
+      $.ajax({
+        url: '<%= send_verify_code_account_users_path %>/?mobile=' + $('#user_mobile').val(),
+      });
+    }else{
+      $('#mobile_group').addClass('has-error');
+      $(".mobile").text("请输入正确的手机号。");
+      state = false;
+    }
+    return false;
+  })
+})
+
+
+
+$(function(){
+       $("input[error='is']").each(function(){
+           var $required = $('<strong style="color: red;font-size: 12px;"> * </strong>');
+           $(this).parent().append($required);
+       });
+        //文本框失去焦点后
+       $("input[error='is']").blur(function(){
+            var $parent = $(this).parent();
+            $parent.find(".formtips").remove();
+            //手机号 
+            if( $(this).is('#user_mobile') ){
+               if( this.value=="" || ( this.value!="" && !/^0{0,1}(13[0-9]|15[0-9]|17[0-9]|18[0-9]|19[0-9])[0-9]{8}$/.test(this.value) )  ){
+                     var errorMsg = '手机号格式不正确';
+                     $parent.append('<span class="formtips onError" style="color: red;font-size: 12px;">'+errorMsg+'</span>');
+               }else{
+                     var okMsg = '输入格式正确.';
+                     $parent.append('<span class="formtips onSuccess" style="color: #00FF00;font-size: 12px;">'+okMsg+'</span>');
+               }
+            }
+            //验证码 
+            if( $(this).is('#user_sms_verify_code') ){
+               if( this.value=="" ){
+                     var errorMsg = '验证码不能为空';
+                     $parent.append('<span class="formtips onError" style="color: red;font-size: 12px;">'+errorMsg+'</span>');
+               }
+            }
+       }).keyup(function(){
+          $(this).triggerHandler("blur");
+       }).focus(function(){
+            $(this).triggerHandler("blur");
+       });//end blur
+        
+       //提交，最终验证。
+        $('#send').click(function(){
+               $("input[error='is']").trigger('blur');
+               var numError = $('form .onError').length;
+               if(numError){
+                alert("请输入正确信息");
+                   return false;
+               }
+        });
+})
+</script>

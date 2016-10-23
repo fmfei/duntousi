@@ -1,0 +1,36 @@
+<div class="well">
+  <ul class="nav nav-tabs">
+    <li><a href="#bids" data-toggle="tab">投标情况</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane" id="bids">
+      招标金额：<%= @loan.amount %>元<br>
+      投标金额：<%= @bids.present? ? @bids.sum(:invest_amount) : 0 %>元<br>
+      利息金额：<%= @bids.present? ? @bids.sum(:collection_interest).round(2) : 0 %>元
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>邮箱</th>
+            <th>姓名</th>
+            <th>投资金额</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th style="width: 26px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bids.each do |bid| %>
+            <tr>
+              <td><%= bid.user.email %></td>
+              <td><%= bid.user.name %></td>
+              <td><%= rmb(bid.invest_amount) %></td>
+              <td><%= t(bid.status) %></td>
+              <td><%= format_time bid.created_at %></td>
+              <td> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

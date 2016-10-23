@@ -1,0 +1,13 @@
+.sidebar-nav {
+  margin-top: 6px;
+}
+.sidebar-nav .nav-list > li > a{
+  padding-left: 30px;
+}
+.opt{display: inline-block;width: 30px;text-decoration: underline;}
+.error{color: #b94a48;}
+.notice{color: #0088cc;}
+.well table tr td:last-child a{margin:0 5px;}
+.well table th{background: #eee;}
+.red {color:#ff0000;}
+.table input, .table select{margin-bottom: 0px;}

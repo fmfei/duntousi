@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PaginationListLinkRenderer - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">WillPaginate::ActionView::LinkRenderer
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-html_container">#html_container</a>
+    
+    <li ><a href="#method-i-page_link">#page_link</a>
+    
+    <li ><a href="#method-i-page_link_or_span">#page_link_or_span</a>
+    
+    <li ><a href="#method-i-page_number">#page_number</a>
+    
+    <li ><a href="#method-i-page_span">#page_span</a>
+    
+    <li ><a href="#method-i-previous_or_next_page">#previous_or_next_page</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PaginationListLinkRenderer">
+  <h1 id="class-PaginationListLinkRenderer" class="class">
+    class PaginationListLinkRenderer
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-html_container" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">html_container</span><span
+            class="method-args">(html)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="html_container-source">
+            <pre><span class="ruby-comment"># File lib/pagination_list_link_renderer.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">html_container</span>(<span class="ruby-identifier">html</span>)
+  <span class="ruby-identifier">string_attributes</span> = <span class="ruby-identifier">container_attributes</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">pair</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">attrs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q( #{pair.first}=&quot;#{CGI::escapeHTML(pair.last.to_s)}&quot;)</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">attrs</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-node">&quot;&lt;div #{string_attributes}&gt;&lt;ul #{string_attributes}&gt;#{html}&lt;/ul&gt;&lt;/div&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-page_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">page_link</span><span
+            class="method-args">(page, text, attributes = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="page_link-source">
+            <pre><span class="ruby-comment"># File lib/pagination_list_link_renderer.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">page_link</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">attributes</span> = {})
+  <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">link_to</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">page</span>)), <span class="ruby-identifier">attributes</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-page_link_or_span" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">page_link_or_span</span><span
+            class="method-args">(page, span_class, text = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="page_link_or_span-source">
+            <pre><span class="ruby-comment"># File lib/pagination_list_link_renderer.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">page_link_or_span</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">span_class</span>, <span class="ruby-identifier">text</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">text</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">page</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_page</span>
+    <span class="ruby-identifier">page_link</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">text</span>, <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">span_class</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">page_span</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">text</span>, <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">span_class</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-page_number" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">page_number</span><span
+            class="method-args">(page)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="page_number-source">
+            <pre><span class="ruby-comment"># File lib/pagination_list_link_renderer.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">page_number</span>(<span class="ruby-identifier">page</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">page</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">current_page</span>
+    <span class="ruby-identifier">tag</span>(<span class="ruby-value">:li</span>, <span class="ruby-identifier">link</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">page</span>, <span class="ruby-value">:rel</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rel_value</span>(<span class="ruby-identifier">page</span>)))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">tag</span>(<span class="ruby-value">:li</span>, <span class="ruby-identifier">link</span>(<span class="ruby-identifier">page</span>, <span class="ruby-string">&#39;javascript:avoid(0)&#39;</span>), <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;current disabled&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-page_span" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">page_span</span><span
+            class="method-args">(page, text, attributes = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="page_span-source">
+            <pre><span class="ruby-comment"># File lib/pagination_list_link_renderer.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">page_span</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">attributes</span> = {})
+  <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">attributes</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-previous_or_next_page" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">previous_or_next_page</span><span
+            class="method-args">(page, text, classname)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="previous_or_next_page-source">
+            <pre><span class="ruby-comment"># File lib/pagination_list_link_renderer.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">previous_or_next_page</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">classname</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>
+    <span class="ruby-identifier">tag</span>(<span class="ruby-value">:li</span>, <span class="ruby-identifier">link</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">page</span>), <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">classname</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">tag</span>(<span class="ruby-value">:li</span>, <span class="ruby-identifier">link</span>(<span class="ruby-identifier">text</span>, <span class="ruby-string">&#39;javascript:avoid(0);&#39;</span>), <span class="ruby-value">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">classname</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39; disabled&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

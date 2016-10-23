@@ -1,0 +1,30 @@
+<%= form_note_account flash %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'validate-form'}) do |f| %>
+    <%= devise_error_messages! %>
+    <%= hidden_field_tag :role, "user" %>
+  <div class="zhuce">
+      <div class="titles">
+          <span class="da">登录</span>
+      </div>
+      <label>用户名或邮箱</label>
+      <%= f.text_field :login, placeholder: "用户名或邮箱", class: "form-control", 'data-required' => true %>
+      <label>密码</label>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "密码", class: "form-control", 'data-required' => true %>
+      <label></label>
+      <%= f.submit "登录", class: "sub zzqding" %>
+      <label></label>
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "忘记密码？", new_password_path(resource_name) %>
+        <% end -%>
+      <label></label>
+      <%= link_to "没有收到邮箱确认信息？", new_confirmation_path(resource_name) %>
+  </div>
+<% end %>
+<style type="text/css">
+.zhuce label{
+  display: inline-block;
+  height: 30px;
+  line-height: 36px;
+  color: #666;
+}
+</style>

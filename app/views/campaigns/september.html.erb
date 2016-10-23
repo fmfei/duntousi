@@ -1,0 +1,94 @@
+<style>
+*{ margin:0; padding:0;}
+.comdiv{ width:100%; height:116px; margin:0 auto;}
+.d01{background:url(/campaigns/september/9_01.png) no-repeat center;}
+.d02{background:url(/campaigns/september/9_02.png) no-repeat center;}
+.d03{background:url(/campaigns/september/9_03.png) no-repeat center;}
+.d04{background:url(/campaigns/september/9_04.png) no-repeat center;}
+.d05{background:url(/campaigns/september/9_05.png) no-repeat center;}
+.d06{background:url(/campaigns/september/9_06.png) no-repeat center;}
+.d06btn{ width:290px; height:72px; position:absolute; top:5px; left:60%;}
+.d07{background:url(/campaigns/september/9_07.png) no-repeat center;}
+.d07btn{ width:270px; height:58px; margin:0 auto; }
+.d07btn img{ width:270px; height:58px;padding-top:30px; display:block;}
+.d08{background:url(/campaigns/september/9_08.png) no-repeat center;}
+.d09{background:url(/campaigns/september/9_09.png) no-repeat center;}
+.d10{background:url(/campaigns/september/9_10.png) no-repeat center;}
+.d11{background:url(/campaigns/september/9_11.png) no-repeat center;}
+.d12{background:url(/campaigns/september/9_12.png) no-repeat center;}
+.d13{background:url(/campaigns/september/9_13.png) no-repeat center;}
+.d14{background:url(/campaigns/september/9_14.png) no-repeat center;}
+.d15{background:url(/campaigns/september/9_15.png) no-repeat center;}
+.d16{background:url(/campaigns/september/9_16.png) no-repeat center;}
+.d17{background:url(/campaigns/september/9_17.png) no-repeat center;}
+.d18{background:url(/campaigns/september/9_18.png) no-repeat center;}
+.d19{background:url(/campaigns/september/9_19.png) no-repeat center;}
+.d20{background:url(/campaigns/september/9_20.png) no-repeat center;}
+
+
+.d21{background:url(/campaigns/september/9_21.png) no-repeat center;}
+.d22{background:url(/campaigns/september/9_22.png) no-repeat center;}
+.d23{background:url(/campaigns/september/9_23.png) no-repeat center;}
+.d24{background:url(/campaigns/september/9_24.png) no-repeat center;}
+.d25{width:100%; height:454px; margin:0 auto;background:url(/campaigns/september/9_25.png) no-repeat center;}
+.d26{background:url(/campaigns/september/9_26.png) no-repeat center;}
+.d27{background:url(/campaigns/september/9_27.jpg) no-repeat center;}
+.d25table{ width:770px; height:44px; margin:0 auto; padding-top:10px;}
+table{ font-family:微软雅黑; color:#d51932;}
+.d25table table tr th{ color:#d51932; font-size:20px;}
+.d25table table tr { width:750px; height:35px; border-bottom:1px dashed #d51932; display:block; margin-left:10px;}
+.mainbox{ width: 1165px; margin:0 auto; position: relative;}
+</style>
+<div class="comdiv d01"></div>
+<div class="comdiv d02"></div>
+<div class="comdiv d03"></div>
+<div class="comdiv d04"></div>
+<div class="comdiv d05"></div>
+<div class="comdiv d06">
+  <div class="mainbox">
+  <div class="d06btn"><a href="/users/sign_up"><img src="/campaigns/september/9_28.png"></a></div>
+  </div>
+</div>
+<div class="comdiv d07">
+  <div class="d07btn"><a href="/loans"><img src="/campaigns/september/9_29.png"></a></div>
+</div>
+<div class="comdiv d08"></div>
+<div class="comdiv d09"></div>
+<div class="comdiv d10"></div>
+<div class="comdiv d11"></div>
+<div class="comdiv d12"></div>
+<div class="comdiv d13"></div>
+<div class="comdiv d14"></div>
+<div class="comdiv d15"></div>
+<div class="comdiv d16"></div>
+<div class="comdiv d17"></div>
+<div class="comdiv d18"></div>
+<div class="comdiv d19"></div>
+<div class="comdiv d20"></div>
+<div class="comdiv d21"></div>
+<div class="comdiv d22"></div>
+<div class="comdiv d23"></div>
+<div class="comdiv d24"></div>
+<div class="d25">
+  <div class="d25table">
+        <table>
+            <tr style=" padding-top:10px;padding-bottom:10px;">
+                <th width="286" height="32" align="center" valign="middle">排名</th>
+                <th width="286" height="32" align="center" valign="middle">用户名</th>
+                <th width="286" height="32" align="center" valign="middle">投资金额</th>
+            </tr>
+          <% @bids.each_with_index do |bid, index|%>
+                    <% user = User.find bid[0]%>
+            <tr>
+                <td width="286" height="32" align="center" valign="middle"><%= index + 1 %></td>
+                <td width="286" height="32" align="center" valign="middle"><%= user.mobile[0..2] + '****' + user.mobile[-4..-1] %></td>
+                <td width="286" height="32" align="center" valign="middle"><%= rmb bid[1].sum(&:invest_amount)%></td>
+            </tr>
+          <% end %>
+        </table>
+    </div>
+</div>
+<div class="comdiv d26"></div>
+<div class="comdiv d27"></div>
+<style type="text/css">.test{height:0px;width:100px;overflow: hidden;}</style>
+<div class="test"><a href="http://wangdaiban.com/">网贷平台</a></div>

@@ -1,0 +1,33 @@
+<%#= btn_toolbar_adds([name: '添加权限', path: new_backend_permission_path, type: 'add']) %>
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>名称</th>
+          <th>操作</th>
+          <th>内容</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @permissions.each do |permission| %>
+          <tr>
+            <td><%= permission.id %></td>
+            <td><%= permission.name %></td>
+            <td><%= permission.action %></td>
+            <td><%= permission.subject %></td>
+            <td>
+              <!--
+              <a href="<%= edit_backend_permission_path(permission) %>"><i class="icon-pencil"></i></a>
+              <% if can? :delete, 'backend/permissions' %>
+                <a href="<%= backend_permission_path(permission) %>" data-confirm="确认删除此权限?" data-method="delete" rel="nofollow"><i class="icon-remove"></i></a>
+              <% end %>
+            -->
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<%= will_paginate @collection_companies %>

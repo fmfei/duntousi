@@ -1,0 +1,47 @@
+<div class="search-well">
+  <%= form_tag backend_invites_path, :method => "get", :class => "form-inline" do %>
+    <%= text_field_tag :q, params[:q], :placeholder => "用户姓名、邮箱或电话" %>
+    <%= submit_tag "搜索", :class => "btn" %>
+  <% end %>
+</div>
+<div class="well">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>邀请人</th>
+        <th>被邀请人</th>
+        <th>注册时间</th>
+        <th style="width: 20px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if params[:q].present? %>
+        <% @lenders.each do |lender| %>
+          <% lender.invite_users.each do |lender| %>
+            <tr>
+              <td><%= link_to lender.from_user.username, backend_advance_lender_path(lender.from_user), :target => "_blank" %></td>
+              <td><%= link_to lender.username, backend_advance_lender_path(lender), :target => "_blank" %></td>
+              <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+          <% end %>
+          <% if lender.from_user_id.present? %>
+            <tr>
+              <td><%= link_to lender.from_user.username, backend_advance_lender_path(lender.from_user), :target => "_blank" %></td>
+              <td><%= link_to lender.username, backend_advance_lender_path(lender), :target => "_blank" %></td>
+              <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% @lenders.each do |lender| %>
+          <tr>
+            <td><%= link_to lender.from_user.username, backend_advance_lender_path(lender.from_user), :target => "_blank" %></td>
+            <td><%= link_to lender.username, backend_advance_lender_path(lender), :target => "_blank" %></td>
+            <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @lenders, :previous_label => '上一页', :next_label => '下一页' %>

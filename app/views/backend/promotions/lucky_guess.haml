@@ -1,0 +1,31 @@
+= if notice
+  %p.notice flash
+
+.well
+  .search-well
+    = form_tag create_lucky_guess_backend_promotions_path do
+      = submit_tag '今日幸运猜猜猜开奖'
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th ID
+        %th 抽奖者
+        %th 手机号
+        %th 时间
+        %th 单双号
+        %th 结果
+        %th 奖品
+    %tbody
+      - @records.each do |re|
+        %tr
+          %td= re.id
+          %td= link_to re.user.name, backend_lender_path(re.user)
+          %td= link_to re.user.mobile, backend_lender_path(re.user)
+          %td= format_time re.created_at
+          %td= re.guess == "single" ? "单数" : "双数"
+          %td= show_result_info re.result
+          %td= show_result_info(re.result) == "中奖" ? "30元" : ""
+
+= will_paginate @records

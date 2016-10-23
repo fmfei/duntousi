@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class LoanUtils - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-calc_payback">::calc_payback</a>
+    
+    <li ><a href="#method-c-calc_payback_interest_only">::calc_payback_interest_only</a>
+    
+    <li ><a href="#method-c-equal_repayments_table">::equal_repayments_table</a>
+    
+    <li ><a href="#method-c-interest_only_table">::interest_only_table</a>
+    
+    <li ><a href="#method-c-max_amount">::max_amount</a>
+    
+    <li ><a href="#method-c-max_interest">::max_interest</a>
+    
+    <li ><a href="#method-c-platform_fee">::platform_fee</a>
+    
+    <li ><a href="#method-c-pmt">::pmt</a>
+    
+    <li ><a href="#method-c-repay_at_due_table">::repay_at_due_table</a>
+    
+    <li ><a href="#method-c-ss">::ss</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-LoanUtils">
+  <h1 id="class-LoanUtils" class="class">
+    class LoanUtils
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-calc_payback" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">calc_payback</span><span
+            class="method-args">(amount, months, interest = self.max_interest)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>每期还款金额(包含平台费) @param [BigDecimal] 本金 @param  [Fixnum] 期数 @param
+[BigDecimal] 年化利率 @return [BigDecimal]</p>
+          
+          
+
+          
+          <div class="method-source-code" id="calc_payback-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">calc_payback</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">months</span>, <span class="ruby-identifier">interest</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">max_interest</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">months</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">interest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">interest</span> <span class="ruby-operator">/=</span> <span class="ruby-value">12</span>
+  ((<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">interest</span> <span class="ruby-operator">/</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">-</span> <span class="ruby-value">1.0</span> <span class="ruby-operator">/</span> (<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">interest</span>) <span class="ruby-operator">**</span> <span class="ruby-identifier">months</span>)) <span class="ruby-operator">+</span> (<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">platform_fee</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">months</span>).<span class="ruby-identifier">round</span>(<span class="ruby-value">2</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-calc_payback_interest_only" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">calc_payback_interest_only</span><span
+            class="method-args">(amount, borrower)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>先付利息产品时，每月需要还的利息</p>
+          
+          
+
+          
+          <div class="method-source-code" id="calc_payback_interest_only-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">calc_payback_interest_only</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">borrower</span>)
+  (<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">contract</span>.<span class="ruby-identifier">interest</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1200.0</span>).<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">2</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-equal_repayments_table" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">equal_repayments_table</span><span
+            class="method-args">(amount, month, month_rate)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>计算 分期 e.g. 10k 12月 年化12.24% : <a
+href="LoanUtils.html#method-c-equal_repayments_table">::equal_repayments_table</a>(10000,
+12, 12.24/12)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="equal_repayments_table-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">equal_repayments_table</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">month_rate</span>)
+  <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">month</span> = <span class="ruby-identifier">month</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">month_rate</span> = <span class="ruby-identifier">month_rate</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">monthly_payment</span> = <span class="ruby-identifier">pmt</span>(<span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">month_rate</span>.<span class="ruby-identifier">to_s</span>)<span class="ruby-operator">/</span><span class="ruby-value">100.0</span>, <span class="ruby-identifier">month</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">to_f</span>)
+
+  <span class="ruby-identifier">seed_interst</span> = {}
+
+  <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">month</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">month_index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">interest_amount</span> = <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">month_rate</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-operator">/</span> <span class="ruby-value">100.0</span>
+    <span class="ruby-identifier">seed</span> = <span class="ruby-identifier">monthly_payment</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">interest_amount</span>
+    <span class="ruby-identifier">amount</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">seed</span>
+    <span class="ruby-identifier">seed_interst</span>[<span class="ruby-identifier">month_index</span>] = {<span class="ruby-value">:seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">seed</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">2</span>), <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">interest_amount</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">2</span>), <span class="ruby-value">:left_seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">abs</span>}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">seed_interst</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-interest_only_table" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">interest_only_table</span><span
+            class="method-args">(amount, month, year_rate)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>先付利息 分期表</p>
+          
+          
+
+          
+          <div class="method-source-code" id="interest_only_table-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">interest_only_table</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">year_rate</span>)
+  <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">month</span> = <span class="ruby-identifier">month</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">year_rate</span> = <span class="ruby-identifier">year_rate</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">monthly_interest</span> = (<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-constant">BigDecimal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">year_rate</span>.<span class="ruby-identifier">to_s</span>)).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">1200.0</span>
+  <span class="ruby-identifier">table</span> = {}
+  <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">month</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">month_index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">table</span>[<span class="ruby-identifier">month_index</span>] = {<span class="ruby-value">:seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0.0</span>, <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">monthly_interest</span>.<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">17</span>), <span class="ruby-value">:left_seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">2</span>)}
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">table</span>[<span class="ruby-identifier">month</span>] = {<span class="ruby-value">:seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">17</span>), <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">monthly_interest</span>.<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">17</span>), <span class="ruby-value">:left_seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0.0</span>}
+  <span class="ruby-identifier">table</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-max_amount" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">max_amount</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="max_amount-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">max_amount</span>
+  <span class="ruby-value">50000</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-max_interest" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">max_interest</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>试算 用的年化利率</p>
+          
+          
+
+          
+          <div class="method-source-code" id="max_interest-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">max_interest</span>
+  <span class="ruby-value">0.15</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-platform_fee" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">platform_fee</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>平台费占出借总金的比例</p>
+          
+          
+
+          
+          <div class="method-source-code" id="platform_fee-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">platform_fee</span>
+  <span class="ruby-value">0.05</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-pmt" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pmt</span><span
+            class="method-args">(rate, months, amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PMT函数即年金函数。PMT基于固定利率及等额分期付款方式，返回贷款的每期付款额 (不包含平台费) @param [BigDecimal] 月利率
+@param [Fixnum] 期数 @param [BigDecimal] 本金</p>
+          
+          
+
+          
+          <div class="method-source-code" id="pmt-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pmt</span>(<span class="ruby-identifier">rate</span>, <span class="ruby-identifier">months</span>, <span class="ruby-identifier">amount</span>)
+  <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">rate</span> <span class="ruby-operator">/</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> (<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rate</span>) <span class="ruby-operator">**</span> (<span class="ruby-operator">-</span><span class="ruby-identifier">months</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-repay_at_due_table" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">repay_at_due_table</span><span
+            class="method-args">(amount, month, year_rate)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>到期付本息 分期表</p>
+          
+          
+
+          
+          <div class="method-source-code" id="repay_at_due_table-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">repay_at_due_table</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">year_rate</span>)
+  <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">month</span> = <span class="ruby-identifier">month</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">year_rate</span> = <span class="ruby-identifier">year_rate</span>.<span class="ruby-identifier">to_f</span>
+  {
+    <span class="ruby-value">:seed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+    <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">year_rate</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">month</span> <span class="ruby-operator">/</span> <span class="ruby-value">1200.00</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-ss" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ss</span><span
+            class="method-args">(pmt, months, rate)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>求本金</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ss-source">
+            <pre><span class="ruby-comment"># File app/models/loan_utils.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ss</span>(<span class="ruby-identifier">pmt</span>, <span class="ruby-identifier">months</span>, <span class="ruby-identifier">rate</span>)
+  <span class="ruby-identifier">pmt</span> <span class="ruby-operator">*</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> (<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rate</span>) <span class="ruby-operator">**</span> (<span class="ruby-operator">-</span><span class="ruby-identifier">months</span>)) <span class="ruby-operator">/</span> <span class="ruby-identifier">rate</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

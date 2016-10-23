@@ -1,0 +1,26 @@
+<div id="cashflow" class="tab-pane">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>投标人电话</th>
+              <th>投标人姓名</th>
+              <th>投标金额(元)</th>
+              <th>年利率(%)</th>
+              <th>投标时间</th>
+              <th>投标类型</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bids.each do |cf| %>
+              <tr>
+                <td><%= cf.user.mobile %></td>
+                <td><%= cf.user.name %></td>
+                <td><%= rmb cf.invest_amount %></td>
+                <td><%= cf.loan.interest %></td>
+                <td><%= cf.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                <td><%= cf.category %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>

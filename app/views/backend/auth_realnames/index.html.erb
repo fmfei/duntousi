@@ -1,0 +1,53 @@
+<div class="search-well">
+  <% url = backend_auth_realnames_path %>
+  <%= form_tag url, :method => "get", :class => "form-inline" do%>
+    <%= text_field_tag :q, '', class: "input-xlarge", placeholder: "用户姓名" %>
+    <%= hidden_field_tag :state, params[:state] %>
+    <%= submit_tag "搜索", :class => "btn" %>
+  <% end %>
+</div>
+<%#= render partial: "search" %>
+<div class="well">
+  <ul class="nav nav-tabs">
+    <li class='<%= "active" if params[:state]=="2" %>'><a id='paid_li' href="/backend/auth_realnames?state=2">待认证</a></li>
+    <li class='<%= "active" if params[:state]=="1"%>'><a href="/backend/auth_realnames?state=1">已认证</a></li>
+    <li class='<%= "active" if params[:state]=="0"%>'><a href="/backend/auth_realnames?state=0">已拒绝</a></li>
+    <li class='<%= "active" unless params[:state].present? %>'><a href="/backend/auth_realnames">信息不全</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active" id="<%= params[:state] || true %>">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>用户</th>
+            <th>状态</th>
+            <th>注册时间</th>
+            <th style="width: 20px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @lenders.each do |lender| %>
+            <tr>
+              <td><%= lender.id %></td>
+              <td><%= link_to lender.username, backend_advance_lender_path(lender), :target => "_blank" %></td>
+              <td><%= lender.auth_realname_state %></td>
+              <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+              <td>
+                <%= link_to_show backend_advance_lender_path(lender) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= will_paginate @lenders %>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  <% if params[:state].present? && params[:state]=='paid' %>
+    $('#paid_li').click();
+  <% end %>
+})
+</script>

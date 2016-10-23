@@ -1,0 +1,27 @@
+/ = if notice
+/   %p.notice flash
+
+/ .well
+/   .search-well
+/     = form_tag create_huodong_comment_backend_promotions_path do
+/       = submit_tag '生成幸运码'
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 中奖者
+        %th 手机号
+        %th 时间
+        %th 评论
+        %th 奖品
+    %tbody
+      - @records.each do |re|
+        %tr
+          %td= link_to re.user.name, backend_lender_path(re.user)
+          %td= link_to re.user.mobile, backend_lender_path(re.user)
+          %td= format_time re.created_at
+          %td= re.comment
+          %td= re.result==1?"10元":""
+
+= will_paginate @records

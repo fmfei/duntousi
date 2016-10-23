@@ -1,0 +1,66 @@
+<header>
+  <div id="ionic-header">
+    <div class="nav">
+      <div class='pull-left'>欢迎访问互联网金融中介信息平台！ 客服热线：<%= SystemConfig.phone400.value %></div>
+      <div class="r">
+        <%= link_to "我的账户", current_user.present? ? (current_user.is_admin? ? backend_home_index_path : account_users_path) :  user_session_path%>
+        <% if current_user.present?%>
+        <%= (link_to "站内消息", account_messages_path)%>
+        <div class="label"><%= (c=current_user.received_messages.unread.count)>0 ? c : ""%></div>
+        <%end%>
+        <%#= link_to "帮助中心", webnews_index_path(:st=>Propaganda.help.current.id) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapped-content">
+
+    <a href="/" class="">
+      <div class="l"><img alt="网贷版" class="img-responsive" src="/assets/logo.png" style="height: 60px;margin-top: 8px;"></div>
+    </a>
+
+    <div class="r">
+    <%= link_to "首页", '/', class: "link" %>
+    <%= link_to "我要理财", invests_path, class: "link" %>
+    <%= link_to "购买债权", debts_path, class: "link" %>
+    <%= link_to "我要借款", new_loan_application_path, class: "link" %>
+    <%= link_to "关于我们", webnews_path(Propaganda.about_us.current.try(:articles).order_by_id.try(:first) || 0), class: "link" %>
+        <% if current_user %>
+        <div class='dropdown btn-group' style="line-height:40px;">
+          <%= link_to "您好，#{current_user.username}<b class='caret'></b>".html_safe, '#', class: 'button flat-blue-button no-right-border dropdown-toggle', 'data-toggle' => 'dropdown' %>
+            <ul class='dropdown-menu'>
+              <li>
+                <%= link_to "我的账户", current_user.is_admin? ? backend_home_index_path : account_users_path %>
+              </li>
+              <% unless current_user.is_admin? %>
+                <li class='divider'></li>
+                <li>
+                  <%= link_to "我要充值", account_recharge_path %>
+                </li>
+                <li>
+                  <%= link_to "我要提现", new_account_withdraw_path %>
+                </li>
+                <li class='divider'></li>
+                <li>
+                  <%= link_to "资金管理", account_transactions_path %>
+                </li>
+                <li>
+                  <%= link_to "理财管理", account_invests_path %>
+                </li>
+              <% end %>
+              <li class='divider'></li>
+              <li>
+                <%= link_to "退出", destroy_user_session_path, method: :delete %>
+              </li>
+            </ul>
+          </div>
+      <% else %>
+        <%= link_to "登录", user_session_path, id: "header-login-button", role: "button", class: "button flat-blue-button no-right-border" %>
+        <%= link_to "注册", new_user_registration_path, class: "button flat-gray-button no-left-border" %>
+      <% end %>
+    </div>
+
+  </div>
+</header>
+<!-- your & Flatty javascripts -->
+<%= javascript_include_tag "account", "data-turbolinks-track" => true %>

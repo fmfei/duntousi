@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>新版上线活动</title>
+<link type="text/css" href="/online/866.css" rel="stylesheet"></link>
+</head>
+
+<body>
+<div class="banner"></div>
+<div class="conter">
+	<img src="/online/8_01.png">
+    <% if current_user.present? %>
+    <img src="/online/8_02.png" style='cursor:pointer;' onclick="javascript:window.location.href='/loans'">
+    <% else %>
+    <img src="/online/8_02.png" style='cursor:pointer;' onclick="javascript:window.location.href='/users/sign_up'">
+    <% end %>
+    <img src="/online/8_03.png" id='huafei'>
+    <img src="/online/8_04.png" id='toubiao'>
+    <img src="/online/8_05.png">
+    <img src="/online/8_06.png">
+</div>
+<div class="backmoney">
+	<div class="leftinfo">
+    	<div>回款续投一月标，奖励 <span>2‰</span></div>
+        <div>回款续投三月标，奖励 <span>4‰</span></div>
+    	<p>注：续投成功后联系财务领取，此奖励只针对在两日内从旧版网站提现，在新版网站投标的用户，为续投，可享受此活动。</p>
+    </div>
+    <div class="rightinfo">
+    	<p style="padding-bottom:20px;">约标人提前与平台客服沟通
+约标金额为10万元起（无限制）</p>
+<div>约投 1月标 ，奖励总金额的<span>2‰</span></div>
+<div>约投 3月标 ，奖励总金额的<span>4‰</span></div>
+<div>约投 6月标 ，奖励总金额的<span>6‰</span></div>
+<p>（注：此活动不能与‘挑战“HIGH”起来’‘霸气十足’同时参加；）。</p>
+    </div>
+</div>
+<div class="baqi"><img src="/online/8_08.png"></div>
+<div class="baqicon">
+	<div>
+    	<p>投资累计总金额的第一名用户，可获得投资总金额的 <span>6‰；</span><br>
+投资累计总金额的第二名用户，可获得投资总金额的 <span>4‰；</span><br>
+投资累计总金额的第三名用户，可获得投资总金额的 <span>3‰；</span><br>
+投资累计总金额的第四名至第五名用户，可获得投资总金额的 <span>2‰；</span><br>
+投资累计总金额的第六名至第十名用户，可获得投资总金额的 <span>1‰；</span></p>
+    </div>
+</div>
+<div class="tablelist">
+    <table class="table">
+        <tbody>
+        <% @users.each_with_index do |cash, index| %>
+        <tr>
+            <td style=" width:30%;text-align: center"><%= index + 1 %></td>
+            <td style="text-align: center"><%= cash.user.mobile[0..2] + '****' + cash.user.mobile[-4..-1] %></td>
+            <td style="text-align: center"><%= rmb (cash.invest_total - cash.user.bids.includes(:loan).where("char_length(pass) > 0").sum(:invest_amount)) %></td>
+        </tr>
+        <% end %>
+    </tbody></table>
+</div>
+<div class="canyu">
+	<div class="ccon">
+	<h4>参与方式：</h4><p>
+1.凡是通过注册、实名认证用户可参与此活动；<br>
+2.财务联系方式：QQ 1958763929；<br>
+3.本活动的最终解释权归亚太投资所有；</p>
+    </div>
+
+</div>
+<div id="topdiv">
+    <a href="http://www.yataitouzi.com" title="回到首页"><img src="/online/go_home.png" alt=""></a>
+</div>
+<style type="text/css">.test{height:0px;width:100px;overflow: hidden;}</style>
+<div class="test"><a href="http://wangdaiban.com/">网贷平台</a></div>
+<style type="text/css">
+#topdiv{
+    position:fixed;
+    z-index:99999;
+    right:5%;
+    bottom:20%;
+    width:50px;
+}
+#topdiv a{ display:block; margin-top:1rem;}
+</style>
+</body>
+</html>

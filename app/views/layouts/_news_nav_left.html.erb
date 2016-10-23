@@ -1,0 +1,53 @@
+<div id='wrapper'>
+  <div id='main-nav-bg' style="min-height:1000px;">
+  </div>
+  <nav id='main-nav' style="margin-left:15px;">
+    <div class="box-content">
+      <div style="margin-bottom:0;" id="accordion1" class="accordion accordion-blue panel-group">
+        <% Propaganda.level_one.each_with_index do |nav_a, i| %>
+          <div class="panel-heading text-center">
+            <a href="#collapseOne-accordion<%= i %>" data-toggle="collapse" data-parent="#accordion1" class="accordion-toggle">
+              <%= nav_a.name %>
+            </a>
+          </div>
+          <div id="collapseOne-accordion<%= i %>" class="panel-collapse collapse in">
+            <div class='navigation'>
+              <ul class='nav nav-stacked text-center'>
+                <% unless nav_a.children.empty? %>
+                  <% nav_a.children.order('id').each_with_index do |nav_b, j| %>
+                    <li <% if params[:st].to_i == nav_b.id %>class="active"<% end %>>
+                      <% if nav_b.art_show.empty? %>
+                        <%= link_to nav_b.name, webnews_index_path(:st => nav_b.id) %>
+                      <% else %>
+                        <div class="panel-heading" style="background: #f4f4f4;">
+                          <a href="#collapseOne-accordion<%= i.to_s + j.to_s %>" data-toggle="collapse" data-parent="#accordion1" class="accordion-toggle" style="color: #000000;">
+                            <%= nav_b.name %>
+                            <i class="icon-caret-right"></i>
+                          </a>
+                        </div>
+                        <div id="collapseOne-accordion<%= i.to_s + j.to_s %>" class="panel-collapse collapse <%= "in" if nav_b.art_show.pluck(:id).include? params[:id].to_i %>">
+                          <% nav_b.art_show.each do |art| %>
+                            <p style="line-height:32px; <% if params[:id].to_i == art.id %>background: #ccc;<% end %>">
+                              <%= link_to art.title, webnews_path(art) %>
+                            </p>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </li>
+                  <% end %>
+                <% end %>
+                <% unless nav_a.art_show.empty? %>
+                  <% nav_a.art_show.each do |nav_b| %>
+                    <li <% if params[:id].to_i == nav_b.id %>class="active"<% end %>>
+                      <%= link_to nav_b.title, webnews_path(nav_b) %>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+</div>

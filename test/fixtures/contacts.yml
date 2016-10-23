@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  relation: MyString
+  name: MyString
+  mobile: MyString
+  company: MyString
+  job_title: MyString
+
+two:
+  user_id: 1
+  relation: MyString
+  name: MyString
+  mobile: MyString
+  company: MyString
+  job_title: MyString

@@ -1,0 +1,76 @@
+<div class="well">
+	<%= render 'search' %>
+	<div id="container" %></div>
+</div>
+<script type="text/javascript">
+$(function(){
+ 	$('#container').highcharts({
+      chart: {
+          zoomType: 'xy'
+      },
+      title: {
+          text: '投资统计'
+      },
+      subtitle: {
+          text: '<%= @data_arr.first %> 至 <%= @data_arr.last %>'
+      },
+      xAxis: [{
+          categories: <%= raw @data_arr %>
+      }],
+      yAxis: [{ // Primary yAxis
+          labels: {
+              format: '{value}人',
+              style: {
+                  color: Highcharts.getOptions().colors[1]
+              }
+          },
+          title: {
+              text: '人数',
+              style: {
+                  color: Highcharts.getOptions().colors[1]
+              }
+          }
+      }, { // Secondary yAxis
+          title: {
+              text: '投资金额',
+              style: {
+                  color: Highcharts.getOptions().colors[0]
+              }
+          },
+          labels: {
+              format: '{value}元',
+              style: {
+                  color: Highcharts.getOptions().colors[0]
+              }
+          },
+          opposite: true
+      }],
+      tooltip: {
+          shared: true
+      },
+      series: [{
+          name: '投资金额',
+          type: 'column',
+          yAxis: 1,
+          data: <%= raw @investment_amount_data %>,
+          tooltip: {
+              valueSuffix: '元'
+          }
+      }, {
+          name: '注册人数',
+          type: 'spline',
+          data: <%= raw @registers_data %>,
+          tooltip: {
+              valueSuffix: '人'
+          }
+      }, {
+          name: '投资人数',
+          type: 'spline',
+          data: <%= raw @investment_data %>,
+          tooltip: {
+              valueSuffix: '人'
+          }
+      }]
+  });
+});
+</script>

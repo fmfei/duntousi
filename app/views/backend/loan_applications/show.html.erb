@@ -1,0 +1,49 @@
+<style type="text/css">
+.table th{text-align: right; width: 15%;}
+.table td{width: 35%; }
+</style>
+<div class="container-fluid">
+  <div class="btn-toolbar">
+    <%= link_to "返回", :back, :class => "btn" %>
+  </div>
+  <div class="well">
+    <table class="table table-bordered">
+      <tr>
+        <th><%= t(:amount) %></th>
+        <td><%= @loan_application.amount %></td>
+        <th><%= t(:loan_usage) %></th>
+        <td><%= @loan_application.loan_usage %></td>
+      </tr>
+      <tr>
+        <th><%= t(:name) %></th>
+        <td><%= @loan_application.name %></td>
+        <th><%= t(:id_card) %></th>
+        <td><%= @loan_application.id_card %></td>
+      </tr>
+      <tr>
+        <th><%= t(:phone) %></th>
+        <td><%= @loan_application.phone %></td>
+        <th><%= t(:email) %></th>
+        <td><%= @loan_application.email %></td>
+      </tr>
+      <tr>
+        <th><%= t(:register_addr) %></th>
+        <td><%= @loan_application.register_addr %></td>
+        <th><%= t(:addr) %></th>
+        <td><%= @loan_application.addr %></td>
+      </tr>
+      <tr>
+        <th><%= t(:monthly_income) %></th>
+        <td><%= @loan_application.monthly_income %></td>
+        <th><%= t(:monthly_expense) %></th>
+        <td><%= @loan_application.monthly_expense %></td>
+      </tr>
+      <tr>
+        <th><%= t(:company) %></th>
+        <td><%= @loan_application.company %></td>
+        <th><%= t(:title) %></th>
+        <td><%= @loan_application.title %></td>
+      </tr>
+    </table>
+  </div>
+</div>

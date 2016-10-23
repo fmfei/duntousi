@@ -1,0 +1,87 @@
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputText1">启用</label>
+  <div class="col-md-5 controls">
+    <div class="checkbox">
+      <%= check_box_tag :active, '1', @auto_invest_rule.actived_at.present? %>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputText1">每次投标金额</label>
+  <div class="col-md-3 controls">
+    <div class='input-group'>
+      <%= f.text_field :amount, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 100, :'data-rule-maxlength' => 10} %><span class="input-group-addon">元</span>
+    </div>
+    <span for="auto_invest_rule_amount" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputPassword4">利息范围</label>
+  <div class="col-md-2 controls">
+    <div class='input-group'>
+    <%= f.text_field :min_interest, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0, :'data-rule-maxlength' => 10} %><span class="input-group-addon">%</span>
+    </div>
+    <span for="auto_invest_rule_min_interest" class="help-block has-error"></span>
+  </div>
+  <div class="between_col">—</div>
+  <div class="col-md-2 controls">
+    <div class='input-group'>
+    <%= f.text_field :max_interest, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0, :'data-rule-maxlength' => 10} %><span class="input-group-addon">%</span>
+    </div>
+    <span for="auto_invest_rule_max_interest" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputSelect">借款期限</label>
+  <div class="col-md-2 controls">
+    <div class='input-group'>
+      <%= f.text_field :min_months, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 1, :'data-rule-max' => 36, :'data-rule-maxlength' => 2} %><span class="input-group-addon">月</span>
+    </div>
+    <span for="auto_invest_rule_min_months" class="help-block has-error"></span>
+  </div>
+  <div class="between_col">—</div>
+  <div class="col-md-2 controls">
+    <div class='input-group'>
+      <%= f.text_field :max_months, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 1, :'data-rule-max' => 36, :'data-rule-maxlength' => 2} %><span class="input-group-addon">月</span>
+    </div>
+    <span for="auto_invest_rule_min_months" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputPassword4">有抵押</label>
+  <div class="col-md-5 controls">
+    <div class="checkbox">
+    <%= f.check_box :with_mortgage %>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputPassword4">有担保</label>
+  <div class="col-md-5 controls">
+    <div class="checkbox">
+    <%= f.check_box :with_guarantee %>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputPassword4">还款方式</label>
+  <div class="col-md-5 controls">
+    <%= f.select :repay_style, {'全部' => ''}.merge(Loan::REPAYSTYLE), class: "input-xlarge" %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputPassword4">账户保留金额</label>
+  <div class="col-md-3 controls">
+    <div class='input-group'>
+      <%= f.text_field :remain_amount, {:class => 'input-xlarge form-control', :'data-rule-number' => "true" } %><span class="input-group-addon">元</span>
+    </div>
+    <span for="auto_invest_rule_remain_amount" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-actions form-actions-padding-sm">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2">
+      <input class="btn btn-primary btn-lg" name="commit" type="submit" value="提交">
+    </div>
+  </div>
+</div>

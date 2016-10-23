@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><%= @title %></title>
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag  "frontend.css", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend", "data-turbolinks-track" => true %>
+</head>
+
+<body>
+<%= render 'layouts/header' %>
+<div class="bod">
+	<div class='bodzcbg'>
+	  <%= yield %>
+	</div>
+  <%= render 'layouts/footer' %>
+</div>
+
+<%= javascript_include_tag "frontend/qqzx", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend/backup", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend/jqueryuser", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "jquery-validate.min", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "account/customize", "data-turbolinks-track" => true %>
+<script type="text/javascript">
+
+  $('form').validate({
+    onKeyup : true,
+    eachValidField : function() {
+
+      $(this).removeClass('error').addClass('success');
+    },
+    eachInvalidField : function() {
+
+      $(this).removeClass('success').addClass('error');
+    }
+  });
+    
+</script>
+<div style='display:none;'>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1252968163'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1252968163%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+</html>

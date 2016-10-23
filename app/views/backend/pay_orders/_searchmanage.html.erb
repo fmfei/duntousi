@@ -1,0 +1,20 @@
+<div class="search-well">
+  <% url = backend_pay_orders_path + "/manage"  %>
+<%= search_form_for @search, :url => url, :class => "form-inline" do |f| %>
+	<%= f.search_field :created_at_gteq %>
+	 至 
+	<%= f.search_field :created_at_lteq %>
+	<%= f.submit "搜索", :class => "btn" %>
+	<%= hidden_field_tag :action, params[:action] %>
+<% end %>
+</div>
+<script type="text/javascript">
+	$(function (){
+		$('#q_created_at_gteq').datepicker({
+		inline: true
+	});
+	$('#q_created_at_lteq').datepicker({
+		inline: true
+		});
+	})
+</script>

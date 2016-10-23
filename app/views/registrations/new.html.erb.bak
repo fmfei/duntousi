@@ -1,0 +1,27 @@
+<%= form_note_account flash %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'zhuceform'}) do |f| %>
+    <%= devise_error_messages! %>
+    <div class="zhuce">
+        <div class="titles">
+            <span class="da">注册</span>
+        </div>
+        <label>用户名</label>
+        <%= f.text_field :username, autofocus: true, placeholder: "请输入用户名", class: "form-control", 'data-required' => true, 'data-rule-minlength' => 2, 'data-rule-mxalength' => 16 %>
+        <label>邮箱</label>
+        <%= f.email_field :email, placeholder: "请输入邮箱", class: "form-control", 'data-required' => true, 'data-rule-email' => true %>
+        <label>密码(不少于8位)</label>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "密码", class: "form-control", 'data-required' => true, 'data-rule-minlength' => 8 %>
+        <label>确认密码</label>
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "确认密码", class: "form-control", 'data-required' => true %>
+        <input type="submit" name="commit" value="确定" class="sub zzqding">
+        <label class="sizef">已同意<a href='/xieyi' target='_blank'><span>《亚太金融协议》</span></a>。</label>
+    </div>
+  <% end %>
+<style type="text/css">
+.zhuce label{
+  display: inline-block;
+  height: 30px;
+  line-height: 36px;
+  color: #666;
+}
+</style>

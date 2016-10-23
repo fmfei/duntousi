@@ -1,0 +1,23 @@
+<div class="well">
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active in" id="home">
+      <!-- <label>父级栏目</label> -->
+      <%# parents_array = [["无", nil]] + Propaganda.level_one.map { |propaganda| [propaganda.name, propaganda.id] } %>
+      <%#= f.select :parent_id, options_for_select(parents_array, @propaganda.parent_id), :class => "input-xlarge" %>
+    </div>
+    <div class="tab-pane active in" id="home">
+      <label>名称</label>
+      <%= f.text_field :name, :class => "input-xlarge" %>
+    </div>
+    <div class="tab-pane active in" id="home">
+      <label>权重（按数字从大到小排列）</label>
+      <%= f.text_field :weight, :class => "input-xlarge" %>
+    </div>
+  </div>
+</div>
+<div class="btn-toolbar form-actions">
+  <%= f.submit '保存', :class => 'btn btn-primary' %>
+  <% if action_name == 'edit' && (can? :delete, 'backend/propagandas') %>
+    <%= link_to '删除', backend_propaganda_path(@propaganda), :method => 'delete', :class => 'btn', :confirm => '确认删除?'%>
+  <% end %>
+</div>

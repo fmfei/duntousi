@@ -1,0 +1,11 @@
+.well
+  #myTabContent.tab-content
+    #home.tab-pane.active.in
+      %label 机构名称
+      = f.text_field :name, :class => "input-xlarge"
+      %label 机构代码
+      = f.text_field :code, :class => "input-xlarge"
+.btn-toolbar.form-actions
+  = f.submit '保存', :class => 'btn btn-primary'
+  - if action_name == 'edit' && (can? :delete, 'backend/organizations')
+    = link_to '删除', backend_organization_path(@org), :method => 'delete', :class => 'btn', :confirm => '确认删除?'

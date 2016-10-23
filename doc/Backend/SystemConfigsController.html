@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Backend::SystemConfigsController - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="BaseController.html">Backend::BaseController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-close_site">#close_site</a>
+    
+    <li ><a href="#method-i-edit">#edit</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-prize">#prize</a>
+    
+    <li ><a href="#method-i-promotion">#promotion</a>
+    
+    <li ><a href="#method-i-site_avaliable">#site_avaliable</a>
+    
+    <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-update_prize">#update_prize</a>
+    
+    <li ><a href="#method-i-update_promotion">#update_promotion</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Backend::SystemConfigsController">
+  <h1 id="class-Backend::SystemConfigsController" class="class">
+    class Backend::SystemConfigsController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-close_site" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">close_site</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="close_site-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">close_site</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;true&quot;</span>
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;false&quot;</span>
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>] = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span>.<span class="ruby-identifier">present?</span> <span class="ruby-keyword">and</span> <span class="ruby-constant">FrontConfig</span>.<span class="ruby-identifier">save_site_status</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:status</span>]
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;修改成功&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;修改失败&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-ivar">@system_config</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">can_be_edit</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;修改参数&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">can_be_edit</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;id asc&quot;</span>) <span class="ruby-comment">#.search(params[:q])</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>].<span class="ruby-identifier">blank?</span>
+    <span class="ruby-ivar">@system_configs</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">normal</span> <span class="ruby-comment">#.paginate :page =&gt; params[:page], :per_page =&gt; 20</span>
+    <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;系统设置&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;seo&#39;</span>
+    <span class="ruby-ivar">@system_configs</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">seo</span> <span class="ruby-comment">#.paginate :page =&gt; params[:page], :per_page =&gt; 20</span>
+    <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;系统设置&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;email_sms&#39;</span>
+    <span class="ruby-ivar">@system_configs</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">email_sms</span> <span class="ruby-comment"># .paginate :page =&gt; params[:page], :per_page =&gt; 20</span>
+    <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;邮件设置&#39;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@site_avaliable</span> = <span class="ruby-constant">FrontConfig</span>.<span class="ruby-identifier">site_avaliable</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-prize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">prize</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="prize-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">prize</span>
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;投标奖励设置&#39;</span>
+  <span class="ruby-ivar">@system_configs</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">can_be_edit</span>.<span class="ruby-identifier">prize</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;id asc&quot;</span>)
+  <span class="ruby-ivar">@system_config</span> = <span class="ruby-ivar">@system_configs</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-promotion" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">promotion</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="promotion-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">promotion</span>
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;邀请、注册奖励设置&#39;</span>
+  <span class="ruby-ivar">@system_configs</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">can_be_edit</span>.<span class="ruby-identifier">promotion</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;id asc&quot;</span>)
+  <span class="ruby-ivar">@system_config</span> = <span class="ruby-ivar">@system_configs</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-site_avaliable" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">site_avaliable</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="site_avaliable-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">site_avaliable</span>
+  <span class="ruby-ivar">@site_avaliable</span> = <span class="ruby-constant">FrontConfig</span>.<span class="ruby-identifier">site_avaliable</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-ivar">@system_config</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">can_be_edit</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-ivar">@system_config</span>.<span class="ruby-identifier">changer_id</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@system_config</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">system_configs_params</span>)
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">backend_system_configs_path</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;更新成功.&#39;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;edit&quot;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@system_config</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_prize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_prize</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_prize-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_prize</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;config&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">find_by_key</span> <span class="ruby-identifier">config</span>
+    <span class="ruby-identifier">res</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:value</span>, <span class="ruby-identifier">config</span>[<span class="ruby-value">1</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">prize_backend_system_configs_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_promotion" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_promotion</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_promotion-source">
+            <pre><span class="ruby-comment"># File app/controllers/backend/system_configs_controller.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_promotion</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;config&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">find_by_key</span> <span class="ruby-identifier">config</span>
+    <span class="ruby-identifier">res</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:value</span>, <span class="ruby-identifier">config</span>[<span class="ruby-value">1</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">promotion_backend_system_configs_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

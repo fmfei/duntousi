@@ -1,0 +1,88 @@
+<%= form_tag update_promotion_backend_system_configs_path, :method => 'PUT' do %>
+<div class="well">
+  <h3>邀请奖励</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>参数名</th>
+          <th>参数值</th>
+          <th>更新时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= t 'SystemConfig.promotion_status' %></td>
+          <td><%= select_tag '[config][promotion_status]', options_for_select([['开', 'on'], ['关', 'off']], @system_configs.where(:key => 'promotion_status').first.value ) %></td>
+          <td><%= format_time(@system_configs.where(:key => 'promotion_status').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.promotion_type' %></td>
+          <td><%= select_tag '[config][promotion_type]', options_for_select([['固定', 'fixed'], ['比例', 'ratio']], @system_configs.where(:key => 'promotion_type').first.value ) %></td>
+          <td><%= format_time(@system_configs.where(:key => 'promotion_type').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.promotion_amount' %></td>
+          <td><%= text_field_tag '[config][promotion_amount]', @system_configs.where(:key => 'promotion_amount').first.value %>元</td>
+          <td><%= format_time(@system_configs.where(:key => 'promotion_amount').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.promotion_ratio' %></td>
+          <td><%= text_field_tag '[config][promotion_ratio]', @system_configs.where(:key => 'promotion_ratio').first.value %>%</td>
+          <td><%= format_time(@system_configs.where(:key => 'promotion_ratio').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>投资奖励门槛</td>
+          <td><%= text_field_tag '[config][promotion_threshold]', @system_configs.where(:key => 'promotion_threshold').first.value %>元</td>
+          <td><%= format_time(@system_configs.where(:key => 'promotion_threshold').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+<div class="well">
+  <h3>注册奖励</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>参数名</th>
+          <th>参数值</th>
+          <th>更新时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= t 'SystemConfig.prize_register_status' %></td>
+          <td><%= select_tag '[config][prize_register_status]', options_for_select([['开', 'on'], ['关', 'off']], @system_configs.where(:key => 'prize_register_status').first.value ) %></td>
+          <td><%= format_time(@system_configs.where(:key => 'prize_register_status').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.prize_register_amount' %></td>
+          <td><%= text_field_tag '[config][prize_register_amount]', @system_configs.where(:key => 'prize_register_amount').first.value %>元</td>
+          <td><%= format_time(@system_configs.where(:key => 'prize_register_amount').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+<div class="btn-toolbar form-actions">
+  <input type='submit' class="btn btn-primary" value='保存'>
+  <div class="btn-group">
+  </div>
+</div>
+<% end %>

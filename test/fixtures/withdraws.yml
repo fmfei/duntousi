@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  status: MyString
+  amount: 9.99
+  received_amount: 9.99
+  fee: 9.99
+  card_number: MyString
+  bank: MyString
+  branch: MyString
+  auditor_id: 1
+  audit_time: 2014-05-07 21:26:16
+  audit_comment: MyText
+  pay_class: MyString
+
+two:
+  user_id: 1
+  status: MyString
+  amount: 9.99
+  received_amount: 9.99
+  fee: 9.99
+  card_number: MyString
+  bank: MyString
+  branch: MyString
+  auditor_id: 1
+  audit_time: 2014-05-07 21:26:16
+  audit_comment: MyText
+  pay_class: MyString

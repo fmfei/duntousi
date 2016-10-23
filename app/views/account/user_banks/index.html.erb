@@ -1,0 +1,189 @@
+<style type="text/css">
+.fn-mt-20 {
+margin-top: 10px;
+padding-left: 0px;
+display: block;
+}
+.ui-list-icons {
+padding-bottom: 10px;
+}
+.fn-hide, .hidden {
+display: none;
+}
+.fn-clear {
+}
+.fn-hide, .hidden {
+display: none;
+}
+ol, ul {
+list-style: none;
+}
+.ui-list-icons li {
+margin-right: 10px;
+}
+.ui-list-icons li {
+width: 175px;
+padding-right: 10px;
+display: inline;
+}
+.ui-list-icons li {
+float: left;
+padding-bottom: 25px;
+}
+.ui-list-icons .icon-box {
+left: 3px;
+cursor: pointer;
+width: 130px;
+background-color: #fff!important;
+line-height: 36px;
+}
+.icon-box, .icon-box-commend, .icon-box-kj {
+width: 126px;
+border: 1px solid #ddd;
+vertical-align: middle;
+position: relative;
+display: inline-block;
+background-color: #eee;
+}
+label {
+cursor: default;
+}
+li {
+text-align: -webkit-match-parent;
+}
+ol, ul {
+list-style: none;
+}
+.icon-box .icon{
+float: left;
+width: 126px;
+padding: 0;
+}
+.cashier-bank .icon, .cashier-bank-kt .icon, .cashier-credit .icon, .cashier-credit-kt .icon, .cashier-bank-fq .icon, .cashier-bank-qy .icon, .cashier-bank-um .icon, .cashier-bank-kj .icon, .cashier-bank-kj-NO .icon {
+height: 36px;
+}
+.cashier-bank-kj{
+  padding-left: 0px;
+}
+.icon-box .icon, .icon-box-commend .icon, .icon-box-kj .icon {
+display: block;
+height: 36px;
+line-height: 30px;
+background-repeat: no-repeat;
+padding: 0 10px;
+color: #07f;
+font-weight: bold;
+white-space: nowrap;
+overflow: hidden;
+position: relative;
+z-index: 1;
+}
+.icon-box .bank-name {
+position: absolute;
+left: 5px;
+z-index: 0;
+height: 36px;
+width: 121px;
+overflow: hidden;
+}
+.icon-box .comment {
+padding-top: 15px;
+padding-bottom: 15px;
+position: absolute;
+}
+.icon-box:hover {
+border-color: #26ACDF !important;
+}
+.ui-list-icons .current, .ui-list-icons .hover, .ui-list-big-icons .current, .ui-list-big-icons .hover {
+border-color: #26ACDF !important;
+}
+
+.ABC, .BJBANK, .BOC, .BOHAIB, .BSB, .CCB, .CEB, .CIB, .CITIC, .CMB, .CMBC, .BOCOM, .DBSCN, .EGBANK, .FJHXBC, .GDB, .HXBC, .HZCB, .ICBC, .JHBANK, .JSBANK, .JXBANK, .NBBANK, .NBYZ, .NDHB, .PSBC, .SHBANK, .SPABANK, .SPDB, .SXCB, .TJBHB, .WZCB, .ZJNX {text-indent: -9999px; background-image: url("<%= asset_url('bank.png') %>");}
+.ABC {background-position: 0px -0px; }
+.BJBANK {background-position: 0px -36px; }
+.BOC {background-position: 0px -72px; }
+.BOHAIB {background-position: 0px -108px; }
+.BSB {background-position: 0px -144px; }
+.CCB {background-position: 0px -180px; }
+.CEB {background-position: 0px -216px; }
+.CIB {background-position: 0px -252px; }
+.CITIC {background-position: 0px -288px; }
+.CMB {background-position: 0px -324px; }
+.CMBC {background-position: 0px -360px; }
+.BOCOM {background-position: 0px -396px; }
+.DBSCN {background-position: 0px -432px; }
+.EGBANK {background-position: 0px -468px; }
+.FJHXBC {background-position: 0px -504px; }
+.GDB {background-position: 0px -540px; }
+.HXBC {background-position: 0px -576px; }
+.HZCB {background-position: 0px -612px; }
+.ICBC {background-position: 0px -648px; }
+.JHBANK {background-position: 0px -684px; }
+.JSBANK {background-position: 0px -720px; }
+.JXBANK {background-position: 0px -756px; }
+.NBBANK {background-position: 0px -792px; }
+.NBYZ {background-position: 0px -828px; }
+.NDHB {background-position: 0px -864px; }
+.PSBC {background-position: 0px -900px; }
+.SHBANK {background-position: 0px -936px; }
+.SPABANK {background-position: 0px -972px; }
+.SPDB {background-position: 0px -1008px; }
+.SXCB {background-position: 0px -1044px; }
+.TJBHB {background-position: 0px -1080px; }
+.WZCB {background-position: 0px -1116px; }
+.ZJNX {background-position: 0px -1152px; }
+</style>
+
+
+<div class="right">
+    <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">银行卡列表</div>
+    </div>
+    <div class="bank_left">
+      <%= form_note_account flash %>
+    </div>
+   <div >
+      <div class="czjl">
+         <div class="czjltitle_bank">银行卡号</div>
+         <div class="czjltitle_bank">开户银行</div>
+         <div class="czjltitle_bank">开户支行</div>
+         <div class="czjltitle_bank">开户地区</div>
+         <div class="czjltitle_bank">操作</div>
+      </div>
+      
+      <% @banks.each do |bank| %>
+        <div class="czjl_smaill">
+           <div class="czjltitle_bank"><%= bank_card bank.card_number %></div>
+           <div class="czjltitle_bank"><%= bank.bank %></div>
+           <div class="czjltitle_bank"><%= bank.branch %></div>
+           
+           <div class="czjltitle_bank"><%= ChinaCity.get(bank.province) %> - <%= ChinaCity.get(bank.city) %> - <%= ChinaCity.get(bank.area) %></div>
+           <div class="czjltitle_bank"><a href="<%= edit_account_bank_path(bank) %>"><i class="icon-pencil"></i>修改</a>&nbsp;<a href="<%= account_bank_path(bank) %>" data-confirm="确认删除此银行卡?" data-method="delete" rel="nofollow"><i class="icon-remove"></i>删除</a></div>
+        </div>
+      <% end %>
+      <%= will_paginate @banks %>
+      <div class="contents_bank" style="margin:30px 0px;">
+        <div class="row">
+          <div class="col_bank">
+            <a class="btn_bank" href="<%= new_account_bank_path %>">添加银行卡</a>
+          </div>
+        </div>
+      </div>
+         <div class="contents_auto">
+        <div class="contents_auto_text">
+          <div class="col-sm-12">
+            <h4>温馨提示</h4>
+            <ol>
+              <li>如果您填写的开户行支行不正确，提现交易将无法成功，提现费用不予返还。</li>
+              <li>如果您不确定开户行支行名称，可打电话到当地所在银行的营业网点询问或上网查询。</li>
+              <li>提现时，不能选择将资金利息等提到信用卡账户中。</li>
+              <li>如有问题，请联系客服， </li>
+            </ol>
+          </div>
+        </div>
+        </div>
+
+   </div><!--contents end-->
+</div>    
+                

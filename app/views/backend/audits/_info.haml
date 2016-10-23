@@ -1,0 +1,133 @@
+个人信息
+.well
+  %table.table.table-bordered
+    %tbody
+      %tr
+        %th.success= t(:name)
+        %td= @loan.borrower.try(:name)
+        %th= t :email
+        %td= @loan.borrower.try(:email)
+        %th= t :id_card
+        %td= @loan.borrower.try(:info).try(:id_card)
+        %th= t :gender
+        %td= @loan.borrower.try(:info).try(:gender)
+      %tr
+        %th.success= t :marriage
+        %td= @loan.borrower.info.marriage.try(:name)
+        %th= t :child
+        %td= @loan.borrower.info.child
+        %th= t :education
+        %td= @loan.borrower.info.education.try(:name)
+        %th= t :degree
+        %td= @loan.borrower.info.degree.try(:name)
+      %tr
+        %th.success= t :address
+        %td= @loan.borrower.info.try(:address)
+        %th= t :detailed_address
+        %td= @loan.borrower.info.detailed_address
+        %th= t :qq
+        %td= @loan.borrower.info.qq
+        %th= t :phone
+        %td= @loan.borrower.info.phone
+      %tr
+        %th= t :mobile
+        %td= @loan.borrower.mobile
+        %th= t :income
+        %td= @loan.borrower.info.income
+        %th.success= t :social_security
+        %td= @loan.borrower.info.social_security
+        %th= t :social_security_id
+        %td= @loan.borrower.info.social_security_id
+
+      %tr
+        %th= t :housing
+        %td= @loan.borrower.info.housing
+        %th= t :car
+        %td= @loan.borrower.info.car
+        %th.success= t :house_address
+        %td= @loan.borrower.info.house_address
+        %th= t :house_area
+        %td= @loan.borrower.info.house_area
+
+      %tr
+        %th.success= t :house_year
+        %td= @loan.borrower.info.house_year
+        %th= t :house_status
+        %td= @loan.borrower.info.house_status
+        %th= t :house_holder1
+        %td= @loan.borrower.info.house_holder1
+        %th= t :house_holder2
+        %td= @loan.borrower.info.house_holder2
+      %tr
+        %th.success= t :house_right1
+        %td= @loan.borrower.info.house_right1
+        %th= t :house_right2
+        %td= @loan.borrower.info.house_right2
+        %th= t :house_loanyear
+        %td= @loan.borrower.info.house_loanyear
+        %th= t :house_loanprice
+        %td= @loan.borrower.info.house_loanprice
+      %tr
+        %th.success= t :house_balance
+        %td= @loan.borrower.info.house_balance
+        %th= t :house_bank
+        %td= @loan.borrower.info.house_bank
+        %th= t :company_name
+        %td= @loan.borrower.info.company_name
+        %th= t :company_type
+        %td= @loan.borrower.info.company_type
+      %tr
+        %th.success= t :company_industry
+        %td= @loan.borrower.info.company_industry
+        %th= t :company_job
+        %td= @loan.borrower.info.company_job
+        %th= t :company_title
+        %td= @loan.borrower.info.company_title
+        %th= t :company_worktime1
+        %td= @loan.borrower.info.company_worktime1
+      %tr
+        %th.success= t :company_worktime2
+        %td= @loan.borrower.info.company_worktime2
+        %th= t :company_phone
+        %td= @loan.borrower.info.company_phone
+        %th= t :company_address
+        %td= @loan.borrower.info.company_address
+        %th= t :company_weburl
+        %td= @loan.borrower.info.company_weburl
+      %tr
+        %th.success= t :company_reamrk
+        %td= @loan.borrower.info.company_reamrk
+        %th= t :mate_name
+        %td= @loan.borrower.info.mate_name
+        %th= t :mate_id_card
+        %td= @loan.borrower.info.mate_id_card
+        %th= t :mate_salary
+        %td= @loan.borrower.info.mate_salary
+      %tr
+        %th.success= t :mate_phone
+        %td= @loan.borrower.info.mate_phone
+        %th= t :mate_mobile
+        %td= @loan.borrower.info.mate_mobile
+        %th= t :mate_company_name
+        %td= @loan.borrower.info.mate_company_name
+        %th= t :mate_job
+        %td= @loan.borrower.info.mate_job
+      %tr
+        %th= t :mate_address
+        %td{:colspan=>7}= @loan.borrower.info.mate_address
+  紧急联系人
+  %table.table.table-bordered
+    %tbody
+      - @loan.borrower.contacts.each_with_index do |c, index|
+        %tr
+          %th.success= t(:relation)
+          %td= c.relation
+          %th= t(:name)
+          %td= c.name
+          %th= t(:mobile)
+          %td= c.mobile
+          %th= t(:company)
+          %td= c.company
+          %th= t(:job_title)
+          %td= c.job_title
+= render 'loan_info'

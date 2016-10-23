@@ -1,0 +1,177 @@
+<style type="text/css">
+    .search_loans .btn{margin: 0px 20px; border-color: #ffffff; box-shadow: none;}
+    .search_loans .active{background-color: #5F8EC9 !important; color: #ffffff; }
+</style>
+<div class="wrapped-content">
+  <div class='box'>
+    <div class="box-header"></div>
+    <%= form_note_account flash %>
+    <div class='box-content search_loans'>
+      <h3>筛选投资项目<small>&nbsp;&nbsp;&nbsp;&nbsp;多选</small></h3>
+      <div class="form-group">
+        <label class="control-label col-lg-2">还款方式</label>
+        <div class='btn-group s-type' data-toggle='buttons'>
+          <label class='btn active'>
+            <input type='radio' name="s-type" value="">
+            不限
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-type" value="equal" >
+            等额本息
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-type" value="interest_only" >
+            先息后本
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-type" value="at_due" >
+            到期还本息
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">借款期限</label>
+        <div class='btn-group s-time' data-toggle='buttons'>
+          <label class='btn active'>
+            <input type='radio' name="s-time" value="" >
+            不限
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-time" value="1-3" >
+            1-3个月
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-time" value="4-6" >
+            4-6个月
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-time" value="7-12" >
+            7-12个月
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-time" value="12+" >
+            12个月以上
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">认证等级</label>
+        <div class='btn-group s-level' data-toggle='buttons'>
+          <label class='btn active'>
+            <input type='radio' name="s-level" value="" >
+            不限
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-level" value="A" >
+            A
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-level" value="B" >
+            B
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-level" value="C" >
+            C
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-level" value="D" >
+            D
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-level" value="E" >
+            E
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">标的状态</label>
+        <div class='btn-group s-level' data-toggle='buttons'>
+          <label class='btn active'>
+            <input type='radio' name="s-state" value="" >
+            不限
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-state" value="<%= Dict::LoanState.bidding.id %>" >
+            招标中
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-state" value="<%= Dict::LoanState.repaying.id %>" >
+            还款中
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-state" value="<%= Dict::LoanState.finished.id %>" >
+            已完成
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-state" value="<%= Dict::LoanState.bids_auditing.id %>" >
+            复审中
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-state" value="<%= Dict::LoanState.failed.id %>" >
+            流标
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">年利率</label>
+        <div class='btn-group s-level' data-toggle='buttons'>
+          <label class='btn active'>
+            <input type='radio' name="s-interest" value="" >
+            不限
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-interest" value="5-10" >
+            5%-10%
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-interest" value="10-15" >
+            11%-15%
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-interest" value="15-20" >
+            16%-20%
+          </label>
+          <label class='btn'>
+            <input type='radio' name="s-interest" value="20+" >
+            20%以上
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='box' id="loans_content">
+    <div class="box-header">投资列表</div>
+    <% @loans.each do |l|%>
+        <%= render :partial => "/home/bid", :locals => {:loan => l}%>
+    <%end%>
+
+    <%= will_paginate @loans, :class => 'pagination' %>
+  </div>
+  <script type="text/javascript">
+      $(function (){
+          $(".search_loans .btn").click(function (){
+              var s_type = $(".s-type .active input").val();
+              var s_time = $(".s-time .active input").val();
+              var s_level = $(".s-level .active input").val();
+              var s_state = $(".s-state .active input").val();
+              var s_interest = $(".s-interest .active input").val();
+              var name = $(this).children("input").attr("name");
+              if(name == 's-type') {
+                  s_type = $(this).children("input").val();
+              }else if(name == 's-time') {
+                  s_time = $(this).children("input").val();
+              }else if(name == 's-level') {
+                  s_level = $(this).children("input").val();
+              }else if(name == 's-state') {
+                  s_state = $(this).children("input").val();
+              }else if(name == 's-interest') {
+                  s_interest = $(this).children("input").val();
+              }
+              $.get("/invests/search", { type : s_type, time: s_time, level: s_level, state: s_state, interest: s_interest },
+                      function(data){
+                          $('#loans_content').html(data);
+                      });
+          })
+      })
+  </script>

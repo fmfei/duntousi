@@ -1,0 +1,53 @@
+<div class="search-well">
+  <%= form_tag backend_auth_mobiles_path, :method => "get", :class => "form-inline" do %>
+    <%= text_field_tag :q, '', :placeholder => "用户姓名、邮箱或电话" %>
+    <%= hidden_field_tag :state, params[:state] %>
+    <%= submit_tag "搜索", :class => "btn" %>
+  <% end %>
+</div>
+
+<div class="well">
+  <ul class="nav nav-tabs">
+    <li class='<%= "active" if params[:state]=="true"%>'><a href="/backend/auth_mobiles?state=true">认证通过</a></li>
+    <li class='<%= "active" if params[:state]=="false"%>'><a id='paid_li' href="/backend/auth_mobiles?state=false">未通过</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active" id="<%= params[:state] || true %>">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>用户</th>
+            <th>手机号</th>
+            <th>状态</th>
+            <!--
+            <th style="width: 26px;">操作</th>
+            -->
+          </tr>
+        </thead>
+        <tbody>
+          <% @lenders.each do |lender| %>
+            <tr>
+              <td><%= lender.id %></td>
+              <td><%= link_to lender.name_or_email, backend_lender_path(lender), :target => '_blank' %></td>
+              <td><%= lender.info.try(:mobile).to_s %></td>
+              <td><%= lender.auth_mobile==true ? '通过' : '未通过' %></td>
+              <!--
+              <td>
+              </td>
+              -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= will_paginate @lenders %>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  <% if params[:state].present? && params[:state]=='paid' %>
+    $('#paid_li').click();
+  <% end %>
+})
+</script>

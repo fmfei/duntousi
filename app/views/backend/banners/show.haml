@@ -1,0 +1,19 @@
+= stylesheet_link_tag "site"
+= javascript_include_tag "unslider"
+:css
+  ul,ul li{padding:0px;margin:0px;}
+  
+#index{"data-spy" => "scroll"}
+  .banner
+    %ul
+      %li{:style => "background-image: url('#{@banner.pic.url}');"}
+        .inner
+          = @banner.inner_html.html_safe
+
+:javascript
+  $(function() {
+    $('.banner').unslider({
+        fluid: true,
+        dots: true
+    });
+  });

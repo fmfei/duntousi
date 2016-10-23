@@ -1,0 +1,325 @@
+<style type="text/css">
+.fn-mt-20 {
+margin-top: 10px;
+padding-left: 0px;
+display: block;
+}
+.ui-list-icons {
+padding-bottom: 10px;
+}
+.fn-hide, .hidden {
+display: none;
+}
+.fn-clear {
+}
+.fn-hide, .hidden {
+display: none;
+}
+ol, ul {
+list-style: none;
+}
+.ui-list-icons li {
+margin-right: 10px;
+}
+.ui-list-icons li {
+width: 175px;
+padding-right: 10px;
+display: inline;
+}
+.ui-list-icons li {
+float: left;
+padding-bottom: 25px;
+}
+.ui-list-icons .icon-box {
+left: 3px;
+cursor: pointer;
+width: 130px;
+background-color: #fff!important;
+line-height: 36px;
+}
+.icon-box, .icon-box-commend, .icon-box-kj {
+width: 126px;
+border: 1px solid #ddd;
+vertical-align: middle;
+position: relative;
+display: inline-block;
+background-color: #eee;
+}
+label {
+cursor: default;
+}
+li {
+text-align: -webkit-match-parent;
+}
+ol, ul {
+list-style: none;
+}
+.icon-box .icon{
+float: left;
+width: 126px;
+padding: 0;
+}
+.cashier-bank .icon, .cashier-bank-kt .icon, .cashier-credit .icon, .cashier-credit-kt .icon, .cashier-bank-fq .icon, .cashier-bank-qy .icon, .cashier-bank-um .icon, .cashier-bank-kj .icon, .cashier-bank-kj-NO .icon {
+height: 36px;
+}
+.cashier-bank-kj{
+  padding-left: 0px;
+}
+.icon-box .icon, .icon-box-commend .icon, .icon-box-kj .icon {
+display: block;
+height: 36px;
+line-height: 30px;
+background-repeat: no-repeat;
+padding: 0 10px;
+color: #07f;
+font-weight: bold;
+white-space: nowrap;
+overflow: hidden;
+position: relative;
+z-index: 1;
+}
+.icon-box .bank-name {
+position: absolute;
+left: 5px;
+z-index: 0;
+height: 36px;
+width: 121px;
+overflow: hidden;
+}
+.icon-box .comment {
+padding-top: 15px;
+padding-bottom: 15px;
+position: absolute;
+}
+.icon-box:hover {
+border-color: #26ACDF !important;
+}
+.ui-list-icons .current, .ui-list-icons .hover, .ui-list-big-icons .current, .ui-list-big-icons .hover {
+border-color: #26ACDF !important;
+}
+
+.ABC, .BJBANK, .BOC, .BOHAIB, .BSB, .CCB, .CEB, .CIB, .CITIC, .CMB, .CMBC, .BOCOM, .DBSCN, .EGBANK, .FJHXBC, .GDB, .HXBC, .HZCB, .ICBC, .JHBANK, .JSBANK, .JXBANK, .NBBANK, .NBYZ, .NDHB, .PSBC, .SHBANK, .SPABANK, .SPDB, .SXCB, .TJBHB, .WZCB, .ZJNX {text-indent: -9999px; background-image: url("<%= asset_url('bank.png') %>");}
+.ABC {background-position: 0px -0px; }
+.BJBANK {background-position: 0px -36px; }
+.BOC {background-position: 0px -72px; }
+.BOHAIB {background-position: 0px -108px; }
+.BSB {background-position: 0px -144px; }
+.CCB {background-position: 0px -180px; }
+.CEB {background-position: 0px -216px; }
+.CIB {background-position: 0px -252px; }
+.CITIC {background-position: 0px -288px; }
+.CMB {background-position: 0px -324px; }
+.CMBC {background-position: 0px -360px; }
+.BOCOM {background-position: 0px -396px; }
+.DBSCN {background-position: 0px -432px; }
+.EGBANK {background-position: 0px -468px; }
+.FJHXBC {background-position: 0px -504px; }
+.GDB {background-position: 0px -540px; }
+.HXBC {background-position: 0px -576px; }
+.HZCB {background-position: 0px -612px; }
+.ICBC {background-position: 0px -648px; }
+.JHBANK {background-position: 0px -684px; }
+.JSBANK {background-position: 0px -720px; }
+.JXBANK {background-position: 0px -756px; }
+.NBBANK {background-position: 0px -792px; }
+.NBYZ {background-position: 0px -828px; }
+.NDHB {background-position: 0px -864px; }
+.PSBC {background-position: 0px -900px; }
+.SHBANK {background-position: 0px -936px; }
+.SPABANK {background-position: 0px -972px; }
+.SPDB {background-position: 0px -1008px; }
+.SXCB {background-position: 0px -1044px; }
+.TJBHB {background-position: 0px -1080px; }
+.WZCB {background-position: 0px -1116px; }
+.ZJNX {background-position: 0px -1152px; }
+</style>
+
+<div class="rights">
+<div class="right">
+     <div class="tongtit"  style="margin-top:20px;">
+        <div class="xshi">账户提现</div>
+        <div>提现记录</div>
+     </div>
+     <div class="contents">
+<div style="margin-left:-20px;"><%= form_note_account flash %></div>
+<div class='tab-pane active' id=''>
+  <div class="box">
+  <% unless current_user.auth_realname == 1 %>
+    <div class="alert">
+      <a href='<%= real_name_account_users_path %>' style="color:gray;">
+      为了您的资金安全，请进行实名认证，然后提现。
+      </a>
+    </div>
+  <% else %>
+    <%= form_for @withdraw, :url => account_withdraws_path, :html=>{:class => 'form form-horizontal validate-form', :novalidate=>"novalidate"} do |f| %>
+           <div class="dtitles" style="margin-top:50px;">
+              <div class="righter">
+                    <div>
+                      <span class="xjieshi">真实姓名&nbsp;&nbsp;&nbsp;</span>
+                      <span class="xjieshi"><%= current_user.try(:info).try(:name) %></span>
+                    </div>
+                    <div>
+                      <span class="xjieshi">可用金额&nbsp;&nbsp;&nbsp;</span>
+                      <span class="xjieshi"><%= rmb current_user.user_cash.available %></span>
+                    </div>
+                    <div>
+                      <span class="xjieshi">免费提现额&nbsp;&nbsp;</span>
+                      <span class="xjieshi"><%= rmb current_user.free_withdraw_amount %></span>
+                    </div>
+                    <div>
+                      <span class="xjieshi">提现金额</span>
+                      <span class="xjieshi"><%= f.text_field :amount, {:value => '请输入数字', :class => 'input-xlarge form-control', :'autocomplete'=>"off", :placeholder => '请输入数字'} %></span>
+                      <span class="withdraw_amount"></span>
+                    </div>
+                    <div>
+                      <span class="xjieshi">提现手续费&nbsp;&nbsp;&nbsp;</span>
+                      <span class="xjieshi shouxufei">0.00 ￥</span>
+                    </div>
+                    <div>
+                      <span class="xjieshi">提现卡号</span>
+                      <span class="xjieshi">
+                          <% if current_user.user_banks.blank? %>
+                          <%= link_to '请先添加银行卡', account_banks_path %>
+                          <% else %>
+                          <%= f.select :bank, options_for_select(current_user.user_banks.map{|b|[bank_card(b.card_number), b.id]}), {}, {:class => 'form-control'} %>
+                          <% end %>
+
+
+                      </span>
+                    </div>
+                     <div>
+                      <span class="xjieshi">提现密码</span>
+                      <span class="xjieshi"><% if current_user.encrypted_trade_password.present?%>
+        <%= password_field_tag :trade_password, '', autocomplete: "off", class: "form-control", 'data-rule-required' => true, 'data-rule-minlength' => 8, 'data-rule-password' =>true %>
+        <span class="trade_password"></span>
+      <% else%>
+        <label class="form-control">
+          <%= link_to '尚未设置提现密码，点击设置'.html_safe, show_set_trade_password_account_users_path %>
+        </label>
+      <% end%></span>
+                    </div>
+                    <div class="dtitle">
+                          <% if current_user.user_banks.blank? %>
+                          <label class="form-control"></label>
+                          <% else %>
+                          <input class="hqyzm" name="commit" type="submit" value="提现">
+                          <% end %>
+                    </div>
+              </div>
+           </div>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div class="row">
+    <div class="contents_auto">
+      <div class="contents_auto_text" style='line-height: 25px;'>
+        注：<br>
+1、请输入您要取出金额,我们将在1至3个工作日(国家节假日除外)之内将钱转入您网站上填写的银行帐号。<br>
+2、如您急需要把钱转到您的帐号或者24小时之内网站未将钱转入到您的银行帐号,请联系客服中心。<br>
+3、确保您的银行帐号的姓名和您的网站上的真实姓名一致。<br>
+4、在钱打到您帐号时会发一封站内信通知您。<br>
+5、每笔提现金额至少100元以上,每笔提现金额最高不能超过50000元以上。<br>
+6、重要！！如果您填写的开户行支行不正确，提现交易将无法成功，提现费用不予返还。如果您不确定开户行支行名称，可以打电话到当地所在银行的营业网点询问或者上网查询。<br>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</div><!--contents end-->
+   <div class="contents">
+      <div class="czjl">
+         <div class="czjltitle">提现金额</div>
+         <div class="czjltitle">手续费</div>
+         <div class="czjltitle">到账金额</div>
+         <div class="czjltitle">提现卡号</div>
+         <div class="czjltitle">提现时间</div>
+         <div class="czjltitle">状态</div>
+      </div>
+
+      <% @withdraws.each do |withdraw| %>
+        <div class="czjl">
+           <div class="czjltitle"><%= rmb(withdraw.amount) %></div>
+           <div class="czjltitle"><%= rmb(withdraw.fee) %></div>
+           <div class="czjltitle"><%= rmb(withdraw.received_amount) %></div>
+           <div class="czjltitle"><%= bank_card withdraw.card_number %></div>
+           <div class="czjltitle"><%= withdraw.created_at.strftime("%Y/%m/%d") %></div>
+           <div class="czjltitle lan"><%= t(withdraw.status) %></div>
+        </div>
+      <% end %>
+      <%= will_paginate @withdraws %>
+   </div><!--contents end-->
+</div>
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            var state = false;
+            $("#withdraw_amount").focus(function () {
+                if (state == false) {
+                    $(this).val('');
+                }
+            })
+            $("#withdraw_amount").keyup(function () {
+                if (/^[1-9]\d*$/.test($(this).val()) == true){
+                  if ($(this).val() > <%= current_user.free_withdraw_amount %>){
+                    fee = (($(this).val() - <%= current_user.free_withdraw_amount %>)*0.003).toFixed(2);
+                    $('.shouxufei').html(fee+' ￥');
+                  }else{
+                    $('.shouxufei').html('0 ￥');
+                  }
+                }
+            })
+            $("#withdraw_amount").blur(function () {
+                if ($(this).val() == '') {
+                    $(".withdraw_amount").text("提现金额不能为空");
+                    $(this).focus();
+                    return false;
+                } else {
+                    if ((isNaN($(this).val())) || (($(this).val())<100) || (($(this).val())>50000)) {
+                        $(".withdraw_amount").text("提现金额应在100元到50000元之间");
+                        $('.shouxufei').html('0 ￥');
+                        $(this).focus();
+                        return false;
+                    } else {
+                        $(".withdraw_amount").text('');
+                        state=true;
+                    }
+                }
+            })
+
+            $("#trade_password").focus(function () {
+                if (state == false) {
+                    $(this).val('');
+                }
+            })
+            $("#trade_password").blur(function () {
+                if ($(this).val() == '') {
+                    $(".trade_password").text("提现密码不能为空");
+                    $(this).focus();
+                    return false;
+                } else {
+                        $(".trade_password").text('');
+                        state=true;
+                }
+            })
+
+            $("#new_withdraw").submit(function(){
+              if(state == false){
+                    alert("请输入正确信息");
+                    return false;
+                }else{
+                    return true;
+                }
+            });
+
+
+        })
+</script>
+<style type="text/css">
+.czjltitle{
+  width: 16%;
+}
+</style>

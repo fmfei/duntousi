@@ -1,0 +1,54 @@
+<table class='table table-th-right'>
+	<tr>
+		<th>公司账户:</th>
+		<td><%= rmb User.company.total %></td>
+	</tr>
+	<tr>
+		<th>公司托管账户(用户提现冻结):</th>
+		<td><%= rmb User.agent.total %></td>
+	</tr>
+	<tr>
+		<th>投资人委托账户(投标中的资金):</th>
+		<td><%= rmb User.asset.total %></td>
+	</tr>
+<!-- 	<tr>
+		<th>汇入手续费:</th>
+		<td><%= rmb User.input_fee.total %></td>
+	</tr>
+	<tr> 
+		<th>提现手续费:</th>
+		<td><%= rmb User.output_fee.total %></td>
+	</tr> -->
+	<tr>
+		<th>出借人总人数:</th>
+		<td><%= User.lender.count %></td>
+	</tr>
+	<tr>
+		<th>出借人账户总金额:</th>
+		<td><%= rmb User.includes(:user_cash).lender.sum(:total).to_f %></td>
+	</tr>
+	<tr>
+		<th>出借人可用金额:</th>
+		<td><%= rmb User.includes(:user_cash).lender.sum(:available).to_f %></td>
+	</tr>
+	<tr>
+		<th>出借人提现总金额:</th>
+		<td><%= rmb User.includes(:user_cash).lender.sum(:withdraw_total).to_f %></td>
+	</tr>
+	<tr>
+		<th>出借人提现手续费总额:</th>
+		<td><%= rmb User.includes(:user_cash).lender.sum(:withdraw_fee).to_f %></td>
+	</tr>
+	<tr>
+		<th>借款人总人数:</th>
+		<td><%= User.borrower.count %>人</td>
+	</tr>
+	<tr>
+		<th>借款总笔数:</th>
+		<td><%= Loan.count %>笔</td>
+	</tr>
+	<tr>
+		<th>借款总金额:</th>
+		<td><%= rmb Loan.sum(:amount) %></td>
+	</tr>
+</table>

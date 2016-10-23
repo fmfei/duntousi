@@ -1,0 +1,226 @@
+<style>
+*{ margin:0; padding:0;}
+a:focus{outline:none;}
+img{ border:none;}
+.comdiv{ width:100%; height:152px; margin:0 auto;}
+.d01{background:url(/campaigns/anti_japanese/kz_01.png) no-repeat center;}
+.d02{background:url(/campaigns/anti_japanese/kz_02.png) no-repeat center;}
+.d03{background:url(/campaigns/anti_japanese/kz_03.png) no-repeat center;}
+.d04{background:url(/campaigns/anti_japanese/kz_04.png) no-repeat center;}
+.d05{background:url(/campaigns/anti_japanese/kz_05.png) no-repeat center;}
+.d06{background:url(/campaigns/anti_japanese/kz_06.png) no-repeat center;}
+.d07{background:url(/campaigns/anti_japanese/kz_07.png) no-repeat center;}
+.main1095{ width:1095px; height:88px; margin:0 auto;position:relative; padding-top:65px;}
+.main1095 img{ width:232px; height:55px; position:absolute; right:60px;}
+.d08{background:url(/campaigns/anti_japanese/kz_08.png) no-repeat center;}
+.d09{background:url(/campaigns/anti_japanese/kz_09.png) no-repeat center;}
+.d10{background:url(/campaigns/anti_japanese/kz_10.png) no-repeat center;}
+.d11{background:url(/campaigns/anti_japanese/kz_11.png) no-repeat center;}
+.d12{background:url(/campaigns/anti_japanese/kz_12.png) no-repeat center;}
+.d13{background:url(/campaigns/anti_japanese/kz_13.png) no-repeat center;}
+.d14{ width:100%; height:456px; margin:0 auto;background:url(/campaigns/anti_japanese/kz_14.jpg) no-repeat center;}
+
+
+.d15{background:url(/campaigns/anti_japanese/kz_15.png) no-repeat center;}
+.d16{background:url(/campaigns/anti_japanese/kz_16.png) no-repeat center;}
+.d17{background:url(/campaigns/anti_japanese/kz_17.png) no-repeat center;}
+.d18{background:url(/campaigns/anti_japanese/kz_18.png) no-repeat center;}
+.chance{ width:220px; height:40px;position:absolute; top:120px; right:30px;}
+.chance p{ font-family:微软雅黑; font-size:20px; line-height:30px;}
+.chance p span{ color:#ff7101;}
+.d19{background:url(/campaigns/anti_japanese/kz_19.png) no-repeat center;}
+.d20{ width:100%; height:304px; margin:0 auto;background:url(/campaigns/anti_japanese/kz_20.png) no-repeat center;}
+.list{ width:190px; height:220px;  position:absolute; top:25px; right:60px;}
+.list ul li{ list-style:none;font-family:微软雅黑; font-size:16px; line-height:30px; color:#9d9d9d; padding-left:0px;}
+.list ul li span{color:#ff7101;}
+.d21{background:url(/campaigns/anti_japanese/kz_21.png) no-repeat center;}
+.d22{background:url(/campaigns/anti_japanese/kz_22.png) no-repeat center;}
+
+.egg{width:1000px; height:400px; margin:0 auto;}
+.egg ul li{z-index:999;}
+.eggList{padding-top:110px;position:relative;width:1000px;}
+
+/*.eggList li{float:left;background:url(/campaigns/anti_japanese/egg_1.png) no-repeat bottom;width:158px;height:187px;cursor:pointer;position:relative;margin-left:35px; list-style:none}*/
+
+.eggList li{float:left;width:180px;height:200px;cursor:pointer;position:relative;margin-left:6px; list-style:none}
+.eggList li span{ display:none;}
+.eggList #egg1{background:url(/campaigns/anti_japanese/eg1.png) no-repeat bottom;}
+.eggList #egg2{background:url(/campaigns/anti_japanese/eg2.png) no-repeat bottom;}
+.eggList #egg3{background:url(/campaigns/anti_japanese/eg3.png) no-repeat bottom;}
+.eggList #egg4{background:url(/campaigns/anti_japanese/eg4.png) no-repeat bottom;}
+.eggList #egg5{background:url(/campaigns/anti_japanese/eg5.png) no-repeat bottom;}
+.eggList li span{position:absolute; width:30px; height:60px; left:68px; top:64px; color:#ff0; font-size:42px; font-weight:bold}
+
+/*.eggList li.curr{background:url(/campaigns/anti_japanese/egg_2.png) no-repeat bottom;cursor:default;z-index:300; list-style:none}*/
+
+.eggList #egg1.curr{background:url(/campaigns/anti_japanese/eg1s.png) no-repeat bottom;cursor:default;z-index:300; list-style:none}
+.eggList #egg2.curr{background:url(/campaigns/anti_japanese/eg2s.png) no-repeat bottom;cursor:default;z-index:300; list-style:none}
+.eggList #egg3.curr{background:url(/campaigns/anti_japanese/eg3s.png) no-repeat bottom;cursor:default;z-index:300; list-style:none}
+.eggList #egg4.curr{background:url(/campaigns/anti_japanese/eg4s.png) no-repeat bottom;cursor:default;z-index:300; list-style:none}
+.eggList #egg5.curr{background:url(/campaigns/anti_japanese/eg5s.png) no-repeat bottom;cursor:default;z-index:300; list-style:none}
+
+
+.eggList li.curr sup{position:absolute;background:url(/campaigns/anti_japanese/img-4.png) no-repeat;width:232px; height:181px;top:-36px;left:-4px;z-index:800; list-style:none}
+.hammer{background:url(/campaigns/anti_japanese/img-6.png) no-repeat;width:74px;height:87px;position:absolute; text-indent:-9999px;z-index:150;left:89px;top:112px;}
+.resultTip{position:absolute; background:#ffc ;width:148px;padding:6px;z-index:500;top:200px; left:10px; color:#f60; text-align:center;overflow:hidden;display:none;z-index:500;}
+.resultTip b{font-size:14px;line-height:24px;}
+</style>
+<div class="comdiv d01"></div>
+<div class="comdiv d02"></div>
+<div class="comdiv d03"></div>
+<div class="comdiv d04"></div>
+<div class="comdiv d05"></div>
+<div class="comdiv d06"></div>
+<div class="comdiv d07">
+  <div class="main1095">
+      <a href="/users/sign_up"><img src="/campaigns/anti_japanese/kz_23.png"></a>
+    </div>
+</div>
+<div class="comdiv d08"></div>
+<div class="comdiv d09"></div>
+<div class="comdiv d10"></div>
+<div class="comdiv d11"></div>
+<div class="comdiv d12"></div>
+<div class="comdiv d13"></div>
+<div class="d14">
+
+<div class="egg">
+    <ul class="eggList">
+
+      <p class="hammer" id="hammer">锤子</p>
+
+      <p class="resultTip" id="resultTip"><b id="result"></b></p>
+      <li id="egg1"><span>1</span><sup></sup></li>
+
+      <li id="egg2"><span>2</span><sup></sup></li>
+
+      <li id="egg3"><span>3</span><sup></sup></li>
+
+      <li id="egg4"><span>4</span><sup></sup></li>
+
+      <li id="egg5"><span>5</span><sup></sup></li>
+    </ul>
+  </div>
+
+
+
+
+</div>
+<div class="comdiv d15"></div>
+<div class="comdiv d16"></div>
+<div class="comdiv d17"></div>
+<div class="comdiv d18">
+  <div class="main1095">
+      <div class="chance">
+        </div>
+    </div>
+</div>
+<div class="comdiv d19"></div>
+<div class="d20">
+  <div class="main1095">
+      <div class="list">
+          <ul>
+            <% @records.each do |record| %>
+              <li><span>尾号<%= record.user.mobile[7..10] %></span>砸中<%= record.prize %></li>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="comdiv d21"></div>
+<div class="comdiv d22"></div>
+<script type="text/javascript">
+
+function eggClick(obj) {
+
+  var _this = obj;
+
+    if(_this.hasClass("curr")){
+
+      alert("蛋都碎了，别砸了！投资后再来.");
+
+      return false;
+
+    }
+
+    //_this.unbind('click');
+
+    $(".hammer").css({"top":_this.position().top-55,"left":_this.position().left+185});
+
+    $(".hammer").animate({
+
+      "top":_this.position().top-25,
+
+      "left":_this.position().left+125
+
+      },30,function(){
+
+        _this.addClass("curr"); //蛋碎效果
+
+        _this.find("sup").show(); //金花四溅
+
+        $(".hammer").hide();
+
+        $("#result").empty();
+
+        $("#result").hide();
+
+        $('.resultTip').css({display:'none',top:'100px',left:_this.position().left+45,opacity:0}).animate({top: '50px',opacity:1},300,function(){
+
+          //中奖状态
+          $.get('/campaigns/anti_api?egg='+_this.attr('id'),function(data){
+            alert(data);
+          });
+
+
+        });
+
+      }
+
+    );
+
+
+
+}
+
+//指定范围的随机数
+
+function randomNum(Min,Max){
+
+
+
+    var Range = Max - Min;
+
+
+
+    var Rand = Math.random();
+
+
+
+    return(Min + Math.round(Rand * Range));
+
+
+
+}
+
+
+
+$(".eggList li").click(function() {
+
+  $(this).children("span").hide();
+
+  eggClick($(this));
+
+});
+
+
+
+$(".eggList li").hover(function() {
+
+  var posL = $(this).position().left + $(this).width();
+
+  $("#hammer").show().css('left', posL);
+
+})
+
+</script>

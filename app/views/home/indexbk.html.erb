@@ -1,0 +1,267 @@
+<style type="text/css">
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background-color: #FBFBFB;
+  }
+</style>
+<div id="fb-root" class=" fb_reset">
+<!--
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<%= link_to '登录', '/users/sign_in'  %>
+<%= link_to '退出', destroy_user_session_path, :method => :delete %>-->
+<a name="top"></a>
+<div id="index" data-spy="scroll">
+    <div class="banner">
+      <ul>
+        <% @banners.each do |banner|%>
+        <li style="background-image: url('<%= banner.pic.url%>');">
+          <div class="inner">
+          <%= banner.inner_html.html_safe%>
+<!--             <h1>国内领先的P2P网贷平台</h1>
+            <p>低风险、高收益、零费率</p>
+
+            <a class="ban_btn" href="#">开始投资</a> -->
+          </div>
+        </li>
+        <% end%>
+      </ul>
+    </div>
+
+<div id="faq" class="wrapped-content">
+  <div class="grid-row clearfix">
+    <div class="grid-3">
+      <div class="big-icon-plane"></div><h3>投资理财</h3>
+      成为理财人后，预期12%-14%的年化收益轻松实现。
+    </div>
+    <div class="grid-3">
+      <div class="big-icon-heart"></div><h3>本金保障</h3>
+      所有理财用户的每笔出借资金均在本金保障计划覆盖之内，一旦出现逾期坏账，风险备用金优先垫付，保证理财人的资金安全。
+    </div>
+    <div class="grid-3">
+      <div class="big-icon-wrench"></div><h3>低门槛</h3>
+      50元起步，0手续费
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+<div class="wrapped-content">
+  <div class='col-sm-12' style="padding:0px;">
+    <div class="box">
+      <div class="box-content">
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="box" style="margin:0px;">
+              <div class="box-content">
+                <img alt="Account" class="img-responsive" src="/assets/account.gif">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            <div class="form-group">
+              <div class="col-sm-10">
+              <h4>借款人装修房子贷款啊，赶紧投标</h4>
+              </div>
+            </div>
+            <div>
+              <div class="col-sm-3">
+                <ul class="list-unstyled bid_list">
+                  <li >
+                    借款金额：<span class="text-big num text-right"><em class="value">100000.0</em>元</span>
+                  </li>
+                  <li>
+                    信用等级：<span class="fn-right text-right"><a class="creditlevel A snow">A</a></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-sm-3">
+                <ul class="list-unstyled bid_list">
+                  <li >
+                    年利率：<span class="text-big num"><em class="value">13.0</em>%</span>
+                  </li>
+                  <li>
+                    已完成：
+
+                        <div class="fn-right progress" style="line-height:20px;width:90px;margin:6px;">
+                          <div class="progress-bar progress-bar-success" style="width:60%;">60%</div>
+                        </div>
+
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-sm-3">
+                <ul class="list-unstyled bid_list">
+                  <li >
+                    贷款期限：<span class="text-big num text-right"><em class="value">10</em>个月</span>
+                  </li>
+                  <li>
+                    还款方式：等额本息
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <div class="col-sm-3">
+              <a href="/invests/14" class="btn btn-primary btn-block btn-lg">投标</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class='tabbable'>
+      <ul class='nav nav-tabs'>
+        <li class='active'>
+          <a data-toggle='tab' href='#tab1'>
+            <h3>投资列表</h3>
+          </a>
+        </li>
+        <li>
+          <a data-toggle='tab' href='#tab2'>
+            <h3>预计发标</h3>
+          </a>
+        </li>
+      </ul>
+      <div class='tab-content'>
+        <div class='tab-pane active' id='tab1'>
+          <table class="table table-hover table-list text-big">
+            <thead>
+              <tr>
+                <th>借款标题</th>
+                <th>信用等级</th>
+                <th>年利率</th>
+                <th>金额</th>
+                <th>期限</th>
+                <th>进度</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @loans.each do |l| %>
+                <tr>
+                  <td>
+                    <span class="fn-left text-big">
+                      <!--<em class="loantype fn-left" title="信用认证标"></em>-->
+                      <a class="fn-left dimgray" href="<%= invest_path(l) %>" target="_blank" title="<%= l.title %>"><%= l.title %></a>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="fn-left"><a class="creditlevel <%= l.try(:credit_level).try(:upcase) %> snow"><%= l.try(:credit_level).try(:upcase) %></a></span>
+                  </td>
+                  <td>
+                    <span class="fn-left text-big num"><em class="value"><%= l.interest %></em>%</span>
+                  </td>
+                  <td>
+                    <span class="fn-left text-big num text-right"><em class="value"><%= l.amount %></em>元</span>
+                  </td>
+                  <td>
+                    <span class="fn-left text-big num text-right"><em class="value"><%= l.months %></em>个月</span>
+                  </td>
+                  <td>
+                    <div class="progress progress-striped active invest-process">
+                      <div class="progress-bar progress-bar-success " role="progressbar" aria-valuenow="<%= l.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= l.progress %>%">
+                        <span class="sr-only"><%= l.progress %>% Complete (success)</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <%= loan_state l %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td colspan="7" class="text-center">
+                <a class="darkgray" href="<%= invests_path %>" target="_blank"><strong>查看更多</strong></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class='tab-pane' id='tab2'>
+          <table class="table table-hover table-list text-big">
+            <thead>
+              <tr>
+                <th>借款标题</th>
+                <th>信用等级</th>
+                <th>年利率</th>
+                <th>金额</th>
+                <th>期限</th>
+                <th>进度</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @loans_feature.each do |l| %>
+                <tr>
+                  <td>
+                    <span class="fn-left text-big">
+                      <!--<em class="loantype fn-left" title="信用认证标"></em>-->
+                      <a class="fn-left dimgray" href="<%= invest_path(l) %>" target="_blank" title="<%= l.title %>"><%= l.title %></a>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="fn-left"><a class="creditlevel <%= l.try(:credit_level).try(:upcase) %> snow"><%= l.try(:credit_level).try(:upcase) %></a></span>
+                  </td>
+                  <td>
+                    <span class="fn-left text-big num"><em class="value"><%= l.interest %></em>%</span>
+                  </td>
+                  <td>
+                    <span class="fn-left text-big num text-right"><em class="value"><%= l.amount %></em>元</span>
+                  </td>
+                  <td>
+                    <span class="fn-left text-big num text-right"><em class="value"><%= l.months %></em>个月</span>
+                  </td>
+                  <td>
+                    <div class="progress progress-striped active invest-process">
+                      <div class="progress-bar progress-bar-success " role="progressbar" aria-valuenow="<%= l.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= l.progress %>%">
+                        <span class="sr-only"><%= l.progress %>% Complete (success)</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <%= loan_state l %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td colspan="7" class="text-center">
+                <a class="darkgray" href="<%= invests_path %>" target="_blank"><strong>查看更多</strong></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hangyenewsbox">
+          <div class="hychild">
+            <% @medias.each do |media| %>
+              <div class="hangyenews">
+                <p class="hyp"><span class="hyspan"><%= media.name %></span></p>
+                  <ul id="news-list" class="hangul">
+                    <% media.articles.first(4).each do |article| %>
+                      <li><a target="_blank" class="f16" href="<%= webnews_path(article) %>"><p class="decoration mt18"></p><%= article.title %></a></li>
+                    <% end %>
+                  </ul>
+                  <p class="news-list-more"><a class="darkgray f16" href="<%= webnews_index_path(:st => media.id) %>">查看更多</a></p>
+              </div>
+            <% end %>
+
+            </div><!--hychild -->
+        </div>
+</div>
+</div>
+
+<script src="/assets/unslider.js"></script>
+<script>
+  $(function() {
+    $('.banner').unslider({
+        fluid: true,
+        dots: true
+    });
+});
+</script>

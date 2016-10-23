@@ -1,0 +1,16 @@
+<header>
+  <div class="header-content home">
+    <div class="parallax-bg" id="slider-wrap">
+    <div class="slider parallax-bg" id="slider"> 
+      <div class="slider-sections sandbox"> 
+        <% @banners.each do |banner| %>
+        <section> <img src="<%= banner.pic.url %>" alt="Kendo UI" style="width:100%; margin:0;" />
+        </section>
+        <% end %>
+      </div> 
+    </div> <a class="slider-prev" href="javascript: void(0)">?</a> <a class="slider-next" href="javascript: void(0)">?</a>
+    </div>
+  </div>
+</header>
+<script type='text/javascript' src='js/common.js'></script>
+<script type='text/javascript' src='js/slider.js'></script>

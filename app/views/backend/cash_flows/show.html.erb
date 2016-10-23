@@ -1,0 +1,32 @@
+<div class="well">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>转出账户</th>
+        <th>转入账户</th>
+        <th>相关账户</th>
+        <th>金额</th>
+        <th>描述</th>
+        <th>创建时间</th>
+        <th>余额</th>
+        <th style="width: 26px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cash_flows.each do |cash_flow| %>
+        <tr>
+          <td><%= cash_flow.id %> </td>
+          <td><%= cash_flow.from_user.try(:name_or_email) %> </td>
+          <td><%= cash_flow.to_user.try(:name_or_email) %> </td>
+          <td><%= cash_flow.offline_user.try(:name_or_email) %> </td>
+          <td><%= rmb cash_flow.amount %> </td>
+          <td><%= cash_flow.description %> </td>
+          <td><%= format_time cash_flow.created_at %></td>
+          <td><%= rmb cash_flow.available_of_user(@user) %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @cash_flows %>

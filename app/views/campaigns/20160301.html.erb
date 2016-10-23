@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>缤纷三月，新春起航</title>
+<style>
+*{ margin:0; padding:0;}
+a:focus{outline:none;}
+img{ border:none;}
+.comdiv{ width:100%; height:103px; margin:0 auto;}
+.d01{background:url(/campaigns/20160301/three_01.jpg) no-repeat center;}
+.d02{background:url(/campaigns/20160301/three_02.jpg) no-repeat center;}
+.d03{background:url(/campaigns/20160301/three_03.jpg) no-repeat center;}
+.d04{background:url(/campaigns/20160301/three_04.jpg) no-repeat center;}
+.d05{background:url(/campaigns/20160301/three_05.jpg) no-repeat center;}
+.d06{background:url(/campaigns/20160301/three_06.jpg) no-repeat center;}
+.d07{background:url(/campaigns/20160301/three_07.jpg) no-repeat center;}
+.d08{background:url(/campaigns/20160301/three_08.jpg) no-repeat center;}
+.d09{background:url(/campaigns/20160301/three_09.jpg) no-repeat center;}
+.d10{background:url(/campaigns/20160301/three_10.jpg) no-repeat center;}
+.d11{background:url(/campaigns/20160301/three_11.jpg) no-repeat center;}
+.d12{background:url(/campaigns/20160301/three_12.jpg) no-repeat center;}
+.d13{background:url(/campaigns/20160301/three_13.jpg) no-repeat center;}
+.d14{background:url(/campaigns/20160301/three_14.jpg) no-repeat center;}
+.d15{background:url(/campaigns/20160301/three_15.jpg) no-repeat center;}
+.d16{background:url(/campaigns/20160301/three_16.jpg) no-repeat center;}
+.d17{background:url(/campaigns/20160301/three_17.jpg) no-repeat center;}
+.d18{background:url(/campaigns/20160301/three_18.jpg) no-repeat center;}
+.d19{background:url(/campaigns/20160301/three_19.jpg) no-repeat center;}
+.d20{background:url(/campaigns/20160301/three_20.jpg) no-repeat center;}
+.d21{background:url(/campaigns/20160301/three_21.jpg) no-repeat center;}
+.d22{background:url(/campaigns/20160301/three_22.jpg) no-repeat center;}
+.d23{background:url(/campaigns/20160301/three_23.jpg) no-repeat center;}
+.d24{background:url(/campaigns/20160301/three_24.jpg) no-repeat center;}
+.d25{background:url(/campaigns/20160301/three_25.jpg) no-repeat center;}
+.d26{background:url(/campaigns/20160301/three_26.jpg) no-repeat center;}
+.d27{background:url(/campaigns/20160301/three_27.jpg) no-repeat center;}
+.d28{background:url(/campaigns/20160301/three_28.jpg) no-repeat center;}
+.d29{background:url(/campaigns/20160301/three_29.jpg) no-repeat center;}
+.d30{background:url(/campaigns/20160301/three_30.jpg) no-repeat center;}
+.d25table{ width:935px; height:560px; margin:0 auto;padding-top:20px;background: #fff;}
+.d25table ul li{ list-style:none; float:left; width:100%; height:40px; line-height:40px; margin-bottom:15px;text-align:center;font-family:微软雅黑; color:#7d7d7d;}
+.t-num-display{ width:82px; height:42px; float:left; text-indent: -9999px;}
+.t-num-block{ width:82px; height:42px; float:left;}
+.t-phone{ width:470px; height:42px; float:left;}
+</style>
+
+</head>
+
+<body>
+<div class="comdiv d01"></div>
+<div class="comdiv d02"></div>
+<div class="comdiv d03"></div>
+<div class="comdiv d04"></div>
+<div class="comdiv d05"></div>
+<div class="comdiv d06"></div>
+<div class="comdiv d07"></div>
+<div class="comdiv d08">
+</div>
+<div class="comdiv d09"></div>
+<div class="comdiv d10"></div>
+<div class="comdiv d11"></div>
+<div class="comdiv d12"></div>
+<div class="comdiv d13"></div>
+<div class="comdiv d14"></div>
+<div class="comdiv d15"></div>
+<div class="comdiv d16"></div>
+<div class="comdiv d17"></div>
+<div class="comdiv d18"></div>
+<div class="comdiv d19"></div>
+<div class="comdiv d20"></div>
+<div class="comdiv d21"></div>
+<div class="comdiv d22"></div>
+<div class="comdiv d23"></div>
+<div class="comdiv d24"></div>
+<div class="comdiv d25"></div>
+<div class="comdiv d26"></div>
+<%
+    bids = Bid.joins(:loan).where(["bids.created_at > ? and bids.created_at < ? and loans.pass = ''", DateTime.new(2016, 3, 1), DateTime.new(2016, 4, 1)])
+    bids = bids.group_by{|bid| bid.user_id}.sort_by do |h|
+      user_id, bs = h
+      bs.sum(&:invest_amount)
+    end
+    @bids = bids.reverse[0..9]
+%>
+<div style="background:#287EAD;padding: 35px 0;">
+  <div class="d25table">
+        <ul>
+          <% @bids.each_with_index do |bid, index|%>
+            <% user = User.find bid[0]%>
+             <li>
+                <div class="t-num-block" ><%= (index+1).to_s %></div>
+                <div class="t-phone" ><%= user.mobile[0..2] + '****' + user.mobile[-4..-1] %></div>
+                <div class="t-price"><%= rmb bid[1].sum(&:invest_amount)%></div>
+             </li>
+          <% end %>
+        </ul>
+    </div>
+</div>
+<div class="comdiv d27"></div>
+<div class="comdiv d28"></div>
+<div class="comdiv d29"></div>
+<div class="comdiv d30"></div>
+</body>
+</html>

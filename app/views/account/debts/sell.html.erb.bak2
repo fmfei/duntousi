@@ -1,0 +1,11 @@
+
+<div class="right">
+         <div class="tongtit" style="margin-button:50px;margin-top:20px;">
+            <div><a href='<%= account_debts_path %>'>债权列表</a></div>
+            <div class="xshi"><a href='<%= selling_list_account_debts_path %>'>转让中</a></div>
+            <div><a href='<%= sold_account_debts_path %>'>已转让</a></div>
+         </div>
+         
+
+
+</div>

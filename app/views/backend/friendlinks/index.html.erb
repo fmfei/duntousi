@@ -1,0 +1,97 @@
+<div class="btn-toolbar">
+  <a class="btn btn-primary" href="<%= new_backend_friendlink_path %>"><i class="icon-plus"></i> 添加友情链接</a>
+  <button class="btn save_weight" style="" onclick="save_weight();">保存排序</button>
+</div>
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>名称</th>
+          <th>链接</th>
+          <th>图片</th>
+          <th style="width: 70px;">权重</th>
+          <th style="width: 40px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @friendlinks.each do |f| %>
+          <tr id="fl<%= f.id %>">
+            <td><%= f.id %></td>
+            <td><%= f.title %></td>
+            <td><%= f.url %></td>
+            <td><%= image_tag f.logo.url, style: "height:50px;" %></td>
+            <td>
+              <a href="javascript:;" onclick="get_down('fl<%= f.id %>')" name="down_fl<%= f.id %>"><i class="icon-arrow-down"></i></a>
+              <a href="javascript:;" onclick="get_up('fl<%= f.id %>')"  name="up_fl<%= f.id %>" style="float: right; margin-right: 40px;"><i class="icon-arrow-up"></i></a>
+            </td>
+            <td>
+              <%= link_to_edit edit_backend_friendlink_path(f) %>
+              <%= link_to_delete backend_friendlink_path(f)%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+  function get_up(trId) {
+    if ($("#" + trId).prev().html() != null) {
+      var checkedTR = $("#" + trId).prev();
+      if ($("#" + trId).next().html() == null) {
+        $("a[name='down_" + trId + "']").show();
+        checkedTR.find("a[name^='down_']").hide();
+      }
+      if (checkedTR.prev().html() == null) {
+        $("a[name='up_" + trId + "']").hide();
+        checkedTR.find("a[name^='up_']").show();
+      }
+      checkedTR.insertAfter($("#" + trId));
+      var obj = $("#weight_" + trId)
+      obj.val(parseInt(obj.val()) - 1);
+    }
+  }
+  function get_down(trId) {
+    if ($("#" + trId).next().html() != null) {
+      var checkedTR = $("#" + trId).next();
+      if (checkedTR.next().html() == null) {
+        $("a[name='down_" + trId + "']").hide();
+        checkedTR.find("a[name^='down_']").show();
+      }
+      if ($("#" + trId).prev().html() == null) {
+        $("a[name='up_" + trId + "']").show();
+        checkedTR.find("a[name^='up_']").hide();
+      }
+      checkedTR.insertBefore($("#" + trId));
+    }
+  }
+
+  function save_weight() {
+    var w_ids = [];
+    for(var i = 1; i <= "<%= @friendlinks.count %>"; i ++) {
+      w_ids[i-1] = $("table tr:eq("+i+") td:first").text();
+    }
+    $.ajax({
+      type: "post",
+      url: "<%= set_weight_backend_friendlinks_path %>",
+      data: {weight: w_ids},
+      success: function(msg){
+        if(msg == 'ok') {
+          alert('保存成功');
+        }else{
+          alert('保存失败');
+        }
+      },
+      error: function(){
+        alert('错误!');
+      }
+    });
+  }
+
+  $(function (){
+    $("table a").click(function (){
+      $(".save_weight").show();
+    })
+  })
+
+</script>

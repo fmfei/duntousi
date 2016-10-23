@@ -1,0 +1,33 @@
+= form_note flash
+.well
+  .tab-content
+    .tab-pane.active
+      = form_tag create_bonu_backend_promotions_path, html: { class: "form-horizontal", role: "form"} do |u|
+        .control-group
+          = label_tag :mobile, "手机号：", class: "col-sm-2 control-label"
+          .controls
+            = text_field_tag :mobile, '', placeholder: "手机号", class: "input-xlarge"
+        .control-group
+          = label_tag :category, '类型', class: "col-sm-2 control-label"
+          .controls
+            = select_tag :category, raw("<option value='cash'>现金</option><option value='actual_object'>实物</option><option value='bribery_money'>红包</option>")
+        .control-group
+          = label_tag :detail, '奖品名称', class: "col-sm-2 control-label"
+          .controls
+            = text_field_tag :detail, '', placeholder: "奖品名称", class: "input-xlarge"
+        .control-group
+          = label_tag :price, '奖品价格', class: "col-sm-2 control-label"
+          .controls
+            = text_field_tag :price, '', placeholder: "奖品价格", class: "input-xlarge"
+            元
+        .control-group
+          = label_tag :dur_time, '到期时长', class: "col-sm-2 control-label"
+          .controls
+            = text_field_tag :dur_time, '', placeholder: "到期时长", class: "input-xlarge"
+            天
+        / .control-group
+        /   = u.label :password, class: "col-sm-2 control-label"
+        /   .controls
+        /     = u.text_field :password, placeholder: "Password", type: "password", class: "input-xlarge"
+        .form-actions
+          %button.btn.btn-primary{:type => "submit"} 创建奖励

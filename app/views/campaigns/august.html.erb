@@ -1,0 +1,95 @@
+<style>
+#tab_data{ width:100%; position:absolute; top:21px; left:0px;}
+#tab_data table{ width:858px; margin:0 auto;}
+#tab_data table td{ color:#fff; font-size:16px; font-weight:bold; height:25px; line-height:27px;}
+.ttab{ position:relative; display:block; width:100%; height:363px; background:url(/august/i_12.png) no-repeat center;}
+#topdiv{
+  position:fixed;
+  z-index:99999;
+  right:5%;
+  bottom:20%;
+  width:50px;
+}
+.btndiv{ width:182px; height:48px; position:absolute;  margin:0 auto;  top:10%; left:45%; overflow:hidden;}
+.btndiv a{width:182px; height:48px; display:block; text-decoration:none;}
+#topdiv a{ display:block; margin-top:1rem;}
+#div01{ width:100%; height:280px; background:url(/august/i_01.png) no-repeat center;}
+#div02{ width:100%; height:280px; background:url(/august/i_02.png) no-repeat center;}
+#div03{ width:100%; height:280px; background:url(/august/i_03.png) no-repeat center;}
+#div04{ width:100%; height:280px; background:url(/august/i_04.png) no-repeat center; position:relative;}
+#div05{ width:100%; height:280px; background:url(/august/i_05.png) no-repeat center;}
+#div06{ width:100%; height:280px; background:url(/august/i_06.png) no-repeat center;}
+#div07{ width:100%; height:280px; background:url(/august/i_07.png) no-repeat center;}
+#div08{ width:100%; height:280px; background:url(/august/i_08.png) no-repeat center;}
+#div09{ width:100%; height:280px; background:url(/august/i_09.png) no-repeat center;}
+#div10{ width:100%; height:280px; background:url(/august/i_10.png) no-repeat center;}
+#div11{ width:100%; height:280px; background:url(/august/i_11.png) no-repeat center;}
+
+#div13{ width:100%; height:199px; background:url(/august/i_13.jpg) no-repeat center;}
+
+
+.test{height:0px;width:100px;overflow: hidden;}
+</style>
+<div id="__01" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+
+    <div id="div01"></div>
+
+
+    <div id="div02"></div>
+
+
+    <div id="div03"></div>
+
+
+    <div id="div04">
+          <div class="btndiv"><a href="http://www.yataitouzi.com/users/sign_up">&nbsp;</a></div>
+        </div>
+
+
+    <div id="div05"></div>
+
+
+    <div id="div06"></div>
+
+
+    <div id="div07"></div>
+
+
+    <div id="div08"></div>
+
+
+    <div id="div09"></div>
+
+
+    <div id="div10"></div>
+
+
+    <div id="div11"></div>
+
+        <div  class="ttab">
+          <div id="tab_data">
+                <table>
+                  <% @bids.each do |bid|%>
+                    <% user = User.find bid[0]%>
+                     <tr>
+                      <td width="286" height="28" align="center" valign="middle"></td>
+                        <td width="286" height="28" align="center" valign="middle"><%= user.mobile[0..2] + '****' + user.mobile[-4..-1] %></td>
+                        <td width="286" height="28" align="center" valign="middle"><%= rmb bid[1].sum(&:invest_amount)%></td>
+                  </tr>
+                  <% end %>
+                </table>
+      </div>
+
+         </div>
+
+
+    <div id="div13"></div>
+
+</div>
+
+
+<div class="test"><a href="http://wangdaiban.com/">网贷平台</a></div>
+<div id="topdiv">
+
+        <a href="http://www.yataitouzi.com" title="回到首页"><img src="/august/top.png" alt=""></a>
+    </div>

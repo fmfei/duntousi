@@ -1,0 +1,69 @@
+.well
+  .tab-content
+    - @user=user
+    - @user_info=user_info
+    .tab-pane.active
+      = form_for @user_info,as: :user_info, url: backend_user_path(@user_info), html: { class: "form-horizontal validate-form", role: "form"} do |u|
+        = hidden_field_tag :user_id, @user.id
+        = hidden_field_tag :step, @step
+        .control-group
+          = u.label t(:name), class: "control-label"
+          .controls
+            = u.text_field :name, placeholder: t(:name), type: "text", class: "input-xlarge", 'data-rule-required' => true
+        .control-group
+          = u.label t(:id_card), class: "control-label"
+          .controls
+            = u.text_field :id_card, placeholder: t(:id_card), type: "text", class: "input-xlarge", 'data-rule-required' => true
+        .control-group
+          = u.label '身份证照片', class: "control-label"
+          .controls
+            = u.file_field :idcard_pic, class: "input-xlarge"
+        - if @user_info.idcard_pic_url.present?
+          .control-group
+            = u.label ' ', class: "control-label"
+            .controls
+              = link_to image_tag(@user_info.idcard_pic_url, :style => 'height:150px;'), @user_info.idcard_pic_url, :target => '_blank'
+        .control-group
+          = u.label '性别', class: "control-label"
+          .controls
+            = u.select :gender_id, Dict::GenderType.all.collect { |p| [ p.name, p.id ] }, prompt: "--请选择--", class: "input-xlarge"
+        .control-group
+          = u.label t(:marriage), class: "control-label"
+          .controls
+            = u.select :marriage_type_id, Dict::MarriageType.all.collect { |p| [ p.name, p.id ] }, prompt: "--请选择--", class: "input-xlarge"
+        .control-group
+          = u.label t(:child), class: "control-label"
+          .controls
+            = u.text_field :child, placeholder: t(:child), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:education), class: "control-label"
+          .controls
+            = u.select :education_type_id, Dict::EducationType.all.collect { |p| [ p.name, p.id ] }, prompt: "--请选择--", class: "input-xlarge"
+        .control-group
+          = u.label t(:degree), class: "control-label"
+          .controls
+            = u.select :degree_type_id, Dict::DegreeType.all.collect { |p| [ p.name, p.id ] }, prompt: "--请选择--", class: "input-xlarge"
+        .control-group
+          %label.control-label 地区
+          .city-group.controls
+            = select_tag "user_info[province]", options_for_select(ChinaCity.list, @user_info.province) , prompt: '--省份--', class: ['city-select', 'city-province']
+            = select_tag "user_info[city]"    , options_for_select(ChinaCity.list(@user_info.province), @user_info.city)        , prompt: '--城市--', class: ['city-select', 'city-city']
+            = select_tag "user_info[area]", options_for_select(ChinaCity.list(@user_info.city), @user_info.area), prompt: '--地区--', class: ['city-select', 'city-district']
+
+        .control-group
+          = u.label t(:detailed_address), class: "control-label"
+          .controls
+            = u.text_field :detailed_address, placeholder: t(:detailed_address), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:postcode), class: "control-label"
+          .controls
+            = u.text_field :postcode, placeholder: t(:postcode), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:phone), class: "control-label"
+          .controls
+            = u.text_field :phone, placeholder: t(:phone), type: "text", class: "input-xlarge"
+
+        .form-actions
+          %button.btn.btn-primary{:type => "submit"} 下一步
+:javascript
+  $("form").validate();

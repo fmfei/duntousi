@@ -1,0 +1,24 @@
+.search-well
+  = search_form_for @q, :url => backend_bids_path, :html => {:method => :get, :class=>"form-inline", :role=>"form"} do |f|
+    %span 投资时间:
+    = f.search_field :created_at_gteq, value: params[:q].try(:[], :created_at_gteq)
+    %span -
+    = f.search_field :created_at_lteq, value: params[:q].try(:[], :created_at_lteq)
+    = f.submit '搜索', class: "btn"
+:javascript
+  $(function (){
+    $('#q_created_at_gteq').datepicker({
+    inline: true,
+    dateFormat: "yy-mm-dd 00:00:00",
+    beforeShow: function(){
+      $('#q_created_at_gteq').datepicker('option', 'maxDate', $('#q_created_at_lteq').val())
+    }
+  });
+  $('#q_created_at_lteq').datepicker({
+    inline: true,
+    dateFormat: "yy-mm-dd 00:00:00",
+    beforeShow: function(){
+      $('#q_created_at_lteq').datepicker('option', 'minDate', $('#q_created_at_gteq').val())
+    }
+    });
+  })

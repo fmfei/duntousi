@@ -1,0 +1,43 @@
+= render :partial=>"search"
+.well
+  %table.table
+    %thead
+      %tr
+        %th 序号
+        %th 邮箱
+        %th 姓名
+        %th 身份证号
+        %th 借款金额
+        %th 期限
+        %th 审核状态
+        %th 操作
+    %tbody
+      - @loans.each do |loan|
+        %tr
+          %td= loan.id
+          %td= loan.borrower.email
+          %td= loan.borrower.info.try(:name)
+          %td= loan.borrower.info.try(:id_card)
+          %td= loan.try(:amount).try(:round,2)
+          %td= loan.months
+          %td= loan.state.try(:name) || "未处理|#{link_to "提交审核", submit_audit_backend_loan_path(loan), method: :post}".html_safe
+          %td
+            %a{:href => "#{edit_backend_loan_path(loan)}"}
+              %i.icon-pencil
+            / %a{"data-toggle" => "modal", :href => "/backend/users/#{user.id}/destroy", :role => "button"}
+            /   %i.icon-remove
+
+            = link_to "<i class='icon-remove'></i>".html_safe, backend_loan_path(loan), method: :delete, :role => "button"
+
+= will_paginate @loans
+#myModal.modal.small.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel 确认删除
+  .modal-body
+    %p.error-text
+      %i.icon-warning-sign.modal-icon>
+      确定要删除该用户吗?
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} 取消
+    %button.btn.btn-danger{"data-dismiss" => "modal"} 删除

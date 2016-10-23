@@ -1,0 +1,23 @@
+= btn_toolbar_adds([name: '添加机构代码', path: '/backend/organizations/new', type: 'add'])
+= render partial: "search"
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 序号
+        %th 机构名称
+        %th 机构代码
+        %th 创建时间
+        %th 操作
+    %tbody
+      - @orgs.each do |org|
+        %tr
+          %td= org.id
+          %td= link_to org.name, ""
+          %td= org.code
+          %td= org.created_at.to_s(:db)
+          %td
+            = link_to_edit edit_backend_organization_path(org)
+            = link_to_delete backend_organization_path(org)
+
+= will_paginate @orgs

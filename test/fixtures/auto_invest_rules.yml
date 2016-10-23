@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  amount: 9.99
+  min_interest: 1.5
+  max_interest: 1.5
+  min_months: 1
+  max_months: 1
+  credit_level: MyString
+  with_mortgage: false
+  with_guarantee: false
+  repay_style: MyString
+  remain_amount: 1.5
+  actived_at: 2014-06-05 21:13:01
+
+two:
+  user_id: 1
+  amount: 9.99
+  min_interest: 1.5
+  max_interest: 1.5
+  min_months: 1
+  max_months: 1
+  credit_level: MyString
+  with_mortgage: false
+  with_guarantee: false
+  repay_style: MyString
+  remain_amount: 1.5
+  actived_at: 2014-06-05 21:13:01

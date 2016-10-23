@@ -1,0 +1,58 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12 box'>
+    <div class="box-header"></div>
+    <div class='box-content box-double-padding'>
+      <fieldset>
+        <% if current_user.auth_realname == nil %>
+          <div class="alert alert-warning alert-dismissable">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            请补全用户信息，进行实名认证，实名认证后可进行提现等操作。
+          </div>
+        <% elsif current_user.auth_realname == 2 %>
+          <div class="alert alert-info alert-dismissable">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            管理员正在审核信息，3个工作日内将返回审核结果。
+          </div>
+        <% elsif current_user.auth_realname == 0 %>
+          <div class="alert alert-danger alert-dismissable">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            实名认证已驳回，请核对姓名，身份证号和上传的身份证图片是否一致。如已修改，请忽略此提示。
+          </div>
+        <% end %>
+        <%= form_note_account flash %>
+        <div class='col-sm-4'>
+          <div class='lead'>
+            <i class='icon-user text-contrast'></i>
+            身份认证 <small><%= '(已认证)' if current_user.auth_realname == 1 %></small>
+          </div>
+          <small class='text-muted'>为了您的资金安全，请保留正确的资料，方便我们进行验证</small>
+        </div>
+        <%= form_for current_user.info, :url => account_users_path, :method => :put, :class=>'form', :style=>'margin-bottom: 0;', :enctype => "multipart/form-data" do |f| %>
+          <div class='col-sm-7 col-sm-offset-1'>
+            <div class='form-group'>
+              <label>姓名</label>
+              <%= f.text_field :name , :class=>'form-control', :placeholder=>'姓名', disabled: current_user.auth_realname == 1 ? true : false %>
+            </div>
+            <div class='form-group'>
+              <label>身份证</label>
+              <%= f.text_field :id_card, :class=>'form-control', disabled: current_user.auth_realname == 1 ? true : false  %>
+            </div>
+            <div class='form-group'>
+            	<label>上传身份证图片</label>
+              <%= (image_tag current_user.info.idcard_pic_url, :class =>"img-responsive") if current_user.info.idcard_pic_url %>
+            	<%= f.file_field :idcard_pic, class: "file-input-wrapper btn", disabled: current_user.auth_realname == 1 ? true : false  %>
+              <div class="text-content"> 您可以上传JPG、GIF或PNG文件上传图片最大4M </div>
+            </div>
+          </div>
+          <div class='text-center'>
+            <% if current_user.auth_realname != 1 %>
+            <%= f.submit "保存", :class => "btn btn-primary" %>
+            <% end %>
+          </div>
+        </fieldset>
+      <% end%>
+    </div>
+  </div>
+</div>
+
+

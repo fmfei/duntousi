@@ -1,0 +1,294 @@
+<div class='wrapped-content'>
+  <div class='invoice box'>
+    <div class='box-content box-double-padding' style='padding-bottom:0px;'>
+      <div class='invoice-header row'>
+        <div class='invoice-title col-sm-9'>
+          <div class="col-sm-9" style="padding:0px">
+            <%= @loan.title %>
+            <small style="font-size:14px;">借款编号：<%= @loan.code ? @loan.code : @loan.id%></small>
+          </div>
+          <div class="col-sm-3 pull-right">
+          <% if @loan.with_mortgage? %>
+            <label class='btn btn-warning btn-sm' style="border:none;">抵押</label>
+          <% end %>
+          <% if @loan.with_guarantee? %>
+            <label class='btn btn-success btn-sm' style="border:none;">担保</label>
+          <% end %>
+          </div>
+        </div>
+        <div class='r col-sm-3'>
+          <%= link_to '借贷协议(范本)', account_contracts_path, target: "_black", :class=>'text-homeblue', :style => 'line-height: 40px;' %>
+        </div>
+      </div>
+      <%= form_note_account flash %>
+      <div class='row info detail'>
+        <div class='col-sm-3'>
+          转让金额(元)
+          <div class='subtotal'><i class="icon-jpy"></i><%= @bid.for_sale_amount.round(2) %></div>
+        </div>
+        <div class='col-sm-3'>
+          年利率
+          <div class='subtotal'><%= percent(@loan.interest) %><small>%</small></div>
+        </div>
+        <div class='col-sm-3'>
+          剩余期限(月)
+          <div class='subtotal'><%= @bid.for_sale_month %></div>
+        </div>
+        <div class='col-sm-3'>
+          投资100元，可得收益(元)
+          <div class='subtotal'><i class="icon-jpy"></i><%= rmb(@earnings_tmp, false) %></div>
+        </div>
+      </div>
+      <div class='row info' style="margin-top:20px;">
+        <div class='col-sm-3'>
+          <div class='loan_detail'>
+            保障方式:&nbsp;&nbsp;
+            <strong>本金+利息</strong>
+          </div>
+          <div class='loan_detail'>
+            还款方式:&nbsp;&nbsp;
+            <strong><%= t(@loan.repay_style) %></strong>
+          </div>
+        </div>
+        <div class='col-sm-3' style='padding-right: 0px;'>
+          <div class='loan_detail'>
+            信用等级:&nbsp;&nbsp;
+            <strong><%=@loan.try(:credit_level).try(:upcase) %></strong>
+          </div>
+        </div>
+
+        <div class='col-sm-3'>
+          <a data-toggle='modal' href='#invest_new' role='button' class='btn btn-primary'>我要投标</a>
+          <div class='modal fade' id='invest_new' tabindex='-1'>
+            <div class='modal-dialog'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <button aria-hidden='true' class='close' data-dismiss='modal' type='button'>×</button>
+                  <h4 class='modal-title' id='myModalLabel'>我要投标</h4>
+                </div>
+                <% if current_user %>
+                  <% if @bid.user_id == current_user.id%>
+                    <div class='modal-body'>
+                      不能购买自己的债权
+                    </div>
+                  <% else %>
+                    <%= form_for @child_bid, :url => debts_path, html: {class: 'form form-horizontal validate-form', style: 'margin-bottom: 0;'} do |f| %>
+                      <div class='modal-body'>
+                        <div class="text-content row">
+                          <label class="control-label col-sm-3">转让金额:</label>
+                          <strong><%= rmb @bid.for_sale_amount %></strong>
+                        </div>
+                        <div class="text-content row">
+                          <label class="control-label col-sm-3">账户现金:</label>
+                          <strong><%= rmb current_user.user_cash.available %></strong>
+                          <%= link_to '充值', account_recharge_path, class: 'btn btn-primary btn-sm', target: '_blank' %>
+                        </div>
+                        <%= f.hidden_field :loan_id, :value => @loan.id %>
+                        <%= f.hidden_field :from_bid_id, :value => @child_bid.from_bid_id %>
+                        <div class="form-group" style="margin-top:20px;">
+                          <%= f.label '投资金额:', class: 'control-label col-sm-3' %>
+                          <div class="row col-sm-5 controls">
+                            <div class="input-group">
+                              <span class="input-group-addon"> ￥ </span>
+                              <%= f.text_field :invest_amount, class: 'form-control text-right', 'data-rule-required' => true, 'data-rule-number' => true, 'data-rule-min' => @loan.min_invest.to_f  %>
+                            </div>
+                            <p class="help-block">
+                              <small>
+                                <% if @loan.min_invest.present? %>
+                                最小投资:<%= rmb @loan.min_invest %><br>
+                                <% end %>
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class='modal-footer'>
+                        <%= f.submit "确定", :class => "btn btn-primary invest_btn" %>
+                        <button class='btn btn-default' data-dismiss='modal' type='button'>取消</button>
+                      </div>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div class='box-no-padding'>
+                    <%= must_be_login %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='invoice box'>
+    <div class='box-content box-double-padding' style='padding-top:30px;'>
+      <div class='row tabbable'>
+        <ul class='nav nav-responsive nav-tabs detail-tabs'>
+          <li class='active'>
+            <a data-toggle='tab' href='#faq1'>
+              标的详情
+            </a>
+          </li>
+          <li class=''>
+            <a data-toggle='tab' href='#faq2'>
+              投标记录
+            </a>
+          </li>
+          <li class=''>
+            <a data-toggle='tab' href='#faq3'>
+              还款表现
+            </a>
+          </li>
+        </ul>
+        <div class='tab-content'>
+          <div class='tab-pane active' id='faq1'>
+            <% if current_user %>
+              <div class='box-header blue-background'>
+                <div class='title'>贷款人信息</div>
+              </div>
+
+              <table style="margin-top:0;" class="table table-bordered table-hover table-striped table-mutual">
+              <% @br = @loan.borrower.info %>
+              <tr>
+                <th>用户名</th>
+                <td><%= keep_mysterious_sp(@br.name, 'name') %></td>
+                <th>公司行业</th>
+                <td><%= @br.company_industry %></td>
+                <th>收入范围</th>
+                <td><%= rmb @br.income %></td>
+              </tr>
+              <tr>
+                <th>年龄</th>
+                <td></td>
+                <th>公司性质</th>
+                <td><%= @br.company_type %></td>
+                <th>住房条件</th>
+                <td><%= @br.housing %></td>
+              </tr>
+              <tr>
+                <th>学历</th>
+                <td><%= @br.education.try(:name) %></td>
+                <th>岗位职位</th>
+                <td><%= @br.company_job %></td>
+                <th>房贷</th>
+                <td><%= @br.house_loanyear %></td>
+              </tr>
+              <tr>
+                <th>学位</th>
+                <td><%= @br.degree.try(:name) %></td>
+                <th>工作城市</th>
+                <td><%= @br.company_address %></td>
+                <th>车产</th>
+                <td><%= @br.car %></td>
+              </tr>
+              <tr>
+                <th>婚姻</th>
+                <td><%= @br.marriage.try(:name) %></td>
+                <th>工作时间</th>
+                <td><%= @br.company_worktime1 %> - <%= @br.company_worktime2 %></td>
+                <th>车贷</th>
+                <td><%= @br.car %></td>
+              </tr>
+              </table>
+              <div class='box-header blue-background'>
+                <div class='title'>信用档案</div>
+              </div>
+              <table style="margin-top:0;" class="table table-bordered table-hover table-striped table-mutual">
+                <% @borrower = @loan.borrower %>
+                <tr>
+                  <th>申请借款(笔)</th>
+                  <td><%= @borrower.loans.count %></td>
+                  <th>借款总额</th>
+                  <td><%= rmb(@borrower.loans.state_in([Dict::LoanState.finished.id, Dict::LoanState.repaying.id]).sum(:amount)) %></td>
+                </tr>
+                <tr>
+                  <th>还清笔数(笔)</th>
+                  <td><%= @borrower.loans.where(loan_state_id: Dict::LoanState.finished).count %></td>
+                  <th>待还本息</th>
+                  <td><%= rmb(@borrower.repayments.unpaid.sum(:amount)) %></td>
+                </tr>
+              </table>
+              <div class='box-header blue-background'>
+                <div class='title'>借款描述</div>
+              </div>
+              <div class='text-content'>
+                <%= @loan.desc.html_safe %>
+              </div>
+            <% else %>
+              <%= must_be_login %>
+            <% end %>
+          </div>
+
+          <div class='tab-pane' id='faq2'>
+            <% if current_user %>
+              <table class='table' style='margin-bottom:0;'>
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>投标人</th>
+                    <th>投标金额</th>
+                    <th>投标时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @loan.bids.order('created_at asc').each_with_index do |bid, i| %>
+                    <tr>
+                      <td><%= i+1 %></td>
+                      <td><%= keep_mysterious_rule(bid.user.username, 'other', 3) %></td>
+                      <td><%= rmb bid.invest_amount %></td>
+                      <td><%= bid.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <%= must_be_login %>
+            <% end %>
+          </div>
+          <div class='tab-pane' id='faq3'>
+            <% if current_user %>
+              <table class='table' style='margin-bottom:0;'>
+                <thead>
+                  <tr>
+                    <th>合约还款日期</th>
+                    <th>状态</th>
+                    <th>应还本息</th>
+                    <th>实际还款日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @loan.borrower.repayments.each do |rep| %>
+                    <tr>
+                      <td><%= rep.due_date.strftime('%Y-%m-%d') %></td>
+                      <td><%= t(rep.state) %></td>
+                      <td><%= rmb rep.amount %></td>
+                      <td><%= rep.paid_at.nil? ? '--' : rep.paid_at.strftime('%Y-%m-%d') %> </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <%= must_be_login %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function (){
+
+  $(".invest_btn").click(function (){
+    var in_amount = $("#bid_invest_amount").val();
+    if(in_amount > <%= @loan.max_invest %> || in_amount < <%= @loan.min_invest %>) {
+      $(".form-group").addClass("has-error");
+      $("p.form-group small").css("color", "#B94A48");
+      return false;
+    }
+  })
+
+})
+</script>

@@ -1,0 +1,68 @@
+<div class="ui-footer" id="_footer">
+  <div class="" style="width:960px;margin:auto;">
+    <div class="col-sm-12" style="padding:0px;">
+      <div class="ui-footer-section ui-footer-narrow-hide fn-clear">
+        <h4 class="color-gray-text text-big fn-left w85">友情链接</h4>
+        <ul class="ui-footer-links fn-left w840">
+        <% Friendlink.all.each do |fl|%>
+          <li class="fn-left">
+            <%= link_to fl.title, fl.url, :target => "_blank", :class =>"gray"%>
+          </li>
+        <% end%>
+        </ul>
+      </div>
+
+      <div class="ui-footer-section ui-footer-narrow-hide fn-clear">
+        <div class="ui-footer-links col-sm-8 alpha">
+          <h4 class="color-gray-text text-big fn-left w85">网站链接</h4>
+          <ul class="fn-clear">
+            <li class="fn-left">
+              <%= link_to "首页", home_index_path, class: "gray", :target=>"_blank" %>
+            </li>
+            <li class="fn-left">
+              <%= link_to "我要理财", invests_path, class: "gray", :target=>"_blank" %>
+            </li>
+            <li class="fn-left">
+              <%= link_to "我要借款", new_loan_application_path, class: "gray", :target=>"_blank" %>
+            </li>
+            <li class="fn-left">
+              <%#= link_to "帮助中心", webnews_index_path(:st=>Propaganda.help.current.id), class: "gray" %>
+            </li>
+            <li class="fn-left">
+              <%= link_to "投资计算器", calculator_path, class: "gray", :target=>"_blank" %>
+            </li>
+          </ul>
+          <!--
+          <ul class="fn-clear icons">
+            <li class="fn-left">
+              <h4 class="color-gray-text text-big">客户服务</h4>
+            </li>
+            <li class="fn-left"><a class="gray" target="_blank" href="">新浪微博</a></li>
+            <li class="fn-left"><a class="gray" target="_blank" href="">腾讯微博</a></li>
+            <li class="fn-left"><a class="gray" tabindex="-1" href="#">微信</a></li>
+          </ul>
+        -->
+        </div>
+        <div class="col-sm-4 omega">
+          <p class="color-gray-text text-left">客服热线：<%= SystemConfig.phone400.value %></p>
+          <p class="color-gray-text text-left">客服邮箱：service@lerongyidai.com</p>
+          <p class="color-gray-text text-left" onclick="ec_cs_fnOpenTalk2('537073','','');" style='cursor:pointer;'>在线客服</p>
+          <p class="color-gray-text text-left">客服工作时间：9:00-21:00（周一至周日）</p>
+        </div>
+      </div>
+      <div class="ui-footer-section last">
+        <div class="ui-footer-copyright">
+          <span class="ui-footer-contact-link color-gray-text">© 2014 All rights reserved</span>
+          <span class="ui-footer-contact-link color-gray-text has-separator"><%= SystemConfig.company_name.value %></span>
+          <span class="ui-footer-contact-link color-gray-text has-separator last">京ICP备 13018016号-2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="display:none;">
+  <% WebStatistic.all.each do |ws| %>
+    <%= ws.code.html_safe %>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<% if action_name == 'edit' && (can? :delete, 'backend/downloads') %>
+	<%= btn_toolbar_adds([name: '删除', path: backend_download_path(@download), type: 'delete']) %>
+<% end %>
+
+<div class="well">
+	<h2><%= @download.name %> <small><%= @download.created_at.strftime('%Y-%M-%d') %></small></h2>
+	<% unless @download.file_url.nil? %>
+		<div class="well">
+			<%= link_to @download.name, @download.file_url %>
+		</div>
+	<% end %>
+	<%= @download.description %>
+</div>

@@ -1,0 +1,86 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+img,table,ul,li{ border:none;}
+.maintheme{ width:100%; height:250px; background:#f3af02; margin:0 auto;}
+.main1206{ width:1206px; height:250px; margin:0 auto; background:url(/anquan/a_01.png) no-repeat right center;}
+.main1206 p{ padding-left:102px; font-family:微软雅黑; font-size:26px; color:#fff; width:760px; padding-top:60px;}
+
+/*资金安全*/
+.zijin1002{ width:1002px; height:453px; margin:0 auto;}
+.zijin1002 .title,.fengxian1002 .title,.webcon .title{ text-align:center; font-family:微软雅黑; font-size:20px; margin-top:30px;}
+.zijin1002 .title span,.fengxian1002 .title span,.webcon .title span{font-size:14px; color:#bbb; padding-top:15px; display:block;}
+.zijin1002 .line,.fengxian1002 .line,.webcon .line{ width:50px; height:2px; margin:0 auto; color:#34c8ff; display:block; border-bottom:2px solid #34c8ff; padding-top:10px;}
+.zijincon{ width:920px; height:160px;margin-top:85px; margin-left:75px;}
+.zijincon .left{ width:154px; height:154px; float:left;}
+.zijincon .right{ width:680px; height:160px; float:left; margin-left:80px;}
+.zijincon .right h2{ color:#2e4154; font-size:30px;font-family:微软雅黑; font-weight:100;}
+.zijincon .right p{ color:#686f7a; font-size:18px;font-family:微软雅黑; font-weight:100; padding-top:20px; line-height:30px;}
+
+/*风险控制*/
+.fengxian{ width:100%; height:419px; border-top:1px solid #eee; margin:0 auto; background:#eff4f7;}
+.fengxian1002{ width:1002px; height:419px; margin:0 auto;}
+.fengcon{ width:950px; height:208px; margin-left:20px;}
+.fengcon .left{ width:160px; height:122px; float:left; margin-top:85px;}
+.fengcon .right{ width:680px; height:160px; float:left; margin-top:35px;}
+.fengcon .right h2{ color:#2e4154; font-size:30px;font-family:微软雅黑; font-weight:100;}
+.fengcon .right p{ color:#686f7a; font-size:18px;font-family:微软雅黑; font-weight:100; padding-top:20px; line-height:33px;}
+
+/*本息垫付*/
+.websafety{ width:100%; height:679px; border-top:1px solid #eee; margin:0 auto; background:#eff4f7;}
+.webcon{ width:1002px; height:679px; margin:0 auto;}
+.weblist{ width:100%; height:480px;  margin-top:10px;}
+.weblist h2{ color:#333333; font-size:30px;font-family:微软雅黑; font-weight:100;}
+.weblist p{ color:#686f7a; font-size:18px;font-family:微软雅黑; font-weight:500; padding-top:20px; line-height:35px;}
+.weblist p span{ color:#02a2f3;}
+
+/*为何选择亚太投资*/
+.choose-p{ width:100%; height:85px;  margin:0 auto; background:#f9f9f9; border-top:1px solid #eee;}
+.choose-p p{ color:#2b2a2a; font-family:微软雅黑; font-size:36px; text-align:center; line-height:85px;}
+
+/*多种期限*/
+.manyqixian{ width:100%; height:442px; background:#ffd966; margin:0 auto;}
+.many1006{ width:1006px; height:442px; margin:0 auto;}
+.many1006 .left{ width:361px; height:442px; float:left;}
+.many1006 .right{ width:546px; height:342px; float:right; margin-top:50px; }
+.many1006 .right h1{color:#a13f0e; font-family:微软雅黑; font-size:36px; font-weight:100;}
+.many1006 .right span{color:#fff; font-family:微软雅黑; font-size:21px; padding:15px 0px 50px 0px; display:block;}
+.many1006 .right p{color:#88360d; font-family:微软雅黑; font-size:18px; line-height:35px;font-weight:100;}
+
+/*低门槛，高收益*/
+.menkan{ width:100%; height:442px; background:#b8bbff; margin:0 auto;}
+.menkan1006{ width:1006px; height:442px; margin:0 auto; }
+.menkan1006 .left{ width:399px; height:442px; float:right;}
+.menkan1006 .right{ width:546px; height:342px; float:left; margin-top:50px; text-align:right;}
+.menkan1006 .right h1{color:#6168ff; font-family:微软雅黑; font-size:36px; font-weight:100;}
+.menkan1006 .right span{color:#fff; font-family:微软雅黑; font-size:21px; padding:15px 0px 50px 0px; display:block;}
+.menkan1006 .right p{color:#6168ff; font-family:微软雅黑; font-size:18px; line-height:35px;font-weight:100; text-align:Justify;
+text-justify:inter-ideograph(IE);}
+
+/*安全保障，理财无忧*/
+.banzhang{width:100%; height:442px; background:#c6e2ff; margin:0 auto;}
+.bao1006{ width:1006px; height:442px; margin:0 auto; }
+.bao1006 .left{ width:361px; height:442px; float:left;}
+.bao1006 .right{ width:546px; height:342px; float:right; margin-top:50px; }
+.bao1006 .right h1{color:#007dff; font-family:微软雅黑; font-size:36px; font-weight:100;}
+.bao1006 .right span{color:#fff; font-family:微软雅黑; font-size:21px; padding:15px 0px 50px 0px; display:block;}
+.bao1006 .right p{color:#007dfe; font-family:微软雅黑; font-size:18px; line-height:35px;font-weight:100;}
+
+/*优质担保机构，为您保驾护航*/
+.danbao{ width:100%; height:432px; background:#FF9E9E; margin:0 auto;}
+.danbao1006{ width:1006px; height:442px; margin:0 auto; }
+.danbao1006 .left{ width:399px; height:442px; float:right;}
+.danbao1006 .right{ width:546px; height:342px; float:left; margin-top:50px; text-align:right;}
+.danbao1006 .right h1{color:#6168ff; font-family:微软雅黑; font-size:36px; font-weight:100;}
+.danbao1006 .right span{color:#fff; font-family:微软雅黑; font-size:21px; padding:15px 0px 50px 0px; display:block;}
+.danbao1006 .right p{color:#6168ff; font-family:微软雅黑; font-size:18px; line-height:35px;font-weight:100; text-align:Justify;
+text-justify:inter-ideograph(IE);}
+
+/*法律*/
+.law{ width:100%; height:424px; margin:0  auto; background:url(/anquan/a_08.png) no-repeat;}
+.law1006{ width:1006px; height:424px; margin:0 auto; }
+.law-circle{ width:100px; height:100px; margin:0 auto; padding-top:55px;   border-radius:50px; overflow:hidden;}
+.law1006 p{ width:940px; margin:30px auto;color:#fff; font-family:微软雅黑; font-size:18px; line-height:35px; text-align:center;}
+.law1006 p span{ font-size:14px;}
+.law1006 #button{ width:204px; height:50px; display:block; border:1px solid #fff; border-radius:30px; text-align:center; line-height:50px; text-decoration:none; color:#fff; margin:0 auto;font-family:微软雅黑; font-size:18px; }
+

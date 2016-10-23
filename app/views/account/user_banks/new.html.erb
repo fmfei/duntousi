@@ -1,0 +1,28 @@
+<div class="rights">
+<div class="right">
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">添加银行卡</div>
+    </div>
+
+<div class="row" id="content-wrapper">
+  <div class="col-xs-12">
+
+    <div class="row" style="margin-top:120px;">
+    <div class="row" style="margin:-10px 0 -30px 20px;">
+      <%= form_note_account flash %>
+    </div>
+      <div class="col-sm-12">
+        <div class="box">
+          <div class="box-content">
+            <%= form_for @bank, :url => account_banks_path, :html=>{:class => 'form form-horizontal validate-form', :novalidate=>"novalidate"} do |f| %>
+              <%= render :partial => "form", :locals => {:f => f} %>
+            <% end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>

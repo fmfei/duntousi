@@ -1,0 +1,124 @@
+<style type="text/css">
+.table-th-right th{text-align: right;}
+</style>
+  <div class="well">
+  	<ul class="nav nav-tabs">
+  		<li class="active"><a href="#info" data-toggle="tab">客户信息</a></li>
+  		<li><a id='cashflow_link' href="#cashflow" data-toggle="tab">账户流水明细</a></li>
+  		<li><a id='upcoming_link' href="#upcoming" data-toggle="tab">收款明细</a></li>
+        <li><a id='upcoming_link' href="#user_cash" data-toggle="tab">资金明细</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+    	<div id="info" class="tab-pane active in">
+            <h3><small>状态：</small><%= @lender.auth_realname_state %>&nbsp;&nbsp;
+            </h3>
+    		<table class="table table-th-right">
+                <tr>
+                    <th>用户名</th>
+                    <td><%= @lender.username %></td>
+                    <th>电子邮件</th>
+                    <td><%= @lender.email %></td>
+                </tr>
+    			<tr>
+    				<th>姓名</th>
+    				<td><%= @lender.name %></td>
+    				<th>QQ</th>
+    				<td><%= @lender.info.qq %></td>
+    			</tr>
+    			<tr>
+    				<th>地址</th>
+    				<td><%= @lender.info.detailed_address %></td>
+                    <th>邮编</th>
+                    <td><%= @lender.info.postcode %></td>
+    			</tr>
+    			<tr>
+    				<th>电话</th>
+    				<td><%= keep_mysterious_sp(@lender.info.phone, 'phone') %></td>
+    				<th>手机</th>
+    				<td><%= keep_mysterious(@lender.mobile, 0, 7) %></td>
+    			</tr>
+                <tr>
+                    <th>身份证号</th>
+                    <td colspan="3"><%= keep_mysterious_sp(@lender.info.id_card, 'id_card') %></td>
+                </tr>
+    		</table>
+    	</div>
+
+    	<div id="cashflow" class="tab-pane">
+    		<table class="table">
+    			<thead>
+    				<tr>
+    					<th>交易时间</th>
+    					<th>交易类型描述</th>
+    					<th>交易金额(元)</th>
+    					<th>可支配余额(元)</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<% @cash_flows.each do |cf| %>
+    					<tr>
+    						<td><%= cf.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+    						<td><%= cf.description %></td>
+    						<td><%= rmb cf.amount %></td>
+    						<td><%= rmb cf.available_of_from_user %></td>
+    					</tr>
+    				<% end %>
+    			</tbody>
+    		</table>
+    		<%= will_paginate @cash_flows, :param_name => 'page1', :previous_label => '上一页', :next_label => '下一页' %>
+    	</div>
+
+    	<div id="upcoming" class="tab-pane">
+    		<table class="table">
+    			<thead>
+    				<tr>
+    					<th>还款到期日</th>
+    					<th>还款人</th>
+    					<th>应还本金(元)</th>
+    					<th>应还利息(元)</th>
+    					<th>应还总额(元)</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<% @upcomings.each do |item| %>
+    				<tr>
+    					<td><%= item.due_date.strftime('%Y-%m-%d') %></td>
+    					<td><%= item.borrower.name %></td>
+    					<td><%= rmb item.principal %></td>
+    					<td><%= rmb item.interest %></td>
+    					<td><%= rmb item.amount %></td>
+    				</tr>
+    				<% end %>
+    			</tbody>
+    		</table>
+            <%= will_paginate @upcomings, :param_name => 'page2', :previous_label => '上一页', :next_label => '下一页' %>
+    	</div>
+          <div id="user_cash" class="tab-pane active in">
+            <table class="table table-th-right">
+              <tr>
+                <th>账户总额</th>
+                <td><%= rmb @lender.total_amount %></td>
+                <th>待收总额</th>
+                <td><%= rmb @lender.not_collection_total %></td>
+              </tr>
+              <tr>
+                <th>可用余额</th>
+                <td><%= rmb @lender.available %></td>
+                <th>冻结总额</th>
+                <td><%= rmb @lender.freeze_amount %></td>
+              </tr>
+            </table>
+          </div>
+
+
+    </div>
+  </div>
+<script type="text/javascript">
+$(function() {
+  <% if params[:page1].present? %>
+      $('#cashflow_link').click();
+  <% elsif params[:page2].present? %>
+      $('#upcoming_link').click();
+  <% end %>
+})
+</script>

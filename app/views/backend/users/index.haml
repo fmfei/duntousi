@@ -1,0 +1,44 @@
+= btn_toolbar_adds([name: '添加借款人', path: '/backend/users/new', type: 'add'])
+= render partial: "search"
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 序号
+        / %th 头像
+        / %th 邮箱
+        %th 姓名
+        %th 身份证号
+        %th 手机
+        
+        %th 操作
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          / %td= popup (image_tag user.info.avatar.url || "/assets/account.gif", style: "height:50px;"), change_avatar_backend_user_path(user)
+          / %td= user.email
+          %td= user.info.try(:name)
+          %td= user.info.try(:id_card)
+          %td= user.info.try(:mobile)
+          %td
+            %a{:href => "#{edit_backend_user_path(user)}"}
+              %i.icon-pencil
+            - unless user.loans.present?
+              = link_to "申请借款", new_backend_loan_path(:user_id => user.id)
+            - else
+              = link_to "再次借款", new_backend_loan_path(:user_id => user.id)
+            = link_to '证明资料', backend_user_identifications_path(user), :target => '_blank'
+
+= will_paginate @users
+#myModal.modal.small.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel 确认删除
+  .modal-body
+    %p.error-text
+      %i.icon-warning-sign.modal-icon>
+      确定要删除该用户吗?
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} 取消
+    %button.btn.btn-danger{"data-dismiss" => "modal"} 删除

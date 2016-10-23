@@ -1,0 +1,127 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='page-header'>
+          <h1 class='pull-left'>
+            <i class='icon-bullhorn'></i>
+            <span>账户提现</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='faq'>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <div class='tabbable'>
+            <ul class='nav nav-responsive nav-tabs'>
+              <li class='<%= "active" if action_name == "new" %>'>
+                <a href='<%= new_account_withdraw_path %>'>
+                  账户提现
+                </a>
+              </li>
+              <li class='<%= "active" if action_name == "index" %>'>
+                <a href='<%= account_withdraws_path %>'>
+                  提现记录
+                </a>
+              </li>
+            </ul>
+            <div class='tab-content'>
+              <%= form_note_account flash %>
+              <div class='tab-pane active' id=''>
+                <div class="box">
+                <% unless current_user.auth_realname == 1 %>
+                  <div class="alert alert-warning alert-dismissable">
+                    <a href='<%= real_name_account_users_path %>'>
+                    为了您的资金安全，请进行实名认证，然后提现。
+                    </a>
+                  </div>
+                <% else %>
+                  <%= form_for @withdraw, :url => account_withdraws_path, :html=>{:class => 'form form-horizontal validate-form', :novalidate=>"novalidate"} do |f| %>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" >真实姓名</label>
+                    <div class="col-md-5">
+                      <div class="checkbox">
+                        <label>
+                          <%= current_user.try(:info).try(:name) %>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" >可用金额</label>
+                    <div class="col-md-5">
+                      <div class="checkbox">
+                        <label>
+                          <%= rmb current_user.user_cash.available %>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="withdraw_amount">提现金额</label>
+                    <div class="col-md-5 controls">
+                      <%= f.text_field :amount, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 1, :'autocomplete'=>"off", :placeholder => '请输入数字'} %>
+                      <span for="pay_order_amount" class="help-block has-error"></span>
+                    </div>
+                    <div class="col-md-5 checkbox">
+                      元
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="withdraw_bank">提现卡号</label>
+                    <div class="col-md-5">
+                      <%= f.select :bank, options_for_select(current_user.user_banks.map{|b|[b.card_number, b.id]}), {}, {:class => 'form-control'} %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="trade_password">提现密码</label>
+                    <div class="col-md-5">
+                    <% if current_user.encrypted_trade_password.present?%>
+                      <%= password_field_tag :trade_password, '', autocomplete: "off", class: "form-control", 'data-rule-required' => true, 'data-rule-minlength' => 8, 'data-rule-password' =>true %>
+                    <% else%>
+                      <label class="form-control">
+                        <%= link_to '尚未设置提现密码，点击设置'.html_safe, show_set_trade_password_account_users_path %>
+                      </label>
+                    <% end%>
+                    </div>
+                  </div>
+                  <div class="form-actions form-actions-padding-sm">
+                    <div class="row">
+                      <div class="col-md-10 col-md-offset-2">
+                        <% if current_user.user_banks.blank? %>
+                        <label><%= link_to '请先添加银行卡', account_banks_path %></label>
+                        <% else %>
+                        <input class="btn btn-primary btn-lg <%= current_user.encrypted_trade_password.present? ? "" : "disabled"%>" name="commit" type="submit" value="提现">
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+                <% end %>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>温馨提示</h4>
+                  <ol>
+                    <li>需要实名认证才能进行提现；</li>
+                    <li>提现手续费为提现金额的千分之五（0.5%），100元封顶，超出部分由平台承担；</li>
+                    <li>请确保您输入的提现金额，以及银行帐号信息准确无误；</li>
+                    <li>如果您填写的提现信息不正确可能会导致提现失败，由此产生的提现费用将不予返还；</li>
+                    <li>在双休日和法定节假日期间，用户可以申请提现，会在下一个工作日进行处理。由此造成的不便，请多多谅解；</li>
+                    <li>平台禁止洗钱、信用卡套现、虚假交易等行为，网站将针对异常提款（包括短期提取无消费充值资金）进行严格审核，审核时间在5个工作日以上。</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$("#withdraw_amount").val('');
+</script>

@@ -1,0 +1,39 @@
+<div class="search-well">
+  <% url = items_list_backend_products_path %>
+<%= search_form_for @q, :url => url, :class => "form-inline" do |f| %>
+  <%= hidden_field_tag :item_created %>
+  创建时间: <%= f.search_field :created_at_gteq, :value => params[:q].try(:[], :created_at_gteq) %>
+   至
+  <%= f.search_field :created_at_lteq, :value => params[:q].try(:[], :created_at_lteq) %>
+  <%= f.submit "搜索", :class => "btn searchBtn" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+<% end %>
+</div>
+
+<div class="search-well">
+  <% url = items_list_backend_products_path %>
+<%= search_form_for @q, :url => url, :class => "form-inline" do |f| %>
+  <%= hidden_field_tag :draw_lottery %>
+  开奖时间: <%= f.search_field :hit_time_gteq, :value => params[:q].try(:[], :hit_time_gteq) %>
+   至
+  <%= f.search_field :hit_time_lteq, :value => params[:q].try(:[], :hit_time_lteq) %>
+  <%= f.submit "搜索", :class => "btn searchBtn" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+<% end %>
+</div>
+
+<script type="text/javascript">
+  $(function (){
+    $('#q_audit_time_gteq, #q_audit_time_lteq, #q_created_at_gteq, #q_created_at_lteq').datepicker({
+      inline: true
+    });
+    $('#q_audit_time_gteq, #q_audit_time_lteq, #q_hit_time_gteq, #q_hit_time_lteq').datepicker({
+      inline: true
+    });
+  $('.searchBtn').click(function(){
+    $('#download').val('');
+    $('#lucky_code_search').attr('target', '_self');
+  });
+
+  })
+</script>

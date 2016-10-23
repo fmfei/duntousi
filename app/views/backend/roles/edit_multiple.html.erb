@@ -1,0 +1,26 @@
+<%= form_tag update_multiple_backend_roles_path, method: :put do %>
+  <div class="well">
+    <table class='table table-hover'>
+      <tr>
+        <th></th>
+        <% @roles.each do |role| %>
+          <th><%= role.name %></th>
+        <% end %>
+      </tr>
+      <% @permissions.each do |permission| %>
+        <tr>
+          <th><%= permission.name %></th>
+          <% @roles.each do |role| %>
+            <td><%= check_box_tag "roles[#{role.id}][permission_ids][]", permission.id, role.permissions.include?(permission) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="btn-toolbar form-actions">
+    <input type='submit' class="btn btn-primary" value='保存'>
+    <% if action_name == 'edit' && (can? :delete, 'backend/roles') %>
+      <%= link_to '删除', backend_role_path(@role), :method => 'delete', :class => 'btn', :confirm => '确认删除此权限?'%>
+    <% end %>
+  </div>
+  <% end %>

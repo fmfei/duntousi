@@ -1,0 +1,27 @@
+
+.well
+  %table.table
+    %thead
+      %tr
+        %th 余额总数
+    %tbody
+      %tr
+        %td= rmb @total
+.well
+  %table.table
+    %thead
+      %tr
+        %th 编号
+        %th 用户
+        %th 注册时间
+        %th 注册IP
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          %td
+            = link_to link_to user.username, backend_lender_path(user), :target => "_blank"
+          %td= user.created_at.strftime('%Y-%m-%d %H:%M:%S')
+          %td= user.register_ip
+
+= will_paginate @users

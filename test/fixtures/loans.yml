@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  amount: 9.99
+  available_amount: 9.99
+  months: 1
+  interest: 1.5
+  repay_style: MyString
+  min_invest: 9.99
+  max_invest: 9.99
+  due_date: 2014-05-07 09:09:07
+  title: MyString
+  desc: MyText
+  credit_level: MyString
+  with_mortgage: false
+  with_guarantee: false
+  state: MyString
+  junior_auditor_id: 1
+  junior_audit_time: 2014-05-07 09:09:08
+  senior_auditor_id: 1
+  senior_audit_time: 2014-05-07 09:09:08
+  bids_auditor_id: 1
+  bids_audit_time: 2014-05-07 09:09:08
+
+two:
+  amount: 9.99
+  available_amount: 9.99
+  months: 1
+  interest: 1.5
+  repay_style: MyString
+  min_invest: 9.99
+  max_invest: 9.99
+  due_date: 2014-05-07 09:09:07
+  title: MyString
+  desc: MyText
+  credit_level: MyString
+  with_mortgage: false
+  with_guarantee: false
+  state: MyString
+  junior_auditor_id: 1
+  junior_audit_time: 2014-05-07 09:09:08
+  senior_auditor_id: 1
+  senior_audit_time: 2014-05-07 09:09:08
+  bids_auditor_id: 1
+  bids_audit_time: 2014-05-07 09:09:08

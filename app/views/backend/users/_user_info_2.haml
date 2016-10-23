@@ -1,0 +1,84 @@
+.well
+  .tab-content
+    - @user=user
+    - @user_info=user_info
+    .tab-pane.active
+      = form_for @user_info,as: :user_info, url: backend_user_path(@user_info), html: { class: "form-horizontal", role: "form"} do |u|
+        = hidden_field_tag :user_id, @user.id
+        = hidden_field_tag :step, @step
+        .control-group
+          = u.label t(:income), class: "control-label"
+          .controls
+            = u.text_field :income, placeholder: t(:income), type: "text", class: "input-xlarge", 'data-rule-required' => true
+            %span.red
+              *
+        / .control-group
+        /   = u.label t(:social_security), class: "control-label"
+        /   .controls
+        /     = u.text_field :social_security, placeholder: t(:social_security), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:social_security_id), class: "control-label"
+          .controls
+            = u.text_field :social_security_id, placeholder: t(:social_security_id), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:housing), class: "control-label"
+          .controls
+            = u.text_field :housing, placeholder: t(:housing), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:car), class: "control-label"
+          .controls
+            = u.text_field :car, placeholder: t(:car), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_address), class: "control-label"
+          .controls
+            = u.text_field :house_address, placeholder: t(:house_address), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_area), class: "control-label"
+          .controls
+            = u.text_field :house_area, placeholder: t(:house_area), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_year), class: "control-label"
+          .controls
+            = u.text_field :house_year, placeholder: t(:house_year), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_status), class: "control-label"
+          .controls
+            = u.text_field :house_status, placeholder: t(:house_status), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_holder1), class: "control-label"
+          .controls
+            = u.text_field :house_holder1, placeholder: t(:house_holder1), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_holder2), class: "control-label"
+          .controls
+            = u.text_field :house_holder2, placeholder: t(:house_holder2), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_right1), class: "control-label"
+          .controls
+            = u.text_field :house_right1, placeholder: t(:house_right1), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_right2), class: "control-label"
+          .controls
+            = u.text_field :house_right2, placeholder: t(:house_right2), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_loanyear), class: "control-label"
+          .controls
+            = u.text_field :house_loanyear, placeholder: t(:house_loanyear), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_loanprice), class: "control-label"
+          .controls
+            = u.text_field :house_loanprice, placeholder: t(:house_loanprice), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_balance), class: "control-label"
+          .controls
+            = u.text_field :house_balance, placeholder: t(:house_balance), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:house_bank), class: "control-label"
+          .controls
+            = u.text_field :house_bank, placeholder: t(:house_bank), type: "text", class: "input-xlarge"
+
+        .form-actions
+          = link_to "上一步", edit_backend_user_path(@user,:step=>1), :class => "btn btn-primary"
+          %button.btn.btn-primary{:type => "submit"} 下一步
+:javascript
+  $("form").validate();

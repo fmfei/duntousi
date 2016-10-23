@@ -1,0 +1,43 @@
+<div class="search-well">
+  <%= form_tag backend_lenders_path, :method => "get", :class => "form-inline" do %>
+    <%= text_field_tag :q, '', :placeholder => "用户姓名、邮箱或电话" %>
+    <%= submit_tag "搜索", :class => "btn" %>
+  <% end %>
+</div>
+<div class="well">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>用户</th>
+        <th>状态</th>
+        <th>注册时间</th>
+        <th>上次登录时间</th>
+        <th>注册IP</th>
+        <th>上次登录IP</th>
+        <th style="width: 20px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @lenders.each do |lender| %>
+        <tr>
+          <td><%= lender.id %></td>
+          <td><%= link_to lender.username, backend_lender_path(lender), :target => "_blank" %></td>
+          <td><%= lender.auth_realname_state %></td>
+          <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td>
+            <%= lender.register_ip %>
+          </td>
+          <td>
+            <%= lender.last_sign_in_ip %>
+          </td>
+          <td>
+            <%= link_to_show backend_lender_path(lender) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @lenders, :previous_label => '上一页', :next_label => '下一页' %>

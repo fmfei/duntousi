@@ -1,0 +1,31 @@
+<div class='wrapped-content' style="min-height: 400px;">
+	<div class="col-xs-12">
+		<%= render "/layouts/news_nav_left"%>
+		<section id='content' style="margin-top: 20px;">
+      <div class='container'>
+      	<div class='row recent-activity'>
+          <div class='box col-xs-12'>
+          	<div class='box-header blue-background'>
+			        <div class='title'>下载中心</div>
+			      </div>
+						<div class='box-content box-no-padding'>
+						  <ul class='list-unstyled users list-hover list-striped'>
+						  	<% @downloads.each do |d| %>
+						    <li>
+                  <div class='action pull-left'>
+                  	<%= link_to d.name, download_path(d) %>
+                  </div>
+                  <small class='date pull-right text-muted'>
+                    <%= d.created_at.strftime("%Y-%m-%d") %>
+                  </small>
+                </li>
+						    <% end %>
+						  </ul>
+						</div>
+						<%= will_paginate @downloads, :class => 'pagination' %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

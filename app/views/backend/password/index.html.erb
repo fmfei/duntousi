@@ -1,0 +1,14 @@
+<div class="well">
+  <%= form_note flash unless flash.empty? %>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active">
+      <%= form_for current_user, :url => backend_password_path(current_user) do |f| %>
+        <label>新密码</label>
+        <%= f.password_field :password, :class => 'input-xlarge' %>
+        <div>
+          <%= f.submit '更新', :class => 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

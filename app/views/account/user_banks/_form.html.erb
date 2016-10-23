@@ -1,0 +1,24 @@
+      <div class="dtitles">
+      <div class="righter" style="margin-left:20px;">
+            <div>
+              <span class="xjieshi">卡号</span><span class="xjieshi"> <%= f.text_field :card_number, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0} %></span>
+            </div>
+            <div>
+              <span class="xjieshi">银行</span><span class="xjieshi"> <%= f.text_field :bank, {:class => 'input-xlarge form-control', :'data-rule-required'=>"true" } %></span>
+            </div>
+            <div>
+              <span class="xjieshi">支行</span><span class="xjieshi"> <%= f.text_field :branch, {:class => 'input-xlarge form-control', :'data-rule-required'=>"true" } %></span>
+            </div>
+            <div class="col-md-10 city-group checkbox">
+              <span class="xjieshi">开户地区</span><span class="xjieshi"> <%= f.select :province, options_for_select([['--省份--', '']] + ChinaCity.list, [@bank.province]), {}, {:class => 'city-select', :id => 'user_info_province'} %>
+            <%= f.select :city, options_for_select([['--城市--', '']] + ChinaCity.list(@bank.province), [@bank.city]), {}, :class => 'city-select', :id => 'user_info_city' %>
+            <%= f.select :area, options_for_select([['--地区--', '']] + ChinaCity.list(@bank.city), [@bank.area]), {}, :class => 'city-select', :id => 'user_info_area' %></span>
+            </div>
+
+
+
+            <div class="dtitle">
+              <%= f.submit "保存", :class => "hqyzm", :id => "send" %>
+            </div>
+      </div>
+    </div>

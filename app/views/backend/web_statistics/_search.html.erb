@@ -1,0 +1,18 @@
+<div class="search-well">
+	<%= form_tag({:action => action_name}, {:class => "form-inline"}) do %>
+		<%= text_field_tag :start_date %>
+		 至 
+		<%= text_field_tag :end_date %> 
+		<%= submit_tag "搜索", :class => "btn" %>
+  <% end %>
+</div>
+<script type="text/javascript">
+$(function (){
+	$('#start_date').datepicker({
+    inline: true
+  });
+  $('#end_date').datepicker({
+    inline: true
+  });
+})
+</script>

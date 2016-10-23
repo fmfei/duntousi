@@ -1,0 +1,74 @@
+<div class='wrapped-content'>
+  <div class='box'>
+    <div class='box-header blue-background'>
+      <div class='title'>投资计算器</div>
+    </div>
+    <div class='box-content'>
+    	<%= form_tag calculator_path, :method => 'get', :class => 'validate-form' do %>
+	    	<div class="col-sm-12">
+		    	<div class='col-sm-3 form-group'>
+		    		<label>投资金额：</label>
+	          <div class="input-group">
+	            <span class="input-group-addon"> ￥ </span>
+	            <%= text_field_tag :account, params[:account], :class => 'form-control', 'data-rule-required' => true, 'data-rule-number' => true %>
+	          </div>
+	        </div>
+	        <div class='col-sm-2 form-group'>
+	          <label>年利率：</label>
+	          <div class="input-group">
+	          	<%= text_field_tag :apr, params[:apr], :class => 'form-control', 'data-rule-required' => true, 'data-rule-number' => true %>
+	            <span class="input-group-addon">%</span>
+	          </div>
+	        </div>
+	        <div class='col-sm-2 form-group'>
+	          <label>投资期限：</label>
+	          <div class="input-group">
+	          	<%= text_field_tag :times, params[:times], :class => 'form-control', 'data-rule-required' => true, 'data-rule-number' => true %>
+	            <span class="input-group-addon">月</span>
+	          </div>
+	        </div>
+	        <div class='col-sm-3 form-group'>
+	          <label>还款方式：</label>
+	          <%= select_tag :type, options_for_select([['等额本息', 'equal'], ['先息后本', 'interest_only'], ['到期还本息', 'at_due']], params[:type]), :class => 'form-control' %>
+		      </div>
+		      <div class='col-sm-2'>
+		      	<label>&nbsp;</label>
+	          <%= submit_tag "开始计算", :class => 'btn btn-primary form-control', :style => "color: #ffffff;" %>
+		      </div>
+		    </div>
+		    <div style="clear:both"></div>
+			<% end %>
+      <% if @interest %>
+        <div class="well comment">
+        	计算结果：年利率：<%= params[:apr] %>%
+        	<% unless params[:type] == 'at_due' %>
+        		月利率：<%= @apr_month.round(3) %>% 月还款额：<%= rmb (@interest[1][:seed] + @interest[1][:interest]).round(2) %>
+        	<% end %>
+        	 还款总额：<%= rmb @total.round(2) %>
+        </div>
+	    	<table style="margin-bottom:0;" class="table table-striped">
+          <thead>
+            <tr>
+              <th>期数</th>
+              <th>月还款本息</th>
+              <th>月还款本金</th>
+              <th>月还款利息</th>
+              <th>剩余本金</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<% @interest.map do |k, v| %>
+	            <tr>
+	              <td>第<%= k %>期</td>
+	              <td><%= rmb (v[:seed] + v[:interest]).round(2) %></td>
+	              <td><%= rmb v[:seed] %></td>
+	              <td><%= rmb v[:interest].round(2) %></td>
+	              <td><%= rmb v[:left_seed] %></td>
+	            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    	<% end %>
+    </div>
+  </div>
+</div>

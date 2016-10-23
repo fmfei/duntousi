@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><%= @title %></title>
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag  "account", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "account", "data-turbolinks-track" => true %>
+<script type="text/javascript">
+var _mvq = _mvq || [];
+_mvq.push(['$setAccount', 'm-80090-0']);
+
+_mvq.push(['$logConversion']);
+(function() {
+var mvl = document.createElement('script');
+mvl.type = 'text/javascript'; mvl.async = true;
+mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(mvl, s);
+})();
+
+</script>
+</head>
+
+<body>
+<%= javascript_include_tag "account/jquery.validate.min.js", "data-turbolinks-track" => true %>
+<%= render 'layouts/header' %>
+<div class="bod">
+   <div class="bodson">
+      <%= render 'layouts/account_nav_left' %>
+      <div class="rights">
+        <%= yield %>
+      </div>
+   </div>
+   <%= render 'layouts/footer' %>
+</div>
+<%= javascript_include_tag "account/customize", "data-turbolinks-track" => true %>
+<div style='display:none;'>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1252968163'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1252968163%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+= render "search"
+.well
+  .search-well
+    = form_tag create_lucky_code_backend_promotions_path do
+      = text_field_tag :lucky_code
+      = submit_tag '生成幸运码'
+      = link_to '阳光普照奖',  consolation_prize_backend_promotions_path
+
+/ .well
+/   .search-well
+/     - url = egg_backend_promotions_path
+/     = search_form_for @q, :url => url, :html => { :class=>"form-inline", :role=>"form"} do |f|
+/       = f.search_field :user_mobile_or_user_info_name_cont, class: "input-xlarge", placeholder: "姓名/手机号"
+/       = f.submit '搜索', class: "btn"
+/       = link_to '重置', egg_backend_promotions_path
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 抽奖者
+        %th 手机号
+        %th 时间
+        %th 数字1
+        %th 数字2
+        %th 数字3
+        %th 数字4
+        %th 数字5
+        %th 数字6
+        %th 状态
+        %th 猜中个数
+        %th 开奖号码
+    %tbody
+      - @records.each do |re|
+        %tr
+          %td= link_to re.user.name, backend_lender_path(re.user)
+          %td= link_to re.user.mobile, backend_lender_path(re.user)
+          %td= format_time re.created_at
+          %td= re.one
+          %td= re.two
+          %td= re.three
+          %td= re.four
+          %td= re.five
+          %td= re.six
+          %td= show_result_info re.status
+          %td= re.hit_number
+          %td= re.win_number
+
+= will_paginate @records

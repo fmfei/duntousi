@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  loan_id: 1
+  invest_amount: 9.99
+  invest_month: 1
+  interest: 1.5
+  collection_amount: 9.99
+  colected_amount: 9.99
+  collected_interest: 9.99
+  not_collected_amount: 9.99
+  not_collected_interest: 9.99
+  status: MyString
+  finished: false
+
+two:
+  user_id: 1
+  loan_id: 1
+  invest_amount: 9.99
+  invest_month: 1
+  interest: 1.5
+  collection_amount: 9.99
+  colected_amount: 9.99
+  collected_interest: 9.99
+  not_collected_amount: 9.99
+  not_collected_interest: 9.99
+  status: MyString
+  finished: false

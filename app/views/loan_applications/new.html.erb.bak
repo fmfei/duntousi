@@ -1,0 +1,97 @@
+<div class='wrapped-content'>
+  <div class='box'>
+    <div class='box-header blue-background'>
+      <div class='title'>贷款申请表</div>
+    </div>
+    <div class='box-content'>
+      <% if flash[:success].present? %>
+        <div class="alert alert-success alert-dismissable">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <%= flash[:success] %>
+        </div>
+      <% else %>
+      	<%= form_for @loan_application, html: {class: 'form-horizontal validate-form'} do |f| %>
+      		<div class='form-group'>
+      			<%= f.label t(:amount), class: 'control-label col-sm-3' %>借款金额
+      			<div class='col-sm-4 controls'>
+      	      <%= f.text_field :amount, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2, 'data-rule-number' => true %>
+            </div>
+          </div>
+          <div class='form-group'>
+  					<%= f.label t(:loan_usage), class: 'control-label col-sm-3' %>借款用途
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :loan_usage, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:name), class: 'control-label col-sm-3' %>姓名
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :name, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:id_card), class: 'control-label col-sm-3' %>身份证
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :id_card, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 15 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:phone), class: 'control-label col-sm-3' %>电话
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :phone, class: 'form-control', 'data-rule-required' => true, 'data-rule-number' => true, 'data-rule-minlength' => 11 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:email), class: 'control-label col-sm-3' %>邮箱
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :email, class: 'form-control', 'data-rule-required' => true, 'data-rule-email' => true %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:register_addr), class: 'control-label col-sm-3' %>户籍
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :register_addr, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:addr), class: 'control-label col-sm-3' %>居住地
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :addr, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 10 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:monthly_income), class: 'control-label col-sm-3' %>月收入
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :monthly_income, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2, 'data-rule-number' => true  %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:monthly_expense), class: 'control-label col-sm-3' %>月开销
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :monthly_expense, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2, 'data-rule-number' => true  %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:company), class: 'control-label col-sm-3' %>工作单位
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :company, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 6 %>
+  					</div>
+  				</div>
+  				<div class='form-group'>
+  					<%= f.label t(:title), class: 'control-label col-sm-3' %>担任职务
+  					<div class='col-sm-4 controls'>
+  						<%= f.text_field :title, class: 'form-control', 'data-rule-required' => true, 'data-rule-minlength' => 2 %>
+  					</div>
+  				</div>
+  				<div class='form-actions' style='margin-bottom:0'>
+            <div class='row'>
+              <div class='col-sm-9 col-sm-offset-3'>
+              	<%= f.submit "提交", :class => "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+      	<% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

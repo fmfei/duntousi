@@ -1,0 +1,71 @@
+= render :partial => "/backend/loans/search"
+.well
+  %table.table
+    %thead
+      %tr
+        %th 借款总人数
+        %th 借款总金额
+    %tbody
+      %tr
+        %td= @loans.select('distinct loans.user_id').count
+        %td= @loans.sum(:amount).to_f
+.well
+  %table.table
+    %thead
+      %tr
+        %th 序号
+        %th 邮箱
+        %th 姓名
+        %th 身份证号
+        %th 借款金额
+        %th 期限
+        %th 审核状态
+        %th 操作
+    %tbody
+      - @loans.each do |loan|
+        %tr
+          %td= loan.id
+          %td
+            = link_to loan.borrower.email, details_backend_audit_path(loan)
+          %td= loan.borrower.info.try(:name)
+          %td= loan.borrower.info.try(:id_card)
+          %td= loan.try(:amount).try(:round,2)
+          %td= loan.months
+          %td= loan.state.try(:name)
+          %td
+            - if loan.state == Dict::LoanState.junior_auditing
+              %a{:href => "#{edit_backend_loan_path(loan,:audit=>params[:as])}"}
+                %i.icon-pencil
+              = link_to "开始初审", junior_audit_backend_audit_path(loan)
+            - elsif loan.state == Dict::LoanState.senior_auditing
+              %a{:href => "#{edit_backend_loan_path(loan,:audit=>params[:as])}"}
+                %i.icon-pencil
+              = link_to "开始终审", senior_audit_backend_audit_path(loan)
+            - elsif loan.state == Dict::LoanState.wait_to_bid
+              %a{:href => "#{edit_backend_loan_path(loan,:audit=>params[:as])}"}
+                %i.icon-pencil
+              = link_to "开始发标", start_bidding_backend_audit_path(loan),:method => :post, :confirm => '确认发标，前台开始投标？'
+            - elsif loan.state == Dict::LoanState.bidding
+              / - if loan.auto_invested_at.present?
+              /   = "&nbsp;自动投标完成".html_safe
+              / - else
+              /   = link_to "自动投标", execute_backend_auto_invest_rules_path(:id => loan.id),:method => :post, :confirm => '确认自动投标？'
+              = link_to '投标情况', backend_audit_path(loan), :target => '_blank'
+            - elsif loan.state == Dict::LoanState.bids_auditing
+              = link_to '投标情况', backend_audit_path(loan), :target => '_blank'
+            - elsif loan.state == Dict::LoanState.bids_auditing
+              %a{:href => "#{backend_audit_path(loan)}"}
+                满标审核
+
+= will_paginate @loans
+#myModal.modal.small.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel 确认删除
+  .modal-body
+    %p.error-text
+      %i.icon-warning-sign.modal-icon>
+      确定要删除该用户吗?
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} 取消
+    %button.btn.btn-danger{"data-dismiss" => "modal"} 删除

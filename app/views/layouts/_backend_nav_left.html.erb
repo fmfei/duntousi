@@ -1,0 +1,138 @@
+<div class="sidebar-nav">
+    <a href="#lending-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>借款管理</a>
+    <ul id="lending-menu" class="nav nav-list collapse">
+        <%= li_link_to "借款人管理", backend_users_path, controller_name == "users" || controller_name == 'identifications'%>
+        <%= li_link_to "未处理的借款", backend_loans_path, controller_name == "loans" && params[:audit].nil? && action_name != 'bids'%>
+        <%= li_link_to "初审中的借款", backend_audits_path(:as=>Dict::LoanState.junior_auditing), ((controller_name == "audits" && params[:as] == Dict::LoanState.junior_auditing.id.to_s) || action_name == 'junior_audit' || (controller_name == 'loans' && action_name == 'edit' && params[:audit] == Dict::LoanState.junior_auditing.id.to_s))%>
+        <%= li_link_to "终审中的借款", backend_audits_path(:as=>Dict::LoanState.senior_auditing), ((controller_name == "audits" && params[:as] == Dict::LoanState.senior_auditing.id.to_s) || action_name == 'senior_audit' || (controller_name == 'loans' && action_name == 'edit' && params[:audit] == Dict::LoanState.senior_auditing.id.to_s)) %>
+        <%= li_link_to "等待发标中的借款", backend_audits_path(:as=>Dict::LoanState.wait_to_bid), (controller_name == "audits" && params[:as] == Dict::LoanState.wait_to_bid.id.to_s) %>
+        <%= li_link_to "招标中的借款", backend_audits_path(:as=>Dict::LoanState.bidding), (controller_name == "audits" && params[:as] == Dict::LoanState.bidding.id.to_s) %>
+        <%#= li_link_to "满标审核", backend_audits_path(:as=>Dict::LoanState.bids_auditing), (controller_name == "audits" && params[:as] == Dict::LoanState.bids_auditing.id.to_s) %>
+        <%= li_link_to "还款中的借款", backend_audits_path(:as=>Dict::LoanState.repaying), (controller_name == "audits" && params[:as] == Dict::LoanState.repaying.id.to_s) %>
+        <%= li_link_to "还款完成的借款", backend_audits_path(:as=>Dict::LoanState.finished), (controller_name == "audits" && params[:as] == Dict::LoanState.finished.id.to_s) %>
+        <%= li_link_to "流标的借款", backend_audits_path(:as=>Dict::LoanState.failed), (controller_name == "audits" && params[:as] == Dict::LoanState.failed.id.to_s) %>
+        <%= li_link_to "所有的借款", backend_audits_path, (controller_name == "audits" && params[:as].blank? && action_name == 'index') %>
+    </ul>
+
+    <a href="#rookie-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>新手标管理</a>
+    <ul id="rookie-menu" class="nav nav-list collapse">
+        <%= li_link_to "新手标列表", backend_rookie_loans_path, (controller_name == "rookir_loans" && action_name == "index") %>
+    </ul>
+
+    <a href="#bid-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>债权管理</a>
+    <ul id="bid-menu" class="nav nav-list collapse">
+        <%= li_link_to "投标列表", backend_bids_path, (controller_name == "bids" && action_name == 'index')%>
+        <%= li_link_to "债权转让列表", selling_backend_bids_path, (controller_name == "bids" && action_name == 'selling')%>
+        <%= li_link_to "已转让债权", sold_backend_bids_path, (controller_name == "bids" && action_name == 'sold')%>
+    </ul>
+    <a href="#auto-invest-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>自投管理</a>
+    <ul id="auto-invest-menu" class="nav nav-list collapse">
+        <%= li_link_to "自投队列", backend_auto_invest_rules_path, (controller_name == "auto_invest_rules" && action_name == 'index')%>
+        <%= li_link_to "自投统计", stats_backend_auto_invest_rules_path, (controller_name == "auto_invest_rules" && action_name == 'stats')%>
+    </ul>
+    <a href="#borrower-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>贷后管理</a>
+    <ul id="borrower-menu" class="nav nav-list collapse">
+        <%= li_link_to "还款管理", backend_repayments_path(:state => 'unpaid'), controller_name == "repayments" %>
+    </ul>
+    <a href="#system-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>系统管理</a>
+    <ul id="system-menu" class="nav nav-list collapse">
+        <%= li_link_to '系统参数设置', backend_system_configs_path, (controller_name == 'system_configs' && params[:type].blank? && action_name == 'index') %>
+        <%= li_link_to '邀请、注册奖励设置', promotion_backend_system_configs_path, (controller_name == 'system_configs' && action_name == 'promotion') %>
+        <%= li_link_to '投标奖励设置', prize_backend_system_configs_path, (controller_name == 'system_configs' && action_name == 'prize') %>
+        <%= li_link_to '产品推广设置', backend_system_configs_path(:type => 'seo'), (controller_name == 'system_configs' && params[:type] == 'seo') %>
+        <%= li_link_to '线下充值银行设置', backend_offline_banks_path, (controller_name == 'offline_banks') %>
+<!--         <%#= li_link_to '邮件，短信通道设置', backend_system_configs_path(:type => 'email_sms'), (controller_name == 'system_configs' && params[:type] == 'email_sms') %> -->
+        <%#= li_link_to '借贷协议', backend_protocol_path('loan'), (controller_name == 'protocols' && params[:id]=='loan') %>
+        <%#= li_link_to '本金保障协议', backend_protocol_path('ensure'), (controller_name == 'protocols' && params[:id]=='ensure') %>
+        <%#= li_link_to '下载管理', backend_downloads_path, controller_name == 'downloads' %>
+    </ul>
+
+    <a href="#propaganda-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>宣传管理</a>
+    <ul id="propaganda-menu" class="nav nav-list collapse">
+        <%= li_link_to '栏目管理', backend_propagandas_path, controller_name == 'propagandas' %>
+        <%= li_link_to '文章管理', backend_articles_path, controller_name == 'articles' %>
+        <%= li_link_to '友情链接管理', backend_friendlinks_path, controller_name == 'friendlinks' %>
+        <%= li_link_to '轮播图片管理', backend_banners_path, controller_name == 'banners' %>
+    </ul>
+
+    <a href="#permission-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>权限管理</a>
+    <ul id="permission-menu" class="nav nav-list collapse">
+        <%= li_link_to '管理员', backend_admins_path, controller_name == 'admins' %>
+        <%= li_link_to '管理角色', backend_roles_path, (controller_name == 'roles' and action_name != 'edit_multiple') %>
+        <%= li_link_to '角色权限', edit_multiple_backend_roles_path, (action_name == 'edit_multiple') %>
+        <%= li_link_to '权限列表', backend_permissions_path, (controller_name == 'permissions') %>
+    </ul>
+
+
+    <a href="#message-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>信息管理</a>
+    <ul id="message-menu" class="nav nav-list collapse">
+        <%= li_link_to '站内信管理', backend_messages_path, controller_name == 'messages' %>
+        <!-- <li><a href="#">短信发送</a></li> -->
+    </ul>
+
+
+    <a href="#statistical-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>统计管理</a>
+    <ul id="statistical-menu" class="nav nav-list collapse">
+        <%= li_link_to '统计代码', backend_web_statistics_path, (controller_name == 'web_statistics' && (action_name == 'index' || action_name == 'new')) %>
+        <%= li_link_to '投资统计', investment_statistics_backend_web_statistics_path, (controller_name == 'web_statistics' && action_name == 'investment_statistics') %>
+        <%= li_link_to '投标统计', bid_statistics_backend_web_statistics_path, (controller_name == 'web_statistics' && action_name == 'bid_statistics') %>
+        <%= li_link_to '借款统计', borrow_statistics_backend_web_statistics_path, (controller_name == 'web_statistics' && action_name == 'borrow_statistics') %>
+        <%= li_link_to '资金统计', fund_backend_web_statistics_path, (controller_name == 'web_statistics' && action_name == 'fund') %>
+        <%= li_link_to '余额统计', remainder_backend_web_statistics_path, (controller_name == 'web_statistics' && action_name == 'remainder') %>
+    </ul>
+
+    <a href="#user-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>用户管理</a>
+    <ul id="user-menu" class="nav nav-list collapse">
+        <%= li_link_to '出借人基本管理', backend_lenders_path, (controller_name == 'lenders' && (action_name == 'index' || action_name == 'show'))  %>
+        <%= li_link_to '出借人管理', backend_advance_lenders_path, (controller_name == 'advance_lenders') %>
+        <%= li_link_to '邀请注册列表', backend_invites_path, (controller_name == 'invites') %>
+        <%= li_link_to '实名认证管理', backend_auth_realnames_path(:state => 2), (controller_name == 'auth_realnames') %>
+        <%= li_link_to '手机认证管理', backend_auth_mobiles_path(:state => false), (controller_name == 'auth_mobiles') %>
+        <%= li_link_to '运营中心', branch_backend_lenders_path, (controller_name == 'lenders' && action_name == 'branch') %>
+    </ul>
+
+    <a href="#financial-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>财务管理</a>
+    <ul id="financial-menu" class="nav nav-list collapse">
+        <%= li_link_to '提现审核', backend_withdraws_path, (controller_name == 'withdraws') %>
+        <%= li_link_to '线下充值审核', wait_audit_backend_offline_recharges_path, (controller_name == 'offline_recharges' && action_name != 'index') %>
+        <%= li_link_to '后台充值/扣款', manage_backend_pay_orders_path, (controller_name == 'pay_orders' && (action_name == 'manage' || action_name == 'offline_recharge' || action_name == 'backend_recharge' || action_name == 'deduct' )) %>
+        <%= li_link_to '线上充值记录', backend_pay_orders_path, (controller_name == 'pay_orders' && action_name == 'index') %>
+        <%= li_link_to '线下充值记录', backend_offline_recharges_path, (controller_name == 'offline_recharges' && action_name == 'index') %>
+        <%= li_link_to '后台充值记录', backend_recharges_backend_pay_orders_path, (controller_name == 'pay_orders' && action_name == 'backend_recharges') %>
+        <%= li_link_to '后台扣款记录', deducts_backend_pay_orders_path, (controller_name == 'pay_orders' && action_name == 'deducts') %>
+        <%= li_link_to '平台流水明细', backend_cash_flows_path, controller_name == 'cash_flows' && action_name != 'stat' %>
+        <%= li_link_to '财务统计', stat_backend_cash_flows_path, controller_name == 'cash_flows' && action_name == 'stat'%>
+    </ul>
+
+    <a href="#apply-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>借款申请</a>
+    <ul id="apply-menu" class="nav nav-list collapse">
+        <%= li_link_to '借款申请', backend_loan_applications_path, (controller_name == 'loan_applications') %>
+    </ul>
+    <a href="#organization-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>机构管理</a>
+    <ul id="organization-menu" class="nav nav-list collapse">
+        <%= li_link_to '机构管理', backend_organizations_path, (controller_name == 'organizations') %>
+    </ul>
+    <a href="#organization-promotion" class="nav-header" data-toggle="collapse"><i class="icon-"></i>活动管理</a>
+    <ul id="organization-promotion" class="nav nav-list collapse">
+        <%= li_link_to '转盘活动', circle_backend_promotions_path, (controller_name == 'promotions' && action_name == 'circle') %>
+        <%= li_link_to '砸蛋活动', egg_backend_promotions_path, (controller_name == 'promotions' && action_name == 'egg') %>
+        <%= li_link_to '幸运码', lucky_code_backend_promotions_path, (controller_name == 'promotions' && action_name == 'lucky_code') %>
+        <%= li_link_to '幸运猜猜猜', lucky_guess_backend_promotions_path, (controller_name == 'promotions' && action_name == 'lucky_guess') %>
+        <%= li_link_to '互动红包', huodong_comment_backend_promotions_path, (controller_name == 'promotions' && action_name == 'huodong_comment') %>
+        <%= li_link_to '新年砸蛋', newyear_egg_backend_promotions_path, (controller_name == 'promotions' && action_name == 'newyear_egg') %>
+        <%= li_link_to '两周年庆转盘', two_yr_anniversary_backend_promotions_path, (controller_name == 'promotions' && action_name == 'two_yr_anniversary') %>
+        <%= li_link_to '转盘--未抽奖的机会', two_yr_anniversary_no_use_backend_promotions_path, (controller_name == 'promotions' && action_name == 'two_yr_anniversary_no_use') %>
+        <%= li_link_to '最新活动', activies_backend_promotions_path, (controller_name == 'promotions' && action_name == 'activies') %>
+    </ul>
+    <a href="#product-menu" class="nav-header" data-toggle="collapse"><i class="icon-"></i>一元夺宝管理</a>
+    <ul id="product-menu" class="nav nav-list collapse">
+        <%= li_link_to '产品管理', backend_products_path, (controller_name == 'products' && action_name == "index") %>
+        <%= li_link_to '期数列表', items_list_backend_products_path, (controller_name == "products" && action_name == "items_list") %>
+    </ul>
+</div>
+<script type="text/javascript">
+$(function(){
+  $('ul.nav-list li.active').parent().addClass('in');
+  $('ul.nav-list').each(function(){ if($(this).children().html()==undefined){$(this).prev().hide()} });
+})
+</script>

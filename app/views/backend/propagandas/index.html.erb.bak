@@ -1,0 +1,39 @@
+<%= btn_toolbar_adds([name: '添加栏目', path: new_backend_propaganda_path, type: 'add']) %>
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>类别</th>
+          <th>栏目名称</th>
+          <th>创建时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @propagandas.each do |p| %>
+          <tr>
+            <td colspan="2">一级栏目</td>
+            <td><%= p.name %></td>
+            <td><%= p.created_at.strftime('%Y-%M-%d') %></td>
+            <td>
+              <%= link_to_edit edit_backend_propaganda_path(p) %>
+              <%= link_to_delete backend_propaganda_path(p)%>
+            </td>
+          </tr>
+          <% p.children.each do |p_2| %>
+            <tr>
+              <td></td>
+              <td>二级栏目</td>
+              <td><%= p_2.name %></td>
+              <td><%= p_2.created_at.strftime('%Y-%M-%d') %></td>
+              <td>
+                <%= link_to_edit edit_backend_propaganda_path(p_2) %>
+                <%= link_to_delete backend_propaganda_path(p_2)%>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+</div>

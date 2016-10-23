@@ -1,0 +1,29 @@
+<%= btn_toolbar_adds([name: '添加下载文件', path: new_backend_download_path, type: 'add']) %>
+<%= form_note flash unless flash.empty? %>
+<div class="well">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>文件名称</th>
+        <th>创建时间</th>
+        <th style="width: 80px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @downloads.each do |d| %>
+        <tr>
+          <td><%= d.id %></td>
+          <td><%= d.name %></td>
+          <td><%= d.created_at.strftime('%Y-%m-%d') %></td>
+          <td>
+            <%= link_to_show backend_download_path(d) %>
+            <%= link_to_edit edit_backend_download_path(d) %>
+            <%= link_to_delete backend_download_path(d)%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @downloads, :previous_label => '上一页', :next_label => '下一页' %>

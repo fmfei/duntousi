@@ -1,0 +1,5 @@
+.search-well
+  - url = backend_users_path
+  = search_form_for @q, :url => url, :html => { :class=>"form-inline", :role=>"form"} do |f|
+    = f.search_field :email_or_info_name_or_info_id_card_cont, class: "input-xlarge", placeholder: "邮箱/姓名/身份证号"
+    = f.submit '搜索', class: "btn"

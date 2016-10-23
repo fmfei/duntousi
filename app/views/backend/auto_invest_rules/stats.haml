@@ -1,0 +1,24 @@
+.block
+  %a.block-heading{"data-toggle" => "collapse", :href => "#page-stats"} 自投统计
+  #page-stats.block-body.collapse.in
+    .stat-widget-container
+      .stat-widget
+        .stat-button
+          %p.title
+            = AutoInvestRule.active.count
+          %p.detail 开启用户数
+      .stat-widget
+        .stat-button
+          %p.title
+            = rmb AutoInvestRule.active.sum(:amount)
+          %p.detail 排队总额
+      .stat-widget
+        .stat-button
+          %p.title
+            = rmb Bid.auto_invest.today.sum(:invest_amount)
+          %p.detail 今日投标
+      .stat-widget
+        .stat-button
+          %p.title
+            = rmb Bid.auto_invest.sum(:invest_amount)
+          %p.detail 投标总额

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  card_number: MyString
+  bank: MyString
+  branch: MyString
+  province: MyString
+  city: MyString
+  area: MyString
+
+two:
+  user_id: 1
+  card_number: MyString
+  bank: MyString
+  branch: MyString
+  province: MyString
+  city: MyString
+  area: MyString

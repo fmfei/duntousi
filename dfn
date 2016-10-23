@@ -1,0 +1,26 @@
+
+[1mFrom:[0m /home/administrator/workspace/zr_p2p/app/controllers/user/payments_controller.rb @ line 11 User::PaymentsController#finish:
+
+     [1;34m7[0m: [32mdef[0m [1;34mfinish[0m
+     [1;34m8[0m:   @order = [1;34;4mPayOrder[0m.find_by_uuid(params[[33m:id[0m])
+     [1;34m9[0m:   [32mif[0m ([1;34;4mThirdPay[0m.verify_response(params) [32mor[0m (![1;34;4mUtils[0m.production?))
+    [1;34m10[0m:     [1;34;4mPayOrder[0m.transaction [32mdo[0m
+ => [1;34m11[0m:       binding.pry
+    [1;34m12[0m:       @order.update_attribute([33m:pay_class[0m,params[[33m:pay_class[0m].titleize)
+    [1;34m13[0m:       [32munless[0m @order.success
+    [1;34m14[0m:         @order.finish([1;34;4mThirdPay[0m.order_id(params), [1;34;4mThirdPay[0m.out_order_id(params))
+    [1;34m15[0m:       [32mend[0m
+    [1;34m16[0m:     [32mend[0m
+    [1;34m17[0m: 
+    [1;34m18[0m:     [32mif[0m [1;34;4mThirdPay[0m.notice_from(params) == [1;34m2[0m
+    [1;34m19[0m:       render [1;34;4mThirdPay[0m.notice_succ_response(params)
+    [1;34m20[0m:     [32melse[0m
+    [1;34m21[0m:       flash[[33m:success[0m] = [31m[1;31m'[0m[31m充值成功[1;31m'[0m[31m[0m
+    [1;34m22[0m:       redirect_to account_recharge_path
+    [1;34m23[0m:       [32mreturn[0m
+    [1;34m24[0m:     [32mend[0m
+    [1;34m25[0m:   [32melse[0m
+    [1;34m26[0m:     render [33m:nothing[0m => [1;36mtrue[0m
+    [1;34m27[0m:   [32mend[0m
+    [1;34m28[0m: [32mend[0m
+

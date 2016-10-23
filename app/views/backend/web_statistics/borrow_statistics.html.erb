@@ -1,0 +1,30 @@
+<div class="well">
+    <%= render 'search' %>
+    <table class="table">
+    	<thead>
+    		<tr>
+    			<th></th>
+	    		<% @loan_count.each do |k, v| %>
+	    			<th><%= k %></th>
+	    		<% end %>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    			<td>标数(个)</td>
+	    		<% @loan_count.each do |k, v| %>
+	    			<td><%= v.sum %></td>
+	    		<% end %>
+    		</tr>
+    		<tr>
+    			<td>金额(元)</td>
+	    		<% @loan_amount.each do |k, v| %>
+	    			<td><%= v.sum %></td>
+	    		<% end %>
+    		</tr>
+    	</tbody>
+    </table>
+    <%= high_chart("borrow_count", @h) %>
+    <%= high_chart("borrow_amount", @a) %>
+    
+</div>

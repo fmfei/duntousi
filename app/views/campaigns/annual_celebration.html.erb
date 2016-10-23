@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>亚太年终盛典活动</title>
+<link rel="stylesheet" type="text/css" href="/campaigns/annual_celebration/style.css">
+<!-- <script src="js/jquery.min.js"></script> -->
+</head>
+
+<body>
+
+  <div class="banner banner01"></div>
+    <div class="banner banner02"></div>
+    <div class="banner banner03"></div>
+    <div class="banner banner04"></div>
+    <div class="banner banner05"></div>
+    <div class="banner banner06"></div>
+<div class="luckynumber">
+  <div class="luckydiv">
+      <!-- <form name="form1" action="" method=""> -->
+      <%= form_tag update_lucky_code_campaigns_path do %>
+      <div class="luckyup">
+          <ul>
+              <li><%= text_field_tag 'one', '', maxlength:1 %></li>
+              <li><%= text_field_tag 'two', '', maxlength:1 %></li>
+              <li><%= text_field_tag 'three', '', maxlength:1 %></li>
+              <li><%= text_field_tag 'four', '', maxlength:1 %></li>
+              <li><%= text_field_tag 'five', '', maxlength:1 %></li>
+              <li><%= text_field_tag 'six', '', maxlength:1 %></li>
+            </ul>
+        </div>
+        <div class="luckydown">
+          <!-- <button type="button" class="click-btn f-left">机选数字</button> -->
+          <input type='button' class="click-btn f-left" value='机选数字' id='rand'>
+          <!-- <button type="button" class="click-btn f-right">确认提交</button> -->
+          <%= submit_tag '确认提交', :id => "sub_btn", class: "click-btn f-right" %>
+        </div>
+        <!-- </form> -->
+        <% end %>
+    </div>
+</div>
+<div class="banner07">
+  <div class="luckyscroll">
+    <div class="lucky-box">
+      <ul>
+        <% if @lucky_people.present?  %>
+          <% @lucky_people.each do |people| %>
+            <% time = format_time(people.created_at).split(/[-:\ ]/) %>
+            <li><%= people.user.mobile[0..2]+"****"+people.user.mobile[-4..-1] %>&nbsp;&nbsp;(<%= time[0] %>&nbsp;&nbsp;<%= time[1] %>.<%= time[2] %>&nbsp;&nbsp;<%= time[3] %>:<%= time[4] %>)&nbsp;&nbsp;获得<%= people.prize %>&nbsp;&nbsp;（开奖号码：<%= people.win_number %>）</li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+
+</div>
+<div class="banner banner08"></div>
+<div class="banner banner09"></div>
+<div class="banner banner10"></div>
+<div class="banner banner11"></div>
+<div class="banner banner12"></div>
+<div class="banner banner13"></div>
+<div class="banner banner14">
+  <div class="luckycai">
+      <div class="caibtn">
+        <%= form_tag create_lucky_guess_campaigns_path do %>
+          <%= hidden_field_tag :lucky_guess, "single" %>
+          <%= submit_tag '单数', class: 'click-btn f-left', id: "single" %>
+        <% end %>
+        <%= form_tag create_lucky_guess_campaigns_path do %>
+          <%= hidden_field_tag :lucky_guess, "double" %>
+          <%= submit_tag '双数', class: 'click-btn f-right', id: "double" %>
+        <% end %>
+          <!-- <button type="button" class="click-btn f-left">单数</button>
+            <button type="button" class="click-btn f-right">双数</button> -->
+        </div>
+    </div>
+</div>
+<div class="banner banner15"></div>
+<div class="banner16">
+  <div class="hudong">
+  <!-- <form name="form2" action="" method=""> -->
+  <%= form_tag create_huodong_comment_campaigns_path do %>
+      <!-- <textarea rows="6" cols="63" placeholder="|最多可输入50字" style=" overflow-y:hidden;"></textarea> -->
+      <%= text_area_tag :comment, "", rows: 6, cols: 63, placeholder: "最少输入10字，最多可输入50字", style: "overflow-y:hidden" %>
+      <div class="hudongbtn"><%= submit_tag "确认提交", :id => "btn-submit", class: "click-btn" %></div>
+        <!-- <div class="hudongbtn"><button type="submit" class="click-btn">提交</button></div> -->
+    <!-- </form> -->
+    <% end %>
+    </div>
+</div>
+<div class="banner17">
+  <div class="datascroll">
+    <div class="list-box">
+      <ul>
+        <% @all_comments.each do |comment| %>
+          <% time = format_time(comment.created_at).split(/[-:\ ]/) %>
+          <li><%= comment.user.mobile[0..2]+"****"+comment.user.mobile[-4..-1] %>&nbsp;&nbsp;(<%= time[0] %>&nbsp;&nbsp;<%= time[1] %>.<%= time[2] %>&nbsp;&nbsp;<%= time[3] %>:<%= time[4] %>)&nbsp;&nbsp;<%= comment.comment %>&nbsp;&nbsp;</li>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function autoScroll(obj){
+      $(obj).find("ul").animate({
+        marginTop : "-30px"
+      },500,function(){
+        $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);
+      })
+    }
+    $(function(){
+      $(".lucky-box ul li:nth-child(2n+1)").css({"background":"#940b24","color":"#fed8b4"});
+      $(".lucky-box ul li:nth-child(2n)").css({"background":"#fed8b4","color":"#940b24"});
+      $(".list-box ul li:nth-child(2n+1)").css({"background":"#940b24","color":"#fed8b4"});
+      $(".list-box ul li:nth-child(2n)").css({"background":"#fed8b4","color":"#940b24"});
+      setInterval('autoScroll(".list-box")',3000);
+      setInterval('autoScroll(".lucky-box")',3000);
+    })
+    $("#btn-submit").click(function(){
+      // if (!isRangeTime()) {
+      //   alert("本次活动时间为2015年12月21日至2016年1月10日");
+      //   return false;
+      // };
+      var commentInfo = $('#comment').val();
+      if(commentInfo.length < 10){
+        alert("输入的字数小于10个");
+        return false;
+      }else if(commentInfo.length > 50){
+        alert("输入的字数大于50个");
+        return false;
+      }
+    })
+    $(function(){
+      <% if flash[:success].present? %>
+        alert("<%= flash[:success] %>");
+      <% end %>
+      <% if @lucky_people.blank? %>
+        $('.banner07').css('display', 'none')
+      <% end %>
+      $('#rand').click(function(){
+        $('#one').val(Math.floor(10*Math.random()));
+        $('#two').val(Math.floor(10*Math.random()));
+        $('#three').val(Math.floor(10*Math.random()));
+        $('#four').val(Math.floor(10*Math.random()));
+        $('#five').val(Math.floor(10*Math.random()));
+        $('#six').val(Math.floor(10*Math.random()));
+      });
+      // $('#single').click(function(){
+      //   if (!isRangeTime()) {
+      //     alert("本次活动时间为2015年12月21日至2016年1月10日");
+      //     return false;
+      //   };
+      // });
+      // $('#double').click(function(){
+      //   if (!isRangeTime()) {
+      //     alert("本次活动时间为2015年12月21日至2016年1月10日");
+      //     return false;
+      //   };
+      // });
+      $('#sub_btn').click(function(){
+        // if (!isRangeTime()) {
+        //   alert("本次活动时间为2015年12月21日至2016年1月10日");
+        //   return false;
+        // }
+        var one = $('#one').val();
+        var two = $('#two').val();
+        var three = $('#three').val();
+        var four = $('#four').val();
+        var five = $('#five').val();
+        var six = $('#six').val();
+        if(!one.match(/^\d$/) || !two.match(/^\d$/) || !three.match(/^\d$/) || !four.match(/^\d$/) || !five.match(/^\d$/) || !six.match(/^\d$/)){
+          alert("每个空格中填入一个0~9之间的数");
+          return false;
+        }
+      })
+      $('#one').change(function(){
+        var val = $('#one').val();
+        if(!val.match(/^\d$/)){
+          alert("只能输入0~9之间的一个数");
+          $('#one').val('');
+          $('#one')[0].focus();
+        }
+      });
+      $('#two').change(function(){
+        var val = $('#two').val();
+        if(!val.match(/^\d$/)){
+          alert("只能输入0~9之间的一个数");
+          $('#two').val('');
+          $('#two').focus();
+        }
+      });
+      $('#three').change(function(){
+        var val = $('#three').val();
+        if(!val.match(/^\d$/)){
+          alert("只能输入0~9之间的一个数");
+          $('#three').val('');
+          $('#three').focus();
+        }
+      });
+      $('#four').change(function(){
+        var val = $('#four').val();
+        if(!val.match(/^\d$/)){
+          alert("只能输入0~9之间的一个数");
+          $('#four').val('');
+          $('#four').focus();
+        }
+      });
+      $('#five').change(function(){
+        var val = $('#five').val();
+        if(!val.match(/^\d$/)){
+          alert("只能输入0~9之间的一个数");
+          $('#five').val('');
+          $('#five').focus();
+        }
+      });
+      $('#six').change(function(){
+        var val = $('#six').val();
+        if(!val.match(/^\d$/)){
+          alert("只能输入0~9之间的一个数");
+          $('#six').val('');
+          $('#osixne').focus();
+        }
+      });
+    })
+    function isRangeTime(){
+      var currentTime = new Date();
+      var now = currentTime.toLocaleDateString() + " " + currentTime.toLocaleTimeString();
+      now = now.replace("年","-").replace("月","-").replace("日","").replace("上午", "").replace("下午", "");
+      now = new Date(now.replace(/-/g,"/"));
+      var begin = '2015/12/21 00:00:00';
+      var end = '2016/1/10 23:59:59';
+      begin = new Date(begin);
+      end = new Date(end);
+      if (Date.parse(now) - Date.parse(begin) >= 0 && Date.parse(now) - Date.parse(end) < 0) {
+        return true;
+      } else{
+        return false;
+      };
+    }
+</script>
+<div class="banner banner19"></div>
+<div class="banner banner20"></div>
+<div class="banner banner21"></div>
+<div class="banner banner22"></div>
+<div class="banner banner23"></div>
+<div class="banner banner24"></div>
+<div class="banner banner25"></div>
+<div class="banner banner26"></div>
+<div class="banner banner27"></div>
+<div class="banner banner28"></div>
+
+</body>
+</html>

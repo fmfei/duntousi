@@ -1,0 +1,36 @@
+<div class="well">
+  <div class="search-well">
+    <%= search_form_for @q, :url => manage_backend_pay_orders_path, :html => {:method => "get", :class => "form-inline"}  do |f| %>
+      <%= f.text_field :email_or_info_name_or_info_id_card_or_mobile_cont, class: "input-xlarge", placeholder: "邮箱/姓名/身份证号/手机号" %>
+      <%= f.submit '搜索用户', class: "btn" %>
+    <% end %>
+  </div>
+  <% if @lenders.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>邮箱</th>
+        <th>姓名</th>
+        <th>身份证</th>
+        <th>创建时间</th>
+        <th style=""></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @lenders.each do |lender| %>
+        <tr>
+          <td><%= lender.id %></td>
+          <td><%= link_to lender.email, backend_lender_path(lender), :target => "_blank" %></td>
+          <td><%= lender.name %></td>
+          <td><%= lender.info.id_card %></td>
+          <td><%= lender.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td>
+            <%= link_to '充值', backend_recharge_backend_pay_orders_path(:id => lender.id) %>&nbsp;<%= link_to '扣款', deduct_backend_pay_orders_path(:id => lender.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>

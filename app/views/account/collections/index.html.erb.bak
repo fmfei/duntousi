@@ -1,0 +1,69 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='page-header'>
+          <h1 class='pull-left'>
+            <i class='icon-table'></i>
+            <span>收款明细</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='box bordered-box blue-border' style='margin-bottom:0;'>
+          <div class="box-header blue-background">
+                <div class="title">收款明细列表</div>
+                <div class="actions">
+                  <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+                  </a>
+
+                  <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+                  </a>
+                </div>
+              </div>
+          <div class='box-content box-no-padding'>
+            <div class='responsive-table'>
+              <div class='scrollable-area'>
+                <table class='table' style='margin-bottom:0;'>
+                  <thead>
+                    <tr>
+                      <th>
+                        借款标题
+                      </th>
+                      <th>
+                        应收日期
+                      </th>
+                      <th>
+                        借款者
+                      </th>
+                      <th>期数</th>
+                      <th>收款总额</th>
+                      <!-- <th>本金</th>
+                      <th>利息</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @collections.each do |collection| %>
+                    <tr>
+                      <td><%= link_to collection.bid.loan.title, invest_path(collection.bid.loan), :target => '_blank' %></td>
+                      <td><%= collection.due_date.strftime("%Y-%m-%d") %></td>
+                      <td><%= collection.borrower.name %></td>
+                      <td><%= collection.month_index %>/<%= collection.bid.invest_month %></td>
+                      <td><%= rmb collection.amount %></td>
+                      <!-- <td><%#= rmb collection.principal %></td>
+                      <td><%#= rmb collection.interest %></td> -->
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+                <%= will_paginate @collections %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

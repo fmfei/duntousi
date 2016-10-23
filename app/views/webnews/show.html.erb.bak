@@ -1,0 +1,42 @@
+<div class='wrapped-content' style="min-height: 1000px;">
+  <div class="col-xs-12">
+    <%= render "/layouts/news_nav_left"%>
+    <section id='content' style="margin-top: 20px;">
+      <div class='container'>
+        <div class="row">
+          <div class="pull-left">
+            <ul class="breadcrumb">
+<!--               <li>
+                <a href="/">
+                  首页
+                </a>
+              </li> -->
+              <li class="separator">
+                <i class="icon-angle-right"></i>
+              </li>
+              <li>
+                <%= link_to "返回列表", webnews_index_path(:st=>@article.propaganda.id)%>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='box col-xs-12'>
+            <div class='box-header blue-background'>
+              <div class='title'><%= @article.propaganda.name %></div>
+            </div>
+            <div class='box-content'>
+              <div class='text-center'>
+                <h2><%= @article.title %></h2>
+                <small class="text-muted"><%= @article.created_at.strftime("%Y-%m-%d" ) %></small>
+              </div>
+              <div class="text-content">
+                <%= @article.content.html_safe %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

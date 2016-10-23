@@ -1,0 +1,42 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">已揭晓的商品</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle_luckycode">商品名称</div>
+            <div class="czjltitle_luckycode">商品期号</div>
+            <!-- <div class="czjltitle_luckycode">夺宝状态</div> -->
+            <div class="czjltitle_luckycode">参与人次</div>
+            <!-- <div class="czjltitle_luckycode">夺宝号码</div> -->
+            <div class="czjltitle_luckycode">幸运号码</div>
+            <div class="czjltitle_luckycode">是否获得者</div>
+            <div class="czjltitle_luckycode">操作</div>
+         </div>
+         <% @product_orders.each do |order| %>
+         <div class="czjl">
+            <div class="czjltitle_luckycode" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"><%= order.item.product.title %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><%= order.item.product.id %>&nbsp;</div>
+            <!-- <div class="czjltitle_luckycode">已揭晓&nbsp;</div> -->
+            <div class="czjltitle_luckycode numbers_detail"><%= order.amount %>&nbsp;</div>
+            <!-- <div class="czjltitle_luckycode numbers_detail" id="numbers_detail" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"><%= order.numbers %>&nbsp;</div> -->
+            <div class="czjltitle_luckycode"><%= order.item.hit_number %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><%= order.is_hit == true ? "是" : "否" %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><a href="/items/<%= order.item.id %>" class="see">详情</a>&nbsp;</div>
+         </div>
+         <div class="show_numbers" style="width:100%;display:none;-webkit-backface-visibility:hidden"><%= order.numbers %></div>
+         <% end %>
+         <%= will_paginate @product_orders %>
+      </div>
+</div>
+
+<script>
+  $(".numbers_detail").bind("mouseover",function(){
+    $(this).parent().next(".show_numbers").show();
+  });
+  $(".numbers_detail").bind("mouseout",function(){
+    $(this).parent().next(".show_numbers").hide();
+  });
+</script>

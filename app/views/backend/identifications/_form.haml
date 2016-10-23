@@ -1,0 +1,19 @@
+.well
+  #myTabContent.tab-content
+    #home.tab-pane.active.in
+      %label 类型
+      = f.select :category, options_for_select(Identification::CATEGORY)
+      %label 说明信息
+      = f.text_field :desc, :class => "input-xlarge"
+      %label 资料文件
+      = f.file_field :file, :class => "btn"
+.btn-toolbar.form-actions
+  = f.submit '保存', :class => 'btn btn-primary'
+  = link_to '返回', backend_user_identifications_path(@user), :class => 'btn'
+  - if action_name == 'edit'
+    = link_to '删除', backend_user_identification_path(@user, f), :method => 'delete', :class => 'btn', :confirm => '确认删除?'
+- if @identification.file.present?
+  .well
+    #myTabContent.tab-content
+      #home.tab-pane.active.in
+        = image_tag @identification.file.url

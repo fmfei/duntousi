@@ -1,0 +1,181 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12' style="padding-right:0;">
+
+      <div class="box">
+        <div class="box-header">
+        </div>
+        <div class="box-content">
+          <div class="row">
+            <div class="col-sm-4 col-lg-3" style="padding-top: 20px;">
+              <div class="box">
+                <div class="box-content avatar">
+                  <a href='<%= profile_account_users_path %>'>
+                  <%= avatar(172) %>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8 col-lg-9">
+              <h3 class="col-sm-7 col-lg-7"><%= current_user.username %></h3>
+              <h3 class='col-sm-5 col-lg-5 pull-right'>
+                <a href="<%= account_recharge_path %>" target='_blank' class='btn btn-success'>充值
+                </a>
+                <a href="<%= new_account_withdraw_path %>" target='_blank' class='btn btn-primary'>提现
+                </a>
+              </h3>
+              <hr class="col-sm-7" style="width: 90%;margin: 0 -15px 20px;">
+            </div>
+            <div class="col-sm-8 col-lg-9  pricing-tables">
+              <div class="col-xs-8 col-sm-7 pricing-table account_cash">
+                <ul class="list-unstyled features">
+                  <li class='pull-left'>
+                    <strong>账户总额：</strong>
+                    <%= rmb current_user.total_amount %>
+                  </li>
+                  <li class='pull-left'>
+                    <strong>可用金额：</strong>
+                    <%= rmb current_user.available %>
+                  </li>
+                  <li class='pull-left'>
+                    <strong>提现冻结：</strong>
+                    <%= rmb current_user.freeze_amount %>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-4 col-sm-5 pricing-table account_auth">
+                <ul class="list-unstyled features">
+                  <li>
+                    <% if current_user.confirmed_at.present? %>
+                    <i class='icon-envelope text-contrast'></i>
+                    邮箱已认证
+                    <% else %>
+                    <i class='icon-envelope'></i>
+                    邮箱未认证
+                    <% end %>
+                  </li>
+                  <li>
+                    <% if current_user.auth_realname == 1 %>
+                    <i class='icon-user text-contrast'></i>
+                    身份已认证
+                    <% else %>
+                    <i class='icon-user'></i>
+                    <%= link_to '身份未认证', real_name_account_users_path %>
+                    <% end %>
+                  </li>
+                  <li>
+                    <% if current_user.auth_mobile == true %>
+                    <i class='icon-phone-sign text-contrast'></i>
+                    手机已认证
+                    <% else %>
+                    <i class='icon-phone-sign'></i>
+                    <%= link_to '手机未认证', auth_phone_account_users_path %>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-header">
+          <div class="title">
+            <div class="icon-inbox text-contrast"></div>
+            投标中的项目
+          </div>
+          <div class="actions">
+            <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+            </a>
+
+            <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+            </a>
+          </div>
+        </div>
+        <div class="box-content">
+          <div class="row">
+            <table class='table' style='margin-bottom:0;'>
+              <thead>
+                <tr>
+                  <th>
+                    借款标题
+                  </th>
+                  <th>
+                    金额(元)
+                  </th>
+                  <th>期限(月)</th>
+                  <th>年利率(%)</th>
+                  <th>投标时间</th>
+                  <th>借出金额</th>
+                  <th>应收本息</th>
+                  <th>已收本息</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @bids.blank? %>
+                  <tr>
+                    <td colspan=8>
+                      <a href='/invests'>没有正在投标的项目，马上投标 >></a>
+                    </td>
+                  </tr>
+                <% end %>
+                <% @bids.each do |bid| %>
+                <tr>
+                  <td><%= link_to bid.loan.title, invest_path(bid.loan), :target => '_blank' %></td>
+                  <td>
+                    <%= bid.loan.amount %>
+                  </td>
+                  <td>
+                    <%= bid.invest_month %>
+                  </td>
+                  <td>
+                    <%= bid.interest %>
+                  </td>
+                  <td>
+                    <%= format_time(bid.created_at) %>
+                  </td>
+                  <td>
+                    <%= rmb bid.invest_amount %>
+                  </td>
+                  <td>
+                    <%= rmb bid.collection_amount %>
+                  </td>
+                  <td>
+                    <%= rmb bid.colected_amount %>
+                  </td>
+                </tr>
+                <% end %>
+                <% if @bids.count > 5%>
+                <tr>
+                  <td colspan=8>
+                    <a href='/account/invests/repaying'>查看更多 >></a>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <% if @loan.present? %>
+      <div class="box">
+        <div class="box-header">
+          <div class="title">
+            <div class="icon-thumbs-up text-contrast"></div>
+            新标推荐
+          </div>
+          <div class="actions">
+            <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+            </a>
+
+            <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+            </a>
+          </div>
+        </div>
+        <%= render 'bid' %>
+      </div>
+      <% end %>
+
+  </div>
+</div>

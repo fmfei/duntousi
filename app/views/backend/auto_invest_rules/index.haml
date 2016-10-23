@@ -1,0 +1,40 @@
+.search-well
+  = search_form_for @q, url: backend_auto_invest_rules_path, html: {method: :get, class: 'form-inline'} do |f|
+    = f.search_field :user_email_or_user_mobile_or_user_info_name_cont, :placeholder => "用户姓名、邮箱或电话"
+    可用金额大于:
+    = f.search_field :user_user_cash_available_gteq
+    = f.submit '搜索', class: 'btn'
+    = link_to '重置', backend_auto_invest_rules_path
+.well
+  %table.table
+    %thead
+      %tr
+        %th 序号
+        %th 账号
+        %th 设置金额
+        %th 可用金额
+        %th 利息范围
+        %th 时间范围
+        %th 有抵押
+        %th 有担保
+        %th 还款方式
+        %th 开启时间
+        %th 上次修改时间
+        %th 系统编号
+    %tbody
+      - @rules.each_with_index do |rule, index|
+        %tr
+          %td= index + 1 + (@rules.current_page - 1)*20
+          %td= link_to rule.user.username, backend_lender_path(rule.user)
+          %td= rule.amount.present? ? rule.amount : '按可用金额'
+          %td= rule.user.show_available
+          %td= "#{rule.min_interest} - #{rule.max_interest}"
+          %td= "#{rule.min_months} - #{rule.max_months}"
+          %td= rule.with_mortgage ? '有' : '无'
+          %td= rule.with_guarantee ? '有' : '无'
+          %td= Loan::REPAYSTYLE.key(rule.repay_style) || '全部'
+          %td= format_time rule.actived_at
+          %td= format_time rule.updated_at
+          %td= rule.queue
+
+= will_paginate @rules

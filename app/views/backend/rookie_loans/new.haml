@@ -1,0 +1,36 @@
+.well
+  .tab-content
+    .tab-pane.active
+      = form_for :rookie_loan, url: backend_rookie_loans_path, method: :post, html: { :class => 'form form-horizontal validate-form', :novalidate=>"novalidate"} do |u|
+        / = u.hidden_field :user_id, :value =>@user.id
+        .control-group
+          / = u.label '机构代码', class: "control-label"
+          / .controls
+          /   = select_tag :organization, options_for_select(Organization.all.map{|m| [ m.name+"--"+m.code, m.id]}), class: "input-xlarge"
+        = render  :partial => "form", :locals => {:u => u}
+
+        .form-actions
+          %button.btn.btn-primary{:type => "submit"} 提交
+:javascript
+  $("form").validate();
+  $(function (){
+    $('#loan_due_date').datepicker({
+      inline: true
+    });
+    $('#loan_estimated_time').datepicker({
+      inline: true
+    });
+    $('#loan_max_invest').change(function(){
+      var amount =parseInt($("#loan_amount").val());
+      var min = parseInt($("#loan_min_invest").val());
+      var max = parseInt($(this).val());
+      if (max > amount){
+        alert("最大投资额不能大于借款总额！");
+        $(this).val(amount);
+      }else if(max < min){
+        alert("最大投资额不能小于最小投资额！");
+        $(this).val(amount);
+      }
+
+    });
+  })

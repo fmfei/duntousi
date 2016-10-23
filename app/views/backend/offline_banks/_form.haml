@@ -1,0 +1,15 @@
+.well
+  #myTabContent.tab-content
+    #home.tab-pane.active.in
+      %label 银行名称
+      = f.text_field :name, :class => "input-xlarge", 'data-rule-required' => true
+      %label 详细信息
+      = f.text_field :detail, :class => "input-xlarge", 'data-rule-required' => true
+      %label 前台是否显示
+      = f.select :status, options_for_select(OfflineBank::STATUS)
+.btn-toolbar.form-actions
+  = f.submit '保存', :class => 'btn btn-primary'
+  - if action_name == 'edit' && (can? :delete, 'backend/offline_banks')
+    = link_to '删除', backend_offline_bank_path(@offline_bank), :method => 'delete', :class => 'btn', :'data-confirm' => '确认删除?'
+:javascript
+  $("form").validate();

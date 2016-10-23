@@ -1,0 +1,27 @@
+/ .search-well
+/   = form_tag backend_messages_path, :method => "get", :class => "form-inline" do
+/     = text_field_tag :q, '', :placeholder => "用户姓名、邮箱或电话"
+/     = submit_tag "搜索", :class => "btn"
+.well
+  %table.table
+    %thead
+      %tr
+        %th 编号
+        %th 用户名
+        %th 标题
+        %th 内容
+        %th 发送时间
+        %th 状态
+        %th{:style => "width: 20px;"}
+    %tbody
+      - @messages.each do |m|
+        %tr
+          %td= m.id
+          %td= link_to m.receive_user.email, backend_lender_path(m.receive_user), :target => "_blank"
+          %td= m.title
+          %td= m.content
+          %td= m.created_at.strftime('%Y-%m-%d %H:%M:%S')
+          %td= m.read? ? "已读" : "未读"
+          %td
+            / = link_to_show backend_messages_path(m)
+= will_paginate @messages, :previous_label => '上一页', :next_label => '下一页'

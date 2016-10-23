@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>六月份活动-转盘活动</title>
+<link type="text/css" href="/css-circle/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!--顶部 Start-->
+<div class="main1518">
+	<div class="special-head">
+    </div>
+</div>
+
+<!--顶部 End-->
+<div class="main1518">
+	<div class="special-dial">
+    	<div class="main937">
+        <!--转盘  Start-->
+    	<div class="zp-con"  id="disk">
+        		<div class="an" id="start"><img src="/images-circle/icon-an4.png" id="startbtn"></div>
+        </div>
+
+        <div class="zp-right">
+            <% if current_user.blank? %>
+            	<a href="/users/sign_up" class="btn-sl" style='background:#0dacd7;'>注册、实名认证获取一次抽奖机会</a>
+            <% elsif current_user.auth_realname != 1 %>
+                <a href="/account/users/real_name" class="btn-sl" style='background:#0dacd7;'>实名认证获取一次抽奖机会</a>
+            <% end %>
+        	<a href="#" class="btn-zc"  style='background:#0dacd7;'>每投资1万元获取1次抽奖机会</a>
+            <div class="zpR-con">
+              <% if current_user.present? %>
+              	<p class="xm">您目前有<span id='times'><%= current_user.circle_records.not_actived.count %></span>次抽奖机会</p>
+                <p class="tit">请点击左侧开始抽奖</p>
+              <% else %>
+                <p class="xm"><%= link_to '立即注册', '/users/sign_up', :style=>'  font-size: 35px;color: #ff6766;' %>参加抽奖</p>
+              <% end %>
+                <p class="jj"></p>
+                <!-- <a href="#"  class="btn-jl">领取奖励</a> -->
+
+            </div>
+        </div>
+<!--转盘 End-->
+        </div>
+    </div>
+</div>
+ <!--活动流程  Start-->
+ <div class="main1518 activity_flow">
+ 	<div class="main937">
+ 	<div class="activity_tit">活动流程</div>
+    <ul class="hdlc">
+    	<li style="background:url(/images-circle/icon-login.png) no-repeat center top; color:#6b879a;">登录</li>
+        <li style="background:url(/images-circle/icon-go.png) no-repeat center top; color:#0bb59b;">参加抽奖</li>
+        <li style="background:url(/images-circle/icon-money.png) no-repeat center top; color:#f57f7f;">领取奖励</li>
+    </ul>
+    </div>
+ </div>
+ <!--活动流程  End-->
+ <!--中奖名单  Start-->
+ <div class="main1518 roster">
+  <div class="main937">
+    <div class="roster_tit">中奖名单</div>
+        <div class="roster_bgs">
+        <div class="roster_bg">
+
+        <ul class="hjmp-con">
+          <% CircleRecord.actived.includes(:user).order("actived_at desc").limit(50).each do |re| %>
+            <li>
+                <span class="xm">恭喜XXXXXXX<%= re.user.mobile[7..10] %></span>
+                <span class="time"><%= re.actived_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+                <span class="jj">抽到<%= re.prize_text %></span>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+ </div>
+ <!--中奖名单  End-->
+<!--活动说明 Start-->
+<div class="main1518 explain">
+	<div class="main937">
+    	<div class="explain_tit">活动说明</div>
+        <div class="explain_con">
+        	<p>
+            	1.  凡是通过注册，认证并进行投资的用户可以参加此次活动。<br>
+2.  单笔每投资1万元可获得一次免费抽奖机会。<br>
+3.  中奖者须向客服人员提供用户名、身份证、联系方式及地址。<br>
+4.  在活动结束后三天内，客服人员与中奖者核对信息，进行奖励发放。<br>
+5.  此活动最终解释权归亚太投资（北京）有限公司所有。
+            </p>
+        </div>
+    </div>
+</div>
+<style type="text/css">.test{height:0px;width:100px;overflow: hidden;}</style>
+<div class="test"><a href="http://wangdaiban.com/">网贷平台</a></div>
+<!--活动说明 End-->
+<script type="text/javascript" src="/js-circle/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/js-circle/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="/js-circle/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="/js-circle/jquery.easing.min.js"></script>
+<script>
+	$(function(){
+		$('.hjmp-con li:odd').addClass('bg-fafafa')
+
+		jQuery(".roster_bg").slide({mainCell:".hjmp-con",autoPlay:true,effect:"topMarquee",vis:10,interTime:50,mouseOverStop:false});
+
+	<% if current_user.blank? %>
+        $("#startbtn").click(function(){
+            alert('请注册、登录后参加抽奖');
+        })
+    <% elsif current_user.circle_records.not_actived.blank? %>
+        $("#startbtn").click(function(){
+            alert('获得抽奖机会，请查看下方活动说明');
+        })
+    <% else %>
+        num = <%= current_user.circle_records.not_actived.count %>;
+        var a = <%= current_user.circle_records.not_actived.order('id asc').first.angle %>;
+          $("#startbtn").rotate({
+            bind:{
+              click:function(){
+                if(num > 0){
+    							num = num - 1;
+                  $('#times').html(num);
+                 $(this).rotate({
+                    duration:4500,
+                    angle: 0,
+                    animateTo:1440+a,
+                    easing: $.easing.easeOutSine,
+                    callback: function(){
+                      if( a<18 || a > 342){
+                          $('.zpR-con .tit').html('恭喜您，请进入理财管理查看抽奖结果！');
+                          }
+                      else if( a >= 18 && a<=54){
+                          $('.zpR-con .tit').html('恭喜您，抽到奖品50元话费！');
+                          }
+                      else if( a > 54 && a<=90){
+
+                          $('.zpR-con .tit').html('恭喜您，请进入理财管理查看抽奖结果！');
+                          }
+                      else if( a > 90 && a<=126){
+
+                          $('.zpR-con .tit').html('恭喜您，抽到奖品金条10克！');
+                          }
+                      else if( a > 126 && a<=162){
+
+                          $('.zpR-con .tit').html('恭喜您，请进入理财管理查看抽奖结果！');
+                          }
+                      else if( a > 162 && a<198){
+
+                          $('.zpR-con .tit').html('恭喜您，请进入理财管理查看抽奖结果！');
+                          }
+                      else if( a > 198 && a<=234){
+
+                          $('.zpR-con .tit').html('恭喜您，抽到300元现金红包！');
+                          }
+                      else if( a > 234 && a<=270){
+
+                          $('.zpR-con .tit').html('恭喜您，抽到奖品金羊一只！');
+                          }
+                      else if( a > 270 && a<=306){
+
+                          $('.zpR-con .tit').html('恭喜您，抽到奖品100元话费！');
+                          }
+                      else if( a > 306 && a<=342){
+
+                          $('.zpR-con .tit').html('恭喜您，抽到奖品20元话费！');
+                          }
+
+                      $.get('/campaigns/circle_prize',function(data){
+                        a = Number(data);
+                        if(a < 0){
+                          num = 0;
+                        }
+                      });
+
+        						}
+        				 });
+                }else{
+                  alert('获得新的抽奖机会或明日再试，请查看下方活动说明');
+                }
+        			}
+        		}
+        	});
+
+
+    <% end %>
+	})
+
+
+</script>
+
+</body>
+</html>

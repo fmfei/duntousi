@@ -1,0 +1,17 @@
+<ul class='nav nav-responsive nav-tabs'>
+  <li class='<%= "active" if action_name == "index" %>'>
+    <a href='<%= account_debts_path %>'>
+      债权列表
+    </a>
+  </li>
+  <li class='<%= "active" if action_name == "selling_list" %>'>
+    <a href='<%= selling_list_account_debts_path %>'>
+      转让中
+    </a>
+  </li>
+  <li class='<%= "active" if action_name == "sold" %>'>
+    <a href='<%= sold_account_debts_path %>'>
+      已转让
+    </a>
+  </li>
+</ul>

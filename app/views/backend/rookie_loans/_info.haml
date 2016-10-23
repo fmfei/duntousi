@@ -1,0 +1,18 @@
+贷款信息 
+.well
+  %table.table.table-bordered
+    %tbody
+      %tr
+        %th.success= t(:amount)
+        %td
+          = @loan.amount
+          元
+        %th= t :interest
+        %td
+          = @loan.interest
+          \%
+        %th.success= t :title
+        %td{:ColSpan => 4}= @loan.title
+      %tr
+        %th.success= t :desc
+        %td{:ColSpan => 7}= @loan.desc.html_safe

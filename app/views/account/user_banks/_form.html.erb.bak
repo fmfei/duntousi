@@ -1,0 +1,36 @@
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputText1">卡号</label>
+  <div class="col-md-5 controls">
+    <%= f.text_field :card_number, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0} %>
+    <span for="user_bank_card_number" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputText1">银行</label>
+  <div class="col-md-5 controls">
+    <%= f.text_field :bank, {:class => 'input-xlarge form-control', :'data-rule-required'=>"true"} %>
+    <span for="user_bank_bank" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputPassword4">支行</label>
+  <div class="col-md-5 controls">
+    <%= f.text_field :branch, {:class => 'input-xlarge form-control', :'data-rule-required'=>"true"} %>
+    <span for="user_bank_branch" class="help-block has-error"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-2 control-label" for="inputSelect">开户地区</label>
+  <div class="col-md-10 city-group checkbox">
+    <%= f.select :province, options_for_select([['--省份--', '']] + ChinaCity.list, [@bank.province]), {}, {:class => 'city-select', :id => 'user_info_province'} %>
+            <%= f.select :city, options_for_select([['--城市--', '']] + ChinaCity.list(@bank.province), [@bank.city]), {}, :class => 'city-select', :id => 'user_info_city' %>
+            <%= f.select :area, options_for_select([['--地区--', '']] + ChinaCity.list(@bank.city), [@bank.area]), {}, :class => 'city-select', :id => 'user_info_area' %>
+  </div>
+</div>
+<div class="form-actions form-actions-padding-sm">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2">
+      <input class="btn btn-primary btn-lg" name="commit" type="submit" value="提交">
+    </div>
+  </div>
+</div>

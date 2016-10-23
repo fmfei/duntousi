@@ -1,0 +1,81 @@
+<div class="search-well">
+  <%= search_form_for @q, :url => backend_cash_flows_path, :html => {:method => :get, :class=>"form-inline", :role=>"form"} do |f| %>
+    <%= f.select :cash_flow_description_id_eq, options_from_collection_for_select(Dict::CashFlowDescription.can_be_search, 'id', 'name', (params[:q].present? ? params[:q][:cash_flow_description_id_eq] : nil)), class: "input-xlarge" %>
+
+      <%= f.search_field :created_at_gteq, :value => params[:q].try(:[], :created_at_gteq) %>
+   至
+  <%= f.search_field :created_at_lteq, :value => params[:q].try(:[], :created_at_lteq) %>
+
+    <%= f.submit '搜索', class: "btn" %>&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to '重置', backend_cash_flows_path %>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(function (){
+    $('#q_created_at_gteq').datepicker({
+    inline: true
+  });
+  $('#q_created_at_lteq').datepicker({
+    inline: true
+    });
+  })
+</script>
+<div class="well">
+  <table class="table table-th-right">
+    <tbody>
+      <tr>
+        <th>金额总计：</th>
+        <td><%= rmb @amount %></td>
+        <th>转出账户总计：</th>
+        <td><%= @from_users %>人</td>
+      </tr>
+      <tr>
+        <th>转入账户总计：</th>
+        <td><%= @to_users %>人</td>
+        <th>相关账户总计：</th>
+        <td><%= @offline_users %>人</td>
+      </tr>
+  </tbody></table>
+</div>
+<div class="well">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>转出账户</th>
+        <th>转入账户</th>
+        <th>相关账户</th>
+        <th>金额</th>
+        <th>说明</th>
+        <th>时间</th>
+        <th style="width: 26px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cash_flows.each do |cash_flow| %>
+        <tr>
+          <td><%= cash_flow.id %></td>
+          <td>
+          <% if cash_flow.from_user %>
+            <%= link_to cash_flow.from_user.try(:name_or_email), backend_cash_flow_path(cash_flow.from_user) %>
+          <% else %>
+            &nbsp;
+          <% end %>
+          </td>
+          <td>
+            <% if cash_flow.to_user %>
+              <%= link_to cash_flow.to_user.try(:name_or_email), backend_cash_flow_path(cash_flow.to_user) %>
+            <% else %>
+              &nbsp;
+            <% end %>
+          </td>
+          <td><%= cash_flow.offline_user.try(:name) %></td>
+          <td><%= rmb cash_flow.amount %></td>
+          <td><%= cash_flow.description %><%= cash_flow.addition.present? ? "(#{cash_flow.addition})" : '' %></td>
+          <td><%= format_time cash_flow.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @cash_flows, first: "First Page", last: "Last Page" %>

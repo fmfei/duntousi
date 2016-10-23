@@ -1,0 +1,24 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">砸蛋记录</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle">时间</div>
+            <div class="czjltitle">砸中记录</div>
+            <div class="czjltitle">是否已发红包</div>
+            <div class="czjltitle">投资金额</div>
+         </div>
+         <% @newyear_eggs.each do |code| %>
+         <div class="czjl">
+            <div class="czjltitle"><%= code.created_at.try(:strftime, "%Y/%m/%d/ %H:%M") %>&nbsp;</div>
+            <div class="czjltitle"><%= code.hit_level %>&nbsp;</div>
+            <div class="czjltitle"><%= code.is_invest == false ? "未投资" : "已发包" %>&nbsp;</div>
+            <div class="czjltitle"><%= code.invest_count %>&nbsp;</div>
+         </div>
+         <% end %>
+         <%= will_paginate @newyear_eggs %>
+      </div>
+</div>

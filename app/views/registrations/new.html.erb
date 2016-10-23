@@ -1,0 +1,77 @@
+<%= form_note_account flash %>
+  <%= form_for(resource, as: resource_name, url: registrations_path, html: {class: 'zhuceform'}) do |f| %>
+    <%= devise_error_messages! %>
+    <div class="zhuce">
+        <div class="titles">
+            <span class="da">注册</span>
+        </div>
+        <label>手机号 &nbsp;&nbsp;<span class='mobile'></span></label>
+        <%= f.text_field :mobile, autofocus: true, placeholder: "请输入手机号", class: "form-control", 'data-required' => true, 'data-rule-minlength' => 11, 'data-rule-mxalength' => 11 %>
+        <label>密码(不少于8位)</label>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "密码", class: "form-control", 'data-required' => true, 'data-rule-minlength' => 8 %>
+        <label>确认密码</label>
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "确认密码", class: "form-control", 'data-required' => true %>
+
+        <%= simple_captcha_options[:image] %><%= simple_captcha_options[:refresh_button] %>
+        <%= simple_captcha_options[:field] %>
+
+
+        <label id='get_verify' style='cursor:pointer;color: #8ed6ef;'>短信验证码，点击获取</label>
+        <label id='show_countdown' style='display:none;'></label>
+        <%= text_field_tag :verify_code, '', placeholder: "请输入验证码", class: "form-control", 'data-required' => true %>
+        <input type="submit" name="commit" value="确定" class="sub zzqding">
+        <label class="sizef">已同意<a href='/xieyi' target='_blank'><span>《亚太金融协议》</span></a>。</label>
+    </div>
+  <% end %>
+<style type="text/css">
+.zhuce label{
+  display: inline-block;
+  height: 30px;
+  line-height: 36px;
+  color: #666;
+}
+</style>
+<script type="text/javascript">
+var wait = 60;
+function countdown(){
+  if(wait == 0){
+    $('#show_countdown').hide();
+    $('#get_verify').show().html('点击重新获取');
+    wait = 60;
+  }else{
+    $('#get_verify').hide();
+    $('#show_countdown').show().html('输入验证码（' + wait + '）');
+    wait--;
+    setTimeout(function(){
+      countdown();
+    }, 1000);
+  }
+}
+$(function(){
+  $('#new_user').validate();
+  $('#get_verify').click(function(){
+    if($('#user_mobile').val().length == 11 && !isNaN($('#user_mobile').val())){
+      $('#user_mobile').removeClass('has-error');
+      $('#user_mobile').html('')
+      $.ajax({
+        url: '<%= send_verify_code2_home_index_path %>/?mobile=' + $('#user_mobile').val() + '&captcha=' + $('#captcha').val(),
+        success: function(msg){
+          if(msg == 'captcha error'){
+            alert('图形验证码错误');
+            $('#captcha').focus();
+          }else if(msg == 'false'){
+            alert('该手机号已注册，请直接登录');
+          }else{
+            countdown();
+          }
+        }
+      });
+    }else{
+      $('#user_mobile').addClass('error');
+      $(".mobile").text("号码不正确");
+      state = false;
+    }
+    return false;
+  });
+})
+</script>

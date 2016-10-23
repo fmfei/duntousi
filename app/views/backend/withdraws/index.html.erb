@@ -1,0 +1,76 @@
+<%= render partial: "search" %>
+<%= form_tag({action: :download}) do %>
+  <div class="well">
+    <table class="table table-th-right">
+      <tbody>
+        <tr>
+          <th>成功提现金额：</th>
+          <td><%= rmb @succeed %></td>
+          <th>待处理的提现：</th>
+          <td><%= rmb @auditing %></td>
+      </tr>
+    </tbody></table>
+  </div>
+  <div class="btn-toolbar">
+    <%= submit_tag "选择导出Excel", :class => "btn" %>
+  </div>
+<div class="well">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th style="width: 10px;"><input type="checkbox" id="ck_all" ></th>
+        <th style="width: 10px;">ID</th>
+        <th style="width: 50px;">姓名</th>
+        <th>免费提现额</th>
+        <th>提现金额</th>
+        <th>到账金额</th>
+        <th>手续费</th>
+        <th>卡号</th>
+        <th>银行</th>
+        <th>支行</th>
+        <!--
+        <th>省份</th>
+        <th>城市</th>
+        <th>区域</th>
+        <th>审核者</th>-->
+        <th>审核时间</th>
+        <th>提现时间</th>
+        <th style=""></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @withdraws.each do |withdraw| %>
+        <tr>
+          <td><%= check_box_tag "printout[]", withdraw.id %></td>
+          <td><%= withdraw.id %></td>
+          <td><%= link_to withdraw.user.name, backend_withdraw_path(withdraw) %></td>
+          <td><%= rmb withdraw.user.free_withdraw_amount %></td>
+          <td><%= rmb(withdraw.amount) %></td>
+          <td style='color: #0088cc;'><%= rmb(withdraw.received_amount) %></td>
+          <td><%= rmb(withdraw.fee) %></td>
+          <td><%= withdraw.card_number %></td>
+          <td><%= withdraw.bank %></td>
+          <td><%= withdraw.branch %></td>
+          <!--
+          <td><%= ChinaCity.get(withdraw.province) %></td>
+          <td><%= ChinaCity.get(withdraw.city) %></td>
+          <td><%= ChinaCity.get(withdraw.area) %></td>
+
+          <td><%= withdraw.auditor.try(:name) %></td>-->
+          <td><%= format_time(withdraw.try(:audit_time)) %></td>
+          <td><%= format_time(withdraw.created_at) %></td>
+          <td style='width:50px;'>
+            <% if withdraw.status == 'auditing' %>
+              <%=link_to '放款', backend_withdraw_path(withdraw, :res => 'pass'), :method => :put, :'data-confirm' => '确认放款成功?' %><br>
+              <%=link_to '取消', backend_withdraw_path(withdraw, :res => 'fail'), :method => :put, :'data-confirm' => '确认取消放款?'%>
+            <% else %>
+              <%= t withdraw.status %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @withdraws %>
+<% end %>

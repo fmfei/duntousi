@@ -1,0 +1,45 @@
+<style type="text/css">
+.search_loans .btn{margin: 0px 20px; border-color: #ffffff; box-shadow: none;}
+.search_loans .active{background-color: #5F8EC9 !important; color: #ffffff; }
+</style>
+<div class="wrapped-content">
+  <div class='box'>
+    <div class="box-header"></div>
+    <%= form_note_account flash %>
+  </div>
+
+  <div class='box' id="loans_content">
+    <div class="box-header">债权转让列表</div>
+      <% @bids.each do |bid|%>
+      <%= render :partial => "bid", :locals => {:bid => bid}%>
+      <%end%>
+
+      <%= will_paginate @bids, :class => 'pagination' %>
+</div>
+<script type="text/javascript">
+$(function (){
+  $(".search_loans .btn").click(function (){
+    var s_type = $(".s-type .active input").val();
+    var s_time = $(".s-time .active input").val();
+    var s_level = $(".s-level .active input").val();
+    var s_state = $(".s-state .active input").val();
+    var s_interest = $(".s-interest .active input").val();
+    var name = $(this).children("input").attr("name");
+    if(name == 's-type') {
+      s_type = $(this).children("input").val();
+    }else if(name == 's-time') {
+      s_time = $(this).children("input").val();
+    }else if(name == 's-level') {
+      s_level = $(this).children("input").val();
+    }else if(name == 's-state') {
+      s_state = $(this).children("input").val();
+    }else if(name == 's-interest') {
+      s_interest = $(this).children("input").val();
+    }
+    $.get("/invests/search", { type : s_type, time: s_time, level: s_level, state: s_state, interest: s_interest },
+      function(data){
+        $('#loans_content').html(data);
+      });
+  })
+})
+</script>

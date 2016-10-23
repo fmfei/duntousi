@@ -1,0 +1,6 @@
+= render :partial => "info"
+.well
+  请确认所有信息属实，符合贷款条件
+  = link_to "通过初审", junior_audit_pass_backend_audit_path(@loan), method: :post, :class=>"btn btn-primary", :confirm => '确认信息属实？'
+  &nbsp;&nbsp;
+  = link_to "编辑", edit_backend_loan_path(@loan), method: :get, :class=>"btn btn-primary"

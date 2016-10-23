@@ -1,0 +1,68 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='page-header'>
+          <h1 class='pull-left'>
+            <i class='icon-table'></i>
+            <span>交易记录</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='box bordered-box blue-border' style='margin-bottom:0;'>
+          <div class="box-header blue-background">
+            <div class="title">交易记录明细</div>
+            <div class="actions">
+              <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+              </a>
+
+              <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+              </a>
+            </div>
+          </div>
+
+          <div class='box-content box-no-padding'>
+            <div class='responsive-table'>
+              <div class='scrollable-area'>
+                <table class='table' style='margin-bottom:0;'>
+                  <thead>
+                    <tr>
+                      <th>
+                        日期/时间
+                      </th>
+                      <th>
+                        交易类型
+                      </th>
+                      <th>
+                        交易金额（元）
+                      </th>
+                      <th>可支配余额（元）</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @cash_flows.each do |cash_flow| %>
+                    <tr>
+                      <td><%= cash_flow.created_at.try(:strftime, "%Y年%m月%d日 %H时%M分") %></td>
+                      <td><%= cash_flow.description.to_s %></td>
+                      <td>
+                        <%= rmb cash_flow.amount %>
+                      </td>
+                      <td>
+                        <%= rmb cash_flow.available_of_user(current_user) %>
+                      </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+                <%= will_paginate @cash_flows %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

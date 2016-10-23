@@ -1,0 +1,29 @@
+= btn_toolbar_adds([name: '新增产品', path: '/backend/products/new', type: 'add'])
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 序号
+        %th 名称
+        %th 价格
+        %th 库存总量
+        %th 已售出
+        %th 剩余
+        %th 权重
+        %th{:colspan=>"3"} 操作
+    %tbody
+      - @products.each do |pd|
+        %tr
+          %td= pd.id
+          %td= pd.title
+          %td= pd.total_price
+          %td= pd.numbers
+          %td= pd.already
+          %td= pd.remain
+          %td= pd.weight
+          %td= link_to "图片", new_backend_attachement_path(pd.id)
+          %td= link_to "编辑", edit_backend_product_path(pd)
+          %td= link_to "删除", backend_product_path(pd), data: {confirm: "确定要删除吗?"}, method: :delete
+
+= will_paginate @products

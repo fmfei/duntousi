@@ -1,0 +1,351 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>墩头寺</title>
+<link rel="stylesheet" href="/assets/css.css">
+<script src="/assets/frontend/jquery.min.js"></script> 
+  <style>
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:0.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{-moz-box-sizing:border-box;box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+/*radio style*/
+label.radio {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  position: relative;
+  margin: 0 5px 5px 0;
+  padding: 0;
+  background-color: #f59a0b;
+  border-radius: 100%;
+  vertical-align: top;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1) inset, 0 1px 4px rgba(0, 0, 0, 0.1) inset, 1px -1px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+label.radio > span.pip {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  border-radius: 100%;
+  background: #f59a0b;
+  top: 4px;
+  left: 4px;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  background-image: linear-gradient(#ffffff 0, #e7e7e7 100%);
+  transform: scale(0, 0);
+  transition: all 0.2s ease;
+}
+label.radio.on {
+ /* background-color: #05abe0;*/
+}
+label.radio.on > span.pip {
+  transform: scale(1, 1);
+}
+label.radio.focus {
+  outline: 0;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1) inset, 0 1px 4px rgba(0, 0, 0, 0.1) inset, 1px -1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #f59a0b, 0 0 1px 1px rgba(0, 0, 0, 0.75) inset;
+}
+input[type=checkbox].replaced,
+input[type=radio].replaced {
+  position: absolute;
+  left: -9999em;
+}
+
+label {
+  height: 30px;
+  line-height: 30px;
+  margin-right: 20px;
+}
+h2 {
+  color: #666;
+  text-align: center;
+  width: 560px;
+  margin: 0 auto;
+  line-height: 1.2em;
+}
+</style>
+ <script src="/assets/frontend/prefixfree.min.js"></script>
+ <script src="/assets/frontend/modernizr.js"></script>
+<script>
+<!--------TAB选项卡---------->
+ function setTab(name,cursel,n){
+     for(i=1;i<=n;i++){
+      var menu=document.getElementById(name+i);
+      var con=document.getElementById("con_"+name+"_"+i);
+      menu.className=i==cursel?"active":"";
+      con.style.display=i==cursel?"block":"none";
+     }
+    }
+</script>    
+</head>
+
+<body>
+<div class="main">
+  <div class="main960">
+      <div class="top-left"><img src="/assets/logo.jpg"></div>
+        <div class="top-right">
+          <div class="tabbar">
+            <a href="javascript:void(0);" class="active" onclick="setTab('conn',1,6)" id="conn1">A区</a>
+            <a href="javascript:void(0);"  onclick="setTab('conn',2,6)" id="conn2">B1区</a>
+            <a href="javascript:void(0);" onclick="setTab('conn',3,6)" id="conn3">C区</a>
+            <a href="javascript:void(0);" onclick="setTab('conn',4,6)" id="conn4">D区</a>
+            <a href="javascript:void(0);" onclick="setTab('conn',5,6)" id="conn5">E区</a>
+            <a href="javascript:void(0);" onclick="setTab('conn',6,6)" id="conn6">B2区</a>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="conbox" id="con_conn_1">
+  <%= render :partial => "detail", :locals => {:seats => @area_a_total, :sold => @area_a_sold, :reserve => @area_a_reserve, :idle => @area_a_idle, :all_count => @area_a_count}%>
+</div>
+<div class="conbox" id="con_conn_2" style="display:none;">
+  <%= render :partial => "detail", :locals => {:seats => @area_b1_total, :sold => @area_b1_sold, :reserve => @area_b1_reserve, :idle => @area_b1_idle, :all_count => @area_b1_count}%>
+</div>
+<div class="conbox" id="con_conn_3" style="display:none;">
+  <%= render :partial => "detail", :locals => {:seats => @area_c_total, :sold => @area_c_sold, :reserve => @area_c_reserve, :idle => @area_c_idle, :all_count => @area_c_count}%>
+</div>
+<div class="conbox" id="con_conn_4" style="display:none;">
+  <%= render :partial => "detail", :locals => {:seats => @area_d_total, :sold => @area_d_sold, :reserve => @area_d_reserve, :idle => @area_d_idle, :all_count => @area_d_count}%>
+</div>
+<div class="conbox" id="con_conn_5" style="display:none;">
+  <%= render :partial => "detail", :locals => {:seats => @area_e_total, :sold => @area_e_sold, :reserve => @area_e_reserve, :idle => @area_e_idle, :all_count => @area_e_count}%>
+</div>
+<div class="conbox" id="con_conn_6" style="display:none;">
+  <%= render :partial => "detail", :locals => {:seats => @area_b2_total, :sold => @area_b2_sold, :reserve => @area_b2_reserve, :idle => @area_b2_idle, :all_count => @area_b2_count}%>
+</div>
+  <script src='/assets/frontend/jquery.js'></script>
+  <script src="/assets/frontend/index.js"></script>
+  <script>
+
+$(function(){
+  $('.seat-left span').each(function(index, el) {
+    var i=1;
+    $(this).click(function(event) {
+      if(i==1){
+        $(this).find("a").addClass('chooseJ');
+        i=0;
+      }else{
+        $(this).find("a").removeClass('chooseJ');
+        i=1;
+      }
+    });
+  });
+})
+
+$("#sumit_btn1").click(function(){
+  var chooseBtn = $(".chooseJ");
+  var listCheck = new Array();
+  for(var i = 0; i < chooseBtn.length; i++){
+    listCheck.push(chooseBtn[i].name)
+  }
+  var radioCheck = $("input[name='radstatus1']:checked").val();
+  $.ajax({
+    url: "/seats/update_status",
+    data: {
+      check_seat: listCheck,
+      check_status: radioCheck
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#resetBtn1").click(function(){
+  var area = $("#areaNum1").html();
+  var seat = $("#chk1").val();
+  if(seat==""){
+    alert("请填写一个座位号")
+    return false;
+  }
+  $.ajax({
+    url: '/seats/reset_seat',
+    data:{
+      seat: area + "-" + seat
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#sumit_btn2").click(function(){
+  var chooseBtn = $(".chooseJ");
+  var listCheck = new Array();
+  for(var i = 0; i < chooseBtn.length; i++){
+    listCheck.push(chooseBtn[i].name)
+  }
+  var radioCheck = $("input[name='radstatus2']:checked").val();
+  $.ajax({
+    url: "/seats/update_status",
+    data: {
+      check_seat: listCheck,
+      check_status: radioCheck
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#resetBtn2").click(function(){
+  var area = $("#areaNum2").html();
+  var seat = $("#chk2").val();
+  if(seat==""){
+    alert("请填写一个座位号")
+    return false;
+  }
+  $.ajax({
+    url: '/seats/reset_seat',
+    data:{
+      seat: area + "-" + seat
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#sumit_btn3").click(function(){
+  var chooseBtn = $(".chooseJ");
+  var listCheck = new Array();
+  for(var i = 0; i < chooseBtn.length; i++){
+    listCheck.push(chooseBtn[i].name)
+  }
+  var radioCheck = $("input[name='radstatus3']:checked").val();
+  $.ajax({
+    url: "/seats/update_status",
+    data: {
+      check_seat: listCheck,
+      check_status: radioCheck
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#resetBtn3").click(function(){
+  var area = $("#areaNum3").html();
+  var seat = $("#chk3").val();
+  if(seat==""){
+    alert("请填写一个座位号")
+    return false;
+  }
+  $.ajax({
+    url: '/seats/reset_seat',
+    data:{
+      seat: area + "-" + seat
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#sumit_btn4").click(function(){
+  var chooseBtn = $(".chooseJ");
+  var listCheck = new Array();
+  for(var i = 0; i < chooseBtn.length; i++){
+    listCheck.push(chooseBtn[i].name)
+  }
+  var radioCheck = $("input[name='radstatus4']:checked").val();
+  $.ajax({
+    url: "/seats/update_status",
+    data: {
+      check_seat: listCheck,
+      check_status: radioCheck
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+$("#resetBtn4").click(function(){
+  var area = $("#areaNum4").html();
+  var seat = $("#chk4").val();
+  if(seat==""){
+    alert("请填写一个座位号")
+    return false;
+  }
+  $.ajax({
+    url: '/seats/reset_seat',
+    data:{
+      seat: area + "-" + seat
+    },
+    success: function(data){
+      if(data["status"] == 0){
+        alert("更新成功")
+        window.location.reload();
+      }else{
+        alert(data["errmsg"])
+      }
+    },
+    error: function(){
+      alert("未知问题，可以联系管理者查看")
+    }
+  })
+})
+
+
+  </script>
+</body>
+</html>
+

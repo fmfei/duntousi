@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title><%= @title.present? ? (@title + '-') : '' %>专业互联网金融中介信息平台！</title>
+    <%= stylesheet_link_tag  "account", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag  "site", "data-turbolinks-track" => true %>
+
+    <!--[if lt IE 9]>
+      <script src='/assets/html5shiv.js' type='text/javascript'></script>
+      <script src='/assets/respond.min.js' type='text/javascript'></script>
+      <script src='/assets/PIE.js' type='text/javascript'></script>
+
+    <![endif]-->
+  </head>
+  <body>
+    <%= render "/layouts/header" %>
+  <div id="content-wrap" class="wrapped-content">
+    <div id="wrapper" class="col-sm-12">
+    <div class="row">
+      <div id="main-nav-bg" style="width:16%;">
+      </div> 
+      <nav id="main-nav" style="position: relative;float: left;width: 16%">
+        <%= render "/layouts/account_nav_left"%>
+      </nav>
+        <div class="container" style="float: left; width: 84%;">
+          <%= yield %>
+        </div>
+    </div>
+    </div>
+  </div>
+  <%= render "/layouts/footer" %>
+  </body>
+</html>

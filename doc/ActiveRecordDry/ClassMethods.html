@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module ActiveRecordDry::ClassMethods - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="HasCity/InstanceMethods.html">ActiveRecordDry::HasCity::InstanceMethods</a>
+  
+  
+  
+    <li><a class="include" href="HasPhone/InstanceMethods.html">ActiveRecordDry::HasPhone::InstanceMethods</a>
+  
+  
+  
+    <li><a class="include" href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+  
+  
+    <li><a class="include" href="HasHouseCost/InstanceMethods.html">ActiveRecordDry::HasHouseCost::InstanceMethods</a>
+  
+  
+  
+    <li><a class="include" href="TranslateName/InstanceMethods.html">ActiveRecordDry::TranslateName::InstanceMethods</a>
+  
+  
+  
+    <li><a class="include" href="TranslateKey/InstanceMethods.html">ActiveRecordDry::TranslateKey::InstanceMethods</a>
+  
+  
+  </ul>
+</div>
+
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    
+  
+    <li><a class="extend" href="ListItem/SingletonMethods.html">ActiveRecordDry::ListItem::SingletonMethods</a>
+  
+  
+  </ul>
+</div>
+
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-acts_as_list_item">#acts_as_list_item</a>
+    
+    <li ><a href="#method-i-has_city">#has_city</a>
+    
+    <li ><a href="#method-i-has_house_cost">#has_house_cost</a>
+    
+    <li ><a href="#method-i-has_phone">#has_phone</a>
+    
+    <li ><a href="#method-i-translate_key">#translate_key</a>
+    
+    <li ><a href="#method-i-translate_name">#translate_name</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-ActiveRecordDry::ClassMethods">
+  <h1 id="module-ActiveRecordDry::ClassMethods" class="module">
+    module ActiveRecordDry::ClassMethods
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-acts_as_list_item" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">acts_as_list_item</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="acts_as_list_item-source">
+            <pre><span class="ruby-comment"># File lib/active_record_dry.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">acts_as_list_item</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveRecordDry</span><span class="ruby-operator">::</span><span class="ruby-constant">ListItem</span><span class="ruby-operator">::</span><span class="ruby-constant">SingletonMethods</span>
+
+  <span class="ruby-identifier">scope</span> <span class="ruby-value">:within</span>, <span class="ruby-identifier">lambda</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">ids</span><span class="ruby-operator">|</span> <span class="ruby-identifier">where</span>(<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;1=2&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;id in (#{ids.join(&#39;,&#39;)})&quot;</span>)}
+  <span class="ruby-identifier">scope</span> <span class="ruby-value">:without</span>, <span class="ruby-identifier">lambda</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">ids</span><span class="ruby-operator">|</span> <span class="ruby-identifier">where</span>(<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;1=1&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;id not in (#{ids.join(&#39;,&#39;)})&quot;</span>)}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-has_city" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_city</span><span
+            class="method-args">(prefix = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="has_city-source">
+            <pre><span class="ruby-comment"># File lib/active_record_dry.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_city</span>(<span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  [<span class="ruby-value">:province</span>, <span class="ruby-value">:city</span>, <span class="ruby-value">:town</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">belongs_to</span> <span class="ruby-node">&quot;#{prefix}#{t}&quot;</span>, <span class="ruby-value">:class_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Dict::City&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveRecordDry</span><span class="ruby-operator">::</span><span class="ruby-constant">HasCity</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-has_house_cost" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_house_cost</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="has_house_cost-source">
+            <pre><span class="ruby-comment"># File lib/active_record_dry.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_house_cost</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ApplicationHelper</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveRecordDry</span><span class="ruby-operator">::</span><span class="ruby-constant">HasHouseCost</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-has_phone" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_phone</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="has_phone-source">
+            <pre><span class="ruby-comment"># File lib/active_record_dry.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_phone</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveRecordDry</span><span class="ruby-operator">::</span><span class="ruby-constant">HasPhone</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-translate_key" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">translate_key</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="translate_key-source">
+            <pre><span class="ruby-comment"># File lib/active_record_dry.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">translate_key</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveRecordDry</span><span class="ruby-operator">::</span><span class="ruby-constant">TranslateKey</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-translate_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">translate_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="translate_name-source">
+            <pre><span class="ruby-comment"># File lib/active_record_dry.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">translate_name</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveRecordDry</span><span class="ruby-operator">::</span><span class="ruby-constant">TranslateName</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

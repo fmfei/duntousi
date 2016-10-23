@@ -1,0 +1,29 @@
+
+
+<div class="search-well">
+  <%  if params[:state].present?
+       url = backend_repayments_path(:state => params[:state])
+      else
+        url = backend_repayments_path
+      end
+  %>
+<%= search_form_for @q, :url => url, :class => "form-inline" do |f| %>
+	<%= f.text_field :due_date_gteq, :value => params[:q].try(:[], :due_date_gteq) %>
+	 至
+	<%= f.text_field :due_date_lteq, :value => params[:q].try(:[], :due_date_lteq) %>
+	<%= hidden_field_tag :state, params[:state] %>
+	<%= f.submit "搜索", :class => "btn" %>
+  &nbsp;
+  还款金额总计：<%= rmb @repayments.sum(:amount) %>
+<% end %>
+</div>
+<script type="text/javascript">
+	$(function (){
+		$('#q_due_date_gteq').datepicker({
+		inline: true
+	});
+	$('#q_due_date_lteq').datepicker({
+		inline: true
+		});
+	})
+</script>

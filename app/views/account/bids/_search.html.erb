@@ -1,0 +1,23 @@
+<div class="box">
+  <div class='box-content'>
+    <% if action_name == "index" %>
+      <% url = account_invests_path %>
+    <% elsif action_name == "repaying" %>
+      <% url = repaying_account_invests_path %>
+    <% elsif action_name == "finished" %>
+      <% url = finished_account_invests_path %>
+    <% end %>
+    <%= search_form_for @search, :url => url, :html => {:method => :get, :class=>"form-inline", :role=>"form"} do |f| %>
+      <div class="form-group">
+        <%= f.label '借款标题', class: "sr-only" %>
+        <%= f.text_field :loan_title, class: "form-control", placeholder: "借款标题" %>&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="form-group">
+        <%= f.label '借款者', class: "sr-only" %>
+        <%= f.text_field :loan_borrower_info_name, class: "form-control", placeholder: "借款人" %>
+        <%= f.submit '搜索', class: "btn btn-default" %>
+      </div>
+      
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="right">
+   <div style="margin-top:20px;"></div>
+   <div class="tongtit_x">
+      <div <%= params[:tab]? '' : 'class=xshi_x' %>><a href="/account/messages">全部消息</a></div>
+      <!-- <div <%#= params[:tab]=="unread"? 'class=xshi_x' : '' %>><a href="/account/messages?tab=unread">未读消息</a></div>
+      <div <%#= params[:tab]=="read"? 'class=xshi_x' : '' %>><a href="/account/messages?tab=read">已读消息</a></div> -->
+   </div>
+   <div class="contents" style="display:block;">
+      <ul class="xiaoxi">
+        <%= @messages? ''  : '暂无消息'%>
+        <% @messages.each do |m|%>
+         <li>
+          <span class="display_nb"><%= m.title %></span>
+          <span class="display_nb"><%= format_time m.created_at %></span>
+         <div><%= m.content%><span class="right">收起∧</span></div>
+         </li>
+         <% m.set_read unless m.read?%>
+         <% end %>
+      </ul>
+      <%= will_paginate @messages %>
+   </div><!--contents end-->
+</div>

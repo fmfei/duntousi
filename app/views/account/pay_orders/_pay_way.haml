@@ -1,0 +1,11 @@
+#online_pay.pinfolist.clearfix.margtop20.linebot{:style => " display:block;"}
+  / %table.table.table-hover
+  %ul.ui-list-icons.fn-mt-20
+    - Gopay::BANKCODE.each_with_index do |bank, i|
+      %li.cashier-bank-kj.col-md-4
+        %input{:id => "bank_#{bank[:code]}", :name => "pay_class", :type => "radio", :value => "#{bank[:code]}"}
+        %label.icon-box.limited-coupon{:for => "bank_#{bank[:code]}"}
+          %span.icon-box-sparkling
+          %span.false.icon{:title => "#{bank[:name]}", :class => "#{bank[:code]}"}
+          %span.bank-name
+            = bank[:name]

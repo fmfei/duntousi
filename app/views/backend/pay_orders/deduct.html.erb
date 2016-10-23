@@ -1,0 +1,84 @@
+  <div class="well">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#info" data-toggle="tab">客户信息</a></li>
+      <li class=""><a href="#record" data-toggle="tab">后台扣款记录</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div id="info" class="tab-pane active in">
+        <table class="table table-bordered">
+          <tr>
+            <td>用户名</td>
+            <td><%= @user.username %></td>
+            <td>电子邮件</td>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td>姓名</td>
+            <td><%= @user.info.try(:name) %></td>
+            <td>身份证号</td>
+            <td><%= @user.info.try(:id_card) %></td>
+          </tr>
+        </table>
+      </div>
+      <div id="record" class="tab-pane">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>转出账户</th>
+              <th>金额</th>
+              <th>说明</th>
+              <th>备注</th>
+              <th>扣款时间</th>
+              <th style="width: 26px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @deducts.each do |cash_flow| %>
+              <tr>
+                <td><%= cash_flow.id %></td>
+                <td>
+                <% if cash_flow.from_user %>
+                  <%= link_to cash_flow.from_user.try(:email), backend_cash_flow_path(cash_flow.from_user) %>
+                <% else %>
+                  &nbsp;
+                <% end %>
+                </td>
+                <td><%= rmb cash_flow.amount %></td>
+                <td><%= cash_flow.description %></td>
+                <td><%= cash_flow.addition %></td>
+                <td><%= format_time cash_flow.created_at %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @deducts %>
+      </div>
+    </div>
+  </div>
+  <div class="search-well">
+    <%= form_tag create_deduct_backend_pay_orders_path, :method => "POST", :class => "form-inline validate-form", :role => "form", :novalidate=>"novalidate", :onsubmit => 'return confirm_recharge();' do %>
+      <%= hidden_field_tag :user_id, params[:id]%>
+      <div class="control-group">
+        <div class='controls'>
+        &nbsp;&nbsp;账户余额: <%= @user.show_available %>元(注意：扣款金额不能大于账户余额)<br>
+        <%= text_field_tag :amount, '', :placeholder => "扣款金额", :class => 'input-xlarge', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0.01 %><br>
+        <%= text_field_tag :addition, '', :placeholder => "扣款备注", :class => 'input-xlarge' %>
+        </div>
+      </div>
+      <%= submit_tag "扣款", :class => "btn" %>
+    <% end %>
+  </div>
+<script type="text/javascript">
+function confirm_recharge(){
+  if(confirm('确认扣款？此操作不可逆！')){
+    return true;
+  }else{
+    return false;
+  }
+}
+$(function(){
+  $("form").validate();
+
+})
+</script>

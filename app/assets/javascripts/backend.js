@@ -1,0 +1,11 @@
+//= require jquery
+//= require jquery_ujs
+//= require backend/bootstrap.min
+//= require 'china_city/jquery.china_city'
+//= require highcharts
+//= require jquery-ui-1.10.3.custom
+//= require datepicker_zh_CN
+//= require backend/common
+//= require flatty/plugins/validate/jquery.validate.min
+//= require flatty/plugins/validate/additional-methods
+//= require flatty/plugins/bootstrap_switch/bootstrapSwitch.min

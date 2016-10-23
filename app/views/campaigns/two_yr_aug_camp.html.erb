@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>8月活动</title>
+<link type="text/css" href="/css_two_yr_aug_camp/css.css" rel="stylesheet">
+<style>
+*{ margin:0; padding:0;}
+a:focus{outline:none;}
+img{ border:none;}
+.comdiv{ width:100%; height:145px; margin:0 auto;}
+.d01{background:url(/campaigns/two_yr_aug_camp/a8_01.png) no-repeat center;}
+.d02{background:url(/campaigns/two_yr_aug_camp/a8_02.png) no-repeat center;}
+.d03{background:url(/campaigns/two_yr_aug_camp/a8_03.png) no-repeat center;}
+.d04{background:url(/campaigns/two_yr_aug_camp/a8_04.png) no-repeat center;}
+.d05{background:url(/campaigns/two_yr_aug_camp/a8_05.png) no-repeat center;}
+.d06{background:url(/campaigns/two_yr_aug_camp/a8_06.png) no-repeat center;}
+.d07{background:url(/campaigns/two_yr_aug_camp/a8_07.jpg) no-repeat center;}
+.d08{background:url(/campaigns/two_yr_aug_camp/a8_08.png) no-repeat center;width:100%; height:99px;}
+.d10{ width:100%; height:300px;background:url(/campaigns/two_yr_aug_camp/a8_11.png) no-repeat center;}
+</style>
+</head>
+
+<body>
+<div class="comdiv d01"></div>
+<div class="comdiv d02"></div>
+<div class="comdiv d03"></div>
+<div class="comdiv d04"></div>
+<div class="comdiv d05"></div>
+<div class="comdiv d06"></div>
+<div class="comdiv d07"></div>
+<div class="d08"></div>
+<div class="zhuanp-bg">
+  <div class="zhuanp-main">
+              <!--转盘  Start-->
+      <div class="zp-con"  id="disk">
+            <div class="an" id="start"><img src="/campaigns/two_yr_aug_camp/icon-an4.png" id="startbtn" width="209" height="161"></div>
+        </div>
+        <div class="zp-right">
+            <div class="zpR-con">
+              <!-- <p class="xm">尊敬的用户 <span>VCHOXXXX</span></p>
+                <p class="tit">快去抽奖试试手气吧！</p>
+                <p class="jj"> </p> -->
+                <% if current_user.blank? %>
+                  <p class="xm">尊敬的用户 <span></span></p>
+                  <p class="tit">快去<a href="/users/sign_up">注册、实名认证</a>获取抽奖机会吧！</p>
+                  <p class="jj"></p>
+                <% elsif current_user.auth_realname != 1 %>
+                  <p class="xm">尊敬的用户 <span><%= current_user.mobile %></span></p>
+                  <p class="tit">快去<a href="/account/users/real_name">实名认证</a>获得抽奖机会吧！</p>
+                  <p class="jj"></p>
+                <% else %>
+                  <p class="xm">尊敬的用户，您有<span id="times"><%= current_user.two_yr_circle_records.not_actived.today_create.count %></span>次抽奖机会</p>
+                  <p class="tit">快去抽奖试试手气吧！</p>
+                  <p class="jj"></p>
+                <% end %>
+            </div>
+        </div>
+<!--转盘 End-->
+    </div>
+</div>
+<div class="roster">  
+    <div class="roster_bgs">  
+      <div class="roster_bg">  
+      <ul class="hjmp-con">
+            <% TwoYrCircleRecord.actived.where(["date(created_at) > ?", DateTime.new(2016, 8, 14)]).includes(:user).order("actived_at desc").limit(50).each do |re| %>
+            <li>
+                <span class="xm">恭喜XXXXXXX<%= re.user.mobile[7..10] %></span>
+                <span class="time"><%= re.actived_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+                <span class="jj">抽到<span><%= re.prize_text %></span></span>
+            </li>
+          <% end %>
+            
+        </ul>
+        </div>
+    </div>
+ </div>
+<div class="d10"></div>
+</body>
+</html>
+<script type="text/javascript" src="/js-circle/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/js-circle/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="/js-circle/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="/js-circle/jquery.easing.min.js"></script>
+<script>
+  $(function(){
+    $('.hjmp-con li:odd').addClass('bg-fafafa')
+    
+    <% if TwoYrCircleRecord.actived.where(["date(created_at) > ?", DateTime.new(2016, 8, 14)]).order("actived_at desc").limit(50).count < 8 %>
+      $(".hjmp-con").css('position', 'relative');
+      $(".hjmp-con").css('marign-left', '55px');
+    <% else %>
+      jQuery(".roster_bg").slide({mainCell:".hjmp-con",autoPlay:true,effect:"topMarquee",vis:8,interTime:50,mouseOverStop:false});
+    <% end %>
+    
+    <% if Time.now.to_date < DateTime.new(2016, 8, 15) %>
+      $("#startbtn").click(function(){
+          alert('抽奖从8月15日开始，请耐心等待');
+      })
+    <% elsif Time.now.to_date > DateTime.new(2016, 8, 20) %>
+      $("#startbtn").click(function(){
+          alert('抽奖已在8月20日结束，请看一下别的活动吧');
+      })
+    <% elsif current_user.blank? %>
+      $("#startbtn").click(function(){
+          alert('请注册、登录后参加抽奖');
+      })
+    <% elsif current_user.two_yr_circle_records.not_actived.today_create.blank? %>
+      $("#startbtn").click(function(){
+          alert('获得抽奖机会，请查看右方活动说明');
+      })
+    <% else %>
+  num = <%= current_user.two_yr_circle_records.not_actived.today_create.count %>;
+  var a = <%= current_user.two_yr_circle_records.not_actived.today_create.order('id asc').first.angle %>;
+    
+  $("#startbtn").rotate({
+    bind:{
+      click:function(){
+        // var a = Math.floor(Math.random() * 360);
+        if(num > 0){
+         num = num - 1;
+         $('#times').html(num);
+         $(this).rotate({
+            duration:4500,
+            angle: 0, 
+                  animateTo:1440+a,
+            easing: $.easing.easeOutSine,
+            callback: function(){
+              
+              if( a < 22.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>50元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a >= 22.5 && a <= 67.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>10元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a > 67.5 && a < 112.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>50元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a >= 112.5 && a <= 157.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>10元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a > 157.5 && a < 202.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>50元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a >= 202.5 && a <= 247.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>10元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a > 247.5 && a < 292.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>200元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+              else if( a >= 292.5 && a <= 335.5){
+                
+                $('.zpR-con .tit').html('恭喜您获得：<span>10元红包</span>');
+                $('.zpR-con .jj').html('已自动发放到您的账户中');
+                }
+
+              $.get('/campaigns/two_yr_circle_prize',function(data){
+                a = Number(data);
+                if(a < 0){
+                  num = 0;
+                }
+              });
+
+            }
+         });
+        }else{
+          alert("获得新的抽奖机会或明日再试，请查看右方活动说明")
+        }
+      }
+    }
+  });
+<% end %>
+    })
+    
+    
+</script>

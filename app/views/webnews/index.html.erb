@@ -1,0 +1,39 @@
+<div class="left">
+	<% @propagandas.each do |p|%>
+   <a href="/news?category=<%= p.id %>" class="title <%= 'current' if(@title == p.name) %>"><%= p.name %></a>
+   <% end %>
+</div>
+<div class="right">
+   <div class="contents">
+		<div class="tongtit">
+		  <div class="xshi"><%= @title %></div>
+		</div>
+		<div class="contents" style="display: block;">
+			<ul class="xiaoxi">
+				<% @articles.each do |article|%>
+					<li><a href='/news?id=<%= article.id %>'><span><%= article.title %></span> <span><%= article.created_at.strftime("%Y/%m/%d") %></span></a></li>
+				<% end %>
+      </ul>
+		</div>
+		<div class="contents" style="display: block;">
+			<%= will_paginate @articles %>
+		</div>
+   </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $('.pagination a').click(function () {
+    if(getUrlParam('category') && $(this).attr('href') !='javascript:avoid(0);' && $(this).attr('href') !='javascript:avoid(0)'){
+    	page = $(this).attr('href').split('?')[1].split('&')[0].split('=')[1];
+	    $.ajax({
+	      url: "/webnews?st="+getUrlParam('category') + '&page=' + page,
+	      success: function (data) {
+	        $('.bodson').html(data);
+	      }
+	    });
+	  }
+    return false;
+  });
+
+})
+</script>

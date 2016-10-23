@@ -1,0 +1,43 @@
+#content-wrapper.row
+  .col-xs-12
+    .row
+      .col-sm-12
+        .page-header
+          %h1.pull-left
+            %i.icon-envelope-alt
+            %span 站内消息
+    .faq
+      .row
+        .col-sm-12
+          .tabbable
+            %ul.nav.nav-responsive.nav-tabs
+              %li{:class => ("active" unless params[:tab].present? )}
+                %a{:href => account_messages_path}
+                  全部消息
+              %li{:class => ("active" if params[:tab]=="unread")}
+                %a{:href => account_messages_path(tab: "unread")}
+                  未读消息
+              %li{:class => ("active" if params[:tab]=="read")}
+                %a{:href => account_messages_path(tab: "read")}
+                  已读消息
+            .tab-content
+              = form_note_account flash
+              .tab-pane.active{:id => ""}
+                .box.chat
+                  %ul.list-unstyled.list-hover.list-striped
+                    - @messages.each do |m| 
+                      %li.message.row
+                        .col-sm-2
+                          %i.icon-envelope.pull-left{:style=>"font-size: 90px; color: #{m.read? ? 'gray' : '#0697da'};"}
+                        .col-sm-10.pull-right
+                          / .name.pull-left
+                          %h5
+                            = m.title
+                            .time.pull-right
+                              %small.date.pull-right.text-muted
+                                %span.timeago.has-tooltip{"data-placement" => "top", :title => "#{m.created_at.to_s(:long)}"}= m.created_at.to_s(:short)
+                                %i.icon-time
+                          .body
+                            = m.content
+                      - m.set_read unless m.read?
+              = will_paginate @messages

@@ -1,0 +1,2 @@
+module Backend::AuditsHelper
+end

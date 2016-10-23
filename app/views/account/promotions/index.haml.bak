@@ -1,0 +1,1 @@
+= invests_url(:yaoqingid => current_user.id)

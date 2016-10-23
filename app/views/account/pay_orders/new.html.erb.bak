@@ -1,0 +1,223 @@
+<style type="text/css">
+.fn-mt-20 {
+margin-top: 10px;
+padding-left: 0px;
+display: block;
+}
+.ui-list-icons {
+padding-bottom: 10px;
+}
+.fn-hide, .hidden {
+display: none;
+}
+.fn-clear {
+}
+.fn-hide, .hidden {
+display: none;
+}
+ol, ul {
+list-style: none;
+}
+.ui-list-icons li {
+margin-right: 10px;
+}
+.ui-list-icons li {
+width: 175px;
+padding-right: 10px;
+display: inline;
+}
+.ui-list-icons li {
+float: left;
+padding-bottom: 25px;
+}
+.ui-list-icons .icon-box {
+left: 3px;
+cursor: pointer;
+width: 130px;
+background-color: #fff!important;
+line-height: 36px;
+}
+.icon-box, .icon-box-commend, .icon-box-kj {
+width: 126px;
+border: 1px solid #ddd;
+vertical-align: middle;
+position: relative;
+display: inline-block;
+background-color: #eee;
+}
+label {
+cursor: default;
+}
+li {
+text-align: -webkit-match-parent;
+}
+ol, ul {
+list-style: none;
+}
+.icon-box .icon{
+float: left;
+width: 126px;
+padding: 0;
+}
+.cashier-bank .icon, .cashier-bank-kt .icon, .cashier-credit .icon, .cashier-credit-kt .icon, .cashier-bank-fq .icon, .cashier-bank-qy .icon, .cashier-bank-um .icon, .cashier-bank-kj .icon, .cashier-bank-kj-NO .icon {
+height: 36px;
+}
+.cashier-bank-kj{
+  padding-left: 0px;
+}
+.icon-box .icon, .icon-box-commend .icon, .icon-box-kj .icon {
+display: block;
+height: 36px;
+line-height: 30px;
+background-repeat: no-repeat;
+padding: 0 10px;
+color: #07f;
+font-weight: bold;
+white-space: nowrap;
+overflow: hidden;
+position: relative;
+z-index: 1;
+}
+.icon-box .bank-name {
+position: absolute;
+left: 5px;
+z-index: 0;
+height: 36px;
+width: 121px;
+overflow: hidden;
+}
+.icon-box .comment {
+padding-top: 15px;
+padding-bottom: 15px;
+position: absolute;
+}
+.icon-box:hover {
+border-color: #26ACDF !important;
+}
+.ui-list-icons .current, .ui-list-icons .hover, .ui-list-big-icons .current, .ui-list-big-icons .hover {
+border-color: #26ACDF !important;
+}
+
+.ABC, .BJBANK, .BOC, .BOHAIB, .BSB, .CCB, .CEB, .CIB, .CITIC, .CMB, .CMBC, .BOCOM, .DBSCN, .EGBANK, .FJHXBC, .GDB, .HXBC, .HZCB, .ICBC, .JHBANK, .JSBANK, .JXBANK, .NBBANK, .NBYZ, .NDHB, .PSBC, .SHBANK, .SPABANK, .SPDB, .SXCB, .TJBHB, .WZCB, .ZJNX {text-indent: -9999px; background-image: url("<%= asset_url('bank.png') %>");}
+.ABC {background-position: 0px -0px; }
+.BJBANK {background-position: 0px -36px; }
+.BOC {background-position: 0px -72px; }
+.BOHAIB {background-position: 0px -108px; }
+.BSB {background-position: 0px -144px; }
+.CCB {background-position: 0px -180px; }
+.CEB {background-position: 0px -216px; }
+.CIB {background-position: 0px -252px; }
+.CITIC {background-position: 0px -288px; }
+.CMB {background-position: 0px -324px; }
+.CMBC {background-position: 0px -360px; }
+.BOCOM {background-position: 0px -396px; }
+.DBSCN {background-position: 0px -432px; }
+.EGBANK {background-position: 0px -468px; }
+.FJHXBC {background-position: 0px -504px; }
+.GDB {background-position: 0px -540px; }
+.HXBC {background-position: 0px -576px; }
+.HZCB {background-position: 0px -612px; }
+.ICBC {background-position: 0px -648px; }
+.JHBANK {background-position: 0px -684px; }
+.JSBANK {background-position: 0px -720px; }
+.JXBANK {background-position: 0px -756px; }
+.NBBANK {background-position: 0px -792px; }
+.NBYZ {background-position: 0px -828px; }
+.NDHB {background-position: 0px -864px; }
+.PSBC {background-position: 0px -900px; }
+.SHBANK {background-position: 0px -936px; }
+.SPABANK {background-position: 0px -972px; }
+.SPDB {background-position: 0px -1008px; }
+.SXCB {background-position: 0px -1044px; }
+.TJBHB {background-position: 0px -1080px; }
+.WZCB {background-position: 0px -1116px; }
+.ZJNX {background-position: 0px -1152px; }
+</style>
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='page-header'>
+          <h1 class='pull-left'>
+            <i class='icon-bullhorn'></i>
+            <span>账户充值</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='faq'>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <div class='tabbable'>
+            <ul class='nav nav-responsive nav-tabs'>
+              <li class='<%= "active" if action_name == "new" %>'>
+                <a href='<%= account_recharge_path %>'>
+                  账户充值
+                </a>
+              </li>
+              <li class='<%= "active" if action_name == "index" %>'>
+                <a href='<%= account_recharges_path %>'>
+                  充值记录
+                </a>
+              </li>
+            </ul>
+            <div class='tab-content'>
+              <%= form_note_account flash %>
+              <div class='tab-pane active' id=''>
+                <div class="box">
+                <%= form_for @pay_order, :url => account_recharge_path, :html=>{:class => 'form form-horizontal validate-form', :novalidate=>"novalidate"} do |f| %>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="inputText1">账户余额</label>
+                    <div class="col-md-5">
+                      <div class="checkbox">
+                        <label>
+                          <%= rmb current_user.user_cash.available %>
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="inputPassword4">充值金额</label>
+                    <div class="col-md-5 controls">
+                      <%= f.text_field :amount, {:class => 'input-xlarge form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0.01, :'data-rule-maxlength' => 10} %>
+                      <%= f.hidden_field :pay_class, :value => "Gopay" %>
+                      <span for="pay_order_amount" class="help-block has-error"></span>
+                    </div>
+                    <div class="col-md-5 checkbox">
+                      元
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label" for="inputPassword4">选择银行</label>
+                    <div class="col-md-10 controls">
+                      <%= render :partial => 'pay_way' %>
+                    </div>
+                  </div>
+                  <div class="form-actions form-actions-padding-sm">
+                    <div class="row">
+                      <div class="col-md-10 col-md-offset-2">
+                        <input class="btn btn-primary btn-lg" name="commit" type="submit" value="充值">
+                      </div>
+                    </div>
+                  </div>
+                  <% end%>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>温馨提示</h4>
+                  <ol>
+                    <li>1. 充值不收取任何手续费，第三方产生的手续费由平台承担；</li>
+                    <li>2. 平台禁止洗钱、信用卡套现、虚假交易等行为，网站将针对异常提款（包括短期提取无消费充值资金）进行严格审核，审核时间在5个工作日以上。</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

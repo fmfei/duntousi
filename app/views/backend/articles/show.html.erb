@@ -1,0 +1,8 @@
+<% if action_name == 'edit' && (can? :delete, 'backend/articles') %>
+	<%= btn_toolbar_adds([name: '删除', path: backend_article_path(@article), type: 'delete']) %>
+<% end %>
+
+<div class="well">
+	<h2><%= @article.title %> <small><%= @article.created_at.strftime('%Y-%M-%d') %></small></h2>
+	<%= @article.content.html_safe %>
+</div>

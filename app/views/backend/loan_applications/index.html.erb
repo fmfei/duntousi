@@ -1,0 +1,46 @@
+<%= form_note flash unless flash.empty? %>
+<div class="search-well">
+  <%= form_tag({action: :index}, {:method => "get", :class => "form-inline"}) do %>
+    每页显示
+    <%= text_field_tag :per_page_la, params[:per_page_la], class: "span1" %>
+    条
+    <%= submit_tag "确定", :class => "btn" %>
+  <% end %>
+</div>
+<%= form_tag({action: :download}) do %>
+  <div class="btn-toolbar">
+    <%= submit_tag "导出Excel", :class => "btn" %>
+  </div>
+
+  <div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th style="width: 50px;"><input type="checkbox" id="ck_all" >全选</th>
+          <th>编号</th>
+          <th>姓名</th>
+          <th>联系方式</th>
+          <th>贷款额度(元)</th>
+          <th>申请时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @loan_applications.each do |f| %>
+          <tr>
+            <td><%= check_box_tag "printout[]", f.id %></td>
+            <td><%= f.id %></td>
+            <td><%= f.name %></td>
+            <td><%= f.phone %></td>
+            <td><%= f.amount %></td>
+            <td><%= f.created_at.strftime('%Y-%m-%d') %></td>
+            <td>
+              <%= link_to_show backend_loan_application_path(f) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= will_paginate @loan_applications, :previous_label => '上一页', :next_label => '下一页' %>
+<% end %>

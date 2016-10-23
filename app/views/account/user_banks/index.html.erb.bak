@@ -1,0 +1,87 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12'>
+    <div class='row'>
+      <%= form_note_account flash %>
+      <div class='col-sm-12'>
+        <div class='page-header'>
+          <h1 class='pull-left'>
+            <i class='icon-credit-card'></i>
+            <span>我的银行卡</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='box bordered-box blue-border' style='margin-bottom:0;'>
+          <div class="box-header blue-background">
+            <div class="title">
+              <a class="" href="#" style='color: #fff;
+'> 银行卡列表</a>
+            </div>
+            <div class="actions">
+              <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+              </a>
+            </div>
+          </div>
+          <div class='box-content box-no-padding'>
+            <div class='responsive-table'>
+              <div class='scrollable-area'>
+                <table class='table' style='margin-bottom:0;'>
+                  <thead>
+                    <tr>
+                      <th>银行卡号</th>
+                      <th>开户银行</th>
+                      <th>开户支行</th>
+                      <th>开户地区</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @banks.each do |bank| %>
+                    <tr>
+                      <td><%= bank.card_number %></td>
+                      <td><%= bank.bank %></td>
+                      <td><%= bank.branch %></td>
+                      <td><%= ChinaCity.get(bank.province) %> - <%= ChinaCity.get(bank.city) %> - <%= ChinaCity.get(bank.area) %></td>
+                      <td>
+                        <a href="<%= edit_account_bank_path(bank) %>"><i class="icon-pencil"></i>修改</a>&nbsp;
+                        <a href="<%= account_bank_path(bank) %>" data-confirm="确认删除此银行卡?" data-method="delete" rel="nofollow"><i class="icon-remove"></i>删除</a>
+                      </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <%= will_paginate @banks %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin:30px 0px;">
+        <div class="row">
+          <div class="col-sm-9 col-sm-offset-3">
+            <a class="btn btn-primary btn-lg" href="<%= new_account_bank_path %>" style='color: #fff;'><i class="icon-plus"></i>添加银行卡</a>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class='col-sm-12'>
+          <div class="box-content">
+            <div class="row">
+              <div class="col-md-12">
+                <h4>温馨提示</h4>
+                <ol>
+                  <li>如果您填写的开户行支行不正确，提现交易将无法成功，提现费用不予返还。</li>
+                  <li>如果您不确定开户行支行名称，可打电话到当地所在银行的营业网点询问或上网查询。</li>
+                  <li>提现时，不能选择将资金利息等提到信用卡账户中。</li>
+                  <li>如有问题，请联系客服，<%= SystemConfig.phone400.value %>。</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

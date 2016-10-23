@@ -1,0 +1,36 @@
+.well
+  .tab-content
+    - @user=user
+    - @user_info=user_info
+    .tab-pane.active
+      = form_tag backend_user_path(@user_info), :method => :put, class: "form-horizontal", role: "form" do |u|
+        = hidden_field_tag :user_id, @user.id
+        = hidden_field_tag :step, @step
+        - @contacts.each_with_index do |c, index|
+          紧急联系人
+          = index+1
+          .well
+            .control-group
+              = label_tag "contact_#{c.id}[relation]", t(:relation), class: "control-label"
+              .controls
+                = text_field_tag "contact_#{c.id}[relation]", c.relation, type: "text", class: "input-xlarge"
+            .control-group
+              = label_tag "contact_#{c.id}[name]", t(:name), class: "control-label"
+              .controls
+                = text_field_tag "contact_#{c.id}[name]", c.name, type: "text", class: "input-xlarge"
+            .control-group
+              = label_tag "contact_#{c.id}[mobile]", t(:mobile), class: "control-label"
+              .controls
+                = text_field_tag "contact_#{c.id}[mobile]", c.mobile, type: "text", class: "input-xlarge"
+            .control-group
+              = label_tag "contact_#{c.id}[company]", t(:company), class: "control-label"
+              .controls
+                = text_field_tag "contact_#{c.id}[company]", c.company, type: "text", class: "input-xlarge"
+            .control-group
+              = label_tag "contact_#{c.id}[job_title]", t(:job_title), class: "control-label"
+              .controls
+                = text_field_tag "contact_#{c.id}[job_title]", c.job_title, type: "text", class: "input-xlarge"
+
+        .form-actions
+          = link_to "上一步", edit_backend_user_path(@user,:step=>4), :class => "btn btn-primary"
+          %button.btn.btn-primary{:type => "submit"} 提交

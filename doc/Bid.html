@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bid - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-auto_invest_by_user">::auto_invest_by_user</a>
+    
+    <li ><a href="#method-c-bought_by">::bought_by</a>
+    
+    <li ><a href="#method-c-create_by_user">::create_by_user</a>
+    
+    <li ><a href="#method-i-can_be_sold-3F">#can_be_sold?</a>
+    
+    <li ><a href="#method-i-cancel_hawk">#cancel_hawk</a>
+    
+    <li ><a href="#method-i-category">#category</a>
+    
+    <li ><a href="#method-i-hawk">#hawk</a>
+    
+    <li ><a href="#method-i-not_collected_principal">#not_collected_principal</a>
+    
+    <li ><a href="#method-i-sale_stop">#sale_stop</a>
+    
+    <li ><a href="#method-i-set_failed">#set_failed</a>
+    
+    <li ><a href="#method-i-update_cash">#update_cash</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bid">
+  <h1 id="class-Bid" class="class">
+    class Bid
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="CASHES">CASHES
+        
+        <dd>
+        
+      
+        <dt id="MIN_SELL_AMOUNT">MIN_SELL_AMOUNT
+        
+        <dd>
+        
+      
+        <dt id="STATISTIC_NEED">STATISTIC_NEED
+        
+        <dd>
+        
+      
+        <dt id="STATUS">STATUS
+        
+        <dd><p>attr_accessible :colected_amount, :collected_interest, :collection_amount,
+:finished, :interest, :invest_amount, :invest_month, :loan_id,
+:not_collected_amount, :not_collected_interest, :status, :user_id, :user</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-auto_invest_by_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">auto_invest_by_user</span><span
+            class="method-args">(current_user, loan_id, invest_amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="auto_invest_by_user-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">auto_invest_by_user</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">loan_id</span>, <span class="ruby-identifier">invest_amount</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">loan</span> = <span class="ruby-constant">Loan</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">loan_id</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">loan_state_id</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">LoanState</span>.<span class="ruby-identifier">bidding</span>.<span class="ruby-identifier">id</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">available</span>.<span class="ruby-identifier">to_f</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;账户余额不足&#39;</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;投资金额不能小于#{loan.min_invest}&quot;</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;当前标的可投金额为#{loan.available_amount}元，请一次投满。&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span>) <span class="ruby-operator">&amp;&amp;</span> ((<span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>)
+        <span class="ruby-identifier">invest_amount</span> = <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> (<span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span>
+        <span class="ruby-identifier">invest_amount</span> = <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span>
+        <span class="ruby-identifier">invest_amount</span> = <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">max_invest</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span>
+        <span class="ruby-identifier">invest_amount</span> = <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">available_amount</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">bid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>,
+                        <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan_id</span>,
+                        <span class="ruby-value">:invest_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span>,
+                        <span class="ruby-value">:invest_month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">months</span>,
+                        <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">interest</span>,
+                        <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;bidding&#39;</span>,
+                        <span class="ruby-value">:auto_invest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
+      <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create_bid</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">bid</span>, <span class="ruby-identifier">loan</span>, <span class="ruby-string">&#39;auto_pay_bid&#39;</span>
+      <span class="ruby-constant">Loan</span>.<span class="ruby-identifier">update_available_amount</span>(<span class="ruby-identifier">loan</span>, <span class="ruby-identifier">invest_amount</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-bought_by" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bought_by</span><span
+            class="method-args">(current_user, from_bid, invest_amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bought_by-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bought_by</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">from_bid</span>, <span class="ruby-identifier">invest_amount</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">for_sale?</span>
+      <span class="ruby-identifier">bid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>,
+                        <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">loan_id</span>,
+                        <span class="ruby-value">:invest_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span>,
+                        <span class="ruby-value">:invest_month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">collections</span>.<span class="ruby-identifier">unpaid</span>.<span class="ruby-identifier">count</span>,
+                        <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">interest</span>,
+                        <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;repaying&#39;</span>,
+                        <span class="ruby-value">:from_bid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>)
+
+      <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">sell_bid</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">from_bid</span>, <span class="ruby-identifier">bid</span>, <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span>
+
+      <span class="ruby-comment"># 生成新债权的 还款</span>
+      <span class="ruby-constant">Collection</span>.<span class="ruby-identifier">generate_for_bid</span> <span class="ruby-identifier">from_bid</span>, <span class="ruby-identifier">bid</span>, <span class="ruby-identifier">current_user</span>
+
+      <span class="ruby-comment"># 调整原始债权的 还款</span>
+      <span class="ruby-constant">Collection</span>.<span class="ruby-identifier">update_unpaid</span> <span class="ruby-identifier">from_bid</span>, <span class="ruby-identifier">bid</span>
+
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">for_sale_amount</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>)
+        <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">sale_stop</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:for_sale_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">for_sale_amount</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">update_cash</span>
+      <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">update_cash</span>
+      <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:sold_amount</span>, (<span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">sold_amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">invest_amount</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-create_by_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_by_user</span><span
+            class="method-args">(current_user, loan_id, invest_amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_by_user-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_by_user</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">loan_id</span>, <span class="ruby-identifier">invest_amount</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">loan</span> = <span class="ruby-constant">Loan</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">loan_id</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">loan_state_id</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">LoanState</span>.<span class="ruby-identifier">bidding</span>.<span class="ruby-identifier">id</span>
+
+      <span class="ruby-identifier">bid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>,
+                        <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan_id</span>,
+                        <span class="ruby-value">:invest_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">invest_amount</span>.<span class="ruby-identifier">to_f</span>,
+                        <span class="ruby-value">:invest_month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">months</span>,
+                        <span class="ruby-value">:interest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">interest</span>,
+                        <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;bidding&#39;</span>)
+      <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create_bid</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">bid</span>, <span class="ruby-identifier">loan</span>
+      <span class="ruby-constant">Loan</span>.<span class="ruby-identifier">update_available_amount</span>(<span class="ruby-identifier">loan</span>, <span class="ruby-identifier">invest_amount</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-can_be_sold-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_be_sold?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>@@@@@@ 债权转让 @@@@@@@</p>
+          
+          
+
+          
+          <div class="method-source-code" id="can_be_sold-3F-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_sold?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not_collected_amount</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not_collected_interest</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-constant">MIN_SELL_AMOUNT</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-cancel_hawk" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cancel_hawk</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>还款后自动取消转让</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cancel_hawk-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel_hawk</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">for_sale</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-value">:for_sale_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
+                          <span class="ruby-value">:for_sale_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
+                          <span class="ruby-value">:for_sale_month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
+                          <span class="ruby-value">:for_sale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">category</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="category-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">category</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">auto_invest</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;自动投标&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;手动投标&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hawk" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hawk</span><span
+            class="method-args">(amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>叫卖</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hawk-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hawk</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not_collected_principal</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-value">:for_sale_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+                          <span class="ruby-value">:for_sale_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>,
+                          <span class="ruby-value">:for_sale_month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collections</span>.<span class="ruby-identifier">unpaid</span>.<span class="ruby-identifier">count</span>,
+                          <span class="ruby-value">:for_sale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-not_collected_principal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">not_collected_principal</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>未收本金</p>
+          
+          
+
+          
+          <div class="method-source-code" id="not_collected_principal-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">not_collected_principal</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not_collected_amount</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not_collected_interest</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sale_stop" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sale_stop</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sale_stop-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sale_stop</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-value">:for_sale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>,
+                          <span class="ruby-value">:for_sale_amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
+                          <span class="ruby-value">:for_sale_time</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
+                          <span class="ruby-value">:for_sale_month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_failed" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_failed</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>流标</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_failed-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_failed</span>
+  <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">return_pay_bid</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:status</span>, <span class="ruby-string">&#39;failed&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_cash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_cash</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>更新各现金字段</p>
+          
+          
+
+          
+          <div class="method-source-code" id="update_cash-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_cash</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:collection_amount</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collections</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:amount</span>))
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:not_collected_amount</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collections</span>.<span class="ruby-identifier">unpaid</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:amount</span>))
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:not_collected_interest</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collections</span>.<span class="ruby-identifier">unpaid</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:interest</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

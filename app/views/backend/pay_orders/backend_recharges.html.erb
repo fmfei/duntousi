@@ -1,0 +1,71 @@
+<div class="search-well">
+<% url = backend_recharges_backend_pay_orders_path %>
+<%= search_form_for @q, :url => url, :html => {:class => "form-inline", :id=>"recharge_search"} do |f| %>
+  <%= hidden_field_tag :download %>
+  <%= f.search_field :created_at_gteq, :value => params[:q].try(:[], :created_at_gteq) %>
+   至
+  <%= f.search_field :created_at_lteq, :value => params[:q].try(:[], :created_at_lteq) %>
+  <%= f.submit "搜索", :class => "btn searchBtn" %>&nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to '下载搜索结果', 'javascript:return false;', class: 'downloadLink'%>
+<% end %>
+</div>
+<script type="text/javascript">
+  $(function (){
+    $('#q_created_at_gteq').datepicker({
+    inline: true
+  });
+  $('#q_created_at_lteq').datepicker({
+    inline: true
+    });
+  $('.downloadLink').click(function(){
+    $('#download').val('on');
+    $('#recharge_search').attr('target', '_blank').submit();
+    return false;
+  });
+  $('.searchBtn').click(function(){
+    $('#download').val('');
+    $('#recharge_search').attr('target', '_self');
+  });
+  })
+</script>
+  <div class="well">
+    <table class="table table-th-right">
+      <tbody>
+        <tr>
+          <th>充值金额：</th>
+          <td><%= rmb @amount %></td>
+      </tr>
+    </tbody></table>
+  </div>
+<div class="well">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>用户</th>
+        <th>金额</th>
+        <th>说明</th>
+        <th>充值时间</th>
+        <th style="width: 26px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @backend_recharges.each do |cash_flow| %>
+        <tr>
+          <td><%= cash_flow.id %></td>
+          <td>
+            <% if cash_flow.to_user %>
+              <%= link_to cash_flow.to_user.name, backend_lender_path(cash_flow.to_user), :target => '_blank' %>
+            <% else %>
+              &nbsp;
+            <% end %>
+          </td>
+          <td><%= rmb cash_flow.amount %></td>
+          <td><%= cash_flow.addition %></td>
+          <td><%= format_time cash_flow.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @backend_recharges %>
+</div>

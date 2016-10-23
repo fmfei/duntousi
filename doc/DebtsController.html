@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class DebtsController - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-create">#create</a>
+    
+    <li ><a href="#method-i-debt_json">#debt_json</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-search">#search</a>
+    
+    <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-show_debts">#show_debts</a>
+    
+    <li ><a href="#method-i-verify_lender">#verify_lender</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-DebtsController">
+  <h1 id="class-DebtsController" class="class">
+    class DebtsController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:invest_amount</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">user_cash</span>.<span class="ruby-identifier">available</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-node">&quot;/show_debts?id=#{params[:bid][:from_bid_id]}&amp;errors=账户余额不足&quot;</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">loan</span> = <span class="ruby-constant">Loan</span>.<span class="ruby-identifier">can_be_seen</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:loan_id</span>])
+  <span class="ruby-identifier">parent_bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">for_sale</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:from_bid_id</span>])
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:invest_amount</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-node">&quot;/show_debts?id=#{params[:bid][:from_bid_id]}&amp;errors=投资金额不能小于#{loan.min_invest}&quot;</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">parent_bid</span>.<span class="ruby-identifier">for_sale_amount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">min_invest</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:invest_amount</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">parent_bid</span>.<span class="ruby-identifier">for_sale_amount</span>)
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-node">&quot;/show_debts?id=#{params[:bid][:from_bid_id]}&amp;errors=当前标的可投金额为#{parent_bid.for_sale_amount}元，请一次投满。&quot;</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:invest_amount</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">parent_bid</span>.<span class="ruby-identifier">for_sale_amount</span>
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:invest_amount</span>] = <span class="ruby-identifier">parent_bid</span>.<span class="ruby-identifier">for_sale_amount</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">bought_by</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">parent_bid</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:bid</span>][<span class="ruby-value">:invest_amount</span>].<span class="ruby-identifier">to_f</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&quot;/debts?notice=投标成功&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+    <span class="ruby-ivar">@bid</span> = <span class="ruby-identifier">parent_bid</span>.<span class="ruby-identifier">reload</span>
+    <span class="ruby-ivar">@loan</span> = <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">loan</span>
+    <span class="ruby-ivar">@child_bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:from_bid_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">id</span>)
+
+    <span class="ruby-comment"># 投资100元，可得收益</span>
+    <span class="ruby-comment"># @total = 0</span>
+    <span class="ruby-comment"># @interest = Loan.calculator(@loan.repay_style, 100, @bid.for_sale_month, @loan.interest)</span>
+    <span class="ruby-comment"># @interest.values.each{|v| @total += (v[:seed] + v[:interest])}</span>
+    <span class="ruby-comment"># @earnings_tmp = @total - 100</span>
+    <span class="ruby-comment"># flash[:errors] = ex.message</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-node">&quot;/show_debts?id=#{params[:bid][:from_bid_id]}&amp;notice=#{ex.message}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-debt_json" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">debt_json</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="debt_json-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">debt_json</span>
+  <span class="ruby-ivar">@bids</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:loan</span>).<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;bids.*,loans.title,loans.id as loand_id,loans.repay_style&#39;</span>).<span class="ruby-identifier">for_sale</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;for_sale_time asc&#39;</span>).<span class="ruby-identifier">paginate</span> <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>], <span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;债权转让&#39;</span>
+
+  <span class="ruby-identifier">info</span> = {
+      <span class="ruby-identifier">total_pages</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">total_pages</span>,
+      <span class="ruby-identifier">current_page</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">current_page</span>,
+      <span class="ruby-identifier">loans</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@bids</span>,
+      <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@title</span>,
+  }
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">info</span>.<span class="ruby-identifier">to_json</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>债权转让列表</p>
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-string">&#39;/debts_list&#39;</span>
+  <span class="ruby-keyword">return</span>
+  <span class="ruby-ivar">@bids</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">for_sale</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;for_sale_time asc&#39;</span>).<span class="ruby-identifier">paginate</span> <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>], <span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;债权转让&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">auth_realname</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+    <span class="ruby-ivar">@bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">for_sale</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-ivar">@loan</span> = <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">loan</span>
+    <span class="ruby-ivar">@child_bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:from_bid_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">layout</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
+  <span class="ruby-identifier">sql</span> = []
+  <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;repay_style = &#39;#{params[:type]}&#39;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;credit_level = &#39;#{params[:level]}&#39;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:level</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:level</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:time</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:time</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:time</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;1-3&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;months between 1 and 3&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;4-6&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;months between 4 and 6&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;7-12&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;months between 7 and 12&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;12+&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;months &gt; 12&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:interest</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:interest</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:interest</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;5-10&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;interest between 5 and 10&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;10-15&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;interest between 10 and 15&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;15-20&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;interest between 15 and 20&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;20+&#39;</span>
+      <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;interest &gt; 20&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;loan_state_id = &#39;#{params[:state]}&#39;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:state</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:state</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@loans</span> = <span class="ruby-constant">Loan</span>.<span class="ruby-identifier">can_be_seen</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">sql</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; and &quot;</span>)).<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;id desc&#39;</span>).<span class="ruby-identifier">paginate</span> <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>], <span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>详情</p>
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">for_sale</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-ivar">@loan</span> = <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">loan</span>
+  <span class="ruby-ivar">@child_bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:from_bid_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">id</span>)
+
+  <span class="ruby-comment"># 投资100元，可得收益</span>
+  <span class="ruby-comment"># @total = 0</span>
+  <span class="ruby-comment"># @interest = Loan.calculator(@loan.repay_style, 100, @bid.for_sale_month, @loan.interest)</span>
+  <span class="ruby-comment"># @interest.values.each{|v| @total += (v[:seed] + v[:interest])}</span>
+  <span class="ruby-comment"># @earnings_tmp = @total - 100</span>
+  <span class="ruby-ivar">@title</span> = <span class="ruby-string">&#39;我要理财&#39;</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show_debts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show_debts</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="show_debts-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show_debts</span>
+  <span class="ruby-ivar">@bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">for_sale</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-ivar">@loan</span> = <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">loan</span>
+  <span class="ruby-ivar">@child_bid</span> = <span class="ruby-constant">Bid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-value">:loan_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:from_bid_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">id</span>)
+
+  <span class="ruby-comment"># 投资100元，可得收益</span>
+  <span class="ruby-comment"># @total = 0</span>
+  <span class="ruby-comment"># @interest = Loan.calculator(@loan.repay_style, 100, @bid.for_sale_month, @loan.interest)</span>
+  <span class="ruby-comment"># @interest.values.each{|v| @total += (v[:seed] + v[:interest])}</span>
+  <span class="ruby-comment"># @earnings_tmp = @total - 100</span>
+  <span class="ruby-comment"># @title = &#39;我要理财&#39;</span>
+  <span class="ruby-identifier">repaystyle</span> = {<span class="ruby-string">&quot;equal&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;按月分期还款&quot;</span>, <span class="ruby-string">&quot;interest_only&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;按月还息，到期还本&quot;</span>, <span class="ruby-string">&quot;at_due&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;到期归还本息&quot;</span>}
+  <span class="ruby-identifier">for_sale_month</span> = <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">for_sale_month</span>
+  <span class="ruby-identifier">loan_code</span> = <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">interest_year</span> = <span class="ruby-identifier">percent</span>(<span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">interest</span>)
+  <span class="ruby-identifier">bid_user_not_cur_user</span> =  <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@bid</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">current_users</span> =  <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span><span class="ruby-operator">:</span><span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">identifications</span> = []
+  <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">identifications</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">present?</span>
+      <span class="ruby-identifier">identifications</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">category</span>), <span class="ruby-identifier">desc</span><span class="ruby-operator">:</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">desc</span>, <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">url</span>}
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">user_info</span> = { <span class="ruby-identifier">gender</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">gender</span>, 
+                <span class="ruby-identifier">marry</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">marriage</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:name</span>),
+                <span class="ruby-identifier">wenhua</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">degree</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:name</span>),
+                <span class="ruby-identifier">income</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">income</span>,
+                <span class="ruby-identifier">shebao</span><span class="ruby-operator">:</span> (<span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">social_security_id</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;有&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;无&#39;</span>),
+                <span class="ruby-identifier">house</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">housing</span>,
+                <span class="ruby-identifier">car</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">car</span>
+              }
+  <span class="ruby-identifier">bids</span> = []
+  <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">bids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bid</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">bids</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> (<span class="ruby-identifier">bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">username</span>[<span class="ruby-value">0</span>, <span class="ruby-value">2</span>]<span class="ruby-operator">+</span><span class="ruby-string">&#39;***&#39;</span>), <span class="ruby-identifier">invest_amount</span><span class="ruby-operator">:</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>, <span class="ruby-identifier">interest</span><span class="ruby-operator">:</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">interest</span>, <span class="ruby-identifier">created_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">format_time</span>(<span class="ruby-identifier">bid</span>.<span class="ruby-identifier">created_at</span>), <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> (<span class="ruby-identifier">bid</span>.<span class="ruby-identifier">category</span>)}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">info</span> = {
+      <span class="ruby-identifier">state_name</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">state</span>.<span class="ruby-identifier">name</span>,
+      <span class="ruby-identifier">loan_state_id</span><span class="ruby-operator">:</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">LoanState</span>.<span class="ruby-identifier">bidding</span>.<span class="ruby-identifier">id</span>,
+      <span class="ruby-identifier">current_user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_users</span>,
+      <span class="ruby-identifier">bid_user_not_cur_user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">bid_user_not_cur_user</span>,
+      <span class="ruby-identifier">interest_year</span><span class="ruby-value">:interest_year</span>,
+      <span class="ruby-identifier">for_sale_month</span><span class="ruby-value">:for_sale_month</span>,
+      <span class="ruby-identifier">repayment_methods</span><span class="ruby-operator">:</span> <span class="ruby-identifier">repaystyle</span>[<span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">repay_style</span>].<span class="ruby-identifier">to_s</span>,
+      <span class="ruby-identifier">loan_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">loan_code</span>,
+      <span class="ruby-identifier">earnings_tmp</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@earnings_tmp</span>,
+      <span class="ruby-identifier">child_bid</span><span class="ruby-value">:@child_bid</span>.<span class="ruby-identifier">from_bid_id</span>,
+      <span class="ruby-identifier">bid</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@bid</span>,
+      <span class="ruby-identifier">loan</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>,
+      <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@title</span>,
+      <span class="ruby-identifier">desc</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@loan</span>.<span class="ruby-identifier">desc</span>,
+      <span class="ruby-identifier">identifications</span><span class="ruby-operator">:</span> <span class="ruby-identifier">identifications</span>,
+      <span class="ruby-identifier">user_info</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_info</span>,
+      <span class="ruby-identifier">bids</span><span class="ruby-operator">:</span> <span class="ruby-identifier">bids</span>
+  }
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">info</span>.<span class="ruby-identifier">to_json</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-verify_lender" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">verify_lender</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="verify_lender-source">
+            <pre><span class="ruby-comment"># File app/controllers/debts_controller.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">verify_lender</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">roles</span>.<span class="ruby-identifier">is_lender</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

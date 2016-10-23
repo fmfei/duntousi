@@ -1,0 +1,75 @@
+<div class="btn-toolbar">
+  <% if (can? :manage, 'backend/@repayments') && @repayment.state == 'unpaid' %>
+    <a class="btn btn-primary" href="<%= backend_repayment_path(@repayment) %>" data-confirm="确认还款?" data-method="PUT" rel="nofollow">还款</a>
+  <% end %>
+  <div class="btn-group">
+  </div>
+</div>
+<div class="well">
+  <ul class="nav nav-tabs">
+    <li><a href="#bids" data-toggle="tab">投标情况</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+
+
+    <div class="tab-pane" id="bids">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>用户</th>
+            <th>借款目的</th>
+            <th>还款金额</th>
+            <th>本金</th>
+            <th>利息</th>
+            <th>剩余本金</th>
+            <th>期数</th>
+            <th>状态</th>
+            <th>最后还款日</th>
+            <th>还款时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @repayment.id %></td>
+            <td><%= @repayment.user.name_or_email %></td>
+            <td><%= @repayment.loan.title %></td>
+            <td><%= @repayment.amount %></td>
+            <td><%= @repayment.principal %></td>
+            <td><%= @repayment.interest_amount %></td>
+            <td><%= @repayment.left_principal %></td>
+            <td><%= @repayment.month_index %>/<%= @repayment.loan.months %></td>
+            <td><%= t(@repayment.state) %></td>
+            <td><%= format_time(@repayment.due_date) %></td>
+            <td><%= format_time(@repayment.paid_at) %></td>
+          </tr>
+        </tbody>
+      </table>
+      投资人列表
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>还款金额</th>
+            <th>投资时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @collections.each do |collection| %>
+            <tr>
+              <td><%= collection.user.name_or_email %></td>
+              <td><%= rmb collection.amount %></td>
+              <td><%= format_time(collection.created_at) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function (){
+  $(".nav-tabs li:first").addClass("active");
+  $(".tab-content div:first").addClass("active in");
+})
+</script>

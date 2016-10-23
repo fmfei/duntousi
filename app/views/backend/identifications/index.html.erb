@@ -1,0 +1,28 @@
+<div class="btn-toolbar">
+  <a class="btn btn-primary" href="<%= new_backend_user_identification_path %>"><i class="icon-plus"></i> 添加资料</a>
+</div>
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>类型</th>
+          <th>说明信息</th>
+          <th style="width: 50px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @identifications.each do |f| %>
+          <tr id="fl<%= f.id %>">
+            <td><%= f.id %></td>
+            <td><%= link_to t(f.category), edit_backend_user_identification_path(@user, f) %></td>
+            <td><%= f.desc %></td>
+            <td>
+              <%= link_to_edit edit_backend_user_identification_path(@user, f) %>
+              <%= link_to_delete backend_user_identification_path(@user, f)%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

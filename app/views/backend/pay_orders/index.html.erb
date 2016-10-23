@@ -1,0 +1,49 @@
+<%= render partial: "search" %>
+
+<%= form_tag({action: :download}) do %>
+  <div class="well">
+    <table class="table table-th-right">
+      <tbody>
+        <tr>
+          <th>成功充值金额：</th>
+          <td><%= rmb @amount %></td>
+      </tr>
+    </tbody></table>
+  </div>
+<div class="btn-toolbar">
+  <%= submit_tag "选择导出Excel", :class => "btn" %>
+</div>
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th style="width: 50px;"><input type="checkbox" id="ck_all" >全选</th>
+          <th>编号</th>
+          <th>邮箱</th>
+          <th>姓名</th>
+          <th>金额</th>
+          <th>支付平台</th>
+          <th>创建时间</th>
+          <th>更新时间</th>
+          <th>成功</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pay_orders.each do |order| %>
+          <tr>
+            <td><%= check_box_tag "printout[]", order.id %></td>
+            <td><%= order.id %></td>
+            <td><%= order.user.email %></td>
+            <td><%= order.user.name %></td>
+            <td><%= order.amount %></td>
+            <td><%= order.pay_class %></td>
+            <td><%= format_time order.created_at %></td>
+            <td><%= format_time order.updated_at %></td>
+            <td><%= order.success ? '是' : '否' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<%= will_paginate @pay_orders, renderer: BootstrapPagination::Rails %>
+<% end %>

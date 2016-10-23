@@ -1,0 +1,111 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12'>
+    <div class='row'>
+      <%= form_note_account flash %>
+      <div class='col-sm-12'>
+        <div class='page-header'>
+          <h1 class='pull-left'>
+            <i class='icon-table'></i>
+            <span>自动投标设置1</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <% if current_user.auto_invest_rules.present? %>
+      <div class='col-sm-12'>
+        <div class='box bordered-box blue-border' style='margin-bottom:0;'>
+          <div class="box-header blue-background">
+            <div class="title">
+              <a class="" href="#" style='color: #fff;
+'>自动投标详情</a>
+            </div>
+            <div class="actions">
+              <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+              </a>
+            </div>
+          </div>
+          <div class='box-content box-no-padding'>
+            <div class='responsive-table'>
+              <div class='scrollable-area'>
+                <table class='table' style='margin-bottom:0;'>
+                  <thead>
+                    <tr>
+                      <th>启用</th>
+                      <th>每次投标金额</th>
+                      <th>利息范围</th>
+                      <th>借款期限</th>
+                      <th>有抵押</th>
+                      <th>有担保</th>
+                      <th>还款方式</th>
+                      <th>保留金额</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @auto_invest_rules.each do |rule| %>
+                    <tr>
+                      <td><%= rule.actived_at.blank? ? '否' : '是' %></td>
+                      <td><%= rmb rule.amount %></td>
+                      <td><%= rule.min_interest %>-<%= rule.max_interest %>%</td>
+                      <td><%= rule.min_months %>-<%= rule.max_months %>个月</td>
+                      <td><%= rule.with_mortgage ? '是' : '否' %></td>
+                      <td><%= rule.with_guarantee ? '是' : '否' %></td>
+                      <td><%= rule.repay_style.present? ? t(rule.repay_style) : '全部' %></td>
+                      <td><%= rmb rule.remain_amount %></td>
+                      <td>
+                        <a href="<%= edit_account_auto_invest_path(rule) %>"><i class="icon-pencil"></i>修改</a>&nbsp;
+                        <a href="<%= account_auto_invest_path(rule) %>" data-confirm="确认删除此投标规则?" data-method="delete" rel="nofollow"><i class="icon-remove"></i>删除</a>
+                      </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <%= will_paginate @auto_invest_rules %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <!-- <div style="margin-top:30px;">
+        <div class="row">
+          <div class="col-sm-9 col-sm-offset-3">
+            <% if current_user.auto_invest_rules.blank? %>
+              <a class="btn btn-primary btn-lg" href="<%= new_account_auto_invest_path %>" style='color: #fff;'><i class="icon-plus"></i>开启自动投标</a>
+            <% end %>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="box">
+      <div class="box-header"></div>
+      <div class="box-content">
+        <% if current_user.auto_invest_rules.blank? %>
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3" >
+                <a class="btn btn-primary btn-lg" href="<%= new_account_auto_invest_path %>" style='color: #fff;'><i class="icon-plus"></i>开启自动投标</a>
+            </div>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-sm-12">
+            <h5>利用 “自动投标”工具，您只需设定预期条件，系统自动为您挑选合适的借款项目并自动投资，不再担心没时间、挑花眼。只需轻点鼠标，赚钱就是这么容易！</h5>
+            <h4>自动投标：规则说明</h4>
+            <ol>
+              <li>最低设置金额为100元；</li>
+              <li>满足您设定的自动理财方案的借款标，即使该借款标的剩余可投标金额小于您设定的自动投标金额，也会进行自动借出；</li>
+              <li>自动理财对某个借款标投出的金额最高只能达到该借款标借款金额的20%；</li>
+              <li>自动理财的排序规则如下：
+                <ul>
+                  <li>1）投标顺序按照开启自动理财功能的时间先后进行排序；</li>
+                  <li>2）每个会员对每个借款标仅自动投标一次，投标后，排到该借款标当前所有自动理财会员的队尾；</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

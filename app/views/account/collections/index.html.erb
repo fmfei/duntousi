@@ -1,0 +1,42 @@
+
+<div class='right'>
+    <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">收款明细</div>
+    </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <div class='tabbable_85'>
+            <div class='tab-content'>
+              <div class='tab-pane active' id=''>
+                <table class='table' style='margin-bottom:0;'>
+                  <thead class="left_mingxi">
+                    <tr>
+                      <td>借款标题</tdtd>
+                      <td>应收日期</td>
+                      <td>借款者</td>
+                      <td>期数</td>
+                      <td>收款总额</td>
+                    </tr>
+                  </thead>
+                  <tbody class="left_mingxi">
+                    <% @collections.each do |collection| %>
+                    <tr>
+                      <td><%= link_to collection.bid.loan.title, invest_path(collection.bid.loan), :target => '_blank' %></td>
+                      <td><%= collection.due_date.strftime("%Y-%m-%d") %></td>
+                      <td><%= collection.borrower.name %></td>
+                      <td><%= collection.month_index %>/<%= collection.bid.invest_month %></td>
+                      <td><%= rmb collection.amount %></td>
+                      <!-- <td><%#= rmb collection.principal %></td>
+                      <td><%#= rmb collection.interest %></td> -->
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <%= will_paginate @collections %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

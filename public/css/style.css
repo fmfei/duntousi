@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+.bodson .{ width:200px; float:left; background:#fff; min-height:210px;}
+.bodson .left a.title {
+  display: block;
+  width: 135px;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 auto;
+  color: #666;
+  background: #ececec;
+  margin-bottom: 2px;
+}
+.bodson .left a.current {
+  background: #4cadda;
+  color: #fff;
+}
+
+.bodson .left a,.bodson .left div a{width:135px;
+	height:36px;
+	display:block;
+	line-hight:36px;
+	color:#b2b2b2;
+	font-size:18px;
+	margin:0 auto;
+	}
+.bodson .left div a{
+	text-align:left;
+	text-indent:1em;
+	}
+.bodson .left div a.visiteds{
+	color:#5db3dd;
+	}
+.bodson .left div{width:135px;height:auto;margin:0 auto;display:none;}
+.bodson .left a.title{
+	display:block;
+	width:135px;
+	height:36px;
+	line-height:36px;
+	margin:0 auto;
+	color: #666;
+	background: #ececec;
+	margin-bottom: 2px;
+	}
+.bodson .left a.title:hover{
+	background: #99CCFF;
+	color: #fff;
+}
+.bodson .left a.current{
+	background:#4cadda;
+	color: #fff;
+}
+.bodson .left a span.jtou{
+	display:inline-block;
+	
+	}
+.bodson .right,.bodson .rights{
+	width:750px;
+	float:right;
+	background:white;
+	}
+.tuandui{ width:695px; list-style:none; }
+.tuandui li{ border:1px solid #ccc; margin:30px 0;}
+.intro_name {
+  font: bold 20px microsoft yahei;
+  color: #0697da;}
+  .zhiwei {
+  font: bold 15px/30px microsoft yahei, Verdana, Geneva, sans-serif;
+  color: #0697da;
+  padding-right: 15px;
+}
+.tdline {
+  border-top: 2px solid #ccc;
+  padding-top: 10px;
+}
+.about_nr{ width:695px;}
+.about_nr table{ padding:10px;}
+.iterm{
+	display:none;
+}

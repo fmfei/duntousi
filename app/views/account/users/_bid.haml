@@ -1,0 +1,51 @@
+- l =@loan
+.box-content
+  .row
+    .col-sm-2{:style => 'padding:0px;'}
+      .box{:style => "margin:0px;"}
+        .box-content.avatar
+          %img.img-responsive{:alt => "Account", :src => "#{bid_avatar_url(l)}"}
+    .col-sm-10{:style => 'padding:0px;'}
+      .row
+        .col-sm-7
+          %h4
+            %a.dimgray{:href => invest_path(l), :target => "_blank", :title => l.title}= l.title
+        .col-sm-3
+          - if l.with_mortgage?
+            %label.btn.btn-warning.btn-sm{:style=>"border:none;"} 抵押
+          - if l.with_guarantee?
+            %label.btn.btn-success.btn-sm{:style=>"border:none;"} 担保
+      .row
+        .col-sm-4
+          %ul.list-unstyled.bid_list
+            %li
+              借款金额：
+              %span.text-big.num.text-right
+                %em.value= bid_amount l.amount
+                元
+            %li
+              还款方式：
+              = t(l.repay_style)
+        .col-sm-3
+          %ul.list-unstyled.bid_list
+            %li
+              年利率：
+              %span.text-big.num
+                %em.value= l.interest
+                \%
+            %li
+              已完成：
+              = l.progress.to_s+"%"
+        .col-sm-3
+          %ul.list-unstyled.bid_list
+            %li
+              贷款期限：
+              %span.text-big.num.text-right
+                %em.value= l.months
+                个月
+            %li
+              信用等级：
+              %span.fn-right.text-right
+                %a{:class => "creditlevel #{l.try(:credit_level).try(:upcase)} snow"}= l.try(:credit_level).try(:upcase)
+        .col-sm-2
+          = link_to '投标', invest_path(@loan), :class => "btn btn-primary btn-block"

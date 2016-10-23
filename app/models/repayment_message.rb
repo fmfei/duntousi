@@ -1,0 +1,3 @@
+class RepaymentMessage < Message
+
+end

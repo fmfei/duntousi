@@ -1,0 +1,131 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12' style="padding-right:0;">
+
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="page-header">
+            <h1 class="pull-left">
+              <i class="icon-signal"></i>
+              <span>理财统计</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box bordered-box blue-border" style="margin-bottom:0;">
+              <div class="box-header blue-background">
+                <div class="title">理财统计列表</div>
+                <div class="actions">
+                  <a class="btn box-remove btn-xs btn-link" href="#"><i class="icon-remove"></i>
+                  </a>
+
+                  <a class="btn box-collapse btn-xs btn-link" href="#"><i></i>
+                  </a>
+                </div>
+              </div>
+              <div class="box-content box-no-padding">
+                <div class="responsive-table">
+                  <div class="scrollable-area">
+                    <table class="table table-bordered table-hover table-striped" style="margin-bottom:0;">
+                      <thead>
+                        <tr>
+                          <th>
+                            资金类别
+                          </th>
+                          <th>
+                            金额
+                          </th>
+                          <th>
+                            说明
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>已赚利息</td>
+                          <td><%= rmb current_user.collected_interest %></td>
+                          <td>
+                            您当前所有投资成功的已收回利息总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>账户总额</td>
+                          <td><%= rmb current_user.total_amount %></td>
+                          <td>
+                            可用金额 + 待收总额 + 提现冻结
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>可用金额</td>
+                          <td><%= rmb current_user.available %></td>
+                          <td>
+                            当前账户余额，账户余额可用于投标或者提现
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>待收总额</td>
+                          <td><%= rmb current_user.not_collection_total %></td>
+                          <td>
+                            待收本金 + 待收利息
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>待收本金</td>
+                          <td><%= rmb current_user.not_collection_principal %></td>
+                          <td>
+                            待收本金是您借款给别人但是还没收回的本金总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>待收利息</td>
+                          <td><%= rmb current_user.not_collection_interest %></td>
+                          <td>
+                            待收利息是您借款给别人但是还没收回的利息总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>充值总额</td>
+                          <td><%= rmb current_user.recharge_total %></td>
+                          <td>
+                            您在网站充值成功后收入总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>提现总额</td>
+                          <td><%= rmb current_user.withdraw_total %></td>
+                          <td>
+                            您在网站提现成功后支出总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>累计投资</td>
+                          <td><%= rmb current_user.invest_total %></td>
+                          <td>
+                            成功投资本金总计
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>冻结总额</td>
+                          <td><%= rmb current_user.freeze_amount %></td>
+                          <td>
+                            您当前暂时不能使用的金额，包括正在审核中的提现金额
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

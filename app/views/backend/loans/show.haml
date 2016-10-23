@@ -1,0 +1,64 @@
+
+.well
+  .tab-content
+    .tab-pane.active
+      = form_for @loan, url: backend_loan_path(@loan), html: { class: "form-horizontal", role: "form"} do |u|
+        = hidden_field_tag :user_id
+        = hidden_field_tag :id
+        .control-group
+          = u.label "借款人姓名", class: "control-label"
+          .controls
+            = text_field_tag :name, @loan.borrower.try(:info).try(:name), disabled: true,  type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:amount), class: "control-label"
+          .controls
+            = u.number_field :amount, placeholder: t(:amount), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:months), class: "control-label"
+          .controls
+            = u.number_field :months, placeholder: t(:months), type: "text", class: "input-xlarge"
+        / .control-group
+        /   = u.label t(:marriage), class: "control-label"
+        /   .controls
+        /     = u.select :marriage_type_id, Dict::MarriageType.all.collect { |p| [ p.name, p.id ] }, prompt: "--请选择--", class: "input-xlarge"
+        .control-group
+          = u.label t(:interest), class: "control-label"
+          .controls
+            = u.text_field :interest, placeholder: t(:interest), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:repay_style), class: "control-label"
+          .controls
+            = u.text_field :repay_style, placeholder: t(:repay_style), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:min_invest), class: "control-label"
+          .controls
+            = u.text_field :min_invest, placeholder: t(:min_invest), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:max_invest), class: "control-label"
+          .controls
+            = u.text_field :max_invest, placeholder: t(:max_invest), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:due_date), class: "control-label"
+          .controls
+            = u.text_field :due_date, placeholder: t(:due_date), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:title), class: "control-label"
+          .controls
+            = u.text_field :title, placeholder: t(:title), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:desc), class: "control-label"
+          .controls
+            = u.text_field :desc, placeholder: t(:desc), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:credit_level), class: "control-label"
+          .controls
+            = u.text_field :credit_level, placeholder: t(:credit_level), type: "text", class: "input-xlarge"
+
+        .control-group
+          = u.label t(:with_mortgage), class: "control-label"
+          .controls
+            = u.select :with_mortgage, [["是",true],["否",false]], prompt: "--请选择--", class: "input-xlarge"
+        .control-group
+          = u.label t(:with_guarantee), class: "control-label"
+          .controls
+            = u.select :with_guarantee, [["是",true],["否",false]], prompt: "--请选择--", class: "input-xlarge"

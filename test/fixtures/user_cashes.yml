@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  total: 9.99
+  available: 9.99
+  freeze_amount: 9.99
+  not_collection_total: 9.99
+  not_collection_interest: 9.99
+  collected_interest: 9.99
+  withdraw_total: 9.99
+  withdraw_received: 9.99
+  withdraw_fee: 9.99
+  not_repay_total: 9.99
+  invest_total: 9.99
+  loan_total: 9.99
+
+two:
+  user_id: 1
+  total: 9.99
+  available: 9.99
+  freeze_amount: 9.99
+  not_collection_total: 9.99
+  not_collection_interest: 9.99
+  collected_interest: 9.99
+  withdraw_total: 9.99
+  withdraw_received: 9.99
+  withdraw_fee: 9.99
+  not_repay_total: 9.99
+  invest_total: 9.99
+  loan_total: 9.99

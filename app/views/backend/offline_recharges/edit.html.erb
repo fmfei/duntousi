@@ -1,0 +1,53 @@
+<%= form_for @offline_recharge, url: backend_offline_recharge_path(@offline_recharge) do |f| %>
+	<div class="well">
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active in" id="home">
+    	<table class="table table-striped table-bordered">
+	      <tbody>
+	      	<tr>
+	          <td>用户名</td>
+	          <td><%= @offline_recharge.user.name %></td>
+        	</tr>
+        	<tr>
+	          <td>充值银行</td>
+	          <td><%= @offline_recharge.bank_name %>: <%= @offline_recharge.bank_detail %></td>
+        	</tr>
+        	<tr>
+	          <td>金额</td>
+	          <td><%= rmb @offline_recharge.amount %></td>
+        	</tr>
+        	<tr>
+	          <td>用户备注</td>
+	          <td><%= @offline_recharge.comment %></td>
+        	</tr>
+        	<tr>
+	          <td>审核结果</td>
+	          <td><%= f.select :status, options_for_select(OfflineRecharge::STATUS) %></td>
+        	</tr>
+        	<tr class='permitAmount'>
+	          <td>批准金额</td>
+	          <td><%= f.text_field :permit_amount, 'data-rule-required' => true, 'data-rule-number' => true, 'data-rule-max' => @offline_recharge.amount.to_f.round(2) %></td>
+        	</tr>
+        	<tr>
+	          <td>说明</td>
+	          <td><%= f.text_field :auditor_comment %></td>
+        	</tr>
+	  		</tbody>
+	  	</table>
+    </div>
+  </div>
+	</div>
+	<div class="btn-toolbar form-actions">
+	  <%= f.submit '保存', :class => 'btn btn-primary' %>
+	</div>
+<% end %>
+<script type="text/javascript">
+	$("form").validate();
+	$('#offline_recharge_status').change(function(){
+		if($('#offline_recharge_status').val() == '0'){
+			$('.permitAmount').hide();
+		}else if($('#offline_recharge_status').val() == '1'){
+			$('.permitAmount').show();
+		}
+	})
+</script>

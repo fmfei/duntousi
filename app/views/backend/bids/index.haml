@@ -1,0 +1,26 @@
+=render :partial => "/backend/bids/search"
+.well
+  %table.table
+    %thead
+      %tr
+        %th 序号
+        %th 投资者
+        %th 借款标题
+        %th 投资金额
+        %th 投资时间
+        %th 投资状态
+        %th 散标/债权
+        %th 自投
+    %tbody
+      - @bids.each do |bid|
+        %tr
+          %td= bid.id
+          %td= link_to bid.user.name_or_email, backend_lender_path(bid.user)
+          %td= link_to bid.loan.title, belongs_to_loan_backend_bids_path(:loan_id => bid.loan.id)
+          %td= bid.invest_amount
+          %td= format_time(bid.created_at)
+          %td= t bid.status
+          %td= bid.from_bid_id.present? ? '债权' : '散标'
+          %td= bid.auto_invest ? '自投' : '手动'
+
+= will_paginate @bids

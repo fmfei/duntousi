@@ -1,0 +1,61 @@
+<!-- <div class="well">
+  启用/关闭网站：
+  <%= check_box_tag :site_avaliable, :status, @site_avaliable%>
+  <br>
+  此操作将导致网站不能访问，请谨慎操作！
+</div> -->
+<!-- <div class="search-well">
+  <%#  if params[:type].present? 
+    #   url = backend_system_configs_path(:type => params[:type])
+    #  else
+    #    url = backend_system_configs_path
+    #  end
+  %>
+  <%#= search_form_for @search, :url => url, :html => {:method => :get, :class=>"form-inline", :role=>"form"} do |f| %>
+    <%#= f.text_field :value_cont, class: "input-xlarge", placeholder: "参数值"%>
+    <%#= hidden_field_tag :type, params[:type] %>
+    <%#= f.submit '搜索', class: "btn"%>
+    <%#end%>
+</div> -->
+
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>参数名</th>
+          <th>参数值</th>
+          <th>创建时间</th>
+          <th>更新时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @system_configs.each do |system_config| %>
+          <tr>
+            <td><%= system_config.key %></td>
+            <td><%= system_config.value %></td>
+            <td><%= format_time(system_config.created_at) %></td>
+            <td><%= format_time(system_config.updated_at) %></td>
+            <td>
+              <a href="<%= edit_backend_system_config_path(system_config, :type => params[:type]) %>"><i class="icon-pencil"></i></a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<% if params[:type].present? && params[:type] == 'email_sms'%>
+<div class="well">
+  短信余额：<%= Sms.querybalance %> 元
+</div>
+<% end %>
+<%#= will_paginate @system_configs %>
+<script>
+  $("#site_avaliable").bootstrapSwitch();
+  $('#site_avaliable').on('switchChange.bootstrapSwitch', function(event, state) {
+    $.post( "/backend/system_configs/close_site",{status: $('#site_avaliable').is(':checked')}, function( data ) {
+      alert(data);
+    });
+  });
+
+</script>

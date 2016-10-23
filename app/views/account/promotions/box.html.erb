@@ -1,0 +1,24 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">任务记录</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle">开始时间</div>
+            <div class="czjltitle">结束时间</div>
+            <div class="czjltitle">状态</div>
+            <div class="czjltitle">奖励</div>
+         </div>
+         <% @records.each do |re| %>
+         <div class="czjl">
+            <div class="czjltitle"><%= re.created_at.try(:strftime, "%Y/%m/%d/ %H:%M") %></div>
+            <div class="czjltitle">&nbsp;<%= re.end_at.try(:strftime, "%Y/%m/%d/ %H:%M") %></div>
+            <div class="czjltitle"><%= re.status_text %></div>
+            <div class="czjltitle"><%= rmb re.prize %></div>
+         </div>
+         <% end %>
+         <%= will_paginate @records %>
+      </div>
+</div>

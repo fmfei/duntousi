@@ -1,0 +1,16 @@
+亲爱的 <%= @resource.username %>, 您好！<br>
+
+感谢您注册亚太平台，您登录的邮箱帐号为 <%= @resource.email %><br>
+
+请点击下面的链接即可完成激活。<br>
+
+<%= link_to '激活账号', confirmation_url(@resource, confirmation_token: @token) %><br>
+
+<%= confirmation_url(@resource, confirmation_token: @token) %><br>
+(如果链接无法点击，请将它拷贝到浏览器的地址栏中)<br>
+
+感谢您光临亚太平台用户中心！<br>
+
+----------------------------------<br>
+
+此为自动发送邮件，请勿直接回复！

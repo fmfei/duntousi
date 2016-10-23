@@ -1,0 +1,55 @@
+- l =loan
+.col-sm-12.hover-effect{:style => "padding:0px;"}
+  .box
+    .box-content.bid
+      .row
+        .col-sm-2
+          .box{:style => "margin:0px;"}
+            .box-content.avatar
+              %img.img-responsive{:alt => "Account", :src => "#{bid_avatar_url(l)}"}
+        .col-sm-10.no-padding
+          .row
+            .col-sm-6
+              %h4
+                %a.dimgray{:href => invest_path(l), :target => "_blank", :title => l.title}= l.title
+            .col-sm-3
+              - if l.with_mortgage?
+                %label.btn.btn-warning.btn-sm{:style=>"border:none;"} 抵押
+              - if l.with_guarantee?
+                %label.btn.btn-success.btn-sm{:style=>"border:none;"} 担保
+          .row
+            .col-sm-3
+              %ul.list-unstyled.bid_list
+                %li
+                  借款金额：
+                  %span.text-big.num.text-right
+                    %em.value= bid_amount l.amount
+                    元
+                %li
+                  信用等级：
+                  %span.fn-right.text-right
+                    %a{:class => "creditlevel #{l.try(:credit_level).try(:upcase)} snow"}= l.try(:credit_level).try(:upcase)
+            .col-sm-3
+              %ul.list-unstyled.bid_list
+                %li
+                  年利率：
+                  %span.text-big.num
+                    %em.value= l.interest
+                    \%
+                %li
+                  已完成：
+                  .fn-right.progress{:style => "line-height:20px;width:90px;margin:6px;"}
+                    .progress-bar.progress-bar-success{:style => "width:#{l.progress}%;#{l.progress < 40 ? 'color:#000;' : ''}"}
+                      = l.progress.to_s+"%"
+            .col-sm-3
+              %ul.list-unstyled.bid_list
+                %li
+                  贷款期限：
+                  %span.text-big.num.text-right
+                    %em.value= l.months
+                    个月
+                %li
+                  还款方式：
+                  = t(l.repay_style)
+            .col-sm-3
+              = loan_state l

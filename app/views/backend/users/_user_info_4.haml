@@ -1,0 +1,44 @@
+.well
+  .tab-content
+    - @user=user
+    - @user_info=user_info
+    .tab-pane.active
+      = form_for @user_info,as: :user_info, url: backend_user_path(@user_info), html: { class: "form-horizontal", role: "form"} do |u|
+        = hidden_field_tag :user_id, @user.id
+        = hidden_field_tag :step, @step
+        .control-group
+          = u.label t(:mate_name), class: "control-label"
+          .controls
+            = u.text_field :mate_name, placeholder: t(:mate_name), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_id_card), class: "control-label"
+          .controls
+            = u.text_field :mate_id_card, placeholder: t(:mate_id_card), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_salary), class: "control-label"
+          .controls
+            = u.text_field :mate_salary, placeholder: t(:mate_salary), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_phone), class: "control-label"
+          .controls
+            = u.text_field :mate_phone, placeholder: t(:mate_phone), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_mobile), class: "control-label"
+          .controls
+            = u.text_field :mate_mobile, placeholder: t(:mate_mobile), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_company_name), class: "control-label"
+          .controls
+            = u.text_field :mate_company_name, placeholder: t(:mate_company_name), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_job), class: "control-label"
+          .controls
+            = u.text_field :mate_job, placeholder: t(:mate_job), type: "text", class: "input-xlarge"
+        .control-group
+          = u.label t(:mate_address), class: "control-label"
+          .controls
+            = u.text_field :mate_address, placeholder: t(:mate_address), type: "text", class: "input-xlarge"
+
+        .form-actions
+          = link_to "上一步", edit_backend_user_path(@user,:step=>3), :class => "btn btn-primary"
+          %button.btn.btn-primary{:type => "submit"} 下一步

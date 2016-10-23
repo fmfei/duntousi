@@ -1,0 +1,98 @@
+.control-group
+  = u.label "借款人姓名", class: "control-label"
+  .controls
+    = text_field_tag :name, @user.try(:info).try(:name), disabled: true,  type: "text", class: "input-xlarge"
+.control-group
+  = u.label "约标密码", class: "control-label"
+  .controls
+    = u.text_field :pass, placeholder: '约标密码',  type: "text", class: "input-xlarge"
+    %span.red
+      非约标勿填
+.control-group
+  = u.label "允许自动投标", class: "control-label"
+  .controls
+    = u.check_box :is_permit_autoinvest
+    %span.red
+      / 不允许自动投标时请勾选
+.control-group
+  = u.label t(:amount), class: "control-label"
+  .controls
+    = u.number_field :amount, placeholder: t(:amount), type: "text", class: "input-xlarge", 'data-rule-required' => true, :'data-rule-number' => "true", :'data-rule-min' => 100, :'data-rule-maxlength' => 10
+    元
+    %span.red
+      *
+.control-group
+  = u.label t(:months), class: "control-label"
+  .controls
+    = u.number_field :months, placeholder: t(:months), type: "text", class: "input-xlarge", 'data-rule-required' => true, :'data-rule-number' => "true", :'data-rule-min' => 1, :'data-rule-maxlength' => 3
+    个月
+    %span.red
+      *
+.control-group
+  = u.label t(:interest), class: "control-label"
+  .controls
+    = u.number_field :interest, placeholder: t(:interest), type: "text", class: "input-xlarge", 'data-rule-required' => true, :'data-rule-number' => "true", :'data-rule-max' => 100
+    \%
+    %span.red
+      *
+.control-group
+  = u.label t(:repay_style), class: "control-label"
+  .controls
+    = u.select :repay_style, Loan::REPAYSTYLE1, class: "input-xlarge"
+.control-group
+  = u.label t(:min_invest), class: "control-label"
+  .controls
+    = u.number_field :min_invest, placeholder: t(:min_invest), type: "text", class: "input-xlarge", value: 100,:'data-rule-number' => "true", :'data-rule-min' => 100, :'data-rule-maxlength' => 10
+    元
+.control-group
+  = u.label t(:max_invest), class: "control-label"
+  .controls
+    = u.number_field :max_invest, placeholder: t(:max_invest), type: "text", class: "input-xlarge",:'data-rule-number' => "true", :'data-rule-min' => 100, :'data-rule-maxlength' => 10
+    元
+/ .control-group
+/   = u.label t(:due_date), class: "control-label"
+/   .controls
+/     = text_field_tag 'loan[due_date]', @loan.try(:due_date).try(:strftime, "%Y-%m-%d"), placeholder: t(:due_date), type: "text", class: "input-xlarge",'data-rule-required' => true, 'data-rule-dateiso'=>true
+/     %span.red
+/       *
+/ .control-group
+/   = u.label t(:estimated_time), class: "control-label"
+/   .controls
+/     = text_field_tag 'loan[estimated_time]', @loan.try(:estimated_time).try(:strftime, "%Y-%m-%d"), placeholder: t(:estimated_time), type: "text", class: "input-xlarge",'data-rule-required' => true, 'data-rule-dateiso'=>true
+/     %span.red
+/       *
+.control-group
+  = u.label t(:title), class: "control-label"
+  .controls
+    = u.text_field :title, placeholder: t(:title), type: "text", class: "input-xlarge", 'data-rule-required' => true
+    %span.red
+      *
+.control-group
+  = u.label t(:credit_level), class: "control-label"
+  .controls
+    / = u.text_field :credit_level, placeholder: t(:credit_level), type: "text", class: "input-xlarge"
+    = u.select :credit_level, [["A","A"],["B","B"],["C","C"],["D","D"],["E","E"]], class: "input-xlarge"
+
+.control-group
+  = u.label t(:with_mortgage), class: "control-label"
+  .controls
+    = u.select :with_mortgage, [["是",true],["否",false]], prompt: "--请选择--", class: "input-xlarge"
+.control-group
+  = u.label t(:with_guarantee), class: "control-label"
+  .controls
+    = u.select :with_guarantee, [["是",true],["否",false]], prompt: "--请选择--", class: "input-xlarge"
+
+/ .control-group
+/   = u.label t(:avatar), class: "control-label"
+/   .controls
+/     = u.file_field :avatar, class: "file-input-wrapper btn"
+/     .text-content
+/       您可以上传JPG、GIF或PNG文件上传图片最大4M
+/ .control-group
+/   = u.label t(:avatar_display), class: "control-label"
+/   .controls
+/     = u.select :avatar_display, [["显示用户头像",false], ["显示借款头像",true]], prompt: "--请选择--", class: "input-xlarge"
+.control-group
+  = u.label t(:desc), class: "control-label"
+  .controls
+    = u.text_area :desc, :cols => 40, :rows => 16, :id => "kindeditor_id"

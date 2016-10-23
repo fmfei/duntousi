@@ -1,0 +1,43 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">进行中的商品</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle_luckycode">商品名称</div>
+            <div class="czjltitle_luckycode">商品期号</div>
+            <!-- <div class="czjltitle_luckycode">夺宝状态</div> -->
+            <div class="czjltitle_luckycode">参与人次</div>
+            <div class="czjltitle_luckycode">夺宝号码</div>
+            <div class="czjltitle_luckycode">操作</div>
+         </div>
+         <% @product_orders.each do |order| %>
+         <div class="czjl">
+            <div class="czjltitle_luckycode" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"><%= order.item.product.title %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><%= order.item.product.id %></div>
+            <!-- <div class="czjltitle_luckycode">正在进行...&nbsp;</div> -->
+            <div class="czjltitle_luckycode"><%= order.amount %>&nbsp;</div>
+            <div class="czjltitle_luckycode numbers_detail" id="numbers_detail" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"><%= order.numbers %></div>
+            <div class="czjltitle_luckycode"><%= link_to "详情", items_path %>&nbsp;</div>
+         </div>
+         <div class="show_numbers" style="width:100%;display:none;-webkit-backface-visibility:hidden"><%= order.numbers %></div>
+         <% end %>
+         <%= will_paginate @product_orders %>
+      </div>
+</div>
+
+<script>
+  $(".numbers_detail").bind("mouseover",function(){
+    // $(this).css("overflow", "visible");
+    // $(this).css("white-space", "normal");
+    // $(this).siblings(".show_numbers").show();
+    $(this).parent().next(".show_numbers").show();
+  });
+  $(".numbers_detail").bind("mouseout",function(){
+    // $(this).css("overflow", "hidden");
+    // $(this).css("white-space", "nowrap");
+    $(this).parent().next(".show_numbers").hide();
+  });
+</script>

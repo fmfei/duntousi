@@ -1,0 +1,30 @@
+<div class='wrapped-content' style="min-height: 400px;">
+  <div class="col-xs-12">
+    <%= render "/layouts/news_nav_left"%>
+    <section id='content' style="margin-top: 20px;">
+      <div class='container'>
+        <div class='row'>
+          <div class='box col-xs-12'>
+            <div class='box-header blue-background'>
+              <div class='title'><%= @download.name %></div>
+            </div>
+            <div class='box-content'>
+              <div class='text-center'>
+                <h2><%= @download.name %></h2>
+                <small class="text-muted"><%= @download.created_at.strftime("%Y-%m-%d" ) %></small>
+              </div>
+              <div class="text-content">
+                <% unless @download.file_url.nil? %>
+                  <div class="well comment">
+                    <%= link_to ('点击下载: '+@download.name), @download.file_url %>
+                  </div>
+                <% end %>
+                <%= @download.description.html_safe %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

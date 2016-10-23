@@ -1,0 +1,72 @@
+<div class="search-well">
+<% url = stat_backend_cash_flows_path %>
+<%= form_tag url, :method => 'GET', :class => "form-inline" do |f| %>
+  <%= text_field_tag :created_at_gteq, params.try(:[], :created_at_gteq), 'required': true %>
+   至
+  <%= text_field_tag :created_at_lteq, params.try(:[], :created_at_lteq), 'required': true %>
+  <%= submit_tag "搜索", :class => "btn" %>
+<% end %>
+</div>
+<script type="text/javascript">
+  $(function (){
+    $('#created_at_gteq').datepicker({
+    inline: true
+  });
+  $('#created_at_lteq').datepicker({
+    inline: true
+    });
+  })
+</script>
+
+
+<div class="well">
+
+  <table class="table table-th-right">
+    <tbody>
+      <tr>
+        <th>支付本金：</th>
+        <td><%= rmb @principal %></td>
+        <th>支付利息：</th>
+        <td><%= rmb @interest %></td>
+      </tr>
+      <tr>
+        <th>支付总额：</th>
+        <td><%= rmb(@principal + @interest) %></td>
+        <th>提现手续费：</th>
+        <td><%= rmb @withdraw_fee %></td>
+      </tr>
+      <tr>
+        <th>待收总额：</th>
+        <td><%= rmb(Repayment.unpaid.sum(:amount)) %></td>
+        <th> </th>
+        <td> </td>
+      </tr>
+  </tbody></table>
+  <table class="table table-th-right">
+    <tbody>
+      <tr>
+        <th>邀请返利：</th>
+        <td><%= rmb @promote_prize %></td>
+        <th>首投奖励：</th>
+        <td><%= rmb @prize_first %></td>
+      </tr>
+      <tr>
+        <th>单标冠军奖励：</th>
+        <td><%= rmb @prize_max %></td>
+        <th>满标奖：</th>
+        <td><%= rmb @prize_last %></td>
+      </tr>
+      <tr>
+        <th>注册奖励：</th>
+        <td><%= rmb @prize_register %></td>
+        <th>线下充值奖励：</th>
+        <td><%= rmb @prize_offline %></td>
+      </tr>
+      <tr>
+        <th>红包：</th>
+        <td><%= rmb @prize %></td>
+        <th>奖励总额：</th>
+        <td><%= rmb (@prize + @promote_prize + @prize_first + @prize_max + @prize_last + @prize_register + @prize_offline) %></td>
+      </tr>
+  </tbody></table>
+</div>

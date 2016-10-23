@@ -1,0 +1,10 @@
+//= require jquery
+//= require jquery_ujs
+//= require flatty/jquery/jquery.min
+//= require flatty/jquery/jquery-migrate.min
+//= require flatty/jquery/jquery-ui.min
+//= require flatty/bootstrap/bootstrap.min
+//= require flatty/theme
+//= require 'china_city/jquery.china_city'
+//= require flatty/plugins/validate/jquery.validate.min
+//= require flatty/plugins/validate/additional-methods

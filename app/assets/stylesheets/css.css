@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family:"Microsoft Yahei"; font-size:14px;}
+*{ margin:0; padding:0;}
+a{ text-decoration: none;}
+li{ list-style: none;}
+.red-bg{ background: #ff6868;}
+.green-bg{ background: #41d87e;}
+.blue-bg{ background: #4ab2e4;}
+.main{ width:100%; overflow:hidden; background:#ffb33b;}
+.main960{ width:960px; margin:0 auto;  overflow: hidden; }
+.top-left{ width: 30%; float: left;height:60px;}
+.top-right{ width: 70%; float: right;height:60px;}
+.tabbar{ height:45px; line-height:45px; width: 100%; margin-top:15px; float: left; }
+.tabbar a{ width:112px; height:45px; display:inline-block; float:left; line-height:45px; text-align:center; font-family:"Microsoft Yahei"; font-size:20px; color:#fff; }
+.tabbar a.active{border-top-left-radius: 5px; border-top-right-radius:5px;  height:45px; background:#fff; line-height:45px; color: #ffb33b; font-weight: bold;}
+.conbox{ width: 100%; background:#fff;}
+/*数据统计*/
+.conbox .sjtj,.conbox .wzxz{ width:100%; padding:20px 0px;border-bottom:5px solid #f1f1f1;}
+.sjtj .tj{ width: 80%;float: left; overflow: hidden;}
+.sjtj .tj h3{ font-size:16px; font-weight: normal; width: 100%; float: left;}
+.sjtj .tj .jd-box{ width: 100%;}
+.sjtj .tj .jd-box .jd-left{float: left;}
+.sjtj .tj .jd-box .jd-center{ float: left;}
+.sjtj .tj .jd-box .jd-right{ float: left;}
+.sjtj .tj .jd-box .bar{ width: 100%; height: 16px; display: block; float: left;}
+.sjtj .tj .jd-box .bl{ width:100%;text-align: right; font-size: 12px; display: block;}
+.sjtj .icon{ width: 15%; float: left; margin-left: 5%; margin-top:15px;}
+.sjtj .icon ul li{ float: left; width: 100%;}
+.sjtj .icon ul li span{ width: 16px; height: 16px; display: block; float: left; margin-right: 10px;}
+/*位置选择*/
+.wzxz h3,.ztxg h3{ font-size:16px; font-weight: normal; width: 100%;}
+.wzxz .seat{ width: 100%; overflow: hidden; padding-top: 10px; padding-bottom: 20%;}
+.wzxz .seat .seat-left{ width:70%; float: left; margin-right: 10%;}
+.wzxz .seat .seat-left span{ float: left; width: 45px; height: 34px; display: block; margin:5px 8px; border-radius: 5px;}
+.wzxz .seat .seat-left span a.chooseJ{ background:url(/assets/gou.png) no-repeat center; display:block; width:34px; height:34px; display:block;}
+
+.wzxz .seat .seat-right{ width: 20%; float: left;}
+.seat-right ul li{ width: 100%; float: left; line-height: 44px;}
+/*状态修改*/
+.conbox .ztxg{ width:100%; padding:20px 0px;position: fixed;left: 0; bottom: 5px; right: 0; background: #f1f1f1;}
+.state-box{ width: 600px; margin:0 auto;text-align:center; }
+.state-top{margin-bottom: 20px;}
+.btn-commit{ padding:10px 40px; color: #fff; background: #00ccff; border-radius: 5px; font-size: 14px;}
+.state-btm #chk{ width: 100px; height: 26px; border:1px solid #ddd;}
+.btn-reset{ padding:6px 20px; margin:0px 5px; color: #fff; background: #00ccff; border-radius: 5px; font-size: 14px;}

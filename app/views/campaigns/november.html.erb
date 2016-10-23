@@ -1,0 +1,93 @@
+<style>
+*{ margin:0; padding:0;}
+a:focus{outline:none;}
+img{ border:none;}
+.comdiv{ width:100%; height:141px; margin:0 auto;}
+.d01{background:url(/campaigns/november/el_01.jpg) no-repeat center;}
+.d02{background:url(/campaigns/november/el_02.jpg) no-repeat center;}
+.d03{background:url(/campaigns/november/el_03.jpg) no-repeat center;}
+.d04{background:url(/campaigns/november/el_04.jpg) no-repeat center;}
+.d05{background:url(/campaigns/november/el_05.jpg) no-repeat center;}
+.d06{background:url(/campaigns/november/el_06.jpg) no-repeat center;}
+.d07{background:url(/campaigns/november/el_07.jpg) no-repeat center;}
+.d08{ width:100%; height:283px; margin:0 auto;background:url(/campaigns/november/el_08.jpg) no-repeat center;}
+
+.d10{background:url(/campaigns/november/el_10.jpg) no-repeat center;}
+.d11{background:url(/campaigns/november/el_11.jpg) no-repeat center;}
+.d12{background:url(/campaigns/november/el_12.jpg) no-repeat center;}
+
+.d13{background:url(/campaigns/november/el_13.jpg) no-repeat center;}
+.d14{background:url(/campaigns/november/el_14.jpg) no-repeat center;}
+.d15{background:url(/campaigns/november/el_15.jpg) no-repeat center;}
+.d16{background:url(/campaigns/november/el_16.jpg) no-repeat center;}
+.d17{background:url(/campaigns/november/el_17.jpg) no-repeat center;}
+
+.d18{background:url(/campaigns/november/el_18.jpg) no-repeat center;}
+.d19{background:url(/campaigns/november/el_19.jpg) no-repeat center;}
+.d20{background:url(/campaigns/november/el_20.jpg) no-repeat center;}
+.d21{background:url(/campaigns/november/el_21.jpg) no-repeat center;}
+.dmiddle{width:100%; height:724px; margin:0 auto;background:url(/campaigns/november/el_22.jpg) no-repeat center;}
+
+.d25table{ width:868px; height:588px; margin:0 auto;padding-top:135px;}
+.d25table ul li{ list-style:none; float:left; width:100%; height:41px; line-height:41px; margin-bottom:20px;text-align:center;font-family:微软雅黑; color:#fff;}
+.t-num-display{ width:82px; height:42px; float:left; text-indent: -9999px;}
+.t-num-block{ width:82px; height:42px; float:left;}
+.t-phone{ width:334px; height:42px; float:left;}
+.ma1086{ width:1086px; margin:0 auto;}
+.d27{ width:100%; height:125px; margin:0 auto;background:url(/campaigns/november/el_27.jpg) no-repeat center;}
+.d28{background:url(/campaigns/november/el_28.jpg) no-repeat center;}
+.d29{background:url(/campaigns/november/el_29.jpg) no-repeat center;}
+.d30{background:url(/campaigns/november/el_30.jpg) no-repeat center;}
+</style>
+
+<div class="comdiv d01"></div>
+<div class="comdiv d02"></div>
+<div class="comdiv d03"></div>
+<div class="comdiv d04" style='cursor:pointer;' onclick="javascript: window.location.href='/users/sign_up'"></div>
+<div class="comdiv d05"></div>
+<div class="comdiv d06"></div>
+<div class="comdiv d07"></div>
+<div class="d08">
+  <div class="ma1086">
+        <img src="/campaigns/november/el-link.jpg" width="1086" usemap="#Map" onclick="javascript: window.location.href='/users/sign_up'">
+        <map name="Map">
+          <area shape="rect" coords="395,113,646,161" href="/users/sign_up">
+        </map>
+    </div>
+</div>
+
+<div class="comdiv d10"></div>
+<div class="comdiv d11"></div>
+<div class="comdiv d12"></div>
+<div class="comdiv d13"></div>
+<div class="comdiv d14"></div>
+<div class="comdiv d15"></div>
+<div class="comdiv d16"></div>
+<div class="comdiv d17"></div>
+<div class="comdiv d18"></div>
+<div class="comdiv d19"></div>
+<div class="comdiv d20"></div>
+<div class="comdiv d21"></div>
+<div class="dmiddle">
+  <div class="d25table">
+        <ul>
+          <% @bids.each_with_index do |bid, index|%>
+            <% user = User.find bid[0]%>
+             <li>
+                <% if index < 3 %>
+                  <div class="t-num-display" ></div>
+                <% else %>
+                  <div class="t-num-block" ><%= (index+1).to_s %></div>
+                <% end %>
+                <div class="t-phone" ><%= user.mobile[0..2] + '****' + user.mobile[-4..-1] %></div>
+                <div class="t-price"><%= rmb bid[1].sum(&:invest_amount)%></div>
+             </li>
+          <% end %>
+        </ul>
+    </div>
+</div>
+
+<div class="d27"></div>
+<div class="comdiv d28"></div>
+<div class="comdiv d29"></div>
+<div class="comdiv d30"></div>

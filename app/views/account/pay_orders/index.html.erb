@@ -1,0 +1,19 @@
+<div class="right">
+   <%= render 'nav' %>
+   <div class="margin_top">
+   <%= form_note_account flash %>
+  </div>
+   <div class="contents" style='display:block;'>
+      <div class="czjl">
+         <div class="czjltitle">充值金额</div><div class="czjltitle">充值时间</div><div class="czjltitle">充值状态</div>
+      </div>
+      <% @pay_orders.each do |order| %>
+      <div class="czjl">
+         <div class="czjltitle"><%= rmb(order.amount) %></div>
+         <div class="czjltitle"><%= format_time(order.created_at) %></div>
+         <div class="czjltitle lan">充值成功</div>
+      </div>
+      <% end %>
+      <%= will_paginate @pay_orders %>
+   </div><!--contents end-->
+</div>

@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+body{ font-family:微软雅黑;}
+li{ list-style:none;}
+img,input{ border:none;}
+img{display:block;}
+input,button,select,textarea{ outline:none;}
+textarea{resize:none;}
+
+.f-left{ float:left;}
+.f-right{ float:right;}
+.banner{ width:100%; height:135px; margin:0 auto;}
+.banner01{  background:url(end_01.png) no-repeat center;}
+.banner02{  background:url(end_02.png) no-repeat center;}
+.banner03{  background:url(end_03.png) no-repeat center;}
+.banner04{  background:url(end_04.png) no-repeat center;}
+.banner05{  background:url(end_05.png) no-repeat center;}
+.banner06{  background:url(end_06.png) no-repeat center;}
+.banner07{ width:100%; height:200px; background:url(end_29.png) no-repeat center; margin:0 auto;}
+.luckyscroll{ width:655px; height:216px; margin:0 auto; overflow:hidden;}
+.lucky-box{ width:655px; height:150px; overflow:hidden;}
+.lucky-box ul{ text-align:center; height:150px; overflow:hidden;}
+.lucky-box ul li{ width:90%; height:30px; float:left; padding-left:5%;padding-right:5%; display:block; font-size:14px; line-height:30px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+.luckynumber{ width:100%; height:271px;background:url(end_07.png) no-repeat center; margin:0 auto;}
+.luckydiv{ width:990px; height:271px;  margin:0 auto;}
+.luckyup{ width:300px; height:50px; margin:0 auto; padding-top:90px;}
+.luckyup ul{ float:left; margin-left:5px;}
+.luckyup ul li{ float:left; display:block; margin-top:5px;}
+.luckyup ul li input{ width:44px; height:44px; float:left; margin-right:5px; background-color:#fff; color:#7b7a76; font-size:30px; line-height:44px; text-align:center;}
+.luckydown{ width:320px; height:40px; margin:0 auto;  padding-top:20px;}
+.click-btn{ width:149px; height:39px; background:url(end_btn.png) no-repeat center; border:none; color:#fff; font-size:16px; cursor:pointer; font-weight:500;}
+.banner08{ background:url(end_08.png) no-repeat center;}
+.banner09{ background:url(end_09.png) no-repeat center;}
+.banner10{ background:url(end_10.png) no-repeat center;}
+.banner11{ background:url(end_11.png) no-repeat center;}
+.banner12{ background:url(end_12.png) no-repeat center;}
+.banner13{ background:url(end_13.png) no-repeat center;}
+.banner14{ background:url(end_14.png) no-repeat center;}
+.luckycai{ width:990px; height:135px; margin:0 auto; overflow:hidden;}
+.banner15{ background:url(end_15.png) no-repeat center;}
+.caibtn{ width:320px; height:49px; margin-top:80px; margin-left:120px;}
+.banner16{ width:100%; height:314px; background:url(end_16.png) no-repeat center; margin:0 auto;}
+.hudong{ width:535px; height:210px; margin:0 auto;  padding-top:102px; overflow:hidden;}
+.hudong textarea{ width:535px; height:130px; resize:none;background:transparent;border-style:none; padding-top:5px; padding-bottom:5px; font-size:14px; font-family:Microsoft YaHei;}
+.hudongbtn{  width:100%; height:40px; text-align:center;margin-top:25px; }
+.banner17{ width:100%; height:228px; background:url(end_17.png) no-repeat center; margin:0 auto;}
+.datascroll{ width:655px; height:216px; margin:0 auto; overflow:hidden;}
+.list-box{ width:655px; height:150px; margin-top:66px; overflow:hidden;}
+.list-box ul{ text-align:center; height:150px; overflow:hidden;}
+.list-box ul li{ width:90%; height:30px; float:left; padding-left:5%;padding-right:5%; display:block; font-size:14px; line-height:30px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.banner19{ background:url(end_19.png) no-repeat center;}
+.banner20{ background:url(end_20.png) no-repeat center;}
+.banner21{ background:url(end_21.png) no-repeat center;}
+.banner22{ background:url(end_22.png) no-repeat center;}
+.banner23{ background:url(end_23.png) no-repeat center;}
+.banner24{ background:url(end_24.png) no-repeat center;}
+.banner25{ background:url(end_25.png) no-repeat center;}
+.banner26{ background:url(end_26.png) no-repeat center;}
+.banner27{ background:url(end_27.png) no-repeat center;}
+.banner28{ background:url(end_28.png) no-repeat center;}

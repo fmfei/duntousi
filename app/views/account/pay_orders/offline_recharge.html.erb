@@ -1,0 +1,44 @@
+<div class="right">
+         <%= render 'nav' %>
+         <div class="margin_top">
+         <%= form_note_account flash %>
+        </div>
+         <div class="contents" style='display:block;text-align:left;line-height:25px;'><br>
+          线下充值如遇到问题，请马上联系客服400-6502-921<br>
+        1）线下充值500元以上，享受奖励充值金额的2‰<br>
+        2）有效充值时间为：周一至周六的8:30到21:00，充值成功请与我们客服联系。
+         </div>
+         <div class="contents" style='display:block;'>
+          <%= form_for @offline_recharge, :url => create_offline_recharge_account_recharges_path, :html=>{:class => 'form', :novalidate=>"novalidate"} do |f| %>
+            <div class="lefttitles jutop">真实姓名:</div>
+            <div class="lefttitles juse jutop contentson" style="margin-left: 25px;text-align:left;"><%= current_user.try(:info).try(:name).to_s %>&nbsp;</div>
+            <div class="lefttitles">平台账号:</div>
+            <div class="lefttitles juse contentson" style="
+    margin-left: 25px;text-align:left;"><%= current_user.username %>&nbsp;</div>
+            <div class="lefttitles">充值金额:</div>
+            <div class="lefttitles juse">
+              <%= f.text_field :amount, {:class => 'form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 10, :'data-rule-maxlength' => 10, 'error' =>'is'} %>
+            </div>
+            <div class="lefttitles clears">充值银行:</div>
+            <div class="contentson">
+              <% @banks.each do |bank| %>
+                <div class="lefttitles juse contentson" style="
+    margin-left: 25px;text-align:left;" onclick="javascript:$('#pay_order_pay_class_ecpss').attr('checked','checked');">
+                  <%= f.radio_button :offline_bank_id, bank.id, :'data-rule-required'=>"true", :style => 'height: 15px;' %>
+                  <span class='bankname'><%= bank.name %></span>
+                  <%= bank.detail %>
+                 </div>
+               <% end %>
+            </div>
+            <div class="lefttitles">备注说明:</div>
+            <div class="lefttitles juse">
+              <%= f.text_field :comment, {:class => 'form-control', :'data-rule-required' => true} %>
+            </div>
+            <div class="contentson" style='padding-left:113px;text-align:left;'>
+              <input class="yinhangsub" name="commit" type="submit" value="充值" id="send">
+            </div>
+            
+         </div><!--contents end-->
+         <% end%>
+
+      </div>

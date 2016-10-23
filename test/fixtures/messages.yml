@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  send_user_id: 1
+  receive_user_id: 1
+  title: MyString
+  content: MyText
+  status: 1
+  type: 
+  reply: MyText
+  replytime: 2014-06-29 12:38:47
+  deleted: false
+
+two:
+  send_user_id: 1
+  receive_user_id: 1
+  title: MyString
+  content: MyText
+  status: 1
+  type: 
+  reply: MyText
+  replytime: 2014-06-29 12:38:47
+  deleted: false

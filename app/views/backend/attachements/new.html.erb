@@ -1,0 +1,20 @@
+<%= form_for @attachement, :url => create_attachement_backend_attachements_path(@product_id), :html => {:multipart => true} do |attache| %>
+  <%= attache.file_field :pic_name %>
+  <%= attache.submit_tag "生成" %>
+<% end %>
+
+<div id="showimg">
+<% if @product_pic %>
+  <% @product_pic.each do |pic| %>
+    <div>
+    <%= image_tag pic.pic_name_url(:small) %>
+    <% if pic.is_main == true %>
+      此图为首图
+    <% else %>
+      <%= link_to "设为首图", main_pic_backend_attachements_path(product_id: @product_id, pic_id: pic.id), method: :post %>&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= link_to '删除', backend_attachement_path(pic, @product_id), :method => 'delete', :confirm => '确认删除?' %>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>
+</div>

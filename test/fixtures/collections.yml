@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  bid_id: 1
+  repayment_id: 1
+  borrower_id: 1
+  amount: 9.99
+  principal: 9.99
+  interest: 9.99
+  due_date: 2014-05-07 20:49:45
+  paid_at: 2014-05-07 20:49:45
+  month_index: 1
+  repay_state: MyString
+
+two:
+  user_id: 1
+  bid_id: 1
+  repayment_id: 1
+  borrower_id: 1
+  amount: 9.99
+  principal: 9.99
+  interest: 9.99
+  due_date: 2014-05-07 20:49:45
+  paid_at: 2014-05-07 20:49:45
+  month_index: 1
+  repay_state: MyString

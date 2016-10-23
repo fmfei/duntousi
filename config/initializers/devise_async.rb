@@ -1,0 +1,1 @@
+Devise::Async.queue = :high

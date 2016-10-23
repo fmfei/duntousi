@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+img{ border:none;}
+body{ width:100%; background:url(/online/bg.png);}
+.banner{ width:100%; height:565px; background:url(/online/banner.png) no-repeat center center; margin:0 auto; }
+.conter{ width:1064px; margin:0 auto;}
+.conter img{ border:none; display:block;}
+.backmoney{ width:1062px; height:220px; margin:0 auto; background:url(/online/8_07.png) -1px center; overflow:hidden;}
+.backmoney .leftinfo{ width:292px; height:222px;  float:left; margin-left:140px;}
+.backmoney .leftinfo div{font-family:微软雅黑; color:#545351; font-size:18px; line-height:43px; text-align:center; width:100%; height:45px; font-weight:500;}
+.backmoney .leftinfo div span{ color:#e47290;}
+.backmoney .leftinfo p{ font-family:微软雅黑; color:#a17720; font-size:18px; line-height:25px;font-weight:500;}
+.backmoney .rightinfo{width:280px; height:220px; float:left; margin-left:195px;}
+.backmoney .rightinfo div{font-family:微软雅黑; color:#6d6c6a; font-size:18px; line-height:25px; text-align:center; width:100%; font-weight:500;}
+.backmoney .rightinfo div span{ color:#13a521;}
+.backmoney .rightinfo p{ font-family:微软雅黑; color:#a17720; font-size:18px; line-height:25px;font-weight:500;}
+.baqi{ width:1064px; margin:0 auto; border:none;}
+.baqi img{ border:none; display:block;}
+.baqicon{ width:1062px; height:194px; margin:0 auto; background:url(/online/8_09.png) -1px center; }
+.baqicon div{ width:545px; height:96%; margin:0 auto; } 
+.baqicon div p{ color:#433d3b;font-family:微软雅黑; font-size:18px; line-height:30px;font-weight:500; padding-top:15px;}
+.baqicon div p span{ color:#e47290;}
+.canyu{ width:1062px; height:295px; margin:0 auto;}
+.canyu .ccon{ width:382px; height:182px; margin:0 auto; margin-top:60px;}
+.canyu .ccon h4{color:#b184c4;font-family:微软雅黑; font-size:18px; line-height:40px;font-weight:500; text-align:center;}
+.canyu .ccon p{color:#b184c4;font-family:微软雅黑; font-size:18px; line-height:40px;font-weight:500; text-align:left;}
+.tablelist{ width:1062px; height:500px; margin:0 auto; background:url(/online/8_10.png) center; overflow:hidden;}
+
+.table{
+width:680px;
+margin: 0 auto;
+font-size: 20px;
+font-family: "微软雅黑";
+line-height: 30px; margin-top:125px;}
+tr {
+display: table-row;
+vertical-align: inherit;
+border-color: inherit;
+}

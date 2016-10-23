@@ -1,0 +1,24 @@
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th ID
+        %th 抽奖者
+        %th 手机号
+        %th 时间
+        %th 砸蛋记录
+        %th 是否发奖
+        %th 投资金额
+    %tbody
+      - @records.each do |re|
+        %tr
+          %td= re.id
+          %td= link_to re.user.name, backend_lender_path(re.user)
+          %td= link_to re.user.mobile, backend_lender_path(re.user)
+          %td= format_time re.created_at
+          %td= re.hit_level
+          %td= re.is_invest == false ? "未投资" : "已发奖"
+          %td= re.invest_count
+
+= will_paginate @records

@@ -1,0 +1,205 @@
+:css
+  *{ margin:0; padding:0;}
+  a:focus{outline:none;}
+  img{ border:none;}
+  .comdiv{ width:100%; height:113px; margin:0 auto;}
+  .d01{background:url(/campaigns/zhongqiu/zq_01.jpg) no-repeat center;}
+  .d02{background:url(/campaigns/zhongqiu/zq_02.jpg) no-repeat center;}
+  .d03{background:url(/campaigns/zhongqiu/zq_03.jpg) no-repeat center;}
+  .d04{background:url(/campaigns/zhongqiu/zq_04.jpg) no-repeat center;}
+  .d05{background:url(/campaigns/zhongqiu/zq_05.jpg) no-repeat center;}
+  .d06{background:url(/campaigns/zhongqiu/zq_06.jpg) no-repeat center;}
+  .d07{background:url(/campaigns/zhongqiu/zq_07.jpg) no-repeat center;}
+  .d08{background:url(/campaigns/zhongqiu/zq_08.jpg) no-repeat center;}
+  .d09{ width:100%; height:455px; margin:0 auto;background:url(/campaigns/zhongqiu/zq_09.jpg) no-repeat center;}
+  .w1000{ width:1000px; height:455px; margin:0 auto; position:relative;}
+  .fourdiv{ width:585px; height:358px;  position:absolute;top:40px;right:75px;}
+  .fourup{ width:310px; height:142px;  margin:0 auto;}
+  .up_left{ width:140px; height:142px; float:left;}
+  .up_left a:focus{outline:none;}
+  .up_right{ width:140px; height:142px; float:right;}
+  .up_right a:focus{outline:none;}
+  .fourdown{ width:310px; height:142px;  margin:0 auto; margin-top:67px;}
+  .up_left{ width:140px; height:142px; float:left; position:relative;}
+  .up_right{ width:140px; height:142px; float:right; position:relative;}
+  .up_left_slide{ width:134px; height:114px; border:2px solid #f3b500; position:absolute; right:140px;  top:22px; display:none;}
+  .up_left_slide p{ font-family:微软雅黑; font-size:16px; color:#fff; text-align:center; padding-top:5px;}
+  .up_left_slide p span{ color:#f3b500;}
+  .up_left_slide .btn{ width:98%; height:20px; margin-top:10px;text-align:center;}
+  .up_left_slide .btn a{ width:30%; padding:4px; border-radius:20px; color:#fff; text-decoration:none; border:1px solid #fff; font-size:12px; text-align:center; margin-left:12px;}
+  .d10{background:url(/campaigns/zhongqiu/zq_10.jpg) no-repeat center;}
+  .d11{background:url(/campaigns/zhongqiu/zq_11.jpg) no-repeat center;}
+  .d12{background:url(/campaigns/zhongqiu/zq_12.jpg) no-repeat center;}
+  .d13{background:url(/campaigns/zhongqiu/zq_13.jpg) no-repeat center;}
+  .d14{background:url(/campaigns/zhongqiu/zq_14.jpg) no-repeat center;}
+  .d15{background:url(/campaigns/zhongqiu/zq_15.jpg) no-repeat center;}
+  .d16{background:url(/campaigns/zhongqiu/zq_16.jpg) no-repeat center;}
+  .d17{background:url(/campaigns/zhongqiu/zq_17.jpg) no-repeat center;}
+  .d18{background:url(/campaigns/zhongqiu/zq_18.jpg) no-repeat center;}
+  .d19{background:url(/campaigns/zhongqiu/zq_19.jpg) no-repeat center;}
+  .d20{background:url(/campaigns/zhongqiu/zq_20.jpg) no-repeat center;}
+  .d21{background:url(/campaigns/zhongqiu/zq_21.jpg) no-repeat center;}
+  .d22{background:url(/campaigns/zhongqiu/zq_22.jpg) no-repeat center;}
+  .d23{background:url(/campaigns/zhongqiu/zq_23.jpg) no-repeat center;}
+  .d24{background:url(/campaigns/zhongqiu/zq_24.jpg) no-repeat center;}
+  .d25{background:url(/campaigns/zhongqiu/zq_25.jpg) no-repeat center;}
+  .d26{background:url(/campaigns/zhongqiu/zq_26.jpg) no-repeat center;}
+  .d27{background:url(/campaigns/zhongqiu/zq_27.jpg) no-repeat center;}
+  #div16{height:0px;width:100px;overflow: hidden;}
+.comdiv.d01
+.comdiv.d02
+.comdiv.d03
+.comdiv.d04
+.comdiv.d05
+.comdiv.d06
+.comdiv.d07
+.comdiv.d08
+.d09
+  .w1000
+    .fourdiv
+      .fourup
+        .up_left
+          %a{:href => "javascript:void(0);"}
+            = image_tag "/campaigns/zhongqiu/bag.png"
+          .up_left_slide
+            %p
+              当天累计投资
+              %br>/
+              5000元
+              %br>/
+              获得奖励
+              %span> 20
+              元
+            .btn
+              - if current_user
+                - if current_user.zhongqiu_records.process.where(:level => '1').count > 0
+                  %a{:href => "javascript:void(0);", :class => 'end', :id => '1'} 完成
+                  %a{:href => "javascript:void(0);", :class => 'fail', :id => '1'} 放弃
+                - else
+                  %a{:href => "javascript:void(0);", :class => 'start', :id => '1'} 做任务
+              - else
+                %a{:href => "/users/sign_up"} 注册
+                %a{:href => "/users/sign_in"} 登录
+        .up_right
+          %a{:href => "javascript:void(0);"}
+            = image_tag "/campaigns/zhongqiu/bag.png"
+          .up_left_slide{:style => "left:135px;"}
+            %p
+              当天累计投资
+              %br>/
+              20000元
+              %br>/
+              获得奖励
+              %span> 60
+              元
+            .btn
+              - if current_user
+                - if current_user.zhongqiu_records.process.where(:level => '2').count > 0
+                  %a{:href => "javascript:void(0);", :class => 'end', :id => '2'} 完成
+                  %a{:href => "javascript:void(0);", :class => 'fail', :id => '2'} 放弃
+                - else
+                  %a{:href => "javascript:void(0);", :class => 'start', :id => '2'} 做任务
+              - else
+                %a{:href => "/users/sign_up"} 注册
+                %a{:href => "/users/sign_in"} 登录
+      .fourdown
+        .up_left
+          %a{:href => "javascript:void(0);"}
+            = image_tag "/campaigns/zhongqiu/bag.png"
+          .up_left_slide
+            %p
+              当天累计投资
+              %br>/
+              50000元
+              %br>/
+              获得奖励
+              %span> 150
+              元
+            .btn
+              - if current_user
+                - if current_user.zhongqiu_records.process.where(:level => '3').count > 0
+                  %a{:href => "javascript:void(0);", :class => 'end', :id => '3'} 完成
+                  %a{:href => "javascript:void(0);", :class => 'fail', :id => '3'} 放弃
+                - else
+                  %a{:href => "javascript:void(0);", :class => 'start', :id => '3'} 做任务
+              - else
+                %a{:href => "/users/sign_up"} 注册
+                %a{:href => "/users/sign_in"} 登录
+        .up_right
+          %a{:href => "javascript:void(0);"}
+            = image_tag "/campaigns/zhongqiu/bag.png"
+          .up_left_slide{:style => "left:135px;"}
+            %p
+              当天累计投资
+              %br>/
+              80000元
+              %br>/
+              获得奖励
+              %span> 320
+              元
+            .btn
+              - if current_user
+                - if current_user.zhongqiu_records.process.where(:level => '4').count > 0
+                  %a{:href => "javascript:void(0);", :class => 'end', :id => '4'} 完成
+                  %a{:href => "javascript:void(0);", :class => 'fail', :id => '4'} 放弃
+                - else
+                  %a{:href => "javascript:void(0);", :class => 'start', :id => '4'} 做任务
+              - else
+                %a{:href => "/users/sign_up"} 注册
+                %a{:href => "/users/sign_in"} 登录
+.comdiv.d10
+.comdiv.d11
+.comdiv.d12
+.comdiv.d13
+.comdiv.d14
+.comdiv.d15
+.comdiv.d16
+.comdiv.d17
+.comdiv.d18
+.comdiv.d19
+.comdiv.d20
+.comdiv.d21
+.comdiv.d22
+.comdiv.d23
+.comdiv.d24
+.comdiv.d25
+.comdiv.d26
+.comdiv.d27
+#div16
+  %a{:href => "http://wangdaiban.com/"} 网贷平台
+:javascript
+  $(function(){
+    //Sldie
+    $(".up_left").mouseenter(function(){
+      $(this).find(".up_left_slide").fadeIn();
+    });
+    $(".up_left").mouseleave(function(){
+      $(this).find(".up_left_slide").fadeOut();
+    });
+    //right
+    $(".up_right").mouseenter(function(){
+      $(this).find(".up_left_slide").fadeIn();
+    });
+    $(".up_right").mouseleave(function(){
+      $(this).find(".up_left_slide").fadeOut();
+    });
+    $('.start').click(function(){
+      $.get("/campaigns/zhongqiu_start?level="+$(this).attr('id'), function(data){
+        alert(data);
+        location.reload(true);
+      });
+    });
+    $('.end').click(function(){
+      $.get("/campaigns/zhongqiu_end?level="+$(this).attr('id'), function(data){
+        alert(data);
+        location.reload(true);
+      });
+    });
+    $('.fail').click(function(){
+      $.get("/campaigns/zhongqiu_fail?level="+$(this).attr('id'), function(data){
+        alert(data);
+        location.reload(true);
+      });
+    });
+
+  });

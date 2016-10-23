@@ -1,0 +1,18 @@
+<div class="rights">
+<div class="right">
+    <div class="czjl_top"></div>
+    <%= form_note_account flash %>
+    <div class="tongtit">
+      <div class="xshi">修改规则</div>
+    </div>
+<div class="row" id="content-wrapper" style='padding-left:20px'>
+  <div class="col-xs-12">
+    <div class="row">
+      <%= form_for @auto_invest_rule, :url => account_auto_invest_path(@auto_invest_rule), :html=>{:class => 'form form-horizontal validate-form', :novalidate=>"novalidate"} do |f| %>
+        <%= render :partial => "form", :locals => {:f => f} %>
+      <% end%>
+    </div>
+  </div>
+</div>
+</div>
+</div>

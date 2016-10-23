@@ -1,0 +1,21 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">现金券</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle">发放时间</div>
+            <div class="czjltitle">金额</div>
+            <div class="czjltitle">状态</div>
+         </div>
+         <% @coupons.each do |coupon| %>
+         <div class="czjl">
+            <div class="czjltitle"><%= coupon.created_at.try(:strftime, "%Y/%m/%d/ %H:%M") %>&nbsp;</div>
+            <div class="czjltitle"><%= rmb(coupon.amount) %>&nbsp;</div>
+            <div class="czjltitle"><%= coupon.status == 'unused' ? "未使用" : "已使用" %>&nbsp;</div>
+         </div>
+         <% end %>
+      </div>
+</div>

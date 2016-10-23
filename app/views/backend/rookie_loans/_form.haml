@@ -1,0 +1,54 @@
+.control-group
+  = u.label t(:amount), class: "control-label"
+  .controls
+    = u.number_field :amount, placeholder: t(:amount), type: "text", class: "input-xlarge", 'data-rule-required' => true, :'data-rule-number' => "true", :'data-rule-min' => 100, :'data-rule-maxlength' => 10, value: (number_with_precision(u.object.amount, :precision => 2, :delimiter => "") if u.object.present? )
+    元
+    %span.red
+      *
+.control-group
+  = u.label t(:interest), class: "control-label"
+  .controls
+    = u.number_field :interest, placeholder: t(:interest), type: "text", class: "input-xlarge", 'data-rule-required' => true, :'data-rule-number' => "true", :'data-rule-max' => 100
+    \%
+    %span.red
+      *
+.control-group
+  = u.label '投资期限', class: "control-label"
+  .controls
+    = u.number_field :invest_day, placeholder: '投资期限', type: "text", class: "input-xlarge", 'data-rule-required' => true, :'data-rule-number' => "true", :'data-rule-max' => 30
+    天
+    %span.red
+      *
+/ .control-group
+/   = u.label t(:due_date), class: "control-label"
+/   .controls
+/     = text_field_tag 'loan[due_date]', @loan.try(:due_date).try(:strftime, "%Y-%m-%d"), placeholder: t(:due_date), type: "text", class: "input-xlarge",'data-rule-required' => true, 'data-rule-dateiso'=>true
+/     %span.red
+/       *
+/ .control-group
+/   = u.label t(:estimated_time), class: "control-label"
+/   .controls
+/     = text_field_tag 'loan[estimated_time]', @loan.try(:estimated_time).try(:strftime, "%Y-%m-%d"), placeholder: t(:estimated_time), type: "text", class: "input-xlarge",'data-rule-required' => true, 'data-rule-dateiso'=>true
+/     %span.red
+/       *
+.control-group
+  = u.label t(:title), class: "control-label"
+  .controls
+    = u.text_field :title, placeholder: t(:title), type: "text", class: "input-xlarge", 'data-rule-required' => true
+    %span.red
+      *
+
+/ .control-group
+/   = u.label t(:avatar), class: "control-label"
+/   .controls
+/     = u.file_field :avatar, class: "file-input-wrapper btn"
+/     .text-content
+/       您可以上传JPG、GIF或PNG文件上传图片最大4M
+/ .control-group
+/   = u.label t(:avatar_display), class: "control-label"
+/   .controls
+/     = u.select :avatar_display, [["显示用户头像",false], ["显示借款头像",true]], prompt: "--请选择--", class: "input-xlarge"
+.control-group
+  = u.label t(:desc), class: "control-label"
+  .controls
+    = u.text_area :desc, :cols => 40, :rows => 16, :id => "kindeditor_id"

@@ -1,0 +1,51 @@
+<div class="btn-toolbar">
+  <% if @loan.loan_state_id == Dict::LoanState.bids_auditing.id %>
+  <a class="btn btn-primary" href="<%= bids_auditing_pass_backend_audit_path(@loan) %>" data-method='POST' data-confirm='确认审核通过？'><i class="icon-plus"></i>审核通过</a>
+  <% end %>
+  <a class="btn btn-primary" href="<%= fail_bid_backend_audit_path(@loan) %>" data-method='POST' data-confirm="确认流标？此操作不可逆"><i class="icon-plus"></i>流标</a>
+
+  <a class="btn btn-primary" href="<%= cut_off_backend_audit_path(@loan) %>" data-method='POST' data-confirm="确认截标？此操作不可逆"><i class="icon-plus"></i>截标</a>
+  <div class="btn-group">
+  </div>
+</div>
+<div class="well">
+  <ul class="nav nav-tabs">
+    <li><a href="#bids" data-toggle="tab">投标情况</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane" id="bids">
+      招标金额：<%= @loan.amount %>元<br>
+      投标金额：<%= @bids.present? ? @bids.sum(:invest_amount) : 0 %>元
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>邮箱</th>
+            <th>姓名</th>
+            <th>投资金额</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th style="width: 26px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bids.each do |bid| %>
+            <tr>
+              <td><%= bid.user.email %></td>
+              <td><%= bid.user.name %></td>
+              <td><%= rmb(bid.invest_amount) %></td>
+              <td><%= t(bid.status) %></td>
+              <td><%= format_time bid.created_at %></td>
+              <td> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function (){
+  $(".nav-tabs li:first").addClass("active");
+  $(".tab-content div:first").addClass("active in");
+})
+</script>

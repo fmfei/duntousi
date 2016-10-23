@@ -1,0 +1,166 @@
+
+<div class='right'>
+    <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">理财统计</div>
+    </div>
+    <div class='row' style='float: left;width: 100%;'>
+      <table class='table-border'>
+        <tr>
+          <td>账户总额: <%= rmb current_user.total_amount %></td>
+          <td>可用金额: <%= rmb current_user.show_available %></td>
+          <td>冻结总额: <%= rmb current_user.freeze_amount %></td>
+        </tr>
+        <tr>
+          <td>待收总额: <%= rmb current_user.not_collection_total %></td>
+          <td>待收本金: <%= rmb current_user.not_collection_principal %></td>
+          <td>待收利息: <%= rmb current_user.not_collection_interest %></td></tr>
+        <tr>
+          <td>充值总额: <%= rmb current_user.recharge_total %></td>
+          <td>提现总额: <%= rmb current_user.withdraw_total %></td>
+          <td>累计投资: <%= rmb current_user.invest_total %></td>
+        </tr>
+        <tr>
+          <td>已赚利息: <%= rmb current_user.collected_interest %></td>
+          <td>奖励总额: <%= rmb current_user.prize_total %></td>
+          <td>投标中总金额: <%= rmb current_user.bidding_total %></td>
+        </tr>
+        <tr>
+          <td>提现手续费: <%= rmb current_user.withdraw_fee_total %></td>
+          <td>债权转让手续费: <%= rmb current_user.sell_bid_fee_total %></td>
+          <td>最近收款日期:
+            <% if current_user.collections.unpaid.order('due_date').first.present? %>
+              <%= current_user.collections.unpaid.order('due_date').first.due_date.strftime("%Y年%m月%d日") %>
+            <% else %>
+             无
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <div class='tabbable_85'>
+            <div class='tab-content'>
+              <div class='tab-pane active' id=''>
+                <table class='table' style='margin-bottom:0;'>
+                  <thead class="left_30" style="line-height: 42px;">
+                      <tr>
+                        <th class="zjlb">
+                          资金类别
+                        </th>
+                        <th class="zjlb_je">
+                          金额
+                        </th>
+                        <th class="zjlb_sm">
+                          说明
+                        </th>
+                      </tr>
+                  </thead>
+                  <tbody class="left_30" style="line-height: 32px;">
+                    <tr>
+                          <td>已赚利息</td>
+                          <td><%= rmb current_user.collected_interest %></td>
+                          <td>
+                            您当前所有投资成功的已收回利息总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>账户总额</td>
+                          <td><%= rmb current_user.total_amount %></td>
+                          <td>
+                            可用金额 + 待收总额 + 提现冻结
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>可用金额</td>
+                          <td><%= rmb current_user.show_available %></td>
+                          <td>
+                            当前账户余额，账户余额可用于投标或者提现
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>冻结总额</td>
+                          <td><%= rmb current_user.freeze_amount %></td>
+                          <td>
+                            您当前暂时不能使用的金额，包括正在审核中的提现金额
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>待收总额</td>
+                          <td><%= rmb current_user.not_collection_total %></td>
+                          <td>
+                            待收本金 + 待收利息
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>待收本金</td>
+                          <td><%= rmb current_user.not_collection_principal %></td>
+                          <td>
+                            待收本金是您借款给别人但是还没收回的本金总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>待收利息</td>
+                          <td><%= rmb current_user.not_collection_interest %></td>
+                          <td>
+                            待收利息是您借款给别人但是还没收回的利息总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>充值总额</td>
+                          <td><%= rmb current_user.recharge_total %></td>
+                          <td>
+                            您在网站充值成功后收入总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>提现总额</td>
+                          <td><%= rmb current_user.withdraw_total %></td>
+                          <td>
+                            您在网站提现成功后支出总额
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>累计投资</td>
+                          <td><%= rmb current_user.invest_total %></td>
+                          <td>
+                            成功投资本金总计
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>投标中总金额</td>
+                          <td><%= rmb current_user.bidding_total %></td>
+                          <td>
+                            投资项目状态为‘投标中’的投资金额之和
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>奖励总额</td>
+                          <td><%= rmb current_user.prize_total %></td>
+                          <td>
+                            邀请返利 + 首投奖励 + 单标冠军奖励 + 满标奖 + 注册奖励 + 线下充值奖励 + 红包
+                          </td>
+                        </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<style type="text/css">
+.table-border{
+  margin:20px;padding:10px;
+  border-spacing:0px;
+  border-collapse: collapse;
+  width: 90%;
+}
+.table-border td{
+  text-align: left;
+  border: 1px solid #666;
+  padding: 10px 20px;
+}
+</style>

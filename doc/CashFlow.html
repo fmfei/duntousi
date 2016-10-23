@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class CashFlow - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-bid_prize">::bid_prize</a>
+    
+    <li ><a href="#method-c-borrower_withdraw">::borrower_withdraw</a>
+    
+    <li ><a href="#method-c-create_bid">::create_bid</a>
+    
+    <li ><a href="#method-c-deduct">::deduct</a>
+    
+    <li ><a href="#method-c-invite_prize">::invite_prize</a>
+    
+    <li ><a href="#method-c-pay_lender_for_withdraw">::pay_lender_for_withdraw</a>
+    
+    <li ><a href="#method-c-prize">::prize</a>
+    
+    <li ><a href="#method-c-recharge_for">::recharge_for</a>
+    
+    <li ><a href="#method-c-repay_to">::repay_to</a>
+    
+    <li ><a href="#method-c-return_pay_bid">::return_pay_bid</a>
+    
+    <li ><a href="#method-c-sell_bid">::sell_bid</a>
+    
+    <li ><a href="#method-c-transfer_to_borrower">::transfer_to_borrower</a>
+    
+    <li ><a href="#method-c-withdraw_apply">::withdraw_apply</a>
+    
+    <li ><a href="#method-c-withdraw_return_to_lender">::withdraw_return_to_lender</a>
+    
+    <li ><a href="#method-i-available_of_user">#available_of_user</a>
+    
+    <li ><a href="#method-i-description">#description</a>
+    
+    <li ><a href="#method-i-update_cash_items">#update_cash_items</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-CashFlow">
+  <h1 id="class-CashFlow" class="class">
+    class CashFlow
+  </h1>
+
+  <section class="description">
+    
+<p>资金流，资金记录</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-bid_prize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bid_prize</span><span
+            class="method-args">(to_user, amount, bid, desc = 'prize_first')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>投标奖励</p>
+          
+          
+
+          
+          <div class="method-source-code" id="bid_prize-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 292</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bid_prize</span> <span class="ruby-identifier">to_user</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">bid</span>, <span class="ruby-identifier">desc</span> = <span class="ruby-string">&#39;prize_first&#39;</span>
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">amount</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">desc</span>).<span class="ruby-identifier">id</span>,
+              <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+              <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">id</span>,
+              <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">id</span>,
+              <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bid</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-borrower_withdraw" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">borrower_withdraw</span><span
+            class="method-args">(loan)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>借款人提现</p>
+          
+          
+
+          
+          <div class="method-source-code" id="borrower_withdraw-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">borrower_withdraw</span> <span class="ruby-identifier">loan</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">add_loan_total</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:offline_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>,
+                    <span class="ruby-value">:cash_flow_description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">withdraw</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-create_bid" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_bid</span><span
+            class="method-args">(user, bid, loan, pay_method = 'pay_bid')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>投标</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create_bid-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_bid</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">bid</span>, <span class="ruby-identifier">loan</span>, <span class="ruby-identifier">pay_method</span> = <span class="ruby-string">&#39;pay_bid&#39;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_invest_total</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">pay_method</span>).<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>,
+                    <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-deduct" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">deduct</span><span
+            class="method-args">(user, amount, addition)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>后台扣款</p>
+          
+          
+
+          
+          <div class="method-source-code" id="deduct-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">deduct</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">addition</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">available</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">available</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>,
+                    <span class="ruby-value">:offline_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+                    <span class="ruby-value">:cash_flow_description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">deduct</span>,
+                    <span class="ruby-value">:addition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">addition</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-invite_prize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">invite_prize</span><span
+            class="method-args">(to_user, amount, offline_user_id, bid)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>邀请奖励</p>
+          
+          
+
+          
+          <div class="method-source-code" id="invite_prize-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">invite_prize</span> <span class="ruby-identifier">to_user</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">offline_user_id</span>, <span class="ruby-identifier">bid</span>
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">amount</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">promote_prize</span>.<span class="ruby-identifier">id</span>,
+              <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+              <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">id</span>,
+              <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">id</span>,
+              <span class="ruby-value">:offline_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">offline_user_id</span>,
+              <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bid</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-pay_lender_for_withdraw" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pay_lender_for_withdraw</span><span
+            class="method-args">(withdraw)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>后台提现放款 @param [Withdraw] 提现订单</p>
+          
+          
+
+          
+          <div class="method-source-code" id="pay_lender_for_withdraw-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pay_lender_for_withdraw</span> <span class="ruby-identifier">withdraw</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_freeze_amount</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_withdraw_total</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_withdraw_received</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">received_amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>,
+                    <span class="ruby-value">:offline_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>,
+                    <span class="ruby-value">:cash_flow_description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">withdraw</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">received_amount</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">fee</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+
+      <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>,
+                      <span class="ruby-value">:offline_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>,
+                      <span class="ruby-value">:cash_flow_description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">withdraw_fee</span>,
+                      <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">fee</span>)
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-prize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">prize</span><span
+            class="method-args">(to_user, amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>发放奖励、红包</p>
+          
+          
+
+          
+          <div class="method-source-code" id="prize-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 306</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">prize</span> <span class="ruby-identifier">to_user</span>, <span class="ruby-identifier">amount</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">amount</span>
+
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">prize</span>.<span class="ruby-identifier">id</span>,
+                <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+                <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">id</span>,
+                <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-recharge_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">recharge_for</span><span
+            class="method-args">(user, amount, pay_order=nil, pay_class='', desc = Dict::CashFlowDescription.charge, trigger=nil, addition=nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>充值 投资充值 还款充值</p>
+          
+          
+
+          
+          <div class="method-source-code" id="recharge_for-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">recharge_for</span> <span class="ruby-identifier">user</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pay_order</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">pay_class</span>=<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">desc</span> = <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">charge</span>, <span class="ruby-identifier">trigger</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">addition</span>=<span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_recharge_total</span> <span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:to_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>,
+                    <span class="ruby-value">:offline_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span>,
+                    <span class="ruby-value">:pay_order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pay_order</span>,
+                    <span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">desc</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:pay_class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pay_class</span>,
+                    <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">trigger</span>,
+                    <span class="ruby-value">:addition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">addition</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">desc</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">offline_recharge</span>
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">amount</span><span class="ruby-operator">*</span><span class="ruby-value">0.002</span>
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">amount</span><span class="ruby-operator">*</span><span class="ruby-value">0.002</span>
+      <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:to_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">user</span>,
+                      <span class="ruby-value">:from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>,
+                      <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">amount</span><span class="ruby-operator">*</span><span class="ruby-value">0.002</span>,
+                      <span class="ruby-value">:pay_order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pay_order</span>,
+                      <span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">prize_offline</span>.<span class="ruby-identifier">id</span>,
+                      <span class="ruby-value">:pay_class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pay_class</span>,
+                      <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">trigger</span>,
+                      <span class="ruby-value">:addition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">addition</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-repay_to" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">repay_to</span><span
+            class="method-args">(collection)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>借款人还款</p>
+          
+          
+
+          
+          <div class="method-source-code" id="repay_to-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">repay_to</span> <span class="ruby-identifier">collection</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">interest</span>
+    <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">borrower_id</span>,
+                    <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">user_id</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">amount</span>,
+                    <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">collection</span>,
+                    <span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">repay</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-return_pay_bid" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">return_pay_bid</span><span
+            class="method-args">(bid)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>流标</p>
+          
+          
+
+          
+          <div class="method-source-code" id="return_pay_bid-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">return_pay_bid</span> <span class="ruby-identifier">bid</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_invest_total</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">return_pay_bid</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">invest_amount</span>,
+                    <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">user_id</span>,
+                    <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bid</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-sell_bid" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sell_bid</span><span
+            class="method-args">(current_user, from_bid, to_bid, invest_amount)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>债权转让</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sell_bid-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sell_bid</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">from_bid</span>, <span class="ruby-identifier">to_bid</span>, <span class="ruby-identifier">invest_amount</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">add_invest_total</span> <span class="ruby-identifier">invest_amount</span>
+
+    <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">invest_amount</span>
+    <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">invest_amount</span>
+
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">sell_bid</span>.<span class="ruby-identifier">id</span>,
+                <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">invest_amount</span>,
+                <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>,
+                <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">user_id</span>,
+                <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to_bid</span>)
+
+    <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">invest_amount</span><span class="ruby-operator">*</span><span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">sell_bid_fee</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">invest_amount</span><span class="ruby-operator">*</span><span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">sell_bid_fee</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">invest_amount</span><span class="ruby-operator">*</span><span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">sell_bid_fee</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">invest_amount</span><span class="ruby-operator">*</span><span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">sell_bid_fee</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">sell_bid_fee</span>.<span class="ruby-identifier">id</span>,
+                <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">invest_amount</span><span class="ruby-operator">*</span><span class="ruby-constant">SystemConfig</span>.<span class="ruby-identifier">sell_bid_fee</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>,
+                <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">from_bid</span>.<span class="ruby-identifier">user_id</span>,
+                <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">company</span>.<span class="ruby-identifier">id</span>,
+                <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">to_bid</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-transfer_to_borrower" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">transfer_to_borrower</span><span
+            class="method-args">(loan)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>放款给借款人</p>
+          
+          
+
+          
+          <div class="method-source-code" id="transfer_to_borrower-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transfer_to_borrower</span> <span class="ruby-identifier">loan</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">transfer_to_borrower</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">amount</span>,
+                    <span class="ruby-value">:from_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">asset</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:to_user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>.<span class="ruby-identifier">borrower</span>.<span class="ruby-identifier">id</span>,
+                    <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loan</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-withdraw_apply" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">withdraw_apply</span><span
+            class="method-args">(withdraw, current_user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>提现申请</p>
+          
+          
+
+          
+          <div class="method-source-code" id="withdraw_apply-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">withdraw_apply</span> <span class="ruby-identifier">withdraw</span>, <span class="ruby-identifier">current_user</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">add_freeze_amount</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:cash_flow_description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">withdraw_apply</span>,
+                    <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>,
+                    <span class="ruby-value">:from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>,
+                    <span class="ruby-value">:to_user=</span><span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>,
+                    <span class="ruby-value">:trigger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-withdraw_return_to_lender" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">withdraw_return_to_lender</span><span
+            class="method-args">(withdraw)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>出借人提现失败</p>
+          
+          
+
+          
+          <div class="method-source-code" id="withdraw_return_to_lender-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">withdraw_return_to_lender</span> <span class="ruby-identifier">withdraw</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+
+    <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_total</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">add_available</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">minus_freeze_amount</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>.<span class="ruby-identifier">minus_total</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+    <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>.<span class="ruby-identifier">minus_available</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>
+
+    <span class="ruby-constant">CashFlow</span>.<span class="ruby-identifier">create</span>( <span class="ruby-value">:from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">agent</span>,
+                     <span class="ruby-value">:to_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">user</span>,
+                     <span class="ruby-value">:cash_flow_description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Dict</span><span class="ruby-operator">::</span><span class="ruby-constant">CashFlowDescription</span>.<span class="ruby-identifier">withdraw_return</span>,
+                     <span class="ruby-value">:amount</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">amount</span>,
+                     <span class="ruby-value">:pay_class=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">withdraw</span>.<span class="ruby-identifier">pay_class</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-available_of_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">available_of_user</span><span
+            class="method-args">(user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="available_of_user-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_of_user</span> <span class="ruby-identifier">user</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_user_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_of_from_user</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_user_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_of_to_user</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-description" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">description</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="description-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:cash_flow_description</span>).<span class="ruby-identifier">try</span>(<span class="ruby-value">:name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_cash_items" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_cash_items</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_cash_items-source">
+            <pre><span class="ruby-comment"># File app/models/cash_flow.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_cash_items</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_user</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-value">:total_of_from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_user</span>.<span class="ruby-identifier">total</span>,
+                            <span class="ruby-value">:available_of_from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_user</span>.<span class="ruby-identifier">available</span>,
+                            <span class="ruby-value">:freeze_of_from_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_user</span>.<span class="ruby-identifier">freeze_amount</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attributes</span>( <span class="ruby-value">:total_of_to_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">total</span>,
+                            <span class="ruby-value">:available_of_to_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">available</span>,
+                            <span class="ruby-value">:freeze_of_to_user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_user</span>.<span class="ruby-identifier">freeze_amount</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

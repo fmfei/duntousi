@@ -1,0 +1,149 @@
+        <div class="gezhdiv">
+         <div class="xtouxiang">
+          <%= avatar %>
+        </div>
+        <div class="gezhxq">
+          <div class="nametitle">
+           <div class="name"><%= current_user.username %></div>
+           <button class="buttons te" onclick="javascript:window.location.href='<%= account_recharge_path %>'">充值</button>
+           <button class="buttons white" onclick="javascript:window.location.href='<%= new_account_withdraw_path %>'">提现</button>
+         </div>
+         <ul>
+           <li><span>账户总额：</span><span class="lan"><%= rmb current_user.total_amount %></span></li>
+           <li>
+            <% if current_user.confirmed_at.present? %>
+              <span><%= image_tag 'account/yxlogs.jpg' %></span>
+              <span>邮箱已认证</span>
+            <% else %>
+              <span><%= image_tag 'account/yxlogs.jpg' %></span>
+              <span class="hui"><%= link_to '邮箱未认证', auth_email_account_users_path %></span>
+            <% end %>
+          </li>
+          <li><span>可用金额：</span><span class="lan"><%= rmb current_user.show_available %></span></li>
+          <li>
+            <% if current_user.auth_realname == 1 %>
+              <span><%= image_tag 'account/sflogs.jpg' %></span>
+              <span>身份已认证</span>
+            <% else %>
+              <span><%= image_tag 'account/sflogs.jpg' %></span>
+              <span class="hui"><%= link_to '身份未认证', real_name_account_users_path %></span>
+            <% end %>
+          </li>
+          <li><span>待收总额：</span><span class="lan"><%= rmb current_user.not_collection_total %></span></li>
+          <li>
+            <% if current_user.auth_mobile == true %>
+            <i class='icon-phone-sign text-contrast'></i>
+              <span><%= image_tag 'account/sjlogs.jpg' %></span>
+              <span>手机已认证</span>
+            <% else %>
+              <span><%= image_tag 'account/sjlogs.jpg' %></span>
+              <span class="hui"><%= link_to '手机未认证', auth_phone_account_users_path %></span>
+            <% end %>
+          </li>
+          <li><span>提现冻结：</span><span class="lan"><%= rmb current_user.freeze_amount %></span></li>
+          <% if current_user.user_cash.rookie_amount.present? && current_user.user_cash.rookie_amount.to_i != 0 %>
+            <li>
+              <span>新手体验金：</span><span class="lan"><%= rmb current_user.rookie_amount %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="touzilist">
+
+        <div class="title">
+          <div class="left">投资流程</div>
+        </div>
+        <div class="tzlc">
+          <div class="tzlccon">
+          <a href="#" class="hover">注册会员</a>
+            <span><%= image_tag 'blue_biao.png' %></span>
+            <a href="#" class="hover">实名认证</a>
+            <span><%= image_tag 'blue_biao.png' %></span>
+            <a href="#" class="hover">账户充值</a>
+            <span><%= image_tag 'blue_biao.png' %></span>
+            <a href="#" class="hover">进行投资</a>
+            </div>
+        </div>
+
+       <div class="title">
+        <div class="left">投标中的项目</div>
+        <div class="right">收起∨</div>
+      </div>
+    <div class="lister hui">
+      <% if @bids.blank? %>
+        <a href='/loans'>没有正在投标的项目，马上投标 >></a>
+        </div>
+      <% else %>
+        <div>项目名称</div>
+        <div>年利息</div>
+        <div>贷款期限</div>
+        <div>投标时间</div>
+        <div>投标金额</div>
+        <div>应收本息</div>
+        <!-- <div>已收本息</div> -->
+      </div>
+        <% @bids.each do |bid| %>
+          <div class="lister">
+            <div><%= link_to truncate(bid.loan.title, :length=>10), invest_path(bid.loan), :target => '_blank' %></div>
+            <div><%= bid.interest %>%</div>
+            <div><%= bid.invest_month %>个月</div>
+            <div><%= format_time(bid.created_at, false, true) %></div>
+            <div><%= rmb bid.invest_amount %></div>
+            <div><%= rmb bid.collection_amount %></div>
+            <!-- <div><%#= rmb bid.colected_amount %></div> -->
+          </div>
+        <% end %>
+      <% end %>
+
+  </div>
+  <div class="jrxinbiaok">
+    <% @loans.each_with_index do |loan, index|%>
+      <div class="jrxinbiao <%= 'jju' if index == 1%> <%= 'jju jju2' if index == 2%>" onclick="javascript:window.location.href='/show_invest?id=<%= loan.id %>'">
+        <% if loan.progress == 100 %>
+          <%= image_tag 'account/huankz.jpg' %>
+        <% else %>
+          <%= image_tag 'account/yatubiao.jpg' %>
+        <% end %>
+           <div class="jsbiao">
+            <!-- <span><%#= loan.borrower.name %></span><br> -->
+            <span class="xiaozi"><%= loan.title %></span>
+          </div>
+          <div class="jinduf">
+            <% if loan.progress != 100 %>
+              <div class="jindu" style="width: <%= 150 * (loan.progress / 100) %>px"></div>
+            <% end %>
+          </div>
+          <span class="xiaozi fenhong">金额：<%= rmb_wan loan.amount %></span>
+          <div class="xbanner">
+            <a href="javscript:void(0)" class="unslider-arrow prev jtleft"></a>
+            <a href="javscript:void(0)" class="unslider-arrow next jtright"></a>
+            <ul>
+              <li><%= image_tag 'account/ysz.jpg' %></li>
+              <li><%= image_tag 'account/ysz.jpg' %></li>
+              <li><%= image_tag 'account/ysz.jpg' %></li>
+            </ul>
+          </div>
+          <div class="shulianghua">
+           <div class="jborder">
+            <span><span class="juh"><%= loan.interest %></span><span class="zhong juh">%</span></span>
+            <span class="xiao">年化利率</span>
+          </div>
+          <div>
+            <span><%= loan.months %><span class="zhong">个月</span></span>
+            <span class="xiao">项目期限</span>
+          </div>
+        </div>
+        <button class="botbot <%= 'zjhse' if loan.progress == 100 %>" onclick="javascript:window.location.href='<%= invest_path(loan) %>'"><%= loan_state loan %></button>
+      </div>
+    <% end %>
+  </div>
+<style>
+/*.tzlcdiv{ width:760px; height:137px; float:left;}*/
+.tzlc{ height:100px; background:#fff;margin-bottom: 30px;}
+.tzlccon{ margin-left:35px;padding-top: 30px;}
+.tzlc .tzlccon a{ width:130px; height:40px; background:#e8e8e8; border-radius:20px; text-align:center; line-height:40px; text-decoration:none; font-family:微软雅黑; font-size:17px; color:#838383; float:left;}
+.tzlc .tzlccon a.hover{ background:#70d5f3; color:#fff;}
+.tzlc .tzlccon span{ width:20px; height:20px; float:left; display:block; margin:10px 17px;}
+</style>

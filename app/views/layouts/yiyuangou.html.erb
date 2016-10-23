@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>亚太投资-【全国诚信、专业的金融投资理财、贷款平台】</title>
+<meta name="keywords" content="亚太投资|理财|投资|贷款|P2P理财|小额投资|金融投资|如何理财投资" >
+<meta name="description" content="亚太投资(www.yataitouzi.com)是全国互联网金融行业中的P2P理财、贷款中诚信、专业的平台，为投资理财和贷款用户提供了安全、透明、公平的金融服务。" >
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag  "frontend.css", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend", "data-turbolinks-track" => true %>
+<script type="text/javascript">
+var _mvq = _mvq || [];
+_mvq.push(['$setAccount', 'm-80090-0']);
+
+_mvq.push(['$logConversion']);
+(function() {
+var mvl = document.createElement('script');
+mvl.type = 'text/javascript'; mvl.async = true;
+mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(mvl, s);
+})();
+
+</script>
+</head>
+
+<body>
+<%= render 'layouts/header' %>
+<div class="bod">
+  <%= yield %>
+  <%= render 'layouts/footer' %>
+</div>
+
+<%= javascript_include_tag "frontend/qqzx", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend/backup", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend/jqueryuser", "data-turbolinks-track" => true %>
+<%#= javascript_include_tag "account/customize", "data-turbolinks-track" => true %>
+<script type="text/javascript">
+  $.ajax({
+      url: "/home/basic_info_json",
+      dataType: 'json',
+      success: function (data) {
+          $('title').text(data.company_name);
+          $('.phone400').text(data.phone400);
+          $('.qq_group').text(data.qq_group);
+          $('.serve_time').text(' 服务时间：' + data.serve_time);
+          // $('.prize_register').text(data.prize_register);
+          $('.prize_register').text('30元红包');
+          // $('.add1').attr('onclick', "javascript:window.location.href='/campaigns/september'");
+          // $('.add2').attr('onclick', "javascript:window.location.href='/campaigns/september'");
+          $('.prize_first').text('50元');
+          $('.promotion_ratio').text(data.promotion_ratio);
+          $('.qq_group').text(data.qq_group);
+          if (data.username.length > 0) {
+              $('#username').text(data.username);
+              $('#hello').show();
+          } else {
+              $('.sign').show();
+          }
+      }
+  });
+</script>
+</body>
+</html>

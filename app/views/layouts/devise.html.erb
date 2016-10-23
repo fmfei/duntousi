@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><%= @title %></title>
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag  "frontend.css", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend", "data-turbolinks-track" => true %>
+<style>
+*{ margin:0; padding:0;}
+.bodzcbg{ width:100%; height:699px; background:url(/zbg.jpg) no-repeat center;}
+.m1000{ width:1000px; height:30px; margin:0 auto;}
+
+.hongqi
+{
+width:622px;
+height:68px;
+
+position:relative;
+animation:myfirst 5s linear 2s infinite alternate;
+/* Firefox: */
+-moz-animation:myfirst 5s linear 2s infinite alternate;
+/* Safari and Chrome: */
+-webkit-animation:myfirst 5s linear 2s infinite alternate;
+/* Opera: */
+-o-animation:myfirst 5s linear 2s infinite alternate;
+}
+
+@keyframes myfirst
+{
+0%   {left:0px; top:0px;}
+50%  {left:100px; top:0px;}
+100%  {left:0px; top:0px;}
+
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0%   {left:0px; top:0px;}
+50%  {left:100px; top:0px;}
+100%  {left:0px; top:0px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+0%   {left:0px; top:0px;}
+50%  {left:100px; top:0px;}
+100%  {left:0px; top:0px;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+0%   {left:0px; top:0px;}
+50%  {left:100px; top:0px;}
+100%  {left:0px; top:0px;}
+}
+
+.bodzcbg .alert{
+  margin-top:50px;
+  width: 25%;
+}
+
+</style>
+<script type="text/javascript">
+var _mvq = _mvq || [];
+_mvq.push(['$setAccount', 'm-80090-0']);
+
+_mvq.push(['$logConversion']);
+(function() {
+var mvl = document.createElement('script');
+mvl.type = 'text/javascript'; mvl.async = true;
+mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(mvl, s);
+})();
+
+</script>
+</head>
+<body>
+<%= render 'layouts/header' %>
+<div class="bod">
+  <div class='bodzcbg'>
+    <%= yield %>
+  </div>
+  <%= render 'layouts/footer' %>
+</div>
+
+<%= javascript_include_tag "frontend/qqzx", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend/backup", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "frontend/jqueryuser", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "jquery-validate.min", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "account/customize", "data-turbolinks-track" => true %>
+<script type="text/javascript">
+
+  $('form').validate({
+    onKeyup : true,
+    eachValidField : function() {
+
+      $(this).removeClass('error').addClass('success');
+    },
+    eachInvalidField : function() {
+
+      $(this).removeClass('success').addClass('error');
+    }
+  });
+
+</script>
+<div style='display:none;'>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1252968163'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1252968163%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+</html>

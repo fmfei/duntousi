@@ -1,0 +1,13 @@
+.search-well
+  - case controller_name
+  - when "loans"
+    - url = backend_loans_path
+  - when "audits"
+    - url = backend_audits_path
+  - else
+    - url = backend_loans_path
+  = search_form_for @search, :url => url, :html => {:method => :get, :class=>"form-inline", :role=>"form"} do |f|
+    - if controller_name == "audits"
+      = hidden_field_tag :as, params[:as]
+    = f.text_field :title_or_borrower_email_or_borrower_info_name_or_borrower_info_id_card_cont, class: "input-xlarge", placeholder: "邮箱/姓名/身份证号/借款目的"
+    = f.submit '搜索', class: "btn"

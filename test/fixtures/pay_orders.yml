@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  uuid: MyString
+  payment_serial: MyString
+  bank_order_id: MyString
+  callback_path: MyString
+  callback_model_name: MyString
+  callback_model_id: 1
+  callback_model_method: MyString
+  amount: 9.99
+  paid: false
+  success: false
+  pay_method_id: 1
+  creator_id: 1
+  pay_class: MyString
+
+two:
+  uuid: MyString
+  payment_serial: MyString
+  bank_order_id: MyString
+  callback_path: MyString
+  callback_model_name: MyString
+  callback_model_id: 1
+  callback_model_method: MyString
+  amount: 9.99
+  paid: false
+  success: false
+  pay_method_id: 1
+  creator_id: 1
+  pay_class: MyString

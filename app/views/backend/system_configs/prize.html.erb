@@ -1,0 +1,111 @@
+<%= form_tag update_prize_backend_system_configs_path, :method => 'PUT' do %>
+<div class="well">
+    <h3>首投奖</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>参数名</th>
+          <th>参数值</th>
+          <!-- <th>创建时间</th> -->
+          <th>更新时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= t 'SystemConfig.prize_first_status' %></td>
+          <td><%= select_tag '[config][prize_first_status]', options_for_select([['开', 'on'], ['关', 'off']], @system_configs.where(:key => 'prize_first_status').first.value ) %></td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_first_status').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_first_status').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.prize_first_threshold' %></td>
+          <td><%= text_field_tag '[config][prize_first_threshold]', @system_configs.where(:key => 'prize_first_threshold').first.value %>元</td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_first_threshold').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_first_threshold').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.prize_first_amount' %></td>
+          <td><%= text_field_tag '[config][prize_first_amount]', @system_configs.where(:key => 'prize_first_amount').first.value %>元</td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_first_amount').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_first_amount').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="well">
+    <h3>单标冠军奖(单标累计投资总额最高者)</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>参数名</th>
+          <th>参数值</th>
+          <!-- <th>创建时间</th> -->
+          <th>更新时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= t 'SystemConfig.prize_max_status' %></td>
+          <td><%= select_tag '[config][prize_max_status]', options_for_select([['开', 'on'], ['关', 'off']], @system_configs.where(:key => 'prize_max_status').first.value ) %></td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_max_status').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_max_status').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.prize_max_amount' %></td>
+          <td><%= text_field_tag '[config][prize_max_amount]', @system_configs.where(:key => 'prize_max_amount').first.value %>元</td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_max_amount').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_max_amount').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="well">
+    <h3>满标奖</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>参数名</th>
+          <th>参数值</th>
+          <!-- <th>创建时间</th> -->
+          <th>更新时间</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= t 'SystemConfig.prize_last_status' %></td>
+          <td><%= select_tag '[config][prize_last_status]', options_for_select([['开', 'on'], ['关', 'off']], @system_configs.where(:key => 'prize_last_status').first.value ) %></td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_last_status').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_last_status').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t 'SystemConfig.prize_last_amount' %></td>
+          <td><%= text_field_tag '[config][prize_last_amount]', @system_configs.where(:key => 'prize_last_amount').first.value %>元</td>
+          <!-- <td><%= format_time(@system_configs.where(:key => 'prize_last_amount').first.created_at) %></td> -->
+          <td><%= format_time(@system_configs.where(:key => 'prize_last_amount').first.updated_at) %></td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="btn-toolbar form-actions">
+  <input type='submit' class="btn btn-primary" value='保存'>
+  <div class="btn-group">
+  </div>
+</div>
+<% end %>

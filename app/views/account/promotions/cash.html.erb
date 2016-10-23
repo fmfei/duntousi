@@ -1,0 +1,24 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">抽奖记录</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle">日期/时间 </div>
+            <div class="czjltitle">奖品</div>
+            <div class="czjltitle">状态</div>
+            <div class="czjltitle">过期时间</div>
+         </div>
+         <% @records.each do |re| %>
+         <div class="czjl">
+            <div class="czjltitle"><%= re.actived_at.try(:strftime, "%Y/%m/%d/ %H:%M") %></div>
+            <div class="czjltitle"><%= re.detail %></div>
+            <div class="czjltitle"><%= re.is_finished ? "已使用" : "未使用" %></div>
+            <div class="czjltitle"><%= re.due_at.try(:strftime, "%Y/%m/%d") %>
+         </div>
+         <% end %>
+         <%= will_paginate @records %>
+      </div>
+</div>

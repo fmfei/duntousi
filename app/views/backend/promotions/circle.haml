@@ -1,0 +1,29 @@
+.well
+  =link_to '下载全部名单', circle_excel_backend_promotions_path
+  \&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  =link_to '已投资名单', circle_excel_backend_promotions_path(invest_total: '1')
+.well
+  .search-well
+    - url = circle_backend_promotions_path
+    = search_form_for @q, :url => url, :html => { :class=>"form-inline", :role=>"form"} do |f|
+      = f.search_field :user_mobile_or_user_info_name_cont, class: "input-xlarge", placeholder: "姓名/手机号"
+      = f.submit '搜索', class: "btn"
+      = link_to '重置', circle_backend_promotions_path
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 中奖者
+        %th 手机号
+        %th 时间
+        %th 奖品
+    %tbody
+      - @records.each do |re|
+        %tr
+          %td= link_to re.user.name, backend_lender_path(re.user)
+          %td= link_to re.user.mobile, backend_lender_path(re.user)
+          %td= format_time re.actived_at
+          %td= re.prize_text
+
+= will_paginate @records

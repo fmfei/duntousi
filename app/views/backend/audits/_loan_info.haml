@@ -1,0 +1,67 @@
+贷款信息 
+- if @loan.pass
+  = "(约标密码: #{@loan.pass}) "
+(贷款编号：
+= @loan.code
+)
+.well
+  %table.table.table-bordered
+    %tbody
+      %tr
+        %th.success= t(:amount)
+        %td
+          = @loan.amount
+          元
+        %th= t :available_amount
+        %td
+          = @loan.available_amount
+          元
+        %th= t :months
+        %td
+          = @loan.months
+          个月
+        %th= t :interest
+        %td
+          = @loan.interest
+          \%
+      %tr
+        %th.success= t :repay_style
+        %td= t(@loan.repay_style)
+        %th= t :min_invest
+        %td
+          = @loan.min_invest
+          元
+        %th= t :max_invest
+        %td
+          = @loan.max_invest
+          元
+        %th= t :due_date
+        %td= @loan.due_date.try(:strftime,"%Y-%m-%d")
+      %tr
+        %th.success= t :title
+        %td{:ColSpan => 3}= @loan.title
+        %th= t :credit_level
+        %td= @loan.credit_level
+        %th= t :with_mortgage
+        %td= @loan.with_mortgage ? "是" : "否"
+      %tr
+        %th.success= t :with_guarantee
+        %td= @loan.with_guarantee ? "是" : "否"
+        %th= t :state
+        %td= @loan.state.try(:name)
+        %th= t :junior_auditor
+        %td= @loan.junior_auditor.try(:name_or_email)
+        %th= t :junior_audit_time
+        %td= @loan.junior_audit_time.try(:strftime,"%Y-%m-%d %H:%M:%S")
+      %tr
+        %th.success= t :senior_auditor
+        %td= @loan.senior_auditor.try(:name_or_email)
+        %th= t :senior_audit_time
+        %td= @loan.senior_audit_time.try(:strftime,"%Y-%m-%d %H:%M:%S")
+        %th= t :bids_auditor_id
+        %td= @loan.bids_auditor.try(:name_or_email)
+        %th= t :bids_audit_time
+        %td= @loan.bids_audit_time.try(:strftime,"%Y-%m-%d %H:%M:%S")
+      %tr
+        %th.success= t :desc
+        %td{:ColSpan => 7}= @loan.desc.html_safe

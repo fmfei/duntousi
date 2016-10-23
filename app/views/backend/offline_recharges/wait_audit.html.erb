@@ -1,0 +1,31 @@
+<div class="well">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>邮箱</th>
+          <th>姓名</th>
+          <th>金额</th>
+          <th>用户备注</th>
+          <th>充值银行</th>
+          <th>申请时间</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @offline_recharges.each do |recharge| %>
+          <tr>
+            <td><%= recharge.id %></td>
+            <td><%= recharge.user.email %></td>
+            <td><%= recharge.user.name %></td>
+            <td><%= recharge.amount %></td>
+            <td><%= recharge.comment %></td>
+            <td><%= recharge.offline_bank.detail %></td>
+            <td><%= format_time recharge.created_at %></td>
+            <td><%= link_to '审核', edit_backend_offline_recharge_path(recharge) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<%= will_paginate @offline_recharges %>

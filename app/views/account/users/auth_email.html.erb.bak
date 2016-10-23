@@ -1,0 +1,24 @@
+<div class='row' id='content-wrapper'>
+  <div class='col-xs-12 box'>
+    <div class="box-header"></div>
+    <div class='box-content box-double-padding'>
+      <fieldset>
+        <%= form_note_account flash %>
+        <% if current_user.confirmed_at.present? %>
+          <div class="alert alert-success alert-dismissable">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            您已通过邮箱认证。
+          </div>
+        <% end %>
+        <div class='col-sm-4'>
+          <div class='lead'>
+            <i class='icon-envelope text-contrast'></i>
+            邮箱认证<small></small>
+          </div>
+            您的邮箱: <%= current_user.email %>
+        </div>
+
+      </fieldset>
+    </div>
+  </div>
+</div>

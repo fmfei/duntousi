@@ -1,0 +1,48 @@
+= include_kindeditor_if_needed
+= form_note flash
+.well
+  .tab-content
+    .tab-pane.active
+      = form_for @product, url: backend_product_path, html: {class: "form-horizontal", role: "form"} do |u|
+        .control-group
+          = u.label '产品名称', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :title, placeholder: "产品名称信息", class: "input-xlarge"
+        .control-group
+          = u.label '产品类型', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :type_id, placeholder: "产品类型",  class: "input-xlarge"
+        .control-group
+          = u.label '总价', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :total_price, placeholder: "总价",  class: "input-xlarge"
+        .control-group
+          = u.label '库存量', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :numbers, placeholder: "库存量",  class: "input-xlarge"
+        .control-group
+          = u.label '已售出量', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :already, placeholder: "已售出量",  class: "input-xlarge"
+        .control-group
+          = u.label '剩余量', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :remain, placeholder: "剩余量",  class: "input-xlarge"
+        / .control-group
+        /   = u.label '产品图片', class: "col-sm-2 control-label"
+        /   .controls
+        /     = u.file_field :attachements, multiple: true
+        .control-group
+          = u.label '产品描述', class: "col-sm-2 control-label"
+          .controls
+            = u.text_area :desc, class: "someclass", :cols => 40, :rows => 16, :id => "kindeditor_id"
+        .control-group
+          = u.label '产品权重', class: "col-sm-2 control-label"
+          .controls
+            = u.text_field :weight, placeholder: "产品权重",  class: "input-xlarge"
+        / .control-group
+        /   = u.label :password, class: "col-sm-2 control-label"
+        /   .controls
+        /     = u.text_field :password, placeholder: "Password", type: "password", class: "input-xlarge"
+        .form-actions
+          %button.btn.btn-primary{:type => "submit"} 更新

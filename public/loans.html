@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>亚太投资-【全国诚信、专业的金融投资理财、贷款平台】</title>
+    <meta name="keywords" content="亚太投资|理财|投资|贷款|P2P理财|小额投资|金融投资|如何理财投资" >
+    <meta name="description" content="亚太投资(www.yataitouzi.com)是全国互联网金融行业中的P2P理财、贷款中诚信、专业的平台，为投资理财和贷款用户提供了安全、透明、公平的金融服务。" >
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link href="css/css.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery_ujs.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+var _mvq = _mvq || [];
+_mvq.push(['$setAccount', 'm-80090-0']);
+
+_mvq.push(['$logConversion']);
+(function() {
+var mvl = document.createElement('script');
+mvl.type = 'text/javascript'; mvl.async = true;
+mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(mvl, s);
+})();
+
+</script>
+</head>
+<body>
+<style type="text/css">
+.bkwhite .top{background: none;}
+.touzixmgb{background:white;}
+.wylclist .lefter{width:856px;background:white;border-radius: 5px;}
+</style>
+<div class="header">
+   <div class="headerson">
+      <div class="left">
+         <span>欢迎致电：</span><span class="da phone400"></span><span class='serve_time'></span>
+         <a href="http://www.weibo.com/yataiyangguang" class="qqlog posa" target='_blank'></a>
+         <a href="http://t.qq.com/yataitouzi" class="qqlog posb" target='_blank'></a>
+      </div>
+      <div class="right">
+         <span id='hello' onclick="javascript:window.location.href='/account/users'">您好： <span id='username'></span>
+          <div class="xllists">
+             <a href="/account/users">我的账户</a>
+             <a href="/account/recharge">我要充值</a>
+             <a href="/account/withdraws/new">我要提现</a>
+             <a href="/account/transactions">资金管理</a>
+             <a href="/account/invests">理财管理</a>
+             <a rel="nofollow" data-method="delete" href="/users/sign_out">退出</a>
+          </div>
+        </span>
+         <a href="/users/sign_in" class="zc sign">登录</a>&nbsp;
+         <a href="/users/sign_up" class="zc sign">注册</a>
+      </div>
+   </div>
+</div>
+<div class="neck">
+   <div class="neckson">
+      <div class="logo" onclick="javascript:window.location.href='/'">
+         <img src="image/logo.jpg" width="248" height="87" />
+      </div>
+<div class="navright"></div>
+   </div>
+</div>
+<div class="bod">
+    <div class="erjinav">
+        <div class="erjinavson">
+            <a href="#">我要理财</a>><a href="#">散标理财列表</a>
+        </div>
+    </div>
+    <div class="bodson bkwhite">
+        <div class="top" style="padding-top:0px;">
+            <div class="topimgbg">
+                <div class="divson">
+                    <div class="bor">
+                        <span id="invest_amount"></span>
+                        <span id='juh' class="juh">成功投资资金</span>
+                    </div>
+                    <div class="bor">
+                        <span id="interest_amount"></span>
+                        <span class="juh">投资者已获取收益</span>
+                    </div>
+                    <div>
+                        <span id="total_deal_num"></span>
+                        <span class="juh">累计成功完成借款</span>
+                    </div>
+                </div>
+            </div>
+            <div class="touzixmgb">
+                <div class="leftd">
+                    <ul class="invests_filter_items">
+                        <li><span class="shui">筛选投资项目</span><!-- <span class="thkuai">多选</span> --></li>
+                        <li class="biao_type"><span>标的类型</span><span class="jhkuai condition" name="all">不限</span><span
+                                name="guarantee" class="condition">担保标</span>
+                            <span name="recommendation" class="condition">推荐标</span><span name="mortgage" class="condition">抵押标</span>
+                        </li>
+                        <li class="months"><span>投标期限</span><span name="all" class="jhkuai condition">不限</span><span name="1" class="condition">1月</span><span name="2" class="condition">2月</span>
+                            <span name="3" class="condition">3月</span>
+                        </li>
+                        <!-- <li class="interest"><span>利息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+                                class="jhkuai condition" name="all">不限</span>
+                            <span name="20" class="condition">20%</span><span name="21" class="condition">21%</span><span name="22" class="condition">22%</span><span
+                                    name="24" class="condition">24%</span></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="yaolinetab">
+                <div>
+                    <div>项目名称</div>
+                    <div>年利率</div>
+                    <div>金额</div>
+                    <div>期限</div>
+                    <div>进度</div>
+                </div>
+            </div>
+            <div id="itemContainer">
+            </div>
+            <div class="wylclist" id="holder">
+            </div>
+            <!--<div class="wylclist" id="holder"></div>-->
+        </div>
+
+        <!--<div class="wylclist" id="holder">-->
+
+        <!--</div>-->
+
+        <div id="item-tmp" style="display: none;">
+            <div class="wylclist">
+                <div class="lefter">
+                    <span class="yikuan dazi title"></span>
+                    <span class="erkuan dazi juse interest"></span>
+                    <span class="paddinger lanser amount"></span>
+                    <span class="paddinger lanser months"></span>
+                    <span class="paddinger lanser a100"></span>
+                </div>
+
+                <a class="righter" href="javascript:void(0)"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footers">
+        <div class="fonterson">
+            <div class="left">
+                <div class="zhzi">客服热线</div>
+                <div class="dazi lan phone400"></div>
+                <div class="xzi serve_time"></div>
+                <div class="zhzi">官方QQ群</div>
+                <div class="dazi lan qq_group"></div>
+            </div>
+            <div class="center">
+            <div class="add1" style='width: 195px;'>
+              <div class="add1-txt">注册投资送<span class='prize_register'></span></div>
+            </div>
+            <div class="add2">
+              <div class="add1-txt">首投奖<span class='prize_first'></span></div>
+            </div>
+            <div class="add3">
+              <div class="add1-txt">推荐奖<span class='promotion_ratio'></span></div>
+            </div>
+            </div>
+            <img src="image/qrcode.png"/>
+        </div>
+    </div>
+    <div class="foot"></div>
+</div>
+<script type="text/javascript" src="js/jqueryuser.js"></script>
+<script type="text/javascript">
+function bindClick() {
+
+    $("#holder a").on('click', function () {
+        var page_number = $(this).attr('page');
+//          传递已选筛选项+点击的页码数至search_json这个action
+        json = array_to_json(page_number);
+        search_json(json);
+    });
+}
+$(document).ready(function () {
+    //        分页AJAX实现
+    info_json_string = "\"" + 'page' + "\":\"" + 1 + "\",";
+    info_json_json = jsonString(info_json_string)
+    info_json(info_json_json);
+
+    // 说明：获取点选元素的父元素，用于清空原来的筛选,为新筛选项增加CLASS
+    // 创建时间：2015年4有15日
+    // 创建人：周凯
+    var items = $(".invests_filter_items li span.condition");
+    var jsonUserInfo = ''
+    items.each(function (i) {
+        var t = $(this);
+        t.click(function () {
+            current_change = t.attr('class');
+            if (current_change != 'jhkuai current_change') {
+                t.toggleClass("jhkuai current_change");
+                t.siblings().removeClass('jhkuai current_change');
+                json = array_to_json(1);
+                search_json(json);
+            }
+//
+        });
+    });
+
+
+})
+function array_to_json(page_number) {
+    var jsonUserInfo = ''
+    $(".current_change").each(function (index, data) {
+        cl = $(data).parent().attr('class').toString()
+        name = $(data).attr('name')
+        jsonUserInfo += "\"" + cl + "\":\"" + name + "\",";
+    })
+    jsonUserInfo += "\"" + 'page' + "\":\"" + page_number + "\",";
+
+    var json = jsonString(jsonUserInfo)
+
+    return json;
+}
+
+function jsonString(jsonUserInfo) {
+    var jsonString = "{" + jsonUserInfo.substring(0, jsonUserInfo.length - 1) + "}";
+    var json = $.parseJSON(jsonString)
+    return json;
+}
+
+function set_page_number(current_page, total_pages) {
+    current_page = Number(current_page);
+    total_pages = Number(total_pages);
+    var str = "";
+    if (total_pages != 1) {
+        if (current_page != 1) {
+            prev_page = Number(current_page) - 1;
+            str += '<a class="jp-previous jp-disabled" name="prev" page =' + prev_page + '>上一页</a>';
+        }
+        if (total_pages >= 6) {
+            if (current_page <= 5) {
+                for (var i = 1; i <= 5; i++) {
+                    if (current_page == i) {
+                        str += "<a class='jp-current' page='" + i + "' href='javascript:void(0);'>" + i + "</a>";
+                    } else {
+                        str += "<a href = 'javascript:void(0);' page='" + i + "'>" + i + "</a>";
+                    }
+                }
+                str += '...';
+                next_page = Number(current_page) + 1;
+            } else if (current_page > 5 && ((total_pages - current_page) > 3) ) {
+                str += "<a href = 'javascript:void(0);' page='" + 1 + "'>" + 1 + "</a>";
+                str += "<a href = 'javascript:void(0);' page='" + 2 + "'>" + 2 + "</a>" + '...';
+
+                for (var i = (current_page - 1); i <= (current_page + 1); i++) {
+                    console.log(current_page);
+                    if (current_page == i) {
+                        str += "<a class='jp-current' page='" + i + "' href='javascript:void(0);'>" + i + "</a>";
+                    } else {
+                        str += "<a href = 'javascript:void(0);' page='" + i + "'>" + i + "</a>";
+                    }
+                }
+                str += '...';
+            } else {
+                str += "<a href = 'javascript:void(0);' page='" + 1 + "'>" + 1 + "</a>";
+                str += "<a href = 'javascript:void(0);' page='" + 2 + "'>" + 2 + "</a>" + '...';
+                for (var i = (current_page - 1); i <= (current_page + 1); i++) {
+                    if (current_page == i) {
+                        str += "<a class='jp-current' page='" + i + "' href='javascript:void(0);'>" + i + "</a>";
+                    } else {
+                        str += "<a href = 'javascript:void(0);' page='" + i + "'>" + i + "</a>";
+                    }
+                }
+            }
+
+            if (current_page < total_pages) {
+
+                next_page = Number(current_page) + 1;
+                str += "<a href = 'javascript:void(0);' class='jp-next' name='next' page=" + next_page + ">下一页</a>";
+            if (total_pages >= 5) {
+                str += '<a href = \'javascript:void(0);\' class="jp-last" name="last" page=' + total_pages + '>尾页</a>';
+            }
+            }
+
+        } else {
+            for (var i = 1; i <= total_pages; i++) {
+                if (current_page == i) {
+                    str += "<a class='jp-current' page='" + i + "' href='javascript:void(0);'>" + i + "</a>";
+                } else {
+                    str += "<a href = 'javascript:void(0);' page='" + i + "'>" + i + "</a>";
+                }
+            }
+            if (current_page < total_pages) {
+                next_page = Number(current_page) + 1;
+                str += "<a href = 'javascript:void(0);' class='jp-next' name='next' page=" + next_page + ">下一页</a>";
+            }
+        }
+
+
+
+    }
+    return str;
+}
+
+function search_json(json) {
+    $.ajax({
+        url: "/invests/search_json",
+        data: json,
+        dataType: 'json',
+        success: function (data) {
+//                      分页显示
+            total_pages = data.total_pages;
+            current_page = data.current_page;
+            str = set_page_number(current_page, total_pages);
+            $("#holder").html(str);
+
+            $('#itemContainer').empty();
+            html_show(data)
+            if (Number(total_pages) >= Number(current_page)){
+            bindClick();}
+        }
+    });
+}
+;
+function info_json(page) {
+    $.ajax({
+        url: "/invests/info_json",
+        data: page,
+        dataType: 'json',
+        success: function (data) {
+            $('#holder').empty();
+            $('#holder').attr('name', '');
+//                组织index页面分页显示
+            total_pages = Number(data.total_pages);
+            current_page = Number(data.current_page);
+            str = set_page_number(current_page, total_pages);
+            $("#holder").attr('name', 'info_json').append(str);
+
+//                组织index页面总数据
+
+            html_show(data);
+            bindClick();
+        }
+    });
+}
+;
+
+function html_show(data) {
+
+    if (typeof(data.invest_amount) != "undefined") {
+        $('#invest_amount').text(data.invest_amount);
+    }
+    if (typeof(data.total_deal_num) != "undefined") {
+        $('#total_deal_num').text(data.total_deal_num + '笔');
+    }
+    if (typeof(data.interest_amount) != "undefined") {
+        $('#interest_amount').text(data.interest_amount);
+    }
+    for (var item in data.loans) {
+        var amount = data.loans[item].amount.toFixed(2);
+        var available_amount = data.loans[item].available_amount.toFixed(2);
+        var a = 0;
+        if (amount > 0) {
+            a = ((amount - available_amount) / amount * 100).toFixed(2);
+
+        }
+        ;
+        $('#item-tmp .wylclist .title').html('<a class="dimgray" href="/show_invest?id=' + data.loans[item].id + '"target="_blank" title="' + data.loans[item].id + '">' + data.loans[item].title + '</a>');
+        $('#item-tmp .wylclist .interest').text(data.loans[item].interest + '%');
+        $('#item-tmp .wylclist .amount').text( (Number(amount)/10000).toFixed(2)+'万元');
+        $('#item-tmp .wylclist .months').text(data.loans[item].months + '个月');
+        $('#item-tmp .wylclist .a100').text(a + '%')
+        if (data.loans[item].state == '投标中') {
+            $('#item-tmp .wylclist .righter').addClass('juhong');
+            $('#item-tmp .wylclist .righter').text('开始投资');
+        }else{
+            $('#item-tmp .wylclist .righter').removeClass('juhong');
+            $('#item-tmp .wylclist .righter').text(data.loans[item].state);
+        }
+        $('#item-tmp .wylclist .righter').attr('href', "/show_invest?id=" + data.loans[item].id);
+
+        $('#itemContainer').append($('#item-tmp ').html());
+    }
+}
+
+function formatNum(str) {
+    var newStr = "";
+    var count = 0;
+
+    if (str.indexOf(".") == -1) {
+        for (var i = str.length - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr;
+            }
+            count++;
+        }
+        str = newStr + ".00"; //自动补小数点后两位
+        console.log(str)
+    }
+    else {
+        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr; //逐个字符相接起来
+            }
+            count++;
+        }
+        str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+        console.log(str)
+    }
+    return str;
+}
+</script>
+<div style='display:none;'>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1252968163'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1252968163%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+</html>

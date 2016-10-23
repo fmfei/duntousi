@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no"/>
+<title>亚太投资</title>
+<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/js/jquery.reveal.js"></script>
+<style>
+*{ margin:0; padding:0;}
+a{ text-decoration:none;}
+.main{ max-width:540px; margin:0 auto; overflow:hidden;}
+img{ vertical-align:bottom; max-width:100%;}
+p{ margin:0 auto;max-width:540px;}
+
+  .reveal-modal-bg {
+    position: fixed;
+    /*height: 100%;*/
+    width: 100%;
+    background: #000;
+    background: rgba(0,0,0,.8);
+    z-index: 100;
+    display: none;
+    top: 0;
+    left: 0;
+    }
+
+  .reveal-modal {
+    visibility: hidden;
+    background: #eee  no-repeat -200px -80px;
+    position: absolute;
+    z-index: 101;
+    text-align:center;
+    }
+
+  .reveal-modal.small     { width: 200px; margin-left: -140px;}
+  .reveal-modal.medium    { width: 400px; margin-left: -240px;}
+  .reveal-modal.large     { width: 600px; margin-left: -340px;}
+  .reveal-modal.xlarge    { width: 800px; margin-left: -440px;}
+
+</style>
+<script type="text/javascript">
+var _mvq = _mvq || [];
+_mvq.push(['$setAccount', 'm-80090-0']);
+
+_mvq.push(['$logConversion']);
+(function() {
+var mvl = document.createElement('script');
+mvl.type = 'text/javascript'; mvl.async = true;
+mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(mvl, s);
+})();
+
+</script>
+</head>
+
+<body>
+<div class="main">
+<a href="http://yataitouzi.com/yataitouzi_0.apk" target="_blank">
+<img src="/campaigns/apponline/a_01.png">
+<img src="/campaigns/apponline/a_02.png">
+<img src="/campaigns/apponline/a_03.png">
+<img src="/campaigns/apponline/a_04.png">
+<img src="/campaigns/apponline/a_05.png">
+<img src="/campaigns/apponline/a_06.png">
+<img src="/campaigns/apponline/a_07.png">
+<img src="/campaigns/apponline/a_08.png">
+<img src="/campaigns/apponline/a_09.png">
+<img src="/campaigns/apponline/a_10.png">
+<img src="/campaigns/apponline/a_11.png">
+<img src="/campaigns/apponline/a_12.png">
+<img src="/campaigns/apponline/a_13.png">
+<img src="/campaigns/apponline/a_14.png">
+</a>
+</div>
+<div id="myModal" class="reveal-modal">
+    <img src="/campaigns/apponline/app_down.png">
+</div>
+
+<a id='testid' href="#" data-reveal-id="myModal">
+</a>
+
+<script type="text/javascript">
+window.onload = function(){
+if(isWeiXin()){
+  $('#testid').click();
+  $('.reveal-modal-bg').css('height', '100%');
+}else{
+  $('#myModal').css('height', '0px').hide();
+}
+}
+function isWeiXin(){
+var ua = window.navigator.userAgent.toLowerCase();
+if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+return true;
+}else{
+return false;
+}
+}
+
+</script>
+</body>
+</html>

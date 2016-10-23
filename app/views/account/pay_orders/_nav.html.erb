@@ -1,0 +1,6 @@
+<div class="tongtit2" style="margin-top:20px;">
+  <div class="<%= 'xshi' if action_name == 'new' %>"><%= link_to '在线充值', account_recharge_path %></div>
+  <div class="<%= 'xshi' if action_name == 'offline_recharge' %>"><%= link_to '线下充值', offline_recharge_account_recharges_path %></div>
+  <div class="<%= 'xshi' if action_name == 'index' %>"><%= link_to '在线充值记录', account_recharges_path %></div>
+  <div class="<%= 'xshi' if action_name == 'index_offline' %>"><%= link_to '线下充值记录', index_offline_account_recharges_path %></div>
+</div>

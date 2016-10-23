@@ -1,0 +1,35 @@
+/ = btn_toolbar_adds([name: '新增产品', path: '/backend/products/new', type: 'add'])
+.well
+  .search-well
+    = form_tag draw_lottery_backend_products_path do
+      = hidden_field_tag :item_id, @item.id
+      = text_field_tag :cqssc, "", placeholder: "请输入重庆时时彩号码"
+      = submit_tag '开奖'
+
+.well
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 序号
+        %th 夺宝人电话
+        %th 人次
+        %th 分配号码
+        %th 购买时间
+        %th 是否中奖
+        %th 中奖号码
+    %tbody
+      - @product_orders.each do |order|
+        %tr
+          %td= order.id
+          %td= link_to "#{order.user.name}(#{order.user.mobile})", backend_advance_lender_path(order.user), :target => "_blank"
+          %td= order.amount
+          %td= order.numbers
+          %td= format_time(order.created_at)
+          %td= order.is_hit == true ? "是" : "否"
+          %td= order.is_hit ? order.hit_number : ""
+          / - if order.is_hit == true
+          /   %td= link_to order.user.mobile, backend_advance_lender_path(order.user), :target => "_blank"
+          / - else
+          /   %td= ""
+
+= will_paginate @product_orders

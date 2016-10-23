@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  amount: 9.99
+  principal: 9.99
+  interest_amount: 9.99
+  month_index: 1
+  late_days: 1
+  state: MyString
+  due_date: 2014-05-07 20:56:18
+  paid_at: 2014-05-07 20:56:18
+  paid_by_platform: false
+
+two:
+  user_id: 1
+  amount: 9.99
+  principal: 9.99
+  interest_amount: 9.99
+  month_index: 1
+  late_days: 1
+  state: MyString
+  due_date: 2014-05-07 20:56:18
+  paid_at: 2014-05-07 20:56:18
+  paid_by_platform: false

@@ -1,0 +1,25 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  backend:
+    users:
+      name: Name
+      id_card: ID Card
+      marriage: marriage
+  Dict::MarriageType:
+    unmarried: unmarried
+    married: married
+    first_married: first_married
+    sec_married: sec_married
+    remarried: remarried
+    widowed: widowed
+    divorce: divorce
+    unknown: unknown
+  Dict::DocumentPhoto:
+    account_permits: account_permits
+    organization_code_certificate: organization_code_certificate
+    land_card: land_card
+    business_license: business_license
+    tax_registration_certificat: tax_registration_certificat
+

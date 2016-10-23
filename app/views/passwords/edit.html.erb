@@ -1,0 +1,18 @@
+<h2 class='text-center title'>修改密码</h2>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'validate-form' }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token, value: params[:reset_password_token] %>
+  <div class='form-group'>
+    <div class='controls with-icon-over-input'>
+      <%= f.label :password, "新密码" %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "密码", class: "form-control", 'data-required' => true, 'data-rule-minlength' => 8 %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='controls with-icon-over-input'>
+      <%= f.label :password_confirmation, "确认密码" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "确认密码", class: "form-control", 'data-required' => true %>
+    </div>
+  </div>
+  <%= f.submit "修改密码", class: "btn btn-block" %>
+<% end %>

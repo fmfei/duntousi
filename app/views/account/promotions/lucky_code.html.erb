@@ -1,0 +1,26 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">抽奖记录</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle_luckycode">抽奖时间</div>
+            <div class="czjltitle_luckycode">抽奖号码</div>
+            <div class="czjltitle_luckycode">中奖个数</div>
+            <div class="czjltitle_luckycode">开奖号码</div>
+            <div class="czjltitle_luckycode">奖励</div>
+         </div>
+         <% @lucky_codes.each do |code| %>
+         <div class="czjl">
+            <div class="czjltitle_luckycode"><%= code.created_at.try(:strftime, "%m/%d/ %H:%M") %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><%= code.one.to_s+code.two.to_s+code.three.to_s+code.four.to_s+code.five.to_s+code.six.to_s %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><%= code.hit_number %>&nbsp;</div>
+            <div class="czjltitle_luckycode"><%= code.win_number %>&nbsp;</div>
+            <div class="czjltitle_luckycode" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"><%= code.prize %>&nbsp;</div>
+         </div>
+         <% end %>
+         <%= will_paginate @lucky_codes %>
+      </div>
+</div>

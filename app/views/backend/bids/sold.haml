@@ -1,0 +1,25 @@
+.well
+  %table.table
+    %thead
+      %tr
+        %th 序号
+        %th 转让者
+        %th 购买者
+        %th 借款标题
+        %th 转让金额
+        %th 利息(%)
+        %th 转让时间
+        %th 转让月数
+    %tbody
+      - @bids.each do |bid|
+        %tr
+          %td= bid.id
+          %td= link_to bid.from_bid.user.name_or_email, backend_lender_path(bid.from_bid.user)
+          %td= link_to bid.user.name_or_email, backend_lender_path(bid.user)
+          %td= link_to bid.loan.title, belongs_to_loan_backend_bids_path(:loan_id => bid.loan.id)
+          %td= bid.invest_amount
+          %td= bid.interest
+          %td= format_time(bid.created_at)
+          %td= bid.invest_month
+
+= will_paginate @bids

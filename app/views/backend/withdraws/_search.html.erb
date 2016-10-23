@@ -1,0 +1,34 @@
+<div class="search-well">
+  <% url = backend_withdraws_path %>
+<%= search_form_for @q, :url => url, :class => "form-inline" do |f| %>
+	<%= hidden_field_tag :download %>
+	提现时间: <%= f.search_field :created_at_gteq, :value => params[:q].try(:[], :created_at_gteq) %>
+	 至
+	<%= f.search_field :created_at_lteq, :value => params[:q].try(:[], :created_at_lteq) %>
+	<br>
+	审核时间: <%= f.search_field :audit_time_gteq, :value => params[:q].try(:[], :audit_time_gteq) %>
+	 至
+	<%= f.search_field :audit_time_lteq, :value => params[:q].try(:[], :audit_time_lteq) %>
+	<%= f.submit "搜索", :class => "btn searchBtn" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+  <%= link_to '下载搜索结果', 'javascript:return false;', class: 'downloadLink'%>
+<% end %>
+</div>
+<script type="text/javascript">
+	$(function (){
+		$('#q_audit_time_gteq, #q_audit_time_lteq, #q_created_at_gteq, #q_created_at_lteq').datepicker({
+			inline: true
+		});
+
+  $('.downloadLink').click(function(){
+    $('#download').val('on');
+    $('#withdraw_search').attr('target', '_blank').submit();
+    return false;
+  });
+  $('.searchBtn').click(function(){
+    $('#download').val('');
+    $('#withdraw_search').attr('target', '_self');
+  });
+
+	})
+</script>

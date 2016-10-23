@@ -1,0 +1,15 @@
+<div class="left">
+	<% @propagandas.each do |p|%>
+   <a href="/news?category=<%= p.id %>" class="title <%= 'current' if(@article.propaganda_id == p.id) %>"><%= p.name %></a>
+   <% end %>
+</div>
+<div class="right">
+   <div class="contents">
+		<div class="tongtit">
+		  <div class="xshi"><%= @article.title %></div>
+		</div>
+		<div class="contents" style="display: block;">
+		<%= @article.content.html_safe %>
+		</div>
+   </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="right">
+         <%= render 'nav' %>
+         <div class="margin_top">
+         <%= form_note_account flash %>
+        </div>
+         <div class="contents" style='display:block;'>
+          <%= form_for @pay_order, :url => account_recharges_path, :html=>{:class => 'form', :novalidate=>"novalidate"} do |f| %>
+            <div class="lefttitles jutop">充值金额:</div>
+            <div class="lefttitles juse jutop">
+              <%= f.text_field :amount, {:class => 'form-control', :'data-rule-number' => "true",  :'data-rule-required'=>"true", :'data-rule-min' => 0.01, :'data-rule-maxlength' => 10, 'error' =>'is'} %>
+            </div>
+
+            <div class="lefttitles clears">选择平台:</div>
+            <div class="contentson">
+                <div class="yinhangk" onclick="javascript:$('#pay_order_pay_class_ecpss').attr('checked','checked');">
+                  <%= f.radio_button :pay_class, "Baofoo", :checked => 'checked', :style => 'height: 31px;' %>
+                    <div class="yinhang"><%= image_tag 'account/baofoo.jpg', style: 'height:35px;'%></div>
+                 </div>
+                 <div class="yinhangk" onclick="javascript:$('#pay_order_pay_class_ecpss').attr('checked','checked');">
+                  <%= f.radio_button :pay_class, "Ecpss", :style => 'height: 31px;' %>
+                    <div class="yinhang"><%= image_tag 'account/ecpss.png', style: 'height:35px;'%></div>
+                 </div>
+            </div>
+            <div class="contentson" style='padding-left:113px;text-align:left;'>
+              <input class="yinhangsub" name="commit" type="submit" value="充值" id="send">
+            </div>
+            
+           <% end%>
+         </div><!--contents end-->
+      </div>
+
+<script type="text/javascript">
+$(function(){
+        //文本框失去焦点后
+       $("input[error='is']").blur(function(){
+            var $parent = $(this).parent();
+            $parent.find(".formtips").remove();
+            //身份证
+            if( $(this).is('#pay_order_amount') ){
+               if( this.value=="" || ( this.value!="" && !/^[1-9]\d{1,9}$/.test(this.value) )  ){
+                     var errorMsg = '(最少充值金额10元)';
+                     $parent.append('<span class="formtips onError" style="font-size: 12px;">'+errorMsg+'</span>');
+               }else{
+               }
+            }
+       }).keyup(function(){
+          $(this).triggerHandler("blur");
+       }).focus(function(){
+            $(this).triggerHandler("blur");
+       });//end blur
+        
+       //提交，最终验证。
+        $('#send').click(function(){
+               $("input[error='is']").trigger('blur');
+               var numError = $('form .onError').length;
+               if(numError){
+                alert("请输入正确信息");
+                return false;
+               }
+        });
+})
+</script>

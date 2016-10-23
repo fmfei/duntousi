@@ -1,0 +1,44 @@
+<style type="text/css">
+#hello, .headerson .right a.zc{
+  display: none;
+  float: right;
+  margin-right: 1px;
+}
+</style>
+<div class="header">
+   <div class="headerson">
+      <div class="left">
+         <span>欢迎致电：</span><span class="da phone400"></span><span class='serve_time'></span>
+         <a href="http://www.weibo.com/yataiyangguang" class="qqlog posa" target='_blank'></a>
+         <a href="http://t.qq.com/yataitouzi" class="qqlog posb" target='_blank'></a>
+      </div>
+      <div class="right">
+         <span id='hello' onclick="javascript:window.location.href='/account/users'">您好： <span id='username'></span>
+          <div class="xllists">
+             <a href="/account/users">我的账户</a>
+             <a href="/account/recharge">我要充值</a>
+             <a href="/account/withdraws/new">我要提现</a>
+             <a href="/account/transactions">资金管理</a>
+             <a href="/account/invests">理财管理</a>
+             <a rel="nofollow" data-method="delete" href="/users/sign_out">退出</a>
+          </div>
+        </span>
+         <a href="/users/sign_in" class="zc sign">登录</a>&nbsp;
+         <a href="/users/sign_up" class="zc sign">注册</a>
+      </div>
+   </div>
+</div>
+<div class="neck">
+   <div class="neckson">
+      <div class="logo" onclick="javascript:window.location.href='/'">
+         <img src="<%= asset_url('frontend/logo.jpg') %>" width="248" height="87" />
+      </div>
+      <div class="navright">
+         <a href="/loans">我要理财</a>
+         <a href="/items" style="color: #ff6766;font-size: 20px;font-weight: bolder;">一元购</a>
+         <a href="/loan_applications/new">我要融资</a>
+         <a href="/news">亚太资讯</a>
+         <a href="/aboutus">关于我们</a>
+      </div>
+   </div>
+</div>

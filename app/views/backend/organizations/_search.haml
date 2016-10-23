@@ -1,0 +1,5 @@
+.search-well
+  - url = backend_organizations_path
+  = search_form_for @search, :url => url, :html => {:method => :get, :class=>"form-inline", :role=>"form"} do |f|
+    = f.text_field :name_or_code_cont, class: "input-xlarge", placeholder: "机构名称/机构代码"
+    = f.submit '搜索', class: "btn"

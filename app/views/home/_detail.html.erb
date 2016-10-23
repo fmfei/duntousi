@@ -1,0 +1,81 @@
+
+  <div class="sjtj">
+    <div class="main960">
+      <div class="tj">
+        <h3>数据统计：</h3>
+        <div class="jd-box">
+          <div class="jd-left" style="width: <%= (sold.to_f / all_count.to_f)*100 %>%">
+            <span class="bl"><%= sold %><br/>(<%= (sold.to_f / all_count.to_f).round(2)*100 %>%)</span>
+            <span class="bar red-bg"></span>
+          </div>
+          <div class="jd-center" style="width: <%= (reserve.to_f / all_count.to_f)*100 %>%">
+            <span class="bl"><%= reserve %><br/>(<<%= (reserve.to_f / all_count.to_f).round(2)*100 %>>%)</span>
+            <span class="bar blue-bg"></span>
+          </div>
+          <div class="jd-right" style="width: <%= (idle.to_f / all_count.to_f)*100 %>%">
+            <span class="bl"><%= idle %><br/>(<%= (idle.to_f / all_count.to_f).round(2)*100 %>%)</span>
+            <span class="bar green-bg"></span>
+          </div>
+        </div>
+      </div>
+      <div class="icon">
+        <ul>
+          <li><span class="red-bg"></span>已售出(<%= sold %>)</li>
+          <li><span class="blue-bg"></span>已预订(<%= reserve %>)</li>
+          <li><span class="green-bg"></span>未售出(<%= idle %>)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wzxz">
+    <div class="main960">
+      <h3>位置选择：</h3>
+      <div class="seat">
+        <div class="seat-left">
+          <% seats.each_pair do |key, val| %>
+            <% val[:col].each do |site| %>
+              <% if site.status == "reserve"
+                  color = "blue-bg"
+                elsif site.status == 'sold'
+                  color = "red-bg"
+                else
+                  color = "green-bg"
+                end
+               %>
+              <span class="<%= color %>" title="<%= site.num %>"><a href="#" class="" name="<%= site.num %>"></a></span>
+              <% if site.num =~ /3$/ && val[:amount] == 3 %>
+                <% 8.times do %>
+                  <span class=""></span>
+                <% end %>
+              <% elsif site.num =~ /3$/ || site.num =~ /7$/ || (site.num =~ /9$/ && val[:amount] == 8) %>
+                <span class=""></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+                
+        <div class="seat-right">
+          <ul>
+            <% seats.each_key do |key| %>
+            <li><%= key %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ztxg">
+    <div class="main960">
+      <h3>状态修改：</h3>
+      <div class="state-box">
+        <div class="state-top">
+          <label><input name="radstatus1" type="radio" value="sold" checked="checked" />已售出</label> 
+          <label><input name="radstatus1" type="radio" value="reserve" />已预订 </label> 
+          <a href="javascript:void(0)" class="btn-commit" id="sumit_btn1">提交</a>
+        </div>
+        <div class="state-btm">将<span id="areaNum1">1</span>-
+            <input type="text" id="chk" name="chk1" placeholder="请填写号码">
+          <a href="javascript:void(0)" class="btn-reset" id="resetBtn1">重置</a>至未出售状态</div>
+      </div>
+    </div>
+  </div>

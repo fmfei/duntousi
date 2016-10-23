@@ -1,0 +1,27 @@
+
+
+<div class="search-well">
+  <%  if params[:state].present? 
+       url = backend_auth_realnames_path(:state => params[:state])
+      else
+        url = backend_auth_realnames_path
+      end
+  %>
+<%= search_form_for @q, :url => url, :class => "form-inline" do |f| %>
+	<%= f.search_field :created_at_gteq %>
+	 至 
+	<%= f.search_field :created_at_lteq %>
+	<%= hidden_field_tag :state, params[:state] %>
+	<%= f.submit "搜索", :class => "btn" %>
+<% end %>
+</div>
+<script type="text/javascript">
+	$(function (){
+		$('#q_created_at_gteq').datepicker({
+		inline: true
+	});
+	$('#q_created_at_lteq').datepicker({
+		inline: true
+		});
+	})
+</script>

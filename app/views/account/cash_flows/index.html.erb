@@ -1,0 +1,29 @@
+<div class='right'>
+  <div class="czjl_top"></div>
+    <div class="tongtit">
+      <div class="xshi">交易记录明细</div>
+    </div>
+
+      <div class="contents">
+         <div class="czjl">
+            <div class="czjltitle" style='line-height:69px;'>日期/时间 </div>
+            <div class="czjltitle" style='line-height:69px;'>交易类型</div>
+            <div class="czjltitle" style='line-height:69px;'>交易金额（元）</div>
+            <div class="czjltitle" style='line-height:69px;'>余额（元）</div>
+         </div>
+         <% @cash_flows.each do |cash_flow| %>
+         <div class="czjl">
+            <div class="czjltitle"><%= cash_flow.created_at.try(:strftime, "%Y/%m/%d/ %H:%M") %></div>
+            <div class="czjltitle"><%= cash_flow.description.to_s %><%= cash_flow.addition.present? ? "(#{cash_flow.addition})" : '' %></div>
+            <div class="czjltitle"><%= rmb cash_flow.amount %></div>
+            <div class="czjltitle"><%= rmb cash_flow.available_of_user(current_user) %></div>
+         </div>
+         <% end %>
+         <%= will_paginate @cash_flows %>
+      </div>
+</div>
+<style type="text/css">
+.czjltitle{
+    line-height: 20px;
+}
+</style>

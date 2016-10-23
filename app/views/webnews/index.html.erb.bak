@@ -1,0 +1,31 @@
+<div class='wrapped-content' style="min-height: 1000px;">
+	<div class="col-xs-12">
+		<%= render "/layouts/news_nav_left"%>
+		<section id='content' style="margin-top: 20px;">
+      <div class='container'>
+      	<div class='row recent-activity'>
+          <div class='box col-xs-12'>
+          	<div class='box-header blue-background'>
+			        <div class='title'><%= @art_title %></div>
+			      </div>
+						<div class='box-content box-no-padding'>
+						  <ul class='list-unstyled users list-hover list-striped'>
+						  	<% @articles.each do |art| %>
+						    <li>
+                  <div class='action pull-left'>
+                  	<%= link_to art.title, webnews_path(art) %>
+                  </div>
+                  <small class='date pull-right text-muted'>
+                    <%= art.created_at.strftime("%Y-%m-%d") %>
+                  </small>
+                </li>
+						    <% end %>
+						  </ul>
+						</div>
+						<%= will_paginate @articles, :class => 'pagination' %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

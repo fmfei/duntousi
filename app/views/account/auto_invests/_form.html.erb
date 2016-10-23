@@ -1,0 +1,50 @@
+     <table class='table' style='margin-bottom:0;'>
+      <tbody>
+        <tr>
+          <td class='label'>启用</td>
+          <td><%= check_box_tag :active, '1', @auto_invest_rule.actived_at.present? %></td>
+        </tr>
+        <tr>
+          <td class='label'>每次投标金额</td>
+          <td>
+            <%= f.text_field :amount, {:class => 'input-xlarge ', :'number' => "true", :'min' => 100, :'maxlength' => 10} %>
+            (不填即为按可用金额投标)
+          </td>
+        </tr>
+        <tr>
+          <td class='label'>利息范围</td>
+          <td><%= f.select :min_interest, (5..24) %>% - <%= f.select :max_interest, (5..24) %>%</td>
+        </tr>
+        <tr>
+          <td class='label'>借款期限</td>
+          <td><%= f.select :min_months, (1..6) %>月 - <%= f.select :max_months, (1..6) %>月</td>
+        </tr>
+<!--         <tr>
+          <td class='label'>有抵押</td>
+          <td><%= f.check_box :with_mortgage %></td>
+        </tr>
+        <tr>
+          <td class='label'>有担保</td>
+          <td><%= f.check_box :with_guarantee %></td>
+        </tr> -->
+        <tr>
+          <td class='label'>还款方式</td>
+          <td><%= f.select :repay_style, {'不限' => ''}.merge(Loan::REPAYSTYLE), class: "useryzm" %></td>
+        </tr>
+        <!-- <tr>
+          <td class='label'>账户保留金额</td>
+          <td><%#= f.text_field :remain_amount, {:class => 'input-xlarge ', :'number' => "true" } %></td>
+        </tr> -->
+      </tbody>
+    </table>
+   <div class="dtitle">
+    <input class="hqyzm" name="commit" type="submit" value="提交">
+  </div>
+<style type="text/css">
+.table td, .table th{
+  text-align: left;
+}
+.dtitle .hqyzm {
+  margin-left: 93px;
+}
+</style>

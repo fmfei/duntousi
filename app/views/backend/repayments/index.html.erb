@@ -1,0 +1,61 @@
+<div class="well">
+  <ul class="nav nav-tabs">
+    <li class='<%= "active" if params[:state]=="unpaid"%>'><a href="/backend/repayments?state=unpaid">未还款</a></li>
+    <li class='<%= "active" if params[:state]=="paid"%>'><a id='paid_li' href="/backend/repayments?state=paid">已还款</a></li>
+  </ul>
+  
+  <%= render partial: "search" %>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active" id="<%= params[:state] %>">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>用户</th>
+            <th>借款目的</th>
+            <th>还款金额</th>
+            <th>本金</th>
+            <th>利息</th>
+            <th>剩余本金</th>
+            <th>期数</th>
+            <th>状态</th>
+            <th>最后还款日</th>
+            <th>还款时间</th>
+            <th style="width: 26px;">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @repayments.each do |repayment| %>
+            <tr>
+              <td><%= repayment.id %></td>
+              <td><%= link_to repayment.user.name, backend_repayment_path(repayment) %></td>
+              <td><%= link_to repayment.loan.title, backend_repayment_path(repayment) %></td>
+              <td><%= rmb(repayment.amount) %></td>
+              <td><%= rmb(repayment.principal) %></td>
+              <td><%= rmb(repayment.interest_amount) %></td>
+              <td><%= rmb(repayment.left_principal) %></td>
+              <td><%= repayment.month_index %>/<%= repayment.loan.months %></td>
+              <td><%= t(repayment.state) %></td>
+              <td><%= repayment.due_date.strftime("%Y-%m-%d") %></td>
+              <td><%= repayment.paid_at.try(:strftime,"%Y-%m-%d %H:%M:%S") %></td>
+              <td>
+                <% if (can? :manage, 'backend/repayments') && repayment.state == 'unpaid' %>
+                  <%= link_to '查看', backend_repayment_path(repayment), :class => 'opt' %>
+                  <a href="<%= backend_repayment_path(repayment) %>" data-confirm="确认还款?" data-method="PUT" rel="nofollow" class='opt'>还款</a>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= will_paginate @repayments %>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  <% if params[:state].present? && params[:state]=='paid' %>
+    $('#paid_li').click();
+  <% end %>
+})
+</script>

@@ -1,0 +1,10 @@
+development:
+  database: lending_development
+  capsize: <%= 500.megabytes %>
+  host: 127.0.0.1
+  port: 27017
+production:
+  database: lending_production
+  capsize: <%= 500.megabytes %>
+  host: 127.0.0.1
+  port: 27017

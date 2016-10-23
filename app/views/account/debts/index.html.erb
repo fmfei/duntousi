@@ -1,0 +1,53 @@
+
+<div class="right">
+         <div class="tongtit_z" style="margin-button:50px;margin-top:20px;">
+            <div <%=(action_name == 'index') ? "class=xshi_z" : '' %>><a href='<%= account_debts_path %>'>债权列表</a></div>
+            <div <%=(action_name == 'selling_list') ?  "class=xshi_z"  : '' %>><a href='<%= selling_list_account_debts_path %>'>转让中</a></div>
+            <div><a href='<%= sold_account_debts_path %>'>已转让</a></div>
+         </div>
+         
+	<div class='row'>
+	<div class='col-sm-12'>
+	  <div class='tabbable_85'>
+	    <div class='tab-content'>
+	      <div class='tab-pane active' id=''>
+	        <table class='table' style='margin-bottom:0;'>
+	          <thead class="left_30" style="line-height: 42px;">
+	                <tr>
+	                  <td class="zq_title">借款标题</td>
+	                  <td class="zq_je">金额(元)</td>
+	                  <td class="zq_qx">期限(月)</td>
+	                  <td class="zq_nll">年利率(%)</td>
+	                  <td class="zq_jcje">借出金额</td>
+	                  <td class="zq_zrje">转让金额</td>
+	                  <td class="zq_cz">操作</td>
+	                </tr>
+	          </thead>
+	          <tbody class="left_30" style="line-height: 32px;font-size:12px;">
+            	<% @bids.each do |bid| %>
+	            <tr>
+	                  <td><%= link_to bid.loan.title, invest_path(bid.loan), :target => '_blank' %></td>
+	                  <td><%= bid.loan.amount %></td>
+	                  <td><%= bid.invest_month %></td>
+	                  <td> <%= bid.interest %></td>
+	                  <td><%= rmb bid.invest_amount %></td>
+	                  <td> <%= rmb bid.for_sale_amount %></td>
+	                  <td><% if bid.can_be_sold? %>
+                          <%= link_to '转让', sell_account_debt_path(bid.id) %>
+                        <% else %>
+                          不可转让
+                        <% end %>
+                        <% if bid.for_sale? %>
+                          <%= link_to '取消转让', cancel_hawk_account_debt_path(bid.id), :method => 'PUT' %>
+                        <% end %></td>
+		            </tr>
+                <% end %>
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</div>
+	<%= will_paginate @bids %>
+</div>

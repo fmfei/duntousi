@@ -1,0 +1,36 @@
+<div class="block">
+        <a href="#page-stats" class="block-heading" data-toggle="collapse">待办事宜</a>
+        <div id="page-stats" class="block-body collapse in">
+
+            <div class="stat-widget-container">
+                <div class="stat-widget">
+                    <div class="stat-button">
+                        <p class="title"><%= link_to "#{Withdraw.auditing.count} 笔", backend_withdraws_path %></p>
+                        <p class="detail"><%= link_to '提现申请', backend_withdraws_path %></p>
+                    </div>
+                </div>
+
+                <div class="stat-widget">
+                    <div class="stat-button">
+                        <p class="title"><%= link_to "#{OfflineRecharge.need_audit.count} 笔", wait_audit_backend_offline_recharges_path %></p>
+                        <p class="detail"><%= link_to '线下充值审核', wait_audit_backend_offline_recharges_path %></p>
+                    </div>
+                </div>
+
+                <div class="stat-widget">
+                    <div class="stat-button">
+                        <p class="title"><%= link_to "#{Repayment.need_pay.count} 笔", backend_repayments_path(:state => 'unpaid') %></p>
+                        <p class="detail"><%= link_to '今日需还款', backend_repayments_path(:state => 'unpaid') %></p>
+                    </div>
+                </div>
+
+                <div class="stat-widget">
+                    <div class="stat-button">
+                        <p class="title"><%= link_to "#{LoanApplication.today.count} 笔", backend_loan_applications_path %></p>
+                        <p class="detail"><%= link_to '贷款申请', backend_loan_applications_path %></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

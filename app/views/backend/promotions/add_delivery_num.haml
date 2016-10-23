@@ -1,0 +1,17 @@
+= form_note flash
+.well
+  .tab-content
+    .tab-pane.active
+      = form_tag create_delivery_num_backend_promotions_path, html: { class: "form-horizontal", role: "form"} do |u|
+        .control-group
+          = hidden_field_tag :bonu_id, @bonu.id
+        .control-group
+          = label_tag :delivery_num, "快递单号：", class: "col-sm-2 control-label"
+          .controls
+            = text_field_tag :delivery_num, '', placeholder: "快递单号", class: "input-xlarge"
+        / .control-group
+        /   = u.label :password, class: "col-sm-2 control-label"
+        /   .controls
+        /     = u.text_field :password, placeholder: "Password", type: "password", class: "input-xlarge"
+        .form-actions
+          %button.btn.btn-primary{:type => "submit"} 创建单号

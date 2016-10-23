@@ -1,0 +1,412 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>一元夺宝详情页</title>
+<link type="text/css" href="../yiyuangou/style/style.css" rel="stylesheet">
+<link type="text/css" href="../yiyuangou/style/common.css" rel="stylesheet">
+<link type="text/css" href="../yiyuangou/style/detail.css" rel="stylesheet">
+<script type="text/javascript" src="../yiyuangou/js/jquery-1.8.3.min.js"></script>
+<!--带左右按钮图片切换-->
+<!--<script src="js/MSClass.js" type="text/javascript"></script>-->
+<script>
+<!--------TAB选项卡---------->
+ function setTab(name,cursel,n){
+     for(i=1;i<=n;i++){
+      var menu=document.getElementById(name+i);
+      var con=document.getElementById("con_"+name+"_"+i);
+      menu.className=i==cursel?"active":"";
+      con.style.display=i==cursel?"block":"none";
+     }
+    }
+<!--------商品图片切换---------->
+/*$(function(){
+    $(".goods-thumbs ul li img").hover(function() {
+        var bigsrc=$(this).attr("bigsrc");
+        $("#mainimg").attr("src",bigsrc);
+    });
+});*/
+$(function(){
+    $(".goods-thumbs ul li:first()").append('<i></i>');
+  //$(".goods-thumbs ul li:first()").addClass("selected");
+    $(".goods-thumbs ul li img").mouseenter(function(event) {
+        $(this).parent().append('<i></i>').siblings().find("i").remove();
+
+    $(this).parent().siblings().removeClass("selected");
+    $(this).parent().addClass("selected");
+        var bigsrc=$(this).attr("bigsrc");
+        $("#mainimg").attr("src",bigsrc);
+    })/*.mouseout(function(event){
+    $(this).parent().removeClass("selected");
+    })*/
+});
+
+//浏览器判断
+
+// $(function(){
+//     var OsObject = "";
+//    if(isIE = navigator.userAgent.indexOf("MSIE")!=-1) {
+//        // return "MSIE";
+//       document.getElementById("zzsc").style.display="none";
+//    }else{
+//       document.getElementById("demo01").style.display="none";
+//      }
+   /*if(isFirefox=navigator.userAgent.indexOf("Firefox")!=-1){
+        return "Firefox";
+   }
+
+   if(isChrome=navigator.userAgent.indexOf("Chrome")!=-1){
+        return "Chrome";
+   }
+   if(isSafari=navigator.userAgent.indexOf("Safari")!=-1) {
+        return "Safari";
+   }
+   if(isOpera=navigator.userAgent.indexOf("Opera")!=-1){
+        return "Opera";
+   } */
+// })
+
+// alert("type -> "+getOs());
+// $(function(){
+//   countDown("2016/1/1 23:59:59","#demo01 .day","#demo01 .hour","#demo01 .minute","#demo01 .second");
+// });
+
+// function countDown(time,day_elem,hour_elem,minute_elem,second_elem){
+//   //if(typeof end_time == "string")
+//   var end_time = new Date(time).getTime(),//月份是实际月份-1
+//   //current_time = new Date().getTime(),
+//   sys_second = (end_time-new Date().getTime())/1000;
+//   var timer = setInterval(function(){
+//     if (sys_second > 0) {
+//       sys_second -= 1;
+//       var day = Math.floor((sys_second / 3600) / 24);
+//       var hour = Math.floor((sys_second / 3600) % 24);
+//       var minute = Math.floor((sys_second / 60) % 60);
+//       var second = Math.floor(sys_second % 60);
+//       day_elem && $(day_elem).text(day);//计算天
+//       $(hour_elem).text(hour<10?"0"+hour:hour);//计算小时
+//       $(minute_elem).text(minute<10?"0"+minute:minute);//计算分
+//       $(second_elem).text(second<10?"0"+second:second);// 计算秒
+//     } else {
+//       clearInterval(timer);
+//     }
+//   }, 1000);
+// }
+
+
+
+</script>
+
+</head>
+
+<body>
+<div class="goods-banner"></div>
+<div class="wrap">
+  <div class="goods-basic clearfix">
+      <div class="basic-left">
+          <div class="goods-title clearfix">
+            <h1>(第<%= @item.id %>期)<span class="txt-red"><%= @item.product.title %></span></h1>
+            </div>
+            <div class="goods-info clearfix">
+              <div class="goods-show clearfix">
+              <div class="goods-pro">
+                  <i></i>
+                    <img src="<%= @main_pic.pic_name || @normal_pic[0].pic_name %>" id="mainimg" width="328" height="305">
+
+                    <div class="goods-thumbs">
+                      <ul>
+                        <% if @main_pic.present? %>
+                          <li class="selected"><img src="<%= @main_pic.pic_name %>" bigsrc="<%= @main_pic.pic_name %>" width="54" height="42"></li>
+                        <% end %>
+                            <% @normal_pic.each do |pic| %>
+                            <li class=""><img src="<%= pic.pic_name %>" bigsrc="<%= pic.pic_name %>" width="54" height="42"></li>
+                          <% end %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="goods-list"  style="font-size: 11px;text-align:left;overflow:scroll; text-overflow:ellipsis;">
+                  您本期的夺宝号码为:<br /><%= @numbers %>
+                </div>
+                <div class="goods-icon">
+                  <ul>
+                      <li><i class="i1"></i>公平公正公开</li>
+                        <li><i class="i2"></i>品质保障</li>
+                        <li><i class="i3"></i>权益保障</li>
+                    </ul>
+                </div>
+              </div>
+              <div class="goods-main clearfix">
+                  <div class="time-title" style="height:360px"><img src="../yiyuangou/images/i_04.jpg" ></div>
+                    <div class="porgressBar" title="100.0%">
+                        <p class="w-progressBar-wrap">
+                            <span class="w-progressBar-bar" style="width:100.0%;"></span>
+                        </p>
+                        <ul class="w-progressBar-txt-put clearfix">
+                            <li class="w-progressBar-txt-l"><p><b><%= @item.already %></b></p><p>已参与人次</p></li>
+                            <li class="w-progressBar-txt-m"><p><b><%= @item.product.total_price %></b></p><p>总需人次</p></li>
+                            <li class="w-progressBar-txt-r"><p><b><%= @item.remain %></b></p><p>剩余人次</p></li>
+                        </ul>
+                    </div>
+                    <div class="waring-info">
+                      <p>购买人次越多获得几率越大哦！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="basic-right" id="basic_right_id">
+          <div class="basic-right-tit">
+              <h4>上期获得者</h4>
+            </div>
+            <div class="basic-right-main">
+              <div class="basic-main-up">
+
+                  <a href="javascript:void(0)" class="btn-left" id="pre_item">上一期</a>
+                    <span class="btn-center" id="item_id">期号：<a><%= @pre_item.id if @pre_item.present? %></a>期</span>
+                    <a href="javascript:void(0)" class="btn-right" id="after_item">下一期</a>
+
+                </div>
+                <div id="hole-hole">
+                  <div id="hole-con">
+                        <% if @product_order_win.present? %>
+                        <div class="basic-main-center">
+                            <div class="headimg">
+                                <a href="#"><img src="<%= @avatar.present? ? @avatar : "../image/xtouxiang.jpg"  %>" width="90"  height="90"></a>
+                                <!-- <div class="xtouxiang"> -->
+                                <!-- <%= image_tag @avatar %> -->
+                              <!-- </div> -->
+                            </div>
+                            <p>恭喜<a href="#"><%= @product_order_win.user.mobile[0..2] %>****<%= @product_order_win.user.mobile[-4..-1] %></a><span></span>获得该期产品</p>
+                        </div>
+                        <div class="basic-main-btm">
+                            <p></p>
+                            <p>幸运号码：<b class="txt-red"><%= @product_order_win.hit_number %></b></p>
+                            <p>本期参与：<b class="txt-red"><%= @product_order_win.amount %></b>人次</p>
+                            <p>揭晓时间：<%= @product_order_win.item.hit_time.strftime("%Y-%m-%d %H:%M:%S") %></p>
+                            <p>夺宝时间：<%= @product_order_win.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+                        </div>
+                        <div class="btn-see">
+                            <a href="/items/<%= @pre_item.id if @pre_item.present?%>" class="see">查看详情</a>
+                        </div>
+                      <% else %>
+                        <div class="basic-main-center">
+                            <div class="headimg">
+                                <a href="#"><img src="<%= "../image/xtouxiang.jpg"  %>" width="90"  height="90"></a>
+                                <!-- <div class="xtouxiang"> -->
+                                <!-- <%= image_tag @avatar %> -->
+                              <!-- </div> -->
+                            </div>
+                              <p>该商品还未揭晓，请等待</p>
+                        </div>
+                        <div class="basic-main-btm">
+                            <p></p>
+                            <p>幸运号码：<b class="txt-red">????????</b></p>
+                            <p>本期参与：<b class="txt-red">???</b>人次</p>
+                            <p>揭晓时间：</p>
+                            <p>夺宝时间：</p>
+                        </div>
+                        <div class="btn-see">
+                            <a href="/items/show_waiting?id=<%= @pre_item.id if @pre_item.present?%>" class="see">查看详情</a>
+                        </div>
+                      <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!--带左右按钮图片切换-->
+<!--<script type="text/javascript">
+new Marquee(
+{
+  MSClass   : ["hole-hole","hole-con"],
+  Direction : 5,
+  PrevBtnID : "btn-left",
+  NextBtnID : "btn-right",
+  Step    : 0.4,
+  Width   : 250,
+  Height    : 520,
+  Timer   : 20,
+  DelayTime : 3000,
+  WaitTime  : 1,
+  ScrollStep: 250,
+  SwitchType: 0,
+  AutoStart : true
+});
+</script>   -->
+
+
+
+
+    <div class="goods-detail clearfix">
+      <div class="tabbar">
+          <a href="javascript:void(0);" class="active" onclick="setTab('conn',1,3)" id="conn1">商品详情</a>
+          <a href="javascript:void(0);"  onclick="setTab('conn',2,3)" id="conn2">计算结果</a>
+          <a href="javascript:void(0);" onclick="setTab('conn',3,3)" id="conn3">参与记录</a>
+        </div>
+        <div class="conbox" id="con_conn_1">
+          <%= h @item.product.desc.html_safe %>
+        </div>
+        <div class="conbox" id="con_conn_2"  style="display:none;" >
+          <div class="count-rule">
+              <div class="leftimg"><img src="../yiyuangou/images/i_05.jpg" width="190" height="190"></div>
+              <div class="rule-word" style="text-align:left">
+                  <p>1商品的最后一个号码分配完毕后，将公示该分配时间点前最后50个参与记录时间。若不足50条记录，则公示所有；<br/>
+                        2将这50个时间的数值进行求和（得出数值A）（每个时间按时、分、秒、微秒的顺序组合，如20:15:25.657605则为201525657605）；<br/>
+                        3为保证公平公正公开，系统还会等待一小段时间，取最近下一期中国福利彩票“老时时彩”的开奖结果（一个五位数值B）；<br/>
+                        4（数值A+数值B）除以该商品总需人次得到的余数 + 原始数 10000001，得到最终幸运号码，拥有该幸运号码者，直接获得该商品。</p>
+                        <p class="txt-red" >
+                        注：如遇福彩中心通讯故障，无法获取上述期数的中国福利彩票“老时时彩”开奖结果，且24小时内该期“老时时彩”开奖结果仍未公  <br/>
+                        布，则默认“老时时彩”开奖结果为00000。</p>
+                </div>
+            </div>
+            <div class="tableinfo">
+                <table width="100%" cellpadding="0" cellspacing="0" border="1">
+                  <tr height="38">
+                      <th width="360" colspan="2">夺宝时间</th>
+                        <th width="215">会员账号</th>
+                        <th width="440">商品名称</th>
+                        <th width="100">商品期号</th>
+                        <th width="83">参与人次</th>
+                    </tr>
+                    <% @product_order.each do |order| %>
+                      <% created_time = order.created_at %>
+                      <% mobile = order.user.mobile %>
+                      <tr>
+                        <td width="128"><%= created_time.strftime("%Y-%m-%d") %></td>
+                          <td width="220"><%= created_time.strftime("%H:%M:%S") %>.<%= created_time.usec %><span><img src="../yiyuangou/images/icon_08.png"></span><b class="txt-red"><%= created_time.strftime("%H%M%S") %><%= created_time.usec %></b></td>
+                          <td width="215"><%= mobile[0..2] %>****<%= mobile[-4..-1] %></td>
+                          <td width="440"><%= order.item.product.title %></td>
+                          <td width="100"><%= order.item.id %></td>
+                          <td width="83"><%= order.amount %>人次</td>
+                      </tr>
+                    <% end %>
+                </table>
+            </div>
+            <!-- <div class="point-info">
+              <div class="point-out">
+                  <p>
+                      1、求和：7096695474 (上面50条参与记录的时间取值相加)<br/>
+    2、 第 20151223051 期“老时时彩”开奖号码：35224 开奖查询>><br/>
+    3、求余：(7096695474 + 35224) % 3288 (商品所需人次) = 274 (余数)<br/>
+    4、 274 (余数) + 10000001 = 10000275
+                    </p>
+                </div>
+                <div class="point-result">
+                  <div class="res-txt">幸运号码：</div>
+                    <div class="res-num">10000275</div>
+                </div>
+            </div> -->
+        </div>
+        <div class="conbox" id="con_conn_3" style="display:none;">
+          <div id="recordPanel" class="w-tabs-panel-item m-detail-mainTab-record" style="">
+              <div class="empty" style="display: none;">
+                <p class="status-empty"><i class="littleU littleU-cry"></i>&nbsp;&nbsp;暂时还没有参与记录</p>
+              </div>
+              <div class="content" style="">
+                <div class="m-detail-recordList-start"><i class="ico ico-clock"></i></div>
+                <div class="m-detail-recordList-timeSeperate"><%= @recorde_all[0].created_at.strftime("%Y-%m-%d") %><i class="ico ico-recordDot ico-recordDot-solid"></i></div>
+                <ul class="m-detail-recordList m-detail-recordList-0">
+                  <% @recorde_all.each do |recorde| %>
+                  <% mobile = recorde.user.mobile %>
+                  <li class="f-clear"><span class="time"><%= recorde.created_at.strftime("%H:%M:%S") %>.<%= recorde.created_at.usec %></span><i class="ico ico-recordDot ico-recordDot-hollow"></i>
+                    <div class="m-detail-recordList-userInfo">
+                      <div class="inner">
+                        <p><span class="avatar"></span><a href="#" target="_blank" title="中不中试一试(ID:68610605)"><%= mobile[0..2] %>****<%= mobile[-4..-1] %></a> <b class="times txt-red">参与了<%= recorde.amount %>人次</b></p>
+
+                        <a style="display:none" class="btn-close" href="javascript:void(0)"></a>
+                      <div class="duobao_numbers" style="display:none;-webkit-backface-visibility:hidden"><%= recorde.numbers %></div></div>
+                    </div>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class="pager" style="">
+                <%= will_paginate @recorde_all %>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+  $(function(){
+    //显示夺宝号码
+    $(".inner").bind("mouseover",function(){
+      $(this).find("*").show();
+    });
+    $(".inner").bind("mouseout",function(){
+        $(this).find(".duobao_numbers").hide();
+    });
+    //查看上一期
+    $("#pre_item").live("click", function(){
+      var itemId = parseInt($("#item_id a").html());
+      if(itemId <= 0){
+        return false;
+      }else{
+        $.ajax({
+          url: "/items/item_history?status=pre&item_id=" + itemId,
+          success: function(data){
+            if (data.flage == -1) {
+              return false;
+            }else if(data.flage == 0) {
+              $("#basic_right_id").html('<div class="basic-right-tit"><h4>上期获得者</h4></div><div class="basic-right-main"><div class="basic-main-up"><a href="javascript:void(0)" class="btn-left" id="pre_item">上一期</a><span class="btn-center" id="item_id">期号：<a>'+data.item_id+'</a>期</span><a href="javascript:void(0)" class="btn-right" id="after_item">上一期</a></div><div id="hole-hole"><div id="hole-con"><div class="basic-main-center"><div class="headimg"><a href="#"><img src="../image/xtouxiang.jpg" width="90"  height="90"></a></div><p>该商品还未揭晓，请等待</p></div><div class="basic-main-btm"><p></p><p>幸运号码：<b class="txt-red">????????</b></p><p>本期参与：<b class="txt-red">???</b>人次</p><p>揭晓时间：</p><p>夺宝时间：</p></div><div class="btn-see"><a href="/items/show_waiting?id='+data.item_id+'" class="see">查看详情</a></div></div></div></div>');
+              return false;
+            };
+            if (!data.avatar) {
+              data.avatar = '../image/xtouxiang.jpg'
+            };
+            var date_invest = new Date(data.invest_time)
+            var date_hit = new Date(data.hit_time)
+            date_hit = timeStamp2String(date_hit)
+            date_invest = timeStamp2String(date_invest)
+            $("#basic_right_id").html('<div class="basic-right-tit"><h4>上期获得者</h4></div><div class="basic-right-main"><div class="basic-main-up"><a href="javascript:void(0)" class="btn-left" id="pre_item">上一期</a><span class="btn-center" id="item_id">期号：<a>'+data.item_id+'</a>期</span><a href="javascript:void(0)" class="btn-right" id="after_item">上一期</a></div><div id="hole-hole"><div id="hole-con"><div class="basic-main-center"><div class="headimg"><a href="#"><img src="'+data.avatar+'" width="90"  height="90"></a></div><p>恭喜<a href="#">'+data.user_mobile[0]+data.user_mobile[1]+data.user_mobile[2]+'****'+data.user_mobile[7]+data.user_mobile[8]+data.user_mobile[9]+data.user_mobile[10]+'</a><span></span>获得该期产品</p></div><div class="basic-main-btm"><p></p><p>幸运号码：<b class="txt-red">'+data.hit_number+'</b></p><p>本期参与：<b class="txt-red">'+data.hit_amount+'</b>人次</p><p>揭晓时间：'+date_hit+'</p><p>夺宝时间：'+date_invest+'</p></div><div class="btn-see"><a href="/items/'+data.item_id+'" class="see">查看详情</a></div></div></div></div>')
+          }
+        })
+      }
+    })
+    //查看下一期
+    $("#after_item").live("click", function(){
+      var itemId = parseInt($("#item_id a").html());
+      if(itemId >= <%= @item.id %>){
+        return false;
+      }else{
+        $.ajax({
+          url: "/items/item_history?status=after&item_id=" + itemId,
+          success: function(data){
+            if (data.flage == -1 || data.item_id >= <%= @item.id %>) {
+              return false;
+            }else if(data.flage == 0) {
+              $("#basic_right_id").html('<div class="basic-right-tit"><h4>上期获得者</h4></div><div class="basic-right-main"><div class="basic-main-up"><a href="javascript:void(0)" class="btn-left" id="pre_item">上一期</a><span class="btn-center" id="item_id">期号：<a>'+data.item_id+'</a>期</span><a href="javascript:void(0)" class="btn-right" id="after_item">上一期</a></div><div id="hole-hole"><div id="hole-con"><div class="basic-main-center"><div class="headimg"><a href="#"><img src="../image/xtouxiang.jpg" width="90"  height="90"></a></div><p>该商品还未揭晓，请等待</p></div><div class="basic-main-btm"><p></p><p>幸运号码：<b class="txt-red">????????</b></p><p>本期参与：<b class="txt-red">???</b>人次</p><p>揭晓时间：</p><p>夺宝时间：</p></div><div class="btn-see"><a href="/items/show_waiting?id='+data.item_id+'" class="see">查看详情</a></div></div></div></div>');
+              return false;
+            };
+            if (!data.avatar) {
+              data.avatar = '../image/xtouxiang.jpg'
+            };
+            var date_invest = new Date(data.invest_time)
+            var date_hit = new Date(data.hit_time)
+            date_hit = timeStamp2String(date_hit)
+            date_invest = timeStamp2String(date_invest)
+            $("#basic_right_id").html('<div class="basic-right-tit"><h4>上期获得者</h4></div><div class="basic-right-main"><div class="basic-main-up"><a href="javascript:void(0)" class="btn-left" id="pre_item">上一期</a><span class="btn-center" id="item_id">期号：<a>'+data.item_id+'</a>期</span><a href="javascript:void(0)" class="btn-right" id="after_item">上一期</a></div><div id="hole-hole"><div id="hole-con"><div class="basic-main-center"><div class="headimg"><a href="#"><img src="'+data.avatar+'" width="90"  height="90"></a></div><p>恭喜<a href="#">'+data.user_mobile[0]+data.user_mobile[1]+data.user_mobile[2]+'****'+data.user_mobile[7]+data.user_mobile[8]+data.user_mobile[9]+data.user_mobile[10]+'</a><span></span>获得该期产品</p></div><div class="basic-main-btm"><p></p><p>幸运号码：<b class="txt-red">'+data.hit_number+'</b></p><p>本期参与：<b class="txt-red">'+data.hit_amount+'</b>人次</p><p>揭晓时间：'+date_hit+'</p><p>夺宝时间：'+date_invest+'</p></div><div class="btn-see"><a href="/items/'+data.item_id+'" class="see">查看详情</a></div></div></div></div>')
+          }
+        })
+      }
+    })
+
+  })//ajax end
+
+  function timeStamp2String(time){
+    var datetime = new Date();
+    datetime.setTime(time);
+    var year = datetime.getFullYear();
+    var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+    var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+    var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+    var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+    var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+}
+</script>
+
+</body>
+</html>

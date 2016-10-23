@@ -1,0 +1,36 @@
+= btn_toolbar_adds([name: '添加新手标', path: '/backend/rookie_loans/new', type: 'add'])
+
+.well
+  %table.table
+    %thead
+      %tr
+        %th 序号
+        %th 借款金额
+        %th 审核状态
+        %th 操作
+    %tbody
+      - @loans.each do |loan|
+        %tr
+          %td= link_to loan.id, detail_backend_rookie_loan_path(loan)
+          %td= loan.try(:amount).try(:round,2)
+          %td= loan.state.try(:name) || "未处理|#{link_to "提交审核", senior_audit_backend_rookie_loan_path(loan)}".html_safe
+          %td
+            %a{:href => "#{edit_backend_rookie_loan_path(loan)}"}
+              %i.icon-pencil
+            / %a{"data-toggle" => "modal", :href => "/backend/users/#{user.id}/destroy", :role => "button"}
+            /   %i.icon-remove
+
+            = link_to "<i class='icon-remove'></i>".html_safe, backend_rookie_loan_path(loan), method: :delete, :role => "button"
+
+= will_paginate @loans
+#myModal.modal.small.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel 确认删除
+  .modal-body
+    %p.error-text
+      %i.icon-warning-sign.modal-icon>
+      确定要删除该用户吗?
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} 取消
+    %button.btn.btn-danger{"data-dismiss" => "modal"} 删除

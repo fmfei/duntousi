@@ -1,0 +1,36 @@
+<div class="dtitles">
+<div class="righter" style="margin-left:20px;">
+      <div>
+        <span class="xjieshi">可转让金额</span><span class="xjieshi"> <%= rmb @bid.not_collected_principal %></span>
+      </div>
+      <div>
+        <span class="xjieshi">转让（元）</span><span class="xjieshi"> <%= f.text_field :for_sale_amount, {:id => 'sell_amount', :class => 'input-xlarge form-control', :'data-rule-required'=>"true", :'data-rule-number' => "true", :'data-rule-range' => [Bid::MIN_SELL_AMOUNT, @bid.not_collected_principal.round(2)],:oninput=>"change_amount();",:onpropertychange=>"change_amount();", :autocomplete => 'off'} %></span>
+      </div>
+      <div>
+        <span class="xjieshi">手续费率</span><span class="xjieshi"> <%= SystemConfig.sell_bid_fee.value.to_f * 100 %>%</span>
+      </div>
+      <div class="col-md-10 city-group checkbox">
+        <span class="xjieshi">到账金额</span><span class="xjieshi"><label id='real_amount'></label>元 </span>
+      </div>
+
+
+
+      <div class="dtitle">
+        <%= f.submit "提交", :class => "hqyzm", :id => "send" %>
+      </div>
+</div>
+</div>
+<script type="text/javascript">
+  function change_amount(){
+    var x = parseInt($("#sell_amount").val());
+
+    if(!isNaN(x)){
+      if (x><%= @bid.not_collected_principal %>)
+        x = <%= @bid.not_collected_principal %>;
+        $("#real_amount").text(Math.floor(x -  x * <%= SystemConfig.sell_bid_fee.value.to_f %> ));
+    }else{
+        $("#real_amount").text("0");
+    }
+  }
+  change_amount();
+</script>

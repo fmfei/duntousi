@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  from_user_id: 1
+  to_user_id: 1
+  amount: 9.99
+  from_user_left_amount: 9.99
+  trigger_type: MyString
+  trigger_id: 1
+  cash_flow_description_id: 1
+  pay_order_id: 1
+  pay_class: MyString
+  addition: MyString
+
+two:
+  from_user_id: 1
+  to_user_id: 1
+  amount: 9.99
+  from_user_left_amount: 9.99
+  trigger_type: MyString
+  trigger_id: 1
+  cash_flow_description_id: 1
+  pay_order_id: 1
+  pay_class: MyString
+  addition: MyString

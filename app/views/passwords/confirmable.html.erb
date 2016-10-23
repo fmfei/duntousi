@@ -1,0 +1,6 @@
+			<h2>我们已将重置密码邮件发送至您的邮箱，请登录您的 <%= link_to resource[:email], get_mail(resource[:email]), :target => "_blank" %> 重置密码</h2>
+			<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+			  <%= f.hidden_field :email, :value => resource[:email], autofocus: true %>
+
+			  <div>没有收到？<%= f.submit "重新发送", class: "btn" %></div>
+			<% end %>

@@ -1,0 +1,19 @@
+<% if @interest %>
+<div class="title">
+	<div>期数</div>
+	<div>月还款本息</div>
+	<div>月还款本金</div>
+	<div>月还款利息</div>
+	<div>剩余本金</div>
+</div>
+<div class="listxinxi">
+  	<% @interest.map do |k, v| %>
+  	<div>第<%= k %>期</div><div><%= rmb (v[:seed] + v[:interest]).round(2) %></div><div><%= rmb v[:seed] %></div><div><%= rmb v[:interest].round(2) %></div><div><%= rmb v[:left_seed] %></div>
+    <% end %>
+   
+</div>
+<% else %>
+<div class="title">
+	<%= flash[:errors] %>
+	</div>
+<% end %>
